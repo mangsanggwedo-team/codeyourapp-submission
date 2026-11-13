@@ -1,0 +1,35 @@
+# AGENTS.md
+
+AI(코딩 도구·심사 보조 AI 포함)가 이 저장소에서 먼저 읽는 파일. 사람용 입구는 [README.md](README.md).
+
+## 이 저장소
+2026 현대자동차그룹 Pleos 'Code your App' 공모전 출품작 **⟨TBD 앱 이름⟩**의 소스·실행물·설명 문서.
+Pleos Connect(현대차그룹 차량 OS) 위에서 도는 Android(Kotlin) 앱이다.
+
+## 지도 — 한 질문에 한 파일
+```
+README.md          무엇이고 어떻게 실행하나        (사람 심사위원의 입구)
+AGENTS.md          AI의 입구 — 이 파일
+DESIGN.md          화면·음성 경험의 규칙
+SAFETY.md          운전자 안전·차량 데이터·개인정보 원칙
+ROADMAP.md         공모전 이후 — 사업의 지속
+CONTRIBUTING.md    우리가 일하는 법 (커밋·리뷰·AI 사용)
+CHANGELOG.md       버전별 변화
+app/               Android 소스            apk/   심사용 APK
+docs/01→07         WHY → WHAT → HOW → PROOF → NEXT (심사 4항목에 대응)
+docs/adr/          결정 기록 — 왜 이렇게 했나
+```
+주장을 검증하려면: README "심사 기준 대응표" → 해당 docs → docs 안의 코드 링크 → [추적표](docs/05-demo.md#추적표).
+
+## 명령
+- 빌드: `./gradlew :app:assembleDebug` · 릴리스: `./gradlew :app:assembleRelease`
+- 테스트: `./gradlew :app:testDebugUnitTest`
+- 문서 링크 검사: `python3 scripts/check_links.py`
+(앱 골격은 아이디어 확정 후 추가된다 — 그 전까지 Gradle 명령은 동작하지 않는다.)
+
+## 규칙
+- 주행 중 상호작용은 [SAFETY.md](SAFETY.md)의 한도를 넘지 않는다. 넘는 기능은 만들지 않는다.
+- 결정은 사람이 한다 → `docs/adr/`. AI는 선택지와 근거를 낸다.
+- 커밋: Conventional Commits + `Prompt-Ref: P##`(AI가 만든 커밋) 또는 `Human-Only: true`. → [CONTRIBUTING.md](CONTRIBUTING.md)
+- 비밀값·연락처·공모전 양식 원본은 커밋하지 않는다(`.githooks/pre-commit`이 막는다).
+- 문서 링크는 상대경로 md 링크.

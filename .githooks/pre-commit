@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# 모든 AI·사람 공통 게이트. 정보자산·개인정보·비밀값이 커밋되지 않게 막는다.  (우회: 사람만, git commit --no-verify)
+fail=0
+paths=$(git -c core.quotepath=off diff --cached --name-only --diff-filter=ACMR)
+bad=$(printf '%s\n' "$paths" | grep -E 'form-original/|동의서|서명|카톡.*\.csv$|(^|/)\.env($|\.)|\.(pem|key|keystore|jks)$' | grep -v '\.env\.example$')
+if [ -n "$bad" ]; then echo "✋ 커밋 금지 파일 (정보자산·개인정보·비밀):"; echo "$bad" | sed 's/^/   /'; fail=1; fi
+added=$(git diff --cached -U0 --diff-filter=ACMR -- . ':(exclude)*.png' ':(exclude)*.jpg' | grep '^+' | grep -v '^+++')
+hit=$(printf '%s\n' "$added" | grep -nE '(^|[^0-9A-Za-z/_-])01[016789]-[0-9]{3,4}-[0-9]{4}([^0-9]|$)|-----BEGIN [A-Z ]*PRIVATE KEY|sk-[A-Za-z0-9_-]{20,}|gh[pousr]_[A-Za-z0-9]{20,}|AIza[0-9A-Za-z_-]{30,}')
+if [ -n "$hit" ]; then echo "✋ 전화번호·비밀키로 보이는 내용:"; echo "$hit" | cut -c1-120 | sed 's/^/   /'; fail=1; fi
+[ $fail -eq 1 ] && echo "→ 빼고 다시 커밋하세요. (AGENTS.md 금지 규칙)"
+exit $fail

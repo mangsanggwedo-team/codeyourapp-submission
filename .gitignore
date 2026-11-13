@@ -1,0 +1,21 @@
+# Android / Gradle
+.gradle/
+build/
+local.properties
+captures/
+.externalNativeBuild/
+.cxx/
+*.iml
+.idea/
+.kotlin/
+# 서명·비밀
+*.jks
+*.keystore
+keystore.properties
+.env
+.env.*
+!.env.example
+# OS
+.DS_Store
+# 공모전 양식 원본은 이 저장소에 두지 않는다
+**/form-original/
