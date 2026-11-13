@@ -20,8 +20,9 @@ description: 아이디어가 정해지면 Pleos Connect 앱 골격을 제출 저
 2. 구성은 틈과 같게: `core/` 순수 Kotlin 도메인 + JUnit (안드로이드 없이 테스트) · `app/` Compose + Pleos SDK. 판단 로직은 core에 둔다 = 테스트 가능 = 심사 "기술 활용성" 증거.
 3. 의존성 핵심: Pleos Maven `https://nexus-playground.pleos.ai/repository/maven-releases/` (인증 없음), `ai.pleos.playground:Vehicle:2.3.2` (2.3.1은 내려감). 다른 SDK(NaviHelper·STT·TTS·FusedLocation)는 버전을 Maven에서 확인 후.
 4. 매니페스트: `uses-feature android.hardware.type.automotive required=true`, 권한 `pleos.car.permission.CAR_DRIVE` 등 쓰는 것만(선언만으로 사용 가능, 2026-10-28 설명회).
-5. `local.properties`(sdk.dir)는 커밋하지 않는다.
-6. `./gradlew :core:test :app:assembleDebug` 초록 → 커밋.
+5. SDK 기능은 쓰기 전에 `checkXxxCapabilities`로 지원 여부를 확인하고, 없으면 대체 동작(설명회 화면 API policy). 플랫폼은 한 화면에 앱 2개까지 띄우므로 **분할 화면(반쪽 폭) 레이아웃**도 확인. minSdk 28 이상.
+6. `local.properties`(sdk.dir)는 커밋하지 않는다.
+7. `./gradlew :core:test :app:assembleDebug` 초록 → 커밋.
 
 ## 에뮬레이터와 Virtual Console 자동화
 ```bash

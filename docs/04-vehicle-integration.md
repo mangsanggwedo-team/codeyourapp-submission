@@ -32,6 +32,9 @@ sequenceDiagram
 ## 권한
 매니페스트 선언 목록: 미정, 공모전 개발에선 Vehicle·NaviHelper·STT·TTS·FusedLocation이 선언만으로 사용 가능(2026-10-28 설명회).
 
+## 지원 여부 확인
+기능을 쓰기 전 SDK의 `checkXxxCapabilities` 계열 API로 차량이 지원하는지 확인하고, 없으면 아래 "신호가 없을 때" 동작으로 내려간다(설명회 화면 API policy).
+
 ## 신호가 없을 때
 | 상황 | 동작 |
 |---|---|
