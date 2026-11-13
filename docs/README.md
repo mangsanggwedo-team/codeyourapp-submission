@@ -1,4 +1,4 @@
-# docs — 심사위원이 묻는 순서대로
+# docs: 심사위원이 묻는 순서대로
 
 ```
  WHY ──────────► WHAT ─────────► HOW ──────────────────────► PROOF ─────► NEXT       + WHO
@@ -15,6 +15,6 @@
 | 05 | [시연](05-demo.md) | 직접 확인하려면? 주장은 어디서 증명되나? | 개발 산출물 |
 | 06 | [사업](06-business.md) | 누가 쓰고, 어떻게 이어지나? | 사업성 |
 | 07 | [AI 협업](07-ai-collaboration.md) | 두 사람이 AI와 어떻게 만들었나? | (팀 역량) |
-| — | [adr/](adr/) | 왜 이렇게 결정했나? | 전체 |
+| - | [adr/](adr/) | 왜 이렇게 결정했나? | 전체 |
 
 문서 종류 구분은 [Diátaxis](https://diataxis.fr/)를 따른다: 01·02·06·07 = 설명(Explanation) · 03·04 = 참조(Reference) · 05 = 따라하기(How-to). 구조도는 [C4 모델](https://c4model.com/)의 Context·Container 두 단계만 쓴다.

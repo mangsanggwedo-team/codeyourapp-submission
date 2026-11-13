@@ -1,4 +1,4 @@
-# CONTRIBUTING — 우리가 일하는 법
+# CONTRIBUTING: 우리가 일하는 법
 
 ## 처음 한 번
 ```bash
@@ -7,10 +7,10 @@ git config core.hooksPath .githooks   # 비밀값·연락처 커밋 차단
 
 ## 브랜치 · 커밋
 - `main`은 언제나 빌드된다. 작업은 `feat/…` `fix/…` 브랜치 → PR → 다른 한 사람이 확인 후 병합.
-- 커밋 메시지: [Conventional Commits](https://www.conventionalcommits.org/ko/v1.0.0/) — `feat:` `fix:` `docs:` `test:` `refactor:` `chore:`
+- 커밋 메시지: [Conventional Commits](https://www.conventionalcommits.org/ko/v1.0.0/), `feat:` `fix:` `docs:` `test:` `refactor:` `chore:`
 - 마지막 줄 트레일러:
-  - `Prompt-Ref: P##` — AI가 만든 변경. 번호는 팀 프롬프트 기록의 지시 번호.
-  - `Human-Only: true` — 사람이 직접 한 변경.
+  - `Prompt-Ref: P##`, AI가 만든 변경. 번호는 팀 프롬프트 기록의 지시 번호.
+  - `Human-Only: true`, 사람이 직접 한 변경.
 
 ## AI를 쓸 때
 - AI는 [AGENTS.md](AGENTS.md)를 먼저 읽는다.
@@ -23,6 +23,6 @@ git config core.hooksPath .githooks   # 비밀값·연락처 커밋 차단
 
 ## 릴리스
 1. `versionName`·`versionCode` 올림, [CHANGELOG.md](CHANGELOG.md) 갱신
-2. `./gradlew :app:assembleRelease` → `apk/망상궤도_⟨TBD⟩_release.apk`
+2. `./gradlew :app:assembleRelease` → `apk/망상궤도_미정_release.apk`
 3. 에뮬레이터에 설치해 [시나리오](docs/05-demo.md#시나리오) 통과 확인
 4. 태그 `vX.Y.Z` + GitHub Releases에 APK 첨부
