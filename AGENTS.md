@@ -1,6 +1,6 @@
 # AGENTS.md
 
-AI(코딩 도구·심사 보조 AI 포함)가 이 저장소에서 먼저 읽는 파일. 사람용 입구는 [README.md](README.md).
+AI 코딩 도구가 이 저장소에서 먼저 읽는 파일. 사람용 입구는 [README.md](README.md).
 
 ## 이 저장소
 2026 현대자동차그룹 Pleos 'Code your App' 공모전 출품작 **(앱 이름)**의 소스·실행물·설명 문서.

@@ -27,7 +27,7 @@
 
 | 앱 이름 | 한 줄 소개 | 테스트 환경 | APK | 실행 |
 |---|---|---|---|---|
-| 미정 | 미정 | Pleos Connect 에뮬레이터 v2.1.0 (API 34) | [`apk/`](apk/) · Releases | [실행 방법](#실행-방법) |
+| 미정 | 미정 | Pleos Connect 에뮬레이터 v2.1.0 (API 34) · 2560x1440 | [`apk/`](apk/) · Releases | [실행 방법](#실행-방법) |
 
 <!-- 시연 GIF가 생기면 주석 해제
 <p align="center"><img src="docs/assets/demo.gif" alt="시연 15초" width="600"><br>
@@ -106,7 +106,7 @@ adb install apk/망상궤도_앱이름_release.apk
 ### 테스트 환경
 | 항목 | 값 |
 |---|---|
-| 에뮬레이터 | Pleos Connect v2.1.0 · Android API 34 |
+| 에뮬레이터 · 화면 규격 | Pleos Connect v2.1.0 · Android API 34 · 2560x1440 (160dpi) |
 | 차량 신호 조작 | Virtual Console (기어·도어·착좌·배터리·공조·경고등), 위치는 adb GPX |
 | Android Studio · JDK · Kotlin | 앱 골격 생성 후 기입 |
 

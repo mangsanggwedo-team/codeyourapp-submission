@@ -25,6 +25,10 @@ sequenceDiagram
 
 에뮬레이터 한계: Virtual Console은 기어·도어·착좌·배터리·충전·공조·경고등을 바꾼다. 차속 조작은 없어서 이동은 adb/GPX 위치 재생으로 흉내 낸다. 실차에선 차속 신호를 쓴다.
 
+## 쓸 수 있는 SDK (공식 공지 기준)
+- 공개 문서에 있는 Pleos SDK만 쓴다. Pleos LLM SDK는 제공되지 않는다.
+- 차량 마이크 음성을 외부 음성 인식 서비스로 보내지 않는다. 음성은 Pleos STT로.
+
 ## 권한
 매니페스트 선언 목록: 미정, 공모전 개발에선 Vehicle·NaviHelper·STT·TTS·FusedLocation이 선언만으로 사용 가능(2026-10-28 설명회).
 
