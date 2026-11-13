@@ -55,3 +55,4 @@ flowchart LR
 | [harness.md](harness.md) | AI가 선을 넘지 않게 무엇이 막나 |
 | [prompts.md](prompts.md) | 어떤 지시가 어떤 변경을 낳았나 |
 | [overrides.md](overrides.md) | 사람이 AI 제안을 뒤집은 때와 이유 |
+| [toolchain.md](toolchain.md) | 플러그인·스킬·에이전트·MCP·로컬 도구와 관리 규칙 |

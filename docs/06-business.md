@@ -16,3 +16,5 @@ timeline
 ```
 
 단계별 일정: [ROADMAP](../ROADMAP.md)
+
+→ 다음: [07 만드는 방식](07-process.md)

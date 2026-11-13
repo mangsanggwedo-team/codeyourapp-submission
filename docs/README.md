@@ -17,7 +17,8 @@ flowchart LR
 | 04 | [차량 연동](04-vehicle-integration.md) | 어떤 차량 신호를 어디에 쓰나? | 차량 특화성 · 기술 활용성 |
 | 05 | [시연](05-demo.md) | 직접 확인하려면? 주장은 어디서 증명되나? | 개발 산출물 |
 | 06 | [사업](06-business.md) | 누가 쓰고, 어떻게 이어지나? | 사업성 |
-| AI | [ai/](../ai/README.md) | 두 사람이 AI와 어떻게 만들었나? | 팀 역량 |
+| 07 | [만드는 방식](07-process.md) | 일정·결정·품질·위험을 어떻게 관리했나? | 개발 산출물 · 팀 역량 |
+| AI | [ai/](../ai/README.md) · [toolchain](../ai/toolchain.md) | 두 사람이 AI·도구와 어떻게 만들었나? | 기술 활용성 · 팀 역량 |
 | - | [adr/](adr/) | 왜 이렇게 결정했나? | 전체 |
 
 문서 종류 구분은 [Diátaxis](https://diataxis.fr/)를 따른다: 01·02·06 = 설명(Explanation) · 03·04 = 참조(Reference) · 05 = 따라하기(How-to). 구조도는 [C4 모델](https://c4model.com/)의 Context·Container 두 단계만 쓴다. 도식은 모두 Mermaid 텍스트가 원본이라 GitHub에서 바로 그려지고, 고친 내역이 diff로 남는다.

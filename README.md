@@ -119,7 +119,9 @@ adb install apk/망상궤도_앱이름_release.apk
 | 어디 | 무엇 |
 |---|---|
 | [docs/](docs/README.md) | 01 문제 → 02 해법 → 03 구조 → 04 차량 연동 → 05 시연 → 06 사업, 결정 기록 |
-| [ai/](ai/README.md) | 두 사람이 AI와 일한 방식: 에이전트, 장치, 지시 기록, 사람이 뒤집은 제안 |
+| [docs/07](docs/07-process.md) | 만드는 방식: 일정, 결정, 품질 문, 위험 관리 |
+| [ai/](ai/README.md) | 두 사람이 AI와 일한 방식: 에이전트, 장치(하네스), 지시 기록, 사람이 뒤집은 제안 |
+| [ai/toolchain](ai/toolchain.md) · [.agents/skills](.agents/skills/README.md) | 쓴 도구 전부: 플러그인 17, 팀 스킬 9, 에이전트 5, 로컬 도구, 관리 규칙 |
 | [DESIGN](DESIGN.md) · [SAFETY](SAFETY.md) | 경험의 규칙, 운전자 안전 |
 | [STATS](STATS.md) | 다시 셀 수 있는 숫자 |
 | [AGENTS.md](AGENTS.md) | AI 도구가 이 저장소를 읽는 입구 |

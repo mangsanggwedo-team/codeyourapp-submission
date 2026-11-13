@@ -4,6 +4,8 @@
 
 ## [Unreleased]
 ### Added
+- 도구 일체: `.claude/settings.json`(마켓 15, 플러그인 17 켜짐·4 대기), 팀 스킬 9(`.agents/skills`), 에이전트 5(`.claude/agents`), `scripts/find-skill.py`.
+- `ai/toolchain.md`: 도구 지도와 관리 규칙. `docs/07-process.md`: 일정·결정·품질 문·위험 관리.
 - `ai/`: AI 협업 지도, 에이전트 표, 장치, 지시 기록, 사람이 뒤집은 제안 4건.
 - STATS.md와 `scripts/stats.sh`: 숫자마다 다시 세는 명령.
 - Mermaid 도식 11장: 주행 상태도, 시스템 맥락도·컨테이너도, 차량 신호 시퀀스, 일정 간트(담당 사람/AI 표기), 사업 타임라인, 이용 여정, AI 협업 지도.

@@ -18,9 +18,10 @@ CHANGELOG.md       버전별 변화
 THIRD-PARTY-NOTICES.md  상표·SDK·캡처의 출처와 조건
 STATS.md           다시 셀 수 있는 숫자 (scripts/stats.sh가 생성)
 app/               Android 소스            apk/   심사용 APK
-docs/01→06         WHY → WHAT → HOW → PROOF → NEXT (심사 4항목에 대응)
+docs/01→07         WHY → WHAT → HOW → PROOF → NEXT (심사 4항목에 대응)
 docs/adr/          결정 기록, 왜 이렇게 했나
-ai/                AI 협업의 증거: 에이전트 · 장치 · 지시 기록 · 사람이 뒤집은 제안
+ai/                AI 협업의 증거: 에이전트 · 장치 · 지시 기록 · 사람이 뒤집은 제안 · 도구(toolchain)
+.agents/skills/    팀 스킬 9 (.claude/skills가 가리킴) · .claude/ 플러그인 선언·에이전트 5
 ```
 주장을 검증하려면: README "심사 기준 대응표" → 해당 docs → docs 안의 코드 링크 → [추적표](docs/05-demo.md#추적표).
 
