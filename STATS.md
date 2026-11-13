@@ -2,7 +2,7 @@
 
 숫자는 모두 이 저장소에서 다시 셀 수 있다. 이 파일은 `bash scripts/stats.sh`가 만든다(손으로 고치지 않음). README의 숫자는 여기서만 가져온다.
 
-<sub>생성: 2026-11-13 · 기준 커밋: `6a4fed7`</sub>
+<sub>생성: 2026-11-13 · 기준 커밋: `ad29ff3`</sub>
 
 ## 제품
 | 지표 | 값 | 다시 세는 법 |
@@ -16,8 +16,8 @@
 ## AI 협업
 | 지표 | 값 | 다시 세는 법 |
 |---|---|---|
-| 전체 커밋 | 2 | `git rev-list --count HEAD` |
-| AI가 만든 커밋 (`Prompt-Ref`) | 2 | `git log --grep '^Prompt-Ref: '` |
+| 전체 커밋 | 4 | `git rev-list --count HEAD` |
+| AI가 만든 커밋 (`Prompt-Ref`) | 4 | `git log --grep '^Prompt-Ref: '` |
 | 사람이 직접 한 커밋 (`Human-Only`) | 0 | `git log --grep '^Human-Only: true'` |
 | 이 저장소를 바꾼 사람의 지시 | 4 | [ai/prompts.md](ai/prompts.md) 행 수 |
 | 사람이 뒤집은 AI 제안 | 4 | [ai/overrides.md](ai/overrides.md) 행 수 |
