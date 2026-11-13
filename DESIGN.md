@@ -25,7 +25,7 @@ stateDiagram-v2
         가장 풍부한 무대
     end note
 ```
-<sub>"이동"은 실차에선 차속, 에뮬레이터에선 GPX 위치 이동으로 판단한다(Virtual Console에 차속 조작이 없음). 신호 이름과 임계값은 [04 차량 연동](docs/04-vehicle-integration.md) · 한도의 근거는 [SAFETY](SAFETY.md)</sub>
+<sub>"이동"은 차속(Android Automotive `PERF_VEHICLE_SPEED`)으로 판단한다. 에뮬레이터에선 Virtual Console 가속 페달로 재현. **차가 움직이면 Pleos가 앱 화면을 가리므로 주행 순간의 경험은 음성이 맡는다.** 신호 이름과 임계값은 [04 차량 연동](docs/04-vehicle-integration.md) · 한도의 근거는 [SAFETY](SAFETY.md)</sub>
 
 | 순간 | 사용자의 주의 | 앱이 쓰는 채널 | 화면 규칙 |
 |---|---|---|---|

@@ -27,10 +27,10 @@ ai/                AI 협업의 증거: 에이전트 · 장치 · 지시 기록 
 
 ## 명령
 - 빌드: `./gradlew :app:assembleDebug` · 릴리스: `./gradlew :app:assembleRelease`
-- 테스트: `./gradlew :app:testDebugUnitTest`
+- 테스트: `./gradlew :core:test`
 - 문서 링크 검사: `python3 scripts/check_links.py`
 - 숫자 갱신: `bash scripts/stats.sh` (README의 숫자는 STATS.md에서만)
-(앱 골격은 아이디어 확정 후 추가된다, 그 전까지 Gradle 명령은 동작하지 않는다.)
+(골격 있음: `:core` 판단 규칙 + `:app`. 순간별 경험은 아이디어 확정 후.)
 
 ## 정본 순서
 주장이 서로 다르면: 코드·테스트 > docs > README. README는 요약만 하고 숫자는 STATS.md에서만 가져온다.

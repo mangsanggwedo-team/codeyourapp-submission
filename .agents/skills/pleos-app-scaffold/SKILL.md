@@ -35,7 +35,9 @@ vc "/vehicle/gear?gear=Drive"; vc "/vehicle/seat?kind=occupied&value=true&area=d
 adb exec-out screencap -p > docs/assets/screens/01_driving.png
 ```
 - 틈의 `docs/emulator/vc.sh` · `virtual_console_scenario.sh`(장면별 조작+캡처) · `live_demo.sh`(라이브 시연, 세션 하트비트 `POST /browser/session`)를 그대로 본떠 쓴다.
-- 차속 조작은 없다. 이동은 adb GPX/위치로.
+- 차속: `PUT /vehicle/controls?accelerator=60` (브레이크 `brake=`). 쓰기가 503이면 콘솔 페이지를 브라우저로 한 번 연다(bridge_ready). 앱은 `PERF_VEHICLE_SPEED`로 받는다.
+- 차가 움직이면 Pleos가 앱 화면을 가린다. 주행 순간은 음성으로 설계.
+- 제어(무드등 등): 읽기 권한 + `CONTROL_` 권한 + 지원 구역 확인. 실측 기록: 노하우 저장소 `10_research/android-pleos/virtual-console/`
 - 알려진 함정: 좌석 착좌 값이 반전되어 들어온 적 있음(틈 커밋 474c7cc). 신호마다 에뮬레이터에서 실제 값 확인.
 - 캡처 캡션에 조건(에뮬레이터 버전·API·해상도·VC 값)을 적는다 (제출 저장소 DESIGN 4절).
 

@@ -4,7 +4,9 @@
 ## 쓰는 차량 신호
 | 신호 | Pleos SDK | 언제 읽나 | 앱이 하는 일 | 코드 |
 |---|---|---|---|---|
-| 주행 상태 / 기어 | Vehicle (API) | 변화 시 | 주행↔정차 모드 전환 ([SAFETY](../SAFETY.md)) | (링크) |
+| 기어 | Vehicle `Gear.registerGearSelection` (CAR_DRIVE) | 변화 시 | 주차·정차·주행 판단 | [GearSource.kt](../app/src/main/java/com/mangsang/app/data/GearSource.kt) |
+| 차속 | Android Automotive `PERF_VEHICLE_SPEED` (CAR_SPEED) | 변화 시 | 움직임 판단 (0.5 m/s 초과) | [SpeedSource.kt](../app/src/main/java/com/mangsang/app/data/SpeedSource.kt) |
+| 판단 규칙 | `:core` MomentDetector | 매 신호 | 신호를 못 받으면 주행으로 간주 | [DriveMoment.kt](../core/src/main/kotlin/com/mangsang/app/core/DriveMoment.kt) · [테스트](../core/src/test/kotlin/com/mangsang/app/core/MomentDetectorTest.kt) |
 | 미정 | 미정 | 미정 | 미정 | 미정 |
 
 ## 신호가 화면이 되기까지
@@ -23,7 +25,7 @@ sequenceDiagram
     UI-->>UI: 주행이면 음성과 한 줄, 정차면 전체 화면
 ```
 
-에뮬레이터 한계: Virtual Console은 기어·도어·착좌·배터리·충전·공조·경고등을 바꾼다. 차속 조작은 없어서 이동은 adb/GPX 위치 재생으로 흉내 낸다. 실차에선 차속 신호를 쓴다.
+에뮬레이터: Virtual Console은 HTTP로 63개 기능(기어, 가속·브레이크·조향 → 차속, 도어·창문·조명·공조·좌석·배터리)을 바꾼다. 시연은 스크립트로 재현한다. 차가 움직이면 Pleos가 앱 화면을 가린다(2026-11-14 확인).
 
 ## 쓸 수 있는 SDK (공식 공지 기준)
 - 공개 문서에 있는 Pleos SDK만 쓴다. Pleos LLM SDK는 제공되지 않는다.
