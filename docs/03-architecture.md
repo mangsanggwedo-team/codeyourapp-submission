@@ -13,10 +13,12 @@ flowchart LR
 ## Container: 앱 안
 ```mermaid
 flowchart TB
-    subgraph app["Android 앱 (단일 모듈)"]
+    subgraph app[":app (Android · Compose)"]
         UI["UI 층<br/>주행 상태별 화면 · 음성"]
-        ST["상태 층<br/>차량 신호 → 주행 · 정차 · 주차"]
         DA["데이터 층<br/>SDK 어댑터 · 로컬 저장"]
+    end
+    subgraph core[":core (순수 Kotlin · JUnit)"]
+        ST["상태 층<br/>차량 신호 → 주행 · 정차 · 주차"]
     end
     CAR[("Pleos SDK")] --> DA --> ST --> UI
     UI -- 사용자 행동 --> ST
@@ -26,10 +28,10 @@ flowchart TB
 | 층 | 책임 | 위치 |
 |---|---|---|
 | UI | 주행 상태별 화면·음성 | `app/src/main/.../ui/` |
-| 상태 | 차량 신호를 앱 상태로 | `.../state/` |
-| 데이터 | SDK 래퍼, 로컬 저장 | `.../data/` |
+| 상태 | 차량 신호를 앱 상태로 (판단 규칙 전부) | `core/src/main/.../` |
+| 데이터 | SDK 래퍼, 로컬 저장 | `app/src/main/.../data/` |
 
-단일 모듈로 둔다. 공모전 규모에서 모듈 분리는 이득보다 비용이 크다.
+모듈은 둘: 판단 규칙은 안드로이드 없이 테스트되는 `:core`, 화면과 SDK는 `:app`. 팀이 모의 출품에서 같은 구성으로 테스트 28개를 통과시키고 에뮬레이터 실동작까지 확인한 방식이다.
 
 ## 기술 선택
 | 무엇 | 선택 | 이유 |
