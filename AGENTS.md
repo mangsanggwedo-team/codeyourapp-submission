@@ -29,6 +29,7 @@ ai/                AI 협업의 증거: 에이전트 · 장치 · 지시 기록 
 - 빌드: `./gradlew :app:assembleDebug` · 릴리스: `./gradlew :app:assembleRelease`
 - 테스트: `./gradlew :core:test`
 - 문서 링크 검사: `python3 scripts/check_links.py`
+- 에뮬레이터 장면: `bash scripts/vc.sh park|stop|drive|brake|shot|state|app`
 - 숫자 갱신: `bash scripts/stats.sh` (README의 숫자는 STATS.md에서만)
 (골격 있음: `:core` 판단 규칙 + `:app`. 순간별 경험은 아이디어 확정 후.)
 

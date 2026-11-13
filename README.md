@@ -94,7 +94,7 @@ stateDiagram-v2
 # 1. 에뮬레이터: Device Manager > Automotive > Pleos Connect v2.1.0, Cold boot
 # 2. 설치
 adb install apk/망상궤도_앱이름_release.apk
-# 3. Virtual Console에서 기어를 P → D로 바꾸고 docs/05-demo.md 시나리오대로
+# 3. 차량 상태 바꾸기: bash scripts/vc.sh drive 40 (가속) · stop · park, 시나리오는 docs/05-demo.md
 ```
 
 <details>
