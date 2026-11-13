@@ -7,4 +7,12 @@
 | 어떻게 만나나 (확보) | (작성 예정: Pleos App Market) | 미정 |
 | 어떻게 이어지나 (지속) | 미정 | 미정 |
 
-단계별 계획: [ROADMAP](../ROADMAP.md)
+```mermaid
+timeline
+    title 공모전에서 시장까지
+    2026-11 : 문제 정의 : 기획서
+    2026-12 : 동작 앱 : PT와 시연
+    2027 : Pleos App Market 출시 : 이용자 확보
+```
+
+단계별 일정: [ROADMAP](../ROADMAP.md)

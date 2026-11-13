@@ -1,9 +1,12 @@
 # docs: 심사위원이 묻는 순서대로
 
-```
- WHY ──────────► WHAT ─────────► HOW ──────────────────────► PROOF ─────► NEXT       + WHO
- 01 문제         02 해법          03 구조 · 04 차량 연동         05 시연       06 사업      07 AI 협업
- 창의성          창의성           기술 활용성 · 차량 특화성        개발 산출물    사업성
+```mermaid
+flowchart LR
+    W["01 문제<br/>WHY"] --> H["02 해법<br/>WHAT"] --> A["03 구조 · 04 차량 연동<br/>HOW"] --> P["05 시연<br/>PROOF"] --> N["06 사업<br/>NEXT"]
+    W -.- c1["창의성"]
+    A -.- c2["기술 활용성 · 차량 특화성"]
+    P -.- c3["개발 산출물"]
+    N -.- c4["사업성"]
 ```
 
 | # | 문서 | 답하는 질문 | 심사 항목 |
@@ -14,7 +17,7 @@
 | 04 | [차량 연동](04-vehicle-integration.md) | 어떤 차량 신호를 어디에 쓰나? | 차량 특화성 · 기술 활용성 |
 | 05 | [시연](05-demo.md) | 직접 확인하려면? 주장은 어디서 증명되나? | 개발 산출물 |
 | 06 | [사업](06-business.md) | 누가 쓰고, 어떻게 이어지나? | 사업성 |
-| 07 | [AI 협업](07-ai-collaboration.md) | 두 사람이 AI와 어떻게 만들었나? | (팀 역량) |
+| AI | [ai/](../ai/README.md) | 두 사람이 AI와 어떻게 만들었나? | 팀 역량 |
 | - | [adr/](adr/) | 왜 이렇게 결정했나? | 전체 |
 
-문서 종류 구분은 [Diátaxis](https://diataxis.fr/)를 따른다: 01·02·06·07 = 설명(Explanation) · 03·04 = 참조(Reference) · 05 = 따라하기(How-to). 구조도는 [C4 모델](https://c4model.com/)의 Context·Container 두 단계만 쓴다.
+문서 종류 구분은 [Diátaxis](https://diataxis.fr/)를 따른다: 01·02·06 = 설명(Explanation) · 03·04 = 참조(Reference) · 05 = 따라하기(How-to). 구조도는 [C4 모델](https://c4model.com/)의 Context·Container 두 단계만 쓴다. 도식은 모두 Mermaid 텍스트가 원본이라 GitHub에서 바로 그려지고, 고친 내역이 diff로 남는다.

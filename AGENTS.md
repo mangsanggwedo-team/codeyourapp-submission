@@ -15,9 +15,12 @@ SAFETY.md          운전자 안전·차량 데이터·개인정보 원칙
 ROADMAP.md         공모전 이후, 사업의 지속
 CONTRIBUTING.md    우리가 일하는 법 (커밋·리뷰·AI 사용)
 CHANGELOG.md       버전별 변화
+THIRD-PARTY-NOTICES.md  상표·SDK·캡처의 출처와 조건
+STATS.md           다시 셀 수 있는 숫자 (scripts/stats.sh가 생성)
 app/               Android 소스            apk/   심사용 APK
-docs/01→07         WHY → WHAT → HOW → PROOF → NEXT (심사 4항목에 대응)
+docs/01→06         WHY → WHAT → HOW → PROOF → NEXT (심사 4항목에 대응)
 docs/adr/          결정 기록, 왜 이렇게 했나
+ai/                AI 협업의 증거: 에이전트 · 장치 · 지시 기록 · 사람이 뒤집은 제안
 ```
 주장을 검증하려면: README "심사 기준 대응표" → 해당 docs → docs 안의 코드 링크 → [추적표](docs/05-demo.md#추적표).
 
@@ -25,6 +28,7 @@ docs/adr/          결정 기록, 왜 이렇게 했나
 - 빌드: `./gradlew :app:assembleDebug` · 릴리스: `./gradlew :app:assembleRelease`
 - 테스트: `./gradlew :app:testDebugUnitTest`
 - 문서 링크 검사: `python3 scripts/check_links.py`
+- 숫자 갱신: `bash scripts/stats.sh` (README의 숫자는 STATS.md에서만)
 (앱 골격은 아이디어 확정 후 추가된다, 그 전까지 Gradle 명령은 동작하지 않는다.)
 
 ## 규칙
@@ -33,4 +37,4 @@ docs/adr/          결정 기록, 왜 이렇게 했나
 - 커밋: Conventional Commits + `Prompt-Ref: P##`(AI가 만든 커밋) 또는 `Human-Only: true`. → [CONTRIBUTING.md](CONTRIBUTING.md)
 - 비밀값·연락처·공모전 양식 원본은 커밋하지 않는다(`.githooks/pre-commit`이 막는다).
 - 문서 링크는 상대경로 md 링크.
-- 문체: 줄표(—, –)를 쓰지 않는다. 쉼표·콜론·괄호로. 자리 표시는 "(작성 예정: …)" 또는 "미정".
+- 문체: 줄표 문자를 쓰지 않는다. 쉼표·콜론·괄호로. 자리 표시는 "(작성 예정: …)" 또는 "미정".

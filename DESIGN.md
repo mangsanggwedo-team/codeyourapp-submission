@@ -3,6 +3,30 @@
 > 화면을 그리거나 문구·음성을 쓰기 전에 읽는다. 안전 한도는 [SAFETY.md](SAFETY.md)가 우선한다.
 
 ## 1. 차 안의 세 순간
+
+```mermaid
+stateDiagram-v2
+    direction LR
+    state "주차" as P
+    state "정차" as S
+    state "주행" as D
+    [*] --> P
+    P --> S: 기어 D 또는 R
+    S --> D: 이동 시작
+    D --> S: 이동 멈춤
+    S --> P: 기어 P
+    D --> D: 신호 끊김 시 주행으로 간주
+    note right of D
+        음성, 2초 글랜스
+        버튼 1개 이하
+    end note
+    note left of P
+        화면 전체
+        가장 풍부한 무대
+    end note
+```
+<sub>"이동"은 실차에선 차속, 에뮬레이터에선 GPX 위치 이동으로 판단한다(Virtual Console에 차속 조작이 없음). 신호 이름과 임계값은 [04 차량 연동](docs/04-vehicle-integration.md) · 한도의 근거는 [SAFETY](SAFETY.md)</sub>
+
 | 순간 | 사용자의 주의 | 앱이 쓰는 채널 | 화면 규칙 |
 |---|---|---|---|
 | **주행 중** | 도로 | 음성(TTS) · 짧은 소리 | 글랜스 한 번에 읽히는 것만, 큰 글자 한 줄, 버튼 ≤ 1 |
@@ -20,5 +44,8 @@
 | color.primary | 미정 | 핵심 동작 |
 | type.glance | 미정 sp 이상 | 주행 중 한 줄 |
 | touch.min | 76 dp (근거 확인) | 차량 터치 최소 크기 |
+
+## 4. 화면 캡처 규칙
+모든 스크린샷 캡션에 캡처 조건을 적는다: 에뮬레이터 버전 · API · 해상도 · Virtual Console 값 · 잘라낸 영역. (Pleos 공식 샘플의 방식)
 
 화면 시안: (피그마 링크)

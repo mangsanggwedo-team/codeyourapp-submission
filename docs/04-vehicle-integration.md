@@ -7,6 +7,24 @@
 | 주행 상태 / 기어 | Vehicle (API) | 변화 시 | 주행↔정차 모드 전환 ([SAFETY](../SAFETY.md)) | (링크) |
 | 미정 | 미정 | 미정 | 미정 | 미정 |
 
+## 신호가 화면이 되기까지
+```mermaid
+sequenceDiagram
+    participant VC as Virtual Console · adb GPX (시연)
+    participant SDK as Pleos SDK (Vehicle · FusedLocation)
+    participant DA as 데이터 층
+    participant ST as 상태 층
+    participant UI as UI · TTS
+    VC->>SDK: 기어 변경 · 위치 이동
+    SDK-->>DA: 콜백
+    DA->>ST: 차량 신호
+    ST->>ST: 주행 · 정차 · 주차 판단
+    ST->>UI: 모드 전환
+    UI-->>UI: 주행이면 음성과 한 줄, 정차면 전체 화면
+```
+
+에뮬레이터 한계: Virtual Console은 기어·도어·착좌·배터리·충전·공조·경고등을 바꾼다. 차속 조작은 없어서 이동은 adb/GPX 위치 재생으로 흉내 낸다. 실차에선 차속 신호를 쓴다.
+
 ## 권한
 매니페스트 선언 목록: 미정, 공모전 개발에선 Vehicle·NaviHelper·STT·TTS·FusedLocation이 선언만으로 사용 가능(2026-10-28 설명회).
 
