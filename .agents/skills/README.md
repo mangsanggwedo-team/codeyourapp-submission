@@ -13,5 +13,9 @@
 | [skill-scout](skill-scout/SKILL.md) | 필요한 스킬·플러그인 찾기와 점검 (`scripts/find-skill.py`) |
 | [judge-sim](judge-sim/SKILL.md) | 심사 기준으로 모의 채점 |
 | [submission-check](submission-check/SKILL.md) | 제출 직전 점검 |
+| [risk-compliance](risk-compliance/SKILL.md) | 운전자 주의분산 · 외부 STT 금지 · 공개 SDK 규칙 점검 |
+| [prd-spec](prd-spec/SKILL.md) | 기능 명세와 Pleos SDK · 주행 상태 · 심사 항목 추적 표 |
+| [eval-design](eval-design/SKILL.md) | Virtual Console 입력 → 기대 반응 골든 케이스 |
+| [publish-submission](publish-submission/SKILL.md) | 팀 원본 저장소 → 이 저장소 한 방향 출판과 공개 점검 |
 
-일부 스킬은 팀 노하우 저장소(비공개, 리서치·회의 기록)의 경로를 가리킨다. 그 경로는 이 저장소에 없다.
+스킬 파일은 팀 원본 저장소에서 출판된다(`.published.json`). 일부 스킬은 팀 노하우 저장소(비공개, 리서치·회의 기록)의 경로를 가리킨다. 그 경로는 이 저장소에 없다.

@@ -1,0 +1,154 @@
+{
+ "note": "팀 원본 저장소에서 scripts/publish.py가 출판한 파일. 여기서 고치지 말 것.",
+ "published": "2026-11-14",
+ "files": {
+  ".agents/registry.tsv": {
+   "source": ".agents/registry.tsv",
+   "sha256": "eb78309273bf19730f19db5c9d9c0f46312dae9d2a869b4e6b668d70fbbd9da3"
+  },
+  ".agents/rnr.tsv": {
+   "source": ".agents/rnr.tsv",
+   "sha256": "796af88d195dba7c3d12374f53007acbdd09d32e86ae5b7b212f1df60cef09a6"
+  },
+  ".agents/skills/diagram-render/SKILL.md": {
+   "source": ".agents/skills/diagram-render/SKILL.md",
+   "sha256": "10c97d8272ce81bf5e0826d0dc4ee81746ae08d240baf6f1732605eb55d41843"
+  },
+  ".agents/skills/eval-design/SKILL.md": {
+   "source": ".agents/skills/eval-design/SKILL.md",
+   "sha256": "07cf6acda1a15d3267871d70ec9f743131355e7a18642d4b2bd33ae750e8dd6e"
+  },
+  ".agents/skills/judge-sim/SKILL.md": {
+   "source": ".agents/skills/judge-sim/SKILL.md",
+   "sha256": "2ccba6b3dc9d91b7e5c5b19613a3bc4294ff967e9d616e8c3109c3b977592bc4"
+  },
+  ".agents/skills/key-visual/SKILL.md": {
+   "source": ".agents/skills/key-visual/SKILL.md",
+   "sha256": "22a5a946ba8d9d7c4d4b42a308d6f95fac21a2f07c4d38490b0c48d2ad0a4b5e"
+  },
+  ".agents/skills/motion-graphic/SKILL.md": {
+   "source": ".agents/skills/motion-graphic/SKILL.md",
+   "sha256": "7ba63afae81e90013257818c4b7d1879f31fa5a927db2a64c242cbeda6b3b6f8"
+  },
+  ".agents/skills/pleos-app-scaffold/SKILL.md": {
+   "source": ".agents/skills/pleos-app-scaffold/SKILL.md",
+   "sha256": "6233f1416647c0077097c574d05d235666bd8727648b27849f5d945099d4596d"
+  },
+  ".agents/skills/prd-spec/SKILL.md": {
+   "source": ".agents/skills/prd-spec/SKILL.md",
+   "sha256": "b92c436210f66ba8566fb6b9772fa6be214c28eea0343bd17365cbc229b096b9"
+  },
+  ".agents/skills/publish-submission/SKILL.md": {
+   "source": ".agents/skills/publish-submission/SKILL.md",
+   "sha256": "10714a3fcd2057cb16e259597cca14976997422913ae0c782b0d58013b4d2056"
+  },
+  ".agents/skills/risk-compliance/SKILL.md": {
+   "source": ".agents/skills/risk-compliance/SKILL.md",
+   "sha256": "8e458d6e68977283aaa9ab97d181f2d0d0182a758b58343f47e52b462352e917"
+  },
+  ".agents/skills/skill-scout/SKILL.md": {
+   "source": ".agents/skills/skill-scout/SKILL.md",
+   "sha256": "e5c8d57d391cd9e784a675799187f38cc574367d50da798261dc264d2161408f"
+  },
+  ".agents/skills/submission-check/SKILL.md": {
+   "source": ".agents/skills/submission-check/SKILL.md",
+   "sha256": "3ececf5cd37fbdaba6ee08293de87ec21375f5a5eacf2bf4713dcf2c04680e64"
+  },
+  ".agents/skills/web-demo-video/SKILL.md": {
+   "source": ".agents/skills/web-demo-video/SKILL.md",
+   "sha256": "0000da03b7ddade067aa6a5e5412bd3cb6d05095dbb379e2afce0c8db5da7021"
+  },
+  ".agents/skills/web-demo-video/record_demo.template.mjs": {
+   "source": ".agents/skills/web-demo-video/record_demo.template.mjs",
+   "sha256": "fc10b52f6b5eaf63d8b8a1e7f89acb617cfd5b3b4118ca59c1b87a80f1f656ee"
+  },
+  ".agents/skills/web-sim/SKILL.md": {
+   "source": ".agents/skills/web-sim/SKILL.md",
+   "sha256": "e3d19813b7a42a5b378c8efad413c92807697b03ed5a819362fc8185ef1d2b43"
+  },
+  ".claude/agent-memory/contest-ops/MEMORY.md": {
+   "source": ".claude/agent-memory/contest-ops/MEMORY.md",
+   "sha256": "c60ff37e7bdb9fa242e8c7eb1306f52e8cb8a78bec0f1ecd2f269a3041a67143"
+  },
+  ".claude/agent-memory/creative-director/MEMORY.md": {
+   "source": ".claude/agent-memory/creative-director/MEMORY.md",
+   "sha256": "40290e34bcecb4ac9398d6853fd35d8467cddc339c1fa7eb1034179514f1edb5"
+  },
+  ".claude/agent-memory/design-reviewer/MEMORY.md": {
+   "source": ".claude/agent-memory/design-reviewer/MEMORY.md",
+   "sha256": "eec53eb940d7ccb72f4f3d0232a59265dfb7e97e644359dcf61a657d03330c6b"
+  },
+  ".claude/agent-memory/fact-verifier/MEMORY.md": {
+   "source": ".claude/agent-memory/fact-verifier/MEMORY.md",
+   "sha256": "2884aad13bf474ecd1d67cb826aa15f3bfbbbc3c449bac7a448ddcaaeb4b471d"
+  },
+  ".claude/agent-memory/judge/MEMORY.md": {
+   "source": ".claude/agent-memory/judge/MEMORY.md",
+   "sha256": "7fae8c3db2789964bd822d1b342dab43ac3268a71418466aeeb2a813fe113ee4"
+  },
+  ".claude/agent-memory/proposal-writer/MEMORY.md": {
+   "source": ".claude/agent-memory/proposal-writer/MEMORY.md",
+   "sha256": "911abc4c056625b4485b348ac6d218c8bd559ae251e09a805ec2c750af087a44"
+  },
+  ".claude/agent-memory/researcher/MEMORY.md": {
+   "source": ".claude/agent-memory/researcher/MEMORY.md",
+   "sha256": "0aae7677d3b40a13f07324bdb5e2b3cc0f893b4856b92d410ab8901b0f61a2a7"
+  },
+  ".claude/agents/contest-ops.md": {
+   "source": ".claude/agents/contest-ops.md",
+   "sha256": "25a858901f946da054ff17b5ee6b861176d095454953a978d1c566ae2050c763"
+  },
+  ".claude/agents/creative-director.md": {
+   "source": ".claude/agents/creative-director.md",
+   "sha256": "4e10529579befb2a47751ccd2cad2bdf33dbad60d6fc9f23af7e7239dc5fb306"
+  },
+  ".claude/agents/design-reviewer.md": {
+   "source": ".claude/agents/design-reviewer.md",
+   "sha256": "ba62152a7b8314a1b5a1fb9eafe44cb6f9d11a612f62310100510ca2ef013268"
+  },
+  ".claude/agents/fact-verifier.md": {
+   "source": ".claude/agents/fact-verifier.md",
+   "sha256": "8193a9cbd9748c79283d356625aa56a1532d95ee6f386a88bb425df890235082"
+  },
+  ".claude/agents/judge.md": {
+   "source": ".claude/agents/judge.md",
+   "sha256": "28d7658ab5a5e49a402ed019aab79ac564353f8a2e292bd3e2a336212ab9ccc8"
+  },
+  ".claude/agents/proposal-writer.md": {
+   "source": ".claude/agents/proposal-writer.md",
+   "sha256": "5e2c0b6568e452be19477d6b6dc5a0f854bd711a07cc17242209fee27f0fc9e3"
+  },
+  ".claude/agents/researcher.md": {
+   "source": ".claude/agents/researcher.md",
+   "sha256": "4c9271b790e1aba061e2e8759de4cbedf3d1445b600480850037a1fee141e4e6"
+  },
+  "ai/agents.md": {
+   "source": "scripts/gen_agents.py (생성)",
+   "sha256": "b00c64c4474c0d9fca6a6c7a9c9d667f717d3786fb07a3b8b22cfa5b10e8a22e"
+  },
+  "docs/assets/ai/ai-operating-map.png": {
+   "source": "docs/assets/diagrams/ai-org/ai-operating-map.png",
+   "sha256": "9160fb566a12eee28f99461ea4251e201cf01ed75fb7f9d9bbb09f4687d7f517"
+  },
+  "docs/assets/ai/command-flow.png": {
+   "source": "docs/assets/diagrams/ai-org/command-flow.png",
+   "sha256": "0ad6acd408a6b60ab3a5775797593c6d651174f050eed8e855b8eb6791c6d935"
+  },
+  "docs/assets/ai/rnr-contribution.png": {
+   "source": "docs/assets/diagrams/ai-org/rnr-contribution.png",
+   "sha256": "98f1e3340c9aa32ebaf736cf9d0d4de791d28e1a66152cbe06f6c37e478d42cb"
+  },
+  "docs/assets/ai/role-model-matrix.png": {
+   "source": "docs/assets/diagrams/ai-org/role-model-matrix.png",
+   "sha256": "e8d4258ef1e072c8df57fd194e9fac71e3f74aa5f30b3249f0ea4fa9846a790c"
+  },
+  "docs/assets/ai/workflow-gantt-blueprint.png": {
+   "source": "docs/assets/diagrams/ai-org/workflow-gantt-blueprint.png",
+   "sha256": "d71bb29b7a9a6922acae85f06a817c60cb1afb2095ca4d606b7e2fca21faf510"
+  },
+  "scripts/find-skill.py": {
+   "source": "scripts/find-skill.py",
+   "sha256": "7b2be591f38bd7120d5befeeab50d78958d66f61450f9ce5824d24520c4d6a7f"
+  }
+ }
+}

@@ -35,4 +35,4 @@ python3 -I scripts/find-skill.py 모션 motion video     # 한국어+영어 단�
 - 썼으면 `docs/tools/registry.md`에 한 줄(실사용 날짜·결과물). 제출 저장소 `ai/toolchain.md`에도.
 
 ## 우리가 들고 있는 것 (요약)
-켜 둔 플러그인 17 · 필요할 때 켜는 것 4(harness-engineering, harness, oh-my-claudecode, ECC) · 마켓 15+Directory. 전체: [ai/toolchain.md](../../../ai/toolchain.md)
+켜 둔 플러그인 17 · 필요할 때 켜는 것 4(harness-engineering, harness, oh-my-claudecode, ECC) · 마켓 15+Directory. 전체: registry.md (팀 노하우 저장소 `docs/tools/registry.md`)

@@ -3,7 +3,7 @@ name: diagram-render
 description: 설명용 다이어그램·보드를 HTML로 짜서 헤드리스 Chrome으로 PNG를 만든다. 팀 하우스 스타일(Pretendard, #6D4AFF, 바탕 #FAFAF8). 트리거: "다이어그램", "구조도", "그림으로", "PNG로 뽑아".
 ---
 
-# diagram-render: HTML → PNG
+# diagram-render — HTML → PNG
 
 - 원본: `30_design/source-assets/diagrams/<이름>.html` (공통 `base.css` 링크). 결과: `docs/assets/diagrams/<이름>.png`.
 - 렌더:
