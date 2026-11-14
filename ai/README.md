@@ -5,39 +5,18 @@
 > 대회는 생성형 AI 보조 도구 사용을 허용하되, 팀이 전체 구조와 로직을 이해하고 직접 설명할 수 있어야 한다고 안내했다(2026-10-28 설명회). 그래서 AI가 쓴 코드도 사람이 실행해 보고 설명할 수 있어야 병합한다.
 
 ## 한 장으로
-```mermaid
-flowchart LR
-    subgraph H["사람: 결정 · 검증"]
-        direction TB
-        PM["김주용 (PM)"]
-        MJ["김민주"]
-    end
-    subgraph E["AI 엔진"]
-        direction TB
-        CC["Claude Code"]
-        CX["Codex CLI"]
-        GM["Gemini Deep Research"]
-        GK["Grok"]
-    end
-    subgraph A["역할별 에이전트"]
-        direction TB
-        R["조사 · 사실 검증"]
-        W["기획서 초안"]
-        D["디자인 검토"]
-        J["모의 심사"]
-    end
-    subgraph O["산출물"]
-        direction TB
-        DOC["docs · ADR"]
-        CODE["app · 테스트"]
-        VIS["도식 · 시안"]
-    end
-    H -- "지시 (P##)" --> E
-    E -- 위임 --> A
-    A -- "초안 (Prompt-Ref)" --> O
-    O == "검토 · 병합 · 제출은 사람만" ==> H
-```
-<sub>출처: [agents.md](agents.md) · 갱신: 2026-11-13</sub>
+![AI 운영 지도: 사람 2명, Claude 지휘, 전문 서브에이전트, 외부 AI, 사람 결정 게이트](../docs/assets/ai/ai-operating-map.png)
+<sub>출처: .agents/registry.tsv · 품질 exact (Gemini·Grok 버전은 estimate) · scripts/gen_ai_viz.py로 생성</sub>
+
+### 지시 하나가 커밋이 되기까지
+![지휘 흐름: 질문, 위임, 산출, 검증, 사람 결정, 커밋](../docs/assets/ai/command-flow.png)
+<sub>출처: .agents/registry.tsv 계층 · 품질 exact · scripts/gen_ai_viz.py로 생성</sub>
+
+### 일정과 담당
+![마일스톤 간트: 사람 담당과 AI 담당(에이전트 · 모델), 완료율](../docs/assets/ai/workflow-gantt-blueprint.png)
+<sub>출처: 작업판 마일스톤 · 사람 할 일 · AI 작업판 · 품질 exact (작업판 기준) · scripts/gen_ai_viz.py로 생성</sub>
+
+그림 5장 전체와 캡션은 [visuals.md](visuals.md).
 
 ## 자리
 | 자리 | 누가 | 맡는 일 | 맡지 않는 일 |
@@ -57,4 +36,5 @@ flowchart LR
 | [harness.md](harness.md) | AI가 선을 넘지 않게 무엇이 막나 |
 | [prompts.md](prompts.md) | 어떤 지시가 어떤 변경을 낳았나 |
 | [overrides.md](overrides.md) | 사람이 AI 제안을 뒤집은 때와 이유 |
+| [visuals.md](visuals.md) | 그림 5장: 운영 지도, 역할 매트릭스, 지휘 흐름, 간트, 기여 |
 | [toolchain.md](toolchain.md) | 플러그인·스킬·에이전트·MCP·로컬 도구와 관리 규칙 |
