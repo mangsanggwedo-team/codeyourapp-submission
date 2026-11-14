@@ -4,7 +4,7 @@
  "files": {
   ".agents/registry.tsv": {
    "source": ".agents/registry.tsv",
-   "sha256": "eb78309273bf19730f19db5c9d9c0f46312dae9d2a869b4e6b668d70fbbd9da3"
+   "sha256": "848cc1735446c7fb43a467f3fa619566cdfec2742794699a4850d42591c48333"
   },
   ".agents/rnr.tsv": {
    "source": ".agents/rnr.tsv",
@@ -94,6 +94,10 @@
    "source": ".claude/agent-memory/researcher/MEMORY.md",
    "sha256": "0aae7677d3b40a13f07324bdb5e2b3cc0f893b4856b92d410ab8901b0f61a2a7"
   },
+  ".claude/agents/conductor.md": {
+   "source": ".claude/agents/conductor.md",
+   "sha256": "dc536cd85eae1b978f5a8c1c21063048aa246e6e5d158ee9f27c384664d5f95a"
+  },
   ".claude/agents/contest-ops.md": {
    "source": ".claude/agents/contest-ops.md",
    "sha256": "25a858901f946da054ff17b5ee6b861176d095454953a978d1c566ae2050c763"
@@ -105,6 +109,10 @@
   ".claude/agents/design-reviewer.md": {
    "source": ".claude/agents/design-reviewer.md",
    "sha256": "ba62152a7b8314a1b5a1fb9eafe44cb6f9d11a612f62310100510ca2ef013268"
+  },
+  ".claude/agents/developer.md": {
+   "source": ".claude/agents/developer.md",
+   "sha256": "73a7f60485091f4dca16e7787de68cee0b551fdbd045e8c41ff6f7b162185973"
   },
   ".claude/agents/fact-verifier.md": {
    "source": ".claude/agents/fact-verifier.md",
@@ -124,7 +132,7 @@
   },
   "ai/agents.md": {
    "source": "scripts/gen_agents.py (생성)",
-   "sha256": "b00c64c4474c0d9fca6a6c7a9c9d667f717d3786fb07a3b8b22cfa5b10e8a22e"
+   "sha256": "1ec6171f47544924f6ade6ad8b25a650a64101201ecb9babfd843842b6446566"
   },
   "docs/assets/ai/ai-operating-map.png": {
    "source": "docs/assets/diagrams/ai-org/ai-operating-map.png",
