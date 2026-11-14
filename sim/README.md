@@ -13,6 +13,17 @@ npm test               # 연결기 순수 로직 자체 검사
 npm run check          # 타입 검사
 ```
 
+## 새 컴퓨터에서 처음 (팀원용, 약 30분)
+1. 준비물: Node.js 20 이상, Git, Android Studio(SDK Platform-Tools 포함).
+2. 받기: `git clone https://github.com/mangsanggwedo-team/codeyourapp-submission.git && cd codeyourapp-submission/sim && npm install`
+3. Pleos Connect 에뮬레이터 만들기: Pleos Playground 문서의 에뮬레이터 안내대로 Android Studio SDK Manager에 시스템 이미지 사이트를 추가한다.
+   - Mac(Apple 칩): `https://nexus-playground.pleos.ai/repository/raw-releases/connect-avd/2.x/crp-arm64-sys-img.xml`
+   - Windows·Linux: `https://nexus-playground.pleos.ai/repository/raw-releases/connect-avd/2.x/crp-sys-img.xml`
+   - 이미지를 받고 AVD를 만든다. 이름을 `Pleos_Connect`로 하면 아래 명령이 그대로 돈다(다르면 `AVD=이름 npm run emu`).
+4. 터미널 1: `npm run dev` → 브라우저 `http://localhost:5173`
+5. 터미널 2: `npm run emu` (에뮬레이터 켜기, 8088 연결, 화면 복사) → 무대 위 **연결**.
+6. 에뮬레이터 없이도 무대·조작·자율주행은 그대로 돈다. 연결 칸만 비어 있다.
+
 ## 에뮬레이터와 잇기
 1. Pleos Connect 에뮬레이터를 켠다. `adb forward tcp:8088 tcp:8088`
 2. 화면 위 **에뮬레이터 연결**을 누른다 (또는 `http://localhost:5173/?connect=1`).

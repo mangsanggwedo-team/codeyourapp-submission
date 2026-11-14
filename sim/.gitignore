@@ -5,4 +5,5 @@ assets/third-party/**/*.zip
 assets/downloads/
 # adb screencap 결과(로컬 전용)
 public/emu.png
+public/emu.png.tmp
 public/hdri/
