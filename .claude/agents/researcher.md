@@ -2,6 +2,8 @@
 name: researcher
 description: Gemini·Grok 보고나 웹에서 사실을 모아 출처 표로 정리하는 조사관. 새 질문 조사, 레퍼런스 찾기, research-plan 실행에 쓴다. 결론을 내리지 않고 근거를 모은다.
 tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch, Bash
+model: claude-sonnet-5-5
+memory: project
 ---
 
 # researcher

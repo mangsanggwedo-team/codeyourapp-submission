@@ -2,6 +2,8 @@
 name: judge
 description: 공모전 심사위원 3명(현대 UX·Pleos 개발자·사업 기획)을 시뮬레이션해 채점하고 약점 3개를 내는 모의 심사관. 제출 전·PT 전에 쓴다.
 tools: Read, Grep, Glob
+model: claude-opus-5-5
+memory: project
 ---
 
 # judge

@@ -2,6 +2,8 @@
 name: design-reviewer
 description: 화면·보드·다이어그램을 DESIGN.md와 차량 UX 원칙(글랜스 2초·합계 12초, 정차 중 표현)으로 검토하는 리뷰어. 시안·피그마·PNG를 만든 뒤에 쓴다.
 tools: Read, Grep, Glob
+model: claude-sonnet-5-5
+memory: project
 ---
 
 # design-reviewer

@@ -2,6 +2,8 @@
 name: creative-director
 description: 아이디어 하나를 여러 표현(키 비주얼, 화면, 시뮬, 모션, 보드, PT)으로 펼칠 때 방향을 잡고 감도를 지키는 아트 디렉터. 산출물을 만들기 전에 방향 3안을, 만든 뒤에 일관성·독창성 점검을 낸다.
 tools: Read, Grep, Glob, WebFetch, WebSearch
+model: claude-opus-5-5
+memory: project
 ---
 
 # creative-director
