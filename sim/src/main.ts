@@ -152,9 +152,13 @@ document.querySelectorAll<HTMLButtonElement>('.pop').forEach(b => b.onclick = ()
 
 // 에뮬레이터 화면: scripts/emu-screencap.sh 가 public/emu.png 를 갱신하면 보인다
 const emuImg = $('emuImg') as HTMLImageElement
-emuImg.onload = () => { emuImg.style.display = 'block'; $('emuHint').style.display = 'none' }
-emuImg.onerror = () => { emuImg.style.display = 'none'; $('emuHint').style.display = '' }
-setInterval(() => { if (!solo) emuImg.src = `/emu.png?t=${Date.now()}` }, 1000)
+// 같은 그림을 차 중앙 디스플레이 텍스처로도 쓴다 (운전석 시점, 새 창 포함)
+const emuTex = new THREE.Texture(emuImg)
+emuTex.colorSpace = THREE.SRGBColorSpace
+car.displayMat.map = emuTex
+emuImg.onload = () => { emuImg.style.display = 'block'; $('emuHint').style.display = 'none'; emuTex.needsUpdate = true; car.displayScreen.visible = true }
+emuImg.onerror = () => { emuImg.style.display = 'none'; $('emuHint').style.display = ''; car.displayScreen.visible = false }
+setInterval(() => { if (solo !== 'telemetry') emuImg.src = `/emu.png?t=${Date.now()}` }, 1000)
 
 // ---- 루프 ----
 let last = performance.now(), frame = 0, lastBroadcast = 0

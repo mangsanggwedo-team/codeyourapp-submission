@@ -45,9 +45,14 @@ export function buildCar() {
   const ws = box(0.9, 0.04, 1.5, glass, 1.12, 1.24, 0); ws.rotation.z = -0.62; root.add(ws) // 앞유리
   // 실내
   root.add(box(0.35, 0.28, 1.6, dark, 0.75, 0.92, 0)) // 대시보드
-  const screen = box(0.03, 0.12, 0.5, std(0x111111, { emissive: 0x2a6fdb, emissiveIntensity: 0.35 }), 0.62, 1.1, 0.05)
-  screen.name = 'cluster'
-  root.add(screen) // 계기판·중앙 디스플레이 자리 (Pleos 화면)
+  // 중앙 디스플레이 (Pleos 화면 2560x1440 = 16:9). 테두리 위에 화면 판을 얹고 운전자 쪽으로 살짝 돌린다.
+  const display = new THREE.Group(); display.name = 'center_display'
+  display.position.set(0.68, 1.1, 0.12); display.rotation.y = -0.25
+  display.add(box(0.02, 0.2, 0.34, std(0x0b0c0f), 0.012, 0, 0))
+  const displayMat = new THREE.MeshBasicMaterial({ toneMapped: false }) // 빛을 받지 않는 화면
+  const displayScreen = new THREE.Mesh(new THREE.PlaneGeometry(0.32, 0.18), displayMat)
+  displayScreen.rotation.y = -Math.PI / 2; displayScreen.visible = false // 그림이 들어오기 전엔 검은 테두리만
+  display.add(displayScreen); root.add(display)
   // 앱이 판단한 순간의 빛: 차 주변 바닥 고리 반경 2.5m, 강조 보라 (무대 사물에는 보라를 쓰지 않는다)
   const ringMat = new THREE.MeshBasicMaterial({ color: '#6D4AFF', transparent: true, opacity: 0.85 })
   const ring = new THREE.Mesh(new THREE.RingGeometry(2.35, 2.6, 48), ringMat)
@@ -181,5 +186,5 @@ export function buildCar() {
     cabin.color.set(appGlow ? theme.accent : c.ambientColor); cabin.intensity = c.ambientPct / 100 * 2 * Math.max(0.2, night)
   }
 
-  return { root, apply }
+  return { root, apply, displayMat, displayScreen }
 }
