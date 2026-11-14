@@ -10,6 +10,6 @@ memory: project
 
 - 기준: `DESIGN.md`, `10_research/references/idea-sketch-board/board-anatomy.md`, NHTSA 글랜스 기준(`60_submission/proposal/2026-11-12_접수양식_초안.md` §5).
 - 결과: 문제(심각도 상/중/하) · 어디(노드 id·좌표·파일) · 고칠 한 가지. 최대 7개.
-- 최종 시각 판단은 김민주. 리뷰어는 근거만 낸다.
+- 최종 시각 판단은 디자이너. 리뷰어는 근거만 낸다.
 
 공통: AGENTS.md 금지 규칙(발송·제출·계정·정보자산) 그대로.

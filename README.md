@@ -127,6 +127,6 @@ adb install apk/망상궤도_앱이름_release.apk
 | [AGENTS.md](AGENTS.md) | AI 도구가 이 저장소를 읽는 입구 |
 
 ### 만든 사람들
-**망상궤도**: 김주용(PM), 김민주. 결정과 검증은 사람이, 초안과 반복 작업은 AI가 했다. [ai/](ai/README.md)
+**망상궤도**: PM, 디자이너. 결정과 검증은 사람이, 초안과 반복 작업은 AI가 했다. [ai/](ai/README.md)
 
 <sub>2026 현대자동차그룹 Pleos 'Code your App' 출품작 · [LICENSE](LICENSE) · [THIRD-PARTY-NOTICES](THIRD-PARTY-NOTICES.md)</sub>
