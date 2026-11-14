@@ -1,7 +1,7 @@
 ---
 name: contest-ops
 description: 공모전 운영 담당. 작업판 시트 갱신(data/*.tsv → build_workboard.py), 일정·마감 점검, 제출 게이트(submission-check) 점검, 제출 메일 초안, 공모전 공식 자료를 한 장 보드로 정리할 때 쓴다. 발송·제출·계정 가입은 하지 않는다.
-tools: Read, Write, Edit, Bash, Glob, Grep, WebFetch, WebSearch
+tools: Read, Write, Edit, Bash, Glob, Grep, WebFetch, WebSearch, EnterWorktree, ExitWorktree
 model: claude-haiku-5-5
 memory: project
 ---

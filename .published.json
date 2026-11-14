@@ -72,7 +72,7 @@
   },
   ".claude/agent-memory/creative-director/MEMORY.md": {
    "source": ".claude/agent-memory/creative-director/MEMORY.md",
-   "sha256": "40290e34bcecb4ac9398d6853fd35d8467cddc339c1fa7eb1034179514f1edb5"
+   "sha256": "8a9eaf0c243462b1645c557959734002c98aed484b06df676e167a86479f21ee"
   },
   ".claude/agent-memory/design-reviewer/MEMORY.md": {
    "source": ".claude/agent-memory/design-reviewer/MEMORY.md",
@@ -80,7 +80,7 @@
   },
   ".claude/agent-memory/fact-verifier/MEMORY.md": {
    "source": ".claude/agent-memory/fact-verifier/MEMORY.md",
-   "sha256": "2884aad13bf474ecd1d67cb826aa15f3bfbbbc3c449bac7a448ddcaaeb4b471d"
+   "sha256": "626923247151b571f2120e0b8b0ad81d56d5949d351d68095dbdcb90abf2fb6f"
   },
   ".claude/agent-memory/judge/MEMORY.md": {
    "source": ".claude/agent-memory/judge/MEMORY.md",
@@ -92,7 +92,7 @@
   },
   ".claude/agent-memory/researcher/MEMORY.md": {
    "source": ".claude/agent-memory/researcher/MEMORY.md",
-   "sha256": "0aae7677d3b40a13f07324bdb5e2b3cc0f893b4856b92d410ab8901b0f61a2a7"
+   "sha256": "0e330e30631057f65a6748f9f2d905b7e12711d4e870847beb461c912d7aa57a"
   },
   ".claude/agents/conductor.md": {
    "source": ".claude/agents/conductor.md",
@@ -100,11 +100,11 @@
   },
   ".claude/agents/contest-ops.md": {
    "source": ".claude/agents/contest-ops.md",
-   "sha256": "25a858901f946da054ff17b5ee6b861176d095454953a978d1c566ae2050c763"
+   "sha256": "4e84b97a15a0aab83ac667d10097b9c042cc76b5b3b8072867503ded34059e52"
   },
   ".claude/agents/creative-director.md": {
    "source": ".claude/agents/creative-director.md",
-   "sha256": "4e10529579befb2a47751ccd2cad2bdf33dbad60d6fc9f23af7e7239dc5fb306"
+   "sha256": "bb8a54150d9e80065c7fb34720321b202084509cd05eed9deb2b74795c9dc45a"
   },
   ".claude/agents/design-reviewer.md": {
    "source": ".claude/agents/design-reviewer.md",
@@ -112,7 +112,7 @@
   },
   ".claude/agents/developer.md": {
    "source": ".claude/agents/developer.md",
-   "sha256": "73a7f60485091f4dca16e7787de68cee0b551fdbd045e8c41ff6f7b162185973"
+   "sha256": "0757f5d0d3bb0a1098c7daf87f114e45258f3495917c25280f00897b12f1def1"
   },
   ".claude/agents/fact-verifier.md": {
    "source": ".claude/agents/fact-verifier.md",
@@ -124,11 +124,11 @@
   },
   ".claude/agents/proposal-writer.md": {
    "source": ".claude/agents/proposal-writer.md",
-   "sha256": "5e2c0b6568e452be19477d6b6dc5a0f854bd711a07cc17242209fee27f0fc9e3"
+   "sha256": "405b74dc83a9149649103c19848e0256d4889e26a1559a09b765c74291866a99"
   },
   ".claude/agents/researcher.md": {
    "source": ".claude/agents/researcher.md",
-   "sha256": "4c9271b790e1aba061e2e8759de4cbedf3d1445b600480850037a1fee141e4e6"
+   "sha256": "c77b33ec1e6e99e0479d96d9f5a0a28d8205209cac626c66868398d90433af86"
   },
   "ai/agents.md": {
    "source": "scripts/gen_agents.py (생성)",

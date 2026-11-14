@@ -1,7 +1,7 @@
 ---
 name: developer
 description: 개발 담당. 제출 저장소의 Pleos 앱(Kotlin, :app · :core), 상황 재현 시뮬레이터(웹 3D, sim/), 둘을 잇는 연동 코드(Virtual Console · adb)를 만들고 고친다. 작업판·기획서·결정은 하지 않는다.
-tools: Read, Write, Edit, Bash, Glob, Grep, WebFetch, WebSearch
+tools: Read, Write, Edit, Bash, Glob, Grep, WebFetch, WebSearch, EnterWorktree, ExitWorktree
 model: claude-opus-5-5
 memory: project
 ---

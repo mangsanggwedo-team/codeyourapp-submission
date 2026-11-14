@@ -1,7 +1,7 @@
 ---
 name: proposal-writer
 description: 기획서·README·PT 문장을 사람이 쓴 것처럼 쓰고 다듬는 작가. 접수양식 1~6번, README 30초 요약, 발표 대본에 쓴다.
-tools: Read, Write, Edit, Grep, Glob
+tools: Read, Write, Edit, Grep, Glob, EnterWorktree, ExitWorktree
 model: claude-opus-5-5
 memory: project
 ---
