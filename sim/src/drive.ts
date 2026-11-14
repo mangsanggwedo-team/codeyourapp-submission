@@ -25,15 +25,15 @@ const wrap = (x: number) => (x > HALF_X ? x - 2 * HALF_X : x < -HALF_X ? x + 2 *
 const approach = (v: number, target: number, rate: number) => (v < target ? Math.min(target, v + rate) : Math.max(target, v - rate))
 
 /** 자율: 목표 차로 z, 목표 속도(m/s), 방향지시 해제 여부 */
-function autopilot(c: Car, pose: { x: number; z: number; yaw: number }, goal: { x: number; z: number } | null, t: number) {
+export function autopilot(c: Car, pose: { x: number; z: number; yaw: number }, goal: { x: number; z: number } | null, t: number) {
   const dirE = Math.cos(pose.yaw) >= 0
   const lanes = dirE ? LANES.east : LANES.west
   // 현재 차로 = 가장 가까운 차로. 깜빡이가 켜져 있으면 그쪽 차로로
   let laneIdx = lanes.reduce((b, z, i) => (Math.abs(z - pose.z) < Math.abs(lanes[b] - pose.z) ? i : b), 0)
-  // 진행 방향 왼쪽 = 중앙선 쪽(인덱스 0), 오른쪽 = 갓길 쪽
+  if (goal) laneIdx = lanes.reduce((b, z, i) => (Math.abs(z - goal.z) < Math.abs(lanes[b] - goal.z) ? i : b), 0)
+  // 깜빡이가 목표 차로보다 우선. 진행 방향 왼쪽 = 중앙선 쪽(인덱스 0), 오른쪽 = 갓길 쪽
   if (c.signal === 'BlinkLeft') laneIdx = 0
   if (c.signal === 'BlinkRight') laneIdx = lanes.length - 1
-  if (goal) laneIdx = lanes.reduce((b, z, i) => (Math.abs(z - goal.z) < Math.abs(lanes[b] - goal.z) ? i : b), 0)
   const laneZ = lanes[laneIdx]
   const fwd = dirE ? 1 : -1
   // 앞 거리: 정지선, 목표 지점
@@ -62,7 +62,7 @@ function autopilot(c: Car, pose: { x: number; z: number; yaw: number }, goal: { 
   const steeringDeg = Math.max(-470, Math.min(500, delta * 180 / Math.PI * 14))
   const done = Math.abs(pose.z - laneZ) < 0.25 && Math.abs(h) < 0.05
   const arrived = !!goal && vMax < 0.3 && v < 0.3
-  return { vMax, steeringDeg, cancelSignal: c.signal !== 'Off' && done, arrived }
+  return { vMax, steeringDeg, cancelSignal: c.signal !== 'Off' && done, arrived, laneZ }
 }
 
 export function step(dt: number, t: number) {
@@ -81,6 +81,8 @@ export function step(dt: number, t: number) {
     else if (v > ap.vMax + 0.2) { v = Math.max(ap.vMax, v - 3.0 * dt); brake = Math.min(100, 20 + (v - ap.vMax) * 20) }
     else if (ap.vMax < 0.3) brake = 30 // 정지 유지
     if (ap.cancelSignal) patch.signal = 'Off'
+    // 깜빡이 차로 변경이 끝나면 목표 지점도 그 차로로 옮긴다 (안 옮기면 원래 차로로 되돌아감)
+    if (ap.cancelSignal && s.goal) setState({ goal: { ...s.goal, z: ap.laneZ } })
     if (keys.has(' ') || keys.has('ArrowDown')) patch.adMode = 'not_ready' // 사람이 브레이크를 밟으면 자율 해제
     if (ap.arrived) setTimeout(() => setState({ goal: null }), 0)
   } else if (s.mode === 'drive') {

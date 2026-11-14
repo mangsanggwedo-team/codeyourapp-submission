@@ -1,4 +1,5 @@
-// 한 페이지 멀티 뷰 + 새 창(BroadcastChannel). 메인 창만 물리·자율·연결기를 돌리고, 새 창은 상태를 받아 그린다.
+// 한 페이지 멀티 뷰 + 새 창(BroadcastChannel). 주인 창 하나만 물리·자율·연결기를 돌리고, 나머지는 상태를 받아 그린다.
+// 주인은 Web Locks로 하나만 뽑힌다. 주인 창이 닫히면 잠금이 풀려 기다리던 창이 이어받는다.
 import * as THREE from 'three'
 import { getState, replaceState, setState, subscribe, type Patch, type SimState } from './state.ts'
 import { buildStage } from './scene/stage.ts'
@@ -11,23 +12,30 @@ import { buildControls, renderCluster, renderTelemetry } from './ui/panel.ts'
 type Cam = 'diorama' | 'driver' | 'chase' | 'pedestrian'
 const params = new URLSearchParams(location.search)
 const solo = params.get('view') as Cam | 'telemetry' | null
-const isMain = !solo
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T
 
 // ---- 상태 공유 ----
 const bc = new BroadcastChannel('mangsang-sim')
 let remoteTele: typeof tele = tele
 let clock = 0
-const act = (p: Patch) => (isMain ? setState(p) : bc.postMessage({ type: 'patch', patch: p }))
-if (isMain) {
-  bc.onmessage = e => {
-    const m = e.data
+let owner = false
+const toggleLink = () => (isConnected() ? disconnect() : connect())
+function becomeOwner() {
+  owner = true
+  // 전 주인이 연결해 두었으면 이어서 연결한다
+  if (params.get('connect') === '1' || remoteTele.status !== 'off') connect()
+}
+// shortcut: 잠금 API가 없는 환경(보안 컨텍스트 아님, 예: LAN IP http)은 예전처럼 ?view= 없는 창이 주인. 그런 환경에서 쓰면 잠금 대신 BroadcastChannel 선출로 바꾼다.
+if (navigator.locks) navigator.locks.request('mangsang-sim-owner', () => new Promise(() => becomeOwner()))
+else if (!solo) becomeOwner()
+const act = (p: Patch) => (owner ? setState(p) : bc.postMessage({ type: 'patch', patch: p }))
+bc.onmessage = e => {
+  const m = e.data
+  if (owner) {
     if (m.type === 'patch') setState(m.patch)
     if (m.type === 'key') (m.down ? pressKey(m.key) : releaseKey(m.key))
-  }
-} else {
-  bc.onmessage = e => {
-    const m = e.data
+    if (m.type === 'link') toggleLink()
+  } else {
     if (m.type === 'state') { replaceState(m.state as SimState); clock = m.t }
     if (m.type === 'tele') remoteTele = m.tele
   }
@@ -36,10 +44,10 @@ addEventListener('keydown', e => {
   if ((e.target as HTMLElement)?.tagName === 'INPUT') return
   if (DRIVE_KEYS.includes(e.key)) e.preventDefault()
   if (e.repeat) return
-  isMain ? pressKey(e.key) : bc.postMessage({ type: 'key', key: e.key, down: true })
+  owner ? pressKey(e.key) : bc.postMessage({ type: 'key', key: e.key, down: true })
 })
-addEventListener('keyup', e => (isMain ? releaseKey(e.key) : bc.postMessage({ type: 'key', key: e.key, down: false })))
-addEventListener('blur', () => (isMain ? releaseAll() : DRIVE_KEYS.forEach(key => bc.postMessage({ type: 'key', key, down: false }))))
+addEventListener('keyup', e => (owner ? releaseKey(e.key) : bc.postMessage({ type: 'key', key: e.key, down: false })))
+addEventListener('blur', () => (owner ? releaseAll() : DRIVE_KEYS.forEach(key => bc.postMessage({ type: 'key', key, down: false }))))
 
 // ---- 3D ----
 const renderer = new THREE.WebGLRenderer({ canvas: $('gl') as unknown as HTMLCanvasElement, antialias: true, preserveDrawingBuffer: true })
@@ -135,13 +143,12 @@ $('modeSeg').onclick = e => { const m = (e.target as HTMLElement).dataset.mode; 
 $('timeSeg').onclick = e => { const t = (e.target as HTMLElement).dataset.time; if (t) act({ time: t as SimState['time'] }) }
 $('rotate').onclick = () => { isoTurn++ }
 $('zoom').onclick = () => { isoWide = !isoWide; $('zoom').textContent = isoWide ? '⤡ 가깝게' : '⤢ 넓게' }
-$('link').onclick = () => (isConnected() ? disconnect() : connect())
+$('link').onclick = () => (owner ? toggleLink() : bc.postMessage({ type: 'link' }))
 sideEl.addEventListener('dblclick', () => { sideCam = sideCam === 'driver' ? 'chase' : sideCam === 'chase' ? 'pedestrian' : 'driver' })
 document.querySelectorAll<HTMLButtonElement>('.pop').forEach(b => b.onclick = () => {
   const v = b.dataset.view === 'telemetry' ? 'telemetry' : panes()[b.dataset.view as 'main' | 'side']
   window.open(`${location.pathname}?view=${v}`, `sim-${v}`, 'width=1100,height=700')
 })
-if (isMain && params.get('connect') === '1') connect()
 
 // 에뮬레이터 화면: scripts/emu-screencap.sh 가 public/emu.png 를 갱신하면 보인다
 const emuImg = $('emuImg') as HTMLImageElement
@@ -153,11 +160,11 @@ setInterval(() => { if (!solo) emuImg.src = `/emu.png?t=${Date.now()}` }, 1000)
 let last = performance.now(), frame = 0, lastBroadcast = 0
 subscribe((s, prev) => { if (s.time !== prev.time) stage.setTime(s.time) })
 stage.setTime(getState().time)
-;(window as any).sim = { getState, setState, tele } // 검증·녹화 스크립트용
+;(window as any).sim = { getState, setState, tele, isOwner: () => owner } // 검증·녹화 스크립트용
 
 function loop(now: number) {
   const dt = Math.min(0.05, (now - last) / 1000); last = now; frame++
-  if (isMain) {
+  if (owner) {
     clock += dt
     step(dt, clock)
     if (now - lastBroadcast > 50) { bc.postMessage({ type: 'state', state: getState(), t: clock }); lastBroadcast = now }
@@ -181,7 +188,7 @@ function loop(now: number) {
   else { render(mainEl, p.main); render(sideEl, p.side) }
 
   if (frame % 6 === 0) {
-    const tl = isMain ? tele : remoteTele
+    const tl = owner ? tele : remoteTele
     renderCluster($('cluster'), s.car, clock)
     if (frame % 12 === 0) {
       renderTelemetry($('tele'), s.car, tl)
