@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>망상궤도 재현 무대 (웹 시뮬레이터)</title>
+  <link rel="stylesheet" href="/src/ui/style.css" />
+</head>
+<body>
+  <canvas id="gl"></canvas>
+  <header id="bar">
+    <b>재현 무대</b><span class="tag">웹 시뮬레이터 화면 · 실제 차 아님</span>
+    <div class="seg" id="modeSeg"><button data-mode="sim">심 방식</button><button data-mode="drive">운전 방식</button></div>
+    <div class="seg" id="timeSeg"><button data-time="day">낮</button><button data-time="dusk">황혼</button><button data-time="night">밤</button></div>
+    <button id="rotate" title="등각 카메라 90도 회전">↻ 90°</button>
+    <button id="zoom" title="40m / 110m">⤢ 넓게</button>
+    <button id="link">에뮬레이터 연결</button>
+    <span id="linkMsg"></span>
+  </header>
+  <main id="grid">
+    <section class="view" id="v-main"><div class="label" id="mainLabel"></div><button class="pop" data-view="main">↗ 새 창</button></section>
+    <section class="view" id="v-side"><div class="label" id="sideLabel"></div><button class="pop" data-view="side">↗ 새 창</button><div id="cluster"></div></section>
+    <section class="panel" id="v-tele"><div class="label">텔레메트리 · 넣은 값 → 보낸 값 → 에뮬레이터가 가진 값</div><button class="pop" data-view="telemetry">↗ 새 창</button><div id="tele"></div></section>
+    <section class="panel" id="v-emu"><div class="label">Pleos 에뮬레이터 화면 (현대차 공식 플랫폼)</div><img id="emuImg" alt="" /><p id="emuHint">에뮬레이터 창을 옆에 띄우거나 <code>scripts/emu-screencap.sh</code> 를 실행하면 1초마다 여기에 갱신된다.</p></section>
+    <aside class="panel" id="controls"></aside>
+  </main>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>

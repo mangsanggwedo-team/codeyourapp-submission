@@ -1,0 +1,8 @@
+node_modules/
+dist/
+# 외부 에셋 원본(zip·큰 GLB)은 커밋하지 않는다. 내려받기 스크립트로 받는다
+assets/third-party/**/*.zip
+assets/downloads/
+# adb screencap 결과(로컬 전용)
+public/emu.png
+public/hdri/

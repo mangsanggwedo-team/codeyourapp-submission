@@ -6,3 +6,4 @@
 | Pleos SDK · 에뮬레이터 | 현대자동차그룹 개발자 포털 | 공모전 개발 이용 조건에 따름. SDK 코드는 이 저장소에 포함하지 않음 |
 | 에뮬레이터 화면 캡처 | 팀 직접 캡처 | 캡처 조건은 각 캡션에 ([DESIGN](DESIGN.md) 4절) |
 | 앱 의존성 | 앱 골격 생성 후 기입 | 라이브러리별 라이선스 |
+| 재현 무대 `sim/` (three.js MIT · Vite MIT · Poly Haven HDRI CC0, HDRI는 저장소에 넣지 않음) | npm · polyhaven.com | 상세 [sim/THIRD-PARTY.md](sim/THIRD-PARTY.md) |
