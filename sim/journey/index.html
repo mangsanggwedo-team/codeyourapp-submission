@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <link rel="icon" href="data:,">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>골방 · 여정 시뮬레이션</title>
+<title>룸19 · 여정 시뮬레이션</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600&display=swap">
 <style>
-:root{--bg:#0B0A0F;--s1:#14121A;--s2:#1C1924;--line:#2B2735;--ink:#ECEAF2;--ink2:#A8A3B8;--mute:#6F6A80;--p:#8F73FF;--amber:#F2B25C;--ok:#7FD99A}
+:root{--bg:#0B0A0F;--s1:#14121A;--s2:#1C1924;--line:#2B2735;--ink:#ECEAF2;--ink2:#A8A3B8;--mute:#6F6A80;--p:#FFB15C;--amber:#F2B25C;--ok:#7FD99A}
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%;background:#050407;color:var(--ink);font-family:Pretendard,sans-serif;-webkit-font-smoothing:antialiased;overflow:hidden}
 #fit{position:absolute;inset:0;display:grid;place-items:center}
@@ -94,41 +94,12 @@ button.on{background:#EDEAF2;color:#09080B;border-color:#EDEAF2}
 <script>
 /* ---------- data: scenarios.js(window.SCENARIOS) 가 있으면 그것, 없으면 아래 기본값 ---------- */
 const FALLBACK={endingModel:{mu:Math.log(15*60),sigma:0.35,thresholds:[0.5,0.7,0.85],signals:{wake:{lr:2.2,label:'화면 깨움'},backrest:{lr:3.0,label:'등받이 당김'},lean:{lr:0.35,label:'다시 기대기(반대)'}},halfLife:90},
-scenarios:[
-{id:'A',name:'귀가 직전 · 기도',place:'아파트 지하주차장 B2',clock:'21:40',drive:40,intent:'기도 · 개신교',duration:960,mu:Math.log(15*60),
- kf:[
- {t:0,stage:'준비',levers:{hvacC:23,fan:3,recirc:0,seatHeat:0,backrest:.55,ambient:{pct:30,hex:'#E9E4FF'},window:15,lock:0,mirrorFolded:0},screen:{title:'도착했어요.',body:'40분 운전하셨네요.',buttons:[]},sound:{tts:''}},
- {t:20,stage:'준비',screen:{title:'잠시 이곳에 머무시겠어요?',body:'오늘은 15분을 권해요.\n지난번처럼 기도로 시작할게요.',buttons:['10분','15분','다음에']},sound:{tts:'잠시 이곳에 머무시겠어요?'}},
- {t:32,stage:'문턱',levers:{lock:1,window:1,backrest:.45,ambient:{pct:22,hex:'#8F73FF'},mirrorFolded:1},screen:{title:'바깥은 잠시 내려놓을게요.',body:'문을 잠그고 창문을 닫았어요.',buttons:[]},sound:{tts:'바깥은 잠시 내려놓을게요.'}},
- {t:52,stage:'숨',levers:{fan:1,recirc:1,hvacC:22,ambient:{pct:18,hex:'#8F73FF'}},screen:{title:'숨을 세 번 고를게요.',body:'빛이 밝아지면 들이쉬고,\n어두워지면 내쉬세요.',buttons:[]},sound:{tts:'숨을 세 번 고를게요.'},breath:true},
- {t:110,stage:'머묾',levers:{fan:1,ambient:{pct:12,hex:'#6E55E8'}},screen:{title:'',body:'',buttons:[],dim:true},sound:{tts:''}},
- {t:600,stage:'머묾',levers:{recirc:0,fan:1},screen:{title:'',body:'',buttons:[],dim:true},note:'환기: 내기 10분 뒤 외기로 조용히 전환'},
- {t:700,stage:'머묾',levers:{recirc:1}},
- {t:880,stage:'돌아옴',levers:{ambient:{pct:35,hex:'#F2B25C'},fan:2},screen:{title:'여기 두고 가셔도 돼요.',body:'',buttons:[]},sound:{tts:'오늘 마음은 여기 두고 가셔도 돼요.'},ending:true},
- {t:925,stage:'출발 준비',levers:{lock:0,window:15,backrest:.55,mirrorFolded:0,recirc:0,fan:3,hvacC:23,ambient:{pct:30,hex:'#E9E4FF'}},screen:{title:'출발할 수 있어요.',body:'모든 설정을 처음처럼 돌려놓았어요.',buttons:[]},sound:{tts:''}},
- {t:960,stage:'출발 준비'}],
- signals:[{t:820,type:'wake'},{t:845,type:'backrest'}]},
-{id:'B',name:'점심 · 조용히 머물기',place:'회사 지상주차장 3층',clock:'12:20',drive:15,intent:'조용히 머물기 · 무교',duration:520,mu:Math.log(8*60),
- kf:[
- {t:0,stage:'준비',levers:{hvacC:21,fan:3,recirc:0,seatHeat:0,backrest:.55,ambient:{pct:25,hex:'#E9E4FF'},window:20,lock:0,mirrorFolded:0},screen:{title:'점심 잘 드셨어요?',body:'오후 전에 잠깐 쉬어 갈까요?',buttons:['8분','다음에']}},
- {t:18,stage:'문턱',levers:{lock:1,window:1,backrest:.45,ambient:{pct:18,hex:'#8F73FF'}},screen:{title:'조용히 머물게요.',body:'',buttons:[]},sound:{tts:'조용히 머물게요.'}},
- {t:34,stage:'숨',levers:{fan:1,recirc:1},screen:{title:'숨 한 번.',body:'',buttons:[]},breath:true},
- {t:70,stage:'머묾',levers:{ambient:{pct:10,hex:'#6E55E8'}},screen:{dim:true,title:'',body:'',buttons:[]}},
- {t:450,stage:'돌아옴',levers:{ambient:{pct:35,hex:'#F2B25C'},fan:2},screen:{title:'오후도 천천히.',body:'',buttons:[]},sound:{tts:'오후도 천천히 가요.'},ending:true},
- {t:490,stage:'출발 준비',levers:{lock:0,window:20,backrest:.55,recirc:0,fan:3,ambient:{pct:25,hex:'#E9E4FF'}},screen:{title:'다녀오세요.',body:'',buttons:[]}},
- {t:520,stage:'출발 준비'}],
- signals:[{t:400,type:'wake'}]},
-{id:'C',name:'예외 · 기어 이탈',place:'아파트 지하주차장 B2',clock:'21:40',drive:40,intent:'기도 · 개신교',duration:300,mu:Math.log(15*60),
- kf:[
- {t:0,stage:'머묾',levers:{hvacC:22,fan:1,recirc:1,seatHeat:1,backrest:.45,ambient:{pct:12,hex:'#6E55E8'},window:1,lock:1,mirrorFolded:1},screen:{dim:true,title:'',body:'',buttons:[]}},
- {t:120,stage:'머묾',screen:{title:'기어가 P에서 벗어났어요.',body:'안전을 위해 바로 처음 상태로 돌려놓았어요.',buttons:[]},levers:{lock:0,window:15,backrest:.55,mirrorFolded:0,recirc:0,fan:3,hvacC:23,seatHeat:0,ambient:{pct:30,hex:'#E9E4FF'}},sound:{tts:''},alert:true,note:'즉시 복원: 0.2초 안에 모든 레버를 시작 전 값으로'},
- {t:300,stage:'출발 준비'}],
- signals:[]}]};
+scenarios:[]};
 
 /* ---------- adapter: docs/journey 사양에서 생성된 scenarios.json(v>=1) → 내부 형식 ---------- */
 const STAGE_KO={drive:'주행','park-in':'주차',arrive:'도착',offer:'준비',threshold:'문턱',breath:'숨',stay:'머묾',closing:'돌아옴','return':'돌아옴',done:'출발 준비',leave:'출발 준비',after:'하차 뒤',door_open:'문 열림',door_closed:'머묾',pause_call:'통화 · 멈춤',resume:'머묾',safety_exit:'안전 복원'};
 const PACK_KO={protestant:'기도 · 개신교',catholic:'기도 · 천주교',buddhist:'기도 · 불교',none:'조용히 머물기'};
-const SIG_KO={SCREEN_TOUCH:'화면 깨움',SEAT_BACKREST_FORWARD:'등받이 세움',SEAT_BACKREST_BACK:'다시 기댐',SEATBELT_FASTENED:'벨트 맴',SEATBELT_UNFASTENED:'벨트 풂',HEADLAMP_ON:'전조등 켬',HVAC_MANUAL:'공조 직접 조작',WINDOW_MANUAL:'창문 직접 조작',BRAKE_PRESSED:'브레이크',TURN_SIGNAL:'방향지시등'};
+const SIG_KO={SCREEN_TOUCH:'화면 깨움',SEAT_BACKREST_FORWARD:'등받이 당김',SEAT_BACKREST_BACK:'다시 기댐',SEATBELT_FASTENED:'벨트 맴(예정)',SEATBELT_UNFASTENED:'벨트 풂(예정)',HEADLAMP_ON:'전조등 켬',HVAC_MANUAL:'공조 직접 조작',WINDOW_MANUAL:'창문 직접 조작',BRAKE_PRESSED:'브레이크(예정)',TURN_SIGNAL:'방향지시등'};
 function adapt(J){const M=J.endingModel||{};const LR=M.likelihoodRatios||{};const th=M.thresholds||{};
  const em={thresholds:[th.LIGHT_RISE??.5,th.SOUND_FADE??.7,th.CLOSING_WORDS??.85],signals:{},halfLife:1e9,adapted:true};
  ['SCREEN_TOUCH','SEAT_BACKREST_FORWARD','SEAT_BACKREST_BACK','SEATBELT_FASTENED'].forEach(k=>{if(LR[k])em.signals[k]={lr:LR[k],label:SIG_KO[k]}});
@@ -181,7 +152,7 @@ sv.innerHTML=`<defs>
 <radialGradient id="lamp" cx="50%" cy="0%" r="70%"><stop offset="0" stop-color="#3A3550" stop-opacity=".55"/><stop offset="1" stop-color="#0B0A0F" stop-opacity="0"/></radialGradient>
 <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#14121A"/><stop offset="1" stop-color="#0B0A0F"/></linearGradient>
 <linearGradient id="glass" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2A2638" stop-opacity=".55"/><stop offset="1" stop-color="#15131C" stop-opacity=".35"/></linearGradient>
-<radialGradient id="amb" cx="50%" cy="50%" r="50%"><stop offset="0" id="ambS0" stop-color="#8F73FF" stop-opacity=".55"/><stop offset="1" id="ambS1" stop-color="#8F73FF" stop-opacity="0"/></radialGradient>
+<radialGradient id="amb" cx="50%" cy="50%" r="50%"><stop offset="0" id="ambS0" stop-color="#FFB15C" stop-opacity=".55"/><stop offset="1" id="ambS1" stop-color="#FFB15C" stop-opacity="0"/></radialGradient>
 <filter id="blur8"><feGaussianBlur stdDeviation="8"/></filter><filter id="blur20"><feGaussianBlur stdDeviation="22"/></filter>
 <clipPath id="cabin"><path d="M470 520 L520 420 Q560 362 650 352 L940 344 Q1010 344 1060 392 L1120 468 L1120 590 L470 590 Z"/></clipPath><clipPath id="frontwin"><path d="M528 418 Q562 368 650 360 L780 356 L780 470 L500 470 Z"/></clipPath>
 </defs>`;
@@ -200,8 +171,8 @@ el('path',{d:'M360 590 Q360 540 420 520 L520 420 Q560 362 650 352 L940 344 Q1010
 const cabin=el('g',{'clip-path':'url(#cabin)'},car);
 el('rect',{x:470,y:340,width:660,height:270,fill:'#0B0A0E'},cabin);
 const ambInside=el('ellipse',{cx:780,cy:525,rx:380,ry:190,fill:'url(#amb)',opacity:.5},cabin);
-const ambStrip=el('rect',{x:560,y:520,width:470,height:4,rx:2,fill:'#8F73FF'},cabin);
-const ambStripBlur=el('rect',{x:560,y:514,width:470,height:16,rx:8,fill:'#8F73FF',filter:'url(#blur8)',opacity:.8},cabin);
+const ambStrip=el('rect',{x:560,y:520,width:470,height:4,rx:2,fill:'#FFB15C'},cabin);
+const ambStripBlur=el('rect',{x:560,y:514,width:470,height:16,rx:8,fill:'#FFB15C',filter:'url(#blur8)',opacity:.8},cabin);
 /* windows (glass that rises) */
 const winFront=el('path',{d:'M528 418 Q562 368 650 360 L780 356 L780 470 L500 470 Z',fill:'url(#glass)',stroke:'rgba(255,255,255,.10)'},car);
 const winRearMask=el('path',{d:'M800 358 L936 352 Q996 352 1034 390 L1084 462 L800 462 Z',fill:'url(#glass)',stroke:'rgba(255,255,255,.10)'},car);
@@ -210,7 +181,7 @@ el('line',{x1:790,y1:352,x2:790,y2:586,stroke:'rgba(255,255,255,.10)','stroke-wi
 /* dashboard + display + vent particles */
 el('path',{d:'M470 470 L560 455 L600 480 L470 500 Z',fill:'#121117',stroke:'rgba(255,255,255,.08)'},cabin);
 const dash=el('rect',{x:548,y:440,width:40,height:26,rx:4,fill:'#211D2B',stroke:'#4A4458'},cabin);
-const dashGlow=el('rect',{x:550,y:442,width:36,height:22,rx:3,fill:'#8F73FF',opacity:.5},cabin);
+const dashGlow=el('rect',{x:550,y:442,width:36,height:22,rx:3,fill:'#FFB15C',opacity:.5},cabin);
 const vents=el('g',{},cabin);const parts=[];for(let i=0;i<26;i++){parts.push({c:el('circle',{r:1.6,fill:'#C9BDFF',opacity:0},vents),x:0,y:0,life:Math.random()})}
 /* seat + person */
 const seatG=el('g',{},cabin);
@@ -246,13 +217,13 @@ function drawTimeline(){tl.innerHTML='';buildAxis();const x=tx,rowH=22;
  // stages
  const sk=[];S.kf.forEach(k=>{if(k.stage&&(!sk.length||sk[sk.length-1].s!==k.stage))sk.push({s:k.stage,t:k.t})});
  sk.forEach((s,i)=>{const t1=i<sk.length-1?sk[i+1].t:S.duration,r=document.createElementNS(NS,'rect');r.setAttribute('x',x(s.t)+1);r.setAttribute('y',11);r.setAttribute('width',Math.max(2,x(t1)-x(s.t)-2));r.setAttribute('height',18);r.setAttribute('rx',4);
-  const idx=STAGES.indexOf(s.s);const SC={'주행':'#2A2633','주차':'#332E40','도착':'#3A3260','준비':'#3A3260','문턱':'#5B4CA8','숨':'#7461D6','머묾':'#8F73FF','돌아옴':'#F2B25C','출발 준비':'#4A4458','하차 뒤':'#2A2633','문 열림':'#B8574F','통화 · 멈춤':'#6F6A80','안전 복원':'#B8574F'};r.setAttribute('fill',SC[s.s]||'#8F73FF');r.setAttribute('opacity',.9);r.style.cursor='pointer';r.onclick=()=>{T=s.t};tl.appendChild(r);
+  const idx=STAGES.indexOf(s.s);const SC={'주행':'#2A2633','주차':'#332E40','도착':'#3A3260','준비':'#3A3260','문턱':'#5B4CA8','숨':'#7461D6','머묾':'#FFB15C','돌아옴':'#F2B25C','출발 준비':'#4A4458','하차 뒤':'#2A2633','문 열림':'#B8574F','통화 · 멈춤':'#6F6A80','안전 복원':'#B8574F'};r.setAttribute('fill',SC[s.s]||'#FFB15C');r.setAttribute('opacity',.9);r.style.cursor='pointer';r.onclick=()=>{T=s.t};tl.appendChild(r);
   if(x(t1)-x(s.t)>=30){const tx=document.createElementNS(NS,'text');tx.setAttribute('x',x(s.t)+8);tx.setAttribute('y',24);tx.setAttribute('fill',['주행','주차','하차 뒤','출발 준비','통화 · 멈춤','도착','준비'].includes(s.s)?'#ECEAF2':'#0B0A0F');tx.setAttribute('font-size','11');tx.setAttribute('font-weight','700');tx.textContent=s.s;tl.appendChild(tx)}});
  // lever tracks sampled
  const N=480;const rows={amb:[],fan:[],backrest:[],window:[],lock:[],p:[]};
- for(let i=0;i<=N;i++){const t=i/N*S.duration,l=leverAt(t);rows.amb.push([t,(l.amb?l.amb.pct:0)/40,l.amb?l.amb.hex:'#8F73FF']);rows.fan.push([t,(l.fan||0)/6]);rows.backrest.push([t,l.backrest||0]);rows.window.push([t,(l.window||0)/30]);rows.lock.push([t,l.lock||0]);rows.p.push([t,posterior(t)])}
+ for(let i=0;i<=N;i++){const t=i/N*S.duration,l=leverAt(t);rows.amb.push([t,(l.amb?l.amb.pct:0)/40,l.amb?l.amb.hex:'#FFB15C']);rows.fan.push([t,(l.fan||0)/6]);rows.backrest.push([t,l.backrest||0]);rows.window.push([t,(l.window||0)/30]);rows.lock.push([t,l.lock||0]);rows.p.push([t,posterior(t)])}
  TRACKS.slice(1).forEach(([n,k],i)=>{const y=8+(i+1)*rowH,h=rowH-8;let d='';rows[k].forEach(([t,v],j)=>{d+=(j?'L':'M')+x(t).toFixed(1)+' '+(y+4+h-Math.min(1,v)*h).toFixed(1)});
-  const p=document.createElementNS(NS,'path');p.setAttribute('d',d);p.setAttribute('fill','none');p.setAttribute('stroke',k==='p'?'#F2B25C':'#8F73FF');p.setAttribute('stroke-width','2');tl.appendChild(p);
+  const p=document.createElementNS(NS,'path');p.setAttribute('d',d);p.setAttribute('fill','none');p.setAttribute('stroke',k==='p'?'#F2B25C':'#FFB15C');p.setAttribute('stroke-width','2');tl.appendChild(p);
   if(k==='p')EM.thresholds.forEach(th=>{const l=document.createElementNS(NS,'line');l.setAttribute('x1',LX);l.setAttribute('x2',LX+LW);const yy=y+4+h-th*h;l.setAttribute('y1',yy);l.setAttribute('y2',yy);l.setAttribute('stroke','#3A3550');l.setAttribute('stroke-dasharray','2 4');tl.appendChild(l)})});
  // signals marks
  [...S.signals,...userSig].forEach(s=>{const c=document.createElementNS(NS,'circle');c.setAttribute('cx',x(s.t));c.setAttribute('cy',8+6*rowH+12);c.setAttribute('r',4);c.setAttribute('fill',(EM.signals[s.type]&&EM.signals[s.type].lr<1)||s.type==='lean'?'#7FD99A':'#ECEAF2');tl.appendChild(c)});
@@ -278,14 +249,14 @@ function drawP(){pc.innerHTML='';const W=328,H=120,x=t=>t/S.duration*W,y=p=>H-6-
 let lastStage='',lastScreen=null;
 function render(dt){const l=leverAt(T),f=frameAt(T),stage=stageAt(T),p=posterior(T);
  // ambient
- const amb=l.amb||{pct:20,hex:'#8F73FF'};let pct=amb.pct;const fr=S.kf.filter(k=>k.t<=T&&k.breath).pop();
+ const amb=l.amb||{pct:20,hex:'#FFB15C'};let pct=amb.pct;const fr=S.kf.filter(k=>k.t<=T&&k.breath).pop();
  if(fr&&stage==='숨'){pct=pct+10*Math.sin((T-fr.t)/5*Math.PI*2/1.6)}
  if(p>EM.thresholds[0]&&stage==='머묾')pct+= (p-EM.thresholds[0])*20;
  const o=Math.max(0,Math.min(1,pct/40));
  ['ambS0'].forEach(id=>$(id).setAttribute('stop-color',amb.hex));$('ambS0').setAttribute('stop-opacity',(.15+.6*o).toFixed(3));
  ambStrip.setAttribute('fill',amb.hex);ambStripBlur.setAttribute('fill',amb.hex);ambStripBlur.setAttribute('opacity',(.3+.7*o).toFixed(2));ambInside.setAttribute('opacity',(.25+.6*o).toFixed(3));
  dashGlow.setAttribute('opacity',f.screen&&f.screen.dim?.12:.55);
- // backrest: 0 reclined(-26deg) 1 upright(-4deg)
+ // backrest: 0 reclined(-26deg) 1 driving posture(-4deg)
  const br=l.backrest??.55,ang=-26+22*br;back.setAttribute('transform',`rotate(${ang} 764 528)`);
  const lean=ang*.55;person.setAttribute('transform',`rotate(${lean} 735 520)`);
  // breathing head bob
@@ -294,7 +265,7 @@ function render(dt){const l=leverAt(T),f=frameAt(T),stage=stageAt(T),p=posterior
  // window: % open (0 closed)
  const w=l.window??10;winOpen.setAttribute('height',(118*w/100).toFixed(1));
  // lock
- const lk=l.lock?1:0;shack.setAttribute('d',lk?'M-6 -2 L-6 -8 Q0 -15 6 -8 L6 -2':'M-6 -2 L-6 -8 Q0 -15 6 -8 L6 -6');shack.setAttribute('stroke',lk?'#8F73FF':'#6F6A80');
+ const lk=l.lock?1:0;shack.setAttribute('d',lk?'M-6 -2 L-6 -8 Q0 -15 6 -8 L6 -2':'M-6 -2 L-6 -8 Q0 -15 6 -8 L6 -6');shack.setAttribute('stroke',lk?'#FFB15C':'#6F6A80');
  mirror.setAttribute('transform',`translate(505,440) rotate(${l.mirrorFolded?28:0})`);
  // vent particles by fan
  const fan=l.fan||0;parts.forEach(q=>{q.life+=dt*(.25+fan*.18);if(q.life>1){q.life=0;q.x=588;q.y=452+Math.random()*8}const a=q.life;q.c.setAttribute('cx',(588+a*(60+fan*22)).toFixed(1));q.c.setAttribute('cy',(q.y-a*18+Math.sin(a*6+q.y)*3).toFixed(1));q.c.setAttribute('opacity',fan?((1-a)*.12*fan).toFixed(3):0)});
@@ -306,7 +277,7 @@ function render(dt){const l=leverAt(T),f=frameAt(T),stage=stageAt(T),p=posterior
  cl.forEach((t,i)=>{const g=el('g',{},chips);if(i)el('line',{x1:cx-5,x2:cx-5,y1:294,y2:310,stroke:'rgba(255,255,255,.12)'},g);const tx=el('text',{x:cx+ws[i]/2,y:307,fill:'#A7A2B4','font-size':12.5,'letter-spacing':'.02em','text-anchor':'middle'},g);tx.textContent=t;cx+=ws[i]+10});
  // screen
  if(f!==lastScreen){lastScreen=f;const s=f.screen||{};const body=$('scBody');body.style.opacity=0;setTimeout(()=>{$('scT').textContent=s.title||'';$('scB').textContent=s.body||'';$('scBtns').innerHTML=(s.buttons||[]).map((b,i)=>`<span class="${i===1&&s.buttons.length>2||i===0&&s.buttons.length===2?'pri':''}">${b}</span>`).join('');body.style.opacity=s.dim?0:1},300);
-  const sub=$('sub');const tts=f.sound&&f.sound.tts;sub.style.opacity=0;setTimeout(()=>{sub.innerHTML=tts?`“${tts}”<small>차 안에서 만든 음성 (TTS · ON_DEVICE)</small>`:'';sub.style.opacity=1},250)}
+  const sub=$('sub');const tts=f.sound&&f.sound.tts;sub.style.opacity=0;setTimeout(()=>{sub.innerHTML=tts?`“${tts}”<small>음성 안내 (TTS) 예정 · 지금은 화면 문장과 종</small>`:'';sub.style.opacity=1},250)}
  const nt=noteAt(T);$('note').textContent=nt?nt.note:'';
  $('scGlow').style.background=`radial-gradient(120% 80% at 50% 120%, ${amb.hex}${Math.round(20+40*o).toString(16).padStart(2,'0')}, transparent 60%)`;
  // context

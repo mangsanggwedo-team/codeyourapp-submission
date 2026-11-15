@@ -1,11 +1,11 @@
 {
  "version": 1,
  "generated": "2026-11-15",
- "note": "웹 시뮬레이터 재생용. t는 기어 P가 된 순간 0 기준 초. levers는 매 키프레임 전체 상태(차분 아님). ambient.ms는 그 값까지 가는 전이 시간. backrest 0~1은 세움 정도(클수록 세움, 세션은 0.55에서 0.45로 조금 뒤로 기댔다가 끝에 0.55로 되돌림. SDK는 위치 지정 불가, 이동·정지만, P에서만). mirrorFolded는 앱 제어 불가, 차량 자체 동작 표시. vol은 앱 기준 음량 대비 dB, null은 무음. session.p는 EndingPolicy 사후확률(코드와 같은 식).",
+ "note": "웹 시뮬레이터 재생용. t는 기어 P가 된 순간 0 기준 초. levers는 매 키프레임 전체 상태(차분 아님). ambient.ms는 그 값까지 가는 전이 시간. backrest 0~1은 운전 자세 쪽 정도(클수록 운전 자세, 세션은 0.55에서 0.45로 조금 뒤로 기댔다가 끝에 0.55로 되돌림. SDK는 위치 지정 불가, 이동·정지만, P에서만). mirrorFolded는 앱 제어 불가, 차량 자체 동작 표시. vol은 앱 기준 음량 대비 dB, null은 무음. session.p는 EndingPolicy 사후확률(코드와 같은 식).",
  "assumptions": [
   "intendedSec·운전 시간·LR·비용·σ는 [가정] 초깃값",
   "외기온·차종은 [가정]",
-  "bell_once·wood_x3·leaves_wind는 자체 녹음 또는 CC0 예정 음원 이름"
+  "bell_once·bell_once·leaves_wind는 자체 녹음 또는 CC0 예정 음원 이름"
  ],
  "endingModel": {
   "prior": {
@@ -49,7 +49,7 @@
   "outputs": {
    "LIGHT_RISE": "앰비언트 +2%/분",
    "SOUND_FADE": "배경음 -1dB/5초 페이드 시작",
-   "CLOSING_WORDS": "마침 문장 TTS 1회, 3분 안 재발화 금지"
+   "CLOSING_WORDS": "마침 문장 1회(음성 안내는 예정), 3분 안 재발화 금지"
   }
  },
  "scenarios": [
@@ -220,9 +220,9 @@
       "seatHeat": 0,
       "backrest": 0.55,
       "ambient": {
-       "pct": 20,
-       "hex": "#FFB15C",
-       "ms": 8000
+       "pct": 30,
+       "hex": "#FFFFFF",
+       "ms": 0
       },
       "window": 0,
       "lock": true,
@@ -236,9 +236,9 @@
       ]
      },
      "sound": {
-      "tts": "문을 닫고, 숨을 한 번 고를게요.",
+      "tts": "",
       "bgm": "none",
-      "vol": -12
+      "vol": null
      },
      "signals": [
       "ui:start",
@@ -251,6 +251,42 @@
      }
     },
     {
+     "t": 15,
+     "clock": "21:40:15",
+     "stage": "threshold",
+     "levers": {
+      "hvacC": 22.0,
+      "fan": 3,
+      "recirc": false,
+      "seatHeat": 0,
+      "backrest": 0.55,
+      "ambient": {
+       "pct": 20,
+       "hex": "#FFB15C",
+       "ms": 8000
+      },
+      "window": 0,
+      "lock": true,
+      "mirrorFolded": false
+     },
+     "screen": {
+      "title": "",
+      "body": "",
+      "buttons": []
+     },
+     "sound": {
+      "tts": "",
+      "bgm": "bell_once",
+      "vol": -14
+     },
+     "signals": [],
+     "session": {
+      "s": 1,
+      "p": 0.0,
+      "endingStage": "STAY"
+     }
+    },
+    {
      "t": 16,
      "clock": "21:40:16",
      "stage": "threshold",
@@ -258,7 +294,7 @@
       "hvacC": 22.0,
       "fan": 2,
       "recirc": false,
-      "seatHeat": 1,
+      "seatHeat": 0,
       "backrest": 0.55,
       "ambient": {
        "pct": 20,
@@ -294,7 +330,7 @@
       "hvacC": 22.0,
       "fan": 2,
       "recirc": false,
-      "seatHeat": 1,
+      "seatHeat": 0,
       "backrest": 0.45,
       "ambient": {
        "pct": 20,
@@ -330,7 +366,7 @@
       "hvacC": 22.0,
       "fan": 1,
       "recirc": false,
-      "seatHeat": 1,
+      "seatHeat": 0,
       "backrest": 0.45,
       "ambient": {
        "pct": 20,
@@ -359,14 +395,14 @@
      }
     },
     {
-     "t": 22,
-     "clock": "21:40:22",
+     "t": 21,
+     "clock": "21:40:21",
      "stage": "threshold",
      "levers": {
       "hvacC": 22.0,
       "fan": 1,
       "recirc": false,
-      "seatHeat": 1,
+      "seatHeat": 0,
       "backrest": 0.45,
       "ambient": {
        "pct": 20,
@@ -379,17 +415,19 @@
      },
      "screen": {
       "title": "",
-      "body": "",
-      "buttons": []
+      "body": "너는 기도할 때에 네 골방에 들어가 문을 닫고 은밀한 중에 계신 네 아버지께 기도하라",
+      "buttons": [
+       "마치기"
+      ]
      },
      "sound": {
-      "tts": "",
-      "bgm": "bell_once",
-      "vol": -14
+      "tts": "너는 기도할 때에 네 골방에 들어가 문을 닫고 은밀한 중에 계신 네 아버지께 기도하라",
+      "bgm": "none",
+      "vol": -12
      },
      "signals": [],
      "session": {
-      "s": 8,
+      "s": 7,
       "p": 0.0,
       "endingStage": "STAY"
      }
@@ -402,7 +440,7 @@
       "hvacC": 22.0,
       "fan": 1,
       "recirc": false,
-      "seatHeat": 1,
+      "seatHeat": 0,
       "backrest": 0.45,
       "ambient": {
        "pct": 20,
@@ -440,7 +478,7 @@
       "hvacC": 22.0,
       "fan": 1,
       "recirc": false,
-      "seatHeat": 1,
+      "seatHeat": 0,
       "backrest": 0.45,
       "ambient": {
        "pct": 15,
@@ -478,7 +516,7 @@
       "hvacC": 22.0,
       "fan": 1,
       "recirc": false,
-      "seatHeat": 1,
+      "seatHeat": 0,
       "backrest": 0.45,
       "ambient": {
        "pct": 20,
@@ -516,7 +554,7 @@
       "hvacC": 22.0,
       "fan": 1,
       "recirc": false,
-      "seatHeat": 1,
+      "seatHeat": 0,
       "backrest": 0.45,
       "ambient": {
        "pct": 15,
@@ -552,7 +590,7 @@
       "hvacC": 22.0,
       "fan": 1,
       "recirc": false,
-      "seatHeat": 1,
+      "seatHeat": 0,
       "backrest": 0.45,
       "ambient": {
        "pct": 15,
@@ -571,9 +609,9 @@
       ]
      },
      "sound": {
-      "tts": "너는 기도할 때에 네 골방에 들어가 문을 닫고 은밀한 중에 계신 네 아버지께 기도하라",
+      "tts": "",
       "bgm": "none",
-      "vol": -12
+      "vol": null
      },
      "signals": [],
      "session": {
@@ -590,7 +628,7 @@
       "hvacC": 22.0,
       "fan": 1,
       "recirc": false,
-      "seatHeat": 1,
+      "seatHeat": 0,
       "backrest": 0.45,
       "ambient": {
        "pct": 15,
@@ -628,7 +666,7 @@
       "hvacC": 22.0,
       "fan": 1,
       "recirc": false,
-      "seatHeat": 1,
+      "seatHeat": 0,
       "backrest": 0.45,
       "ambient": {
        "pct": 15,
@@ -666,7 +704,7 @@
       "hvacC": 22.0,
       "fan": 1,
       "recirc": false,
-      "seatHeat": 1,
+      "seatHeat": 0,
       "backrest": 0.45,
       "ambient": {
        "pct": 15,
@@ -702,7 +740,7 @@
       "hvacC": 22.0,
       "fan": 1,
       "recirc": false,
-      "seatHeat": 1,
+      "seatHeat": 0,
       "backrest": 0.45,
       "ambient": {
        "pct": 17,
@@ -742,7 +780,7 @@
       "hvacC": 22.0,
       "fan": 1,
       "recirc": false,
-      "seatHeat": 1,
+      "seatHeat": 0,
       "backrest": 0.52,
       "ambient": {
        "pct": 17,
@@ -781,7 +819,7 @@
       "hvacC": 22.0,
       "fan": 1,
       "recirc": false,
-      "seatHeat": 1,
+      "seatHeat": 0,
       "backrest": 0.52,
       "ambient": {
        "pct": 17,
@@ -819,7 +857,7 @@
       "hvacC": 22.0,
       "fan": 1,
       "recirc": false,
-      "seatHeat": 1,
+      "seatHeat": 0,
       "backrest": 0.52,
       "ambient": {
        "pct": 30,
@@ -855,7 +893,7 @@
       "hvacC": 22.0,
       "fan": 1,
       "recirc": false,
-      "seatHeat": 1,
+      "seatHeat": 0,
       "backrest": 0.55,
       "ambient": {
        "pct": 30,
@@ -886,7 +924,7 @@
       "hvacC": 22.0,
       "fan": 2,
       "recirc": false,
-      "seatHeat": 1,
+      "seatHeat": 0,
       "backrest": 0.55,
       "ambient": {
        "pct": 30,
@@ -917,7 +955,7 @@
       "hvacC": 22.0,
       "fan": 3,
       "recirc": false,
-      "seatHeat": 1,
+      "seatHeat": 0,
       "backrest": 0.55,
       "ambient": {
        "pct": 30,
@@ -948,7 +986,7 @@
       "hvacC": 22.0,
       "fan": 3,
       "recirc": false,
-      "seatHeat": 1,
+      "seatHeat": 0,
       "backrest": 0.55,
       "ambient": {
        "pct": 30,
@@ -962,9 +1000,7 @@
      "screen": {
       "title": "끝났어요.",
       "body": "좌석과 공조를 원래대로 돌렸어요.",
-      "buttons": [
-       "닫기"
-      ]
+      "buttons": []
      },
      "sound": {
       "tts": "",
@@ -1090,7 +1126,7 @@
       },
       "window": 0,
       "lock": true,
-      "mirrorFolded": true
+      "mirrorFolded": false
      },
      "screen": {
       "title": "",
@@ -1103,8 +1139,7 @@
       "vol": null
      },
      "signals": [
-      "vehicle:auto_lock",
-      "vehicle:mirror_auto_fold"
+      "vehicle:auto_lock"
      ]
     },
     {
@@ -1124,7 +1159,7 @@
       },
       "window": 0,
       "lock": true,
-      "mirrorFolded": true
+      "mirrorFolded": false
      },
      "screen": {
       "title": "",
@@ -1144,23 +1179,23 @@
   },
   {
    "id": "B",
-   "title": "점심 회사 주차장, 조용히 머물기",
-   "persona": "정은 씨의 동료 하늘 씨 (가상, 20대 후반, 무교)",
+   "title": "낮 12:30 회사 주차장, 정해 둔 기도 시간",
+   "persona": "정은 씨의 동료 하늘 씨 (가상, 20대 후반, 개신교)",
    "context": {
     "intendedSec": 480,
     "driveMin": 12,
     "hour": 12,
-    "pack": "none",
+    "pack": "protestant",
     "place": "회사 옥외 주차장",
     "outsideC": 12,
     "car": "그랜저 하이브리드 [가정]"
    },
-   "t0Clock": "12:20:00",
+   "t0Clock": "12:30:00",
    "sessionStartT": 9,
    "keyframes": [
     {
      "t": -60,
-     "clock": "12:19:00",
+     "clock": "12:29:00",
      "stage": "drive",
      "levers": {
       "hvacC": 22.0,
@@ -1195,7 +1230,7 @@
     },
     {
      "t": -12,
-     "clock": "12:19:48",
+     "clock": "12:29:48",
      "stage": "park-in",
      "levers": {
       "hvacC": 22.0,
@@ -1229,7 +1264,7 @@
     },
     {
      "t": 0,
-     "clock": "12:20:00",
+     "clock": "12:30:00",
      "stage": "arrive",
      "levers": {
       "hvacC": 22.0,
@@ -1263,7 +1298,7 @@
     },
     {
      "t": 6,
-     "clock": "12:20:06",
+     "clock": "12:30:06",
      "stage": "offer",
      "levers": {
       "hvacC": 22.0,
@@ -1282,7 +1317,7 @@
      },
      "screen": {
       "title": "잠시 머물다 갈까요",
-      "body": "조용히 머물기 · 12시 28분까지",
+      "body": "기도 · 12시 38분까지",
       "buttons": [
        "머물기",
        "오늘은 그냥 갈게요"
@@ -1297,7 +1332,7 @@
     },
     {
      "t": 9,
-     "clock": "12:20:09",
+     "clock": "12:30:09",
      "stage": "threshold",
      "levers": {
       "hvacC": 22.0,
@@ -1323,7 +1358,7 @@
      },
      "sound": {
       "tts": "문을 닫고, 숨을 한 번 고를게요.",
-      "bgm": "wood_x3",
+      "bgm": "bell_once",
       "vol": -12
      },
      "signals": [
@@ -1338,7 +1373,7 @@
     },
     {
      "t": 11,
-     "clock": "12:20:11",
+     "clock": "12:30:11",
      "stage": "threshold",
      "levers": {
       "hvacC": 22.0,
@@ -1374,7 +1409,7 @@
     },
     {
      "t": 14,
-     "clock": "12:20:14",
+     "clock": "12:30:14",
      "stage": "threshold",
      "levers": {
       "hvacC": 22.0,
@@ -1413,7 +1448,7 @@
     },
     {
      "t": 19,
-     "clock": "12:20:19",
+     "clock": "12:30:19",
      "stage": "breath",
      "levers": {
       "hvacC": 22.0,
@@ -1451,7 +1486,7 @@
     },
     {
      "t": 23,
-     "clock": "12:20:23",
+     "clock": "12:30:23",
      "stage": "breath",
      "levers": {
       "hvacC": 22.0,
@@ -1489,7 +1524,7 @@
     },
     {
      "t": 49,
-     "clock": "12:20:49",
+     "clock": "12:30:49",
      "stage": "stay",
      "levers": {
       "hvacC": 22.0,
@@ -1527,7 +1562,7 @@
     },
     {
      "t": 189,
-     "clock": "12:23:09",
+     "clock": "12:33:09",
      "stage": "stay",
      "levers": {
       "hvacC": 22.0,
@@ -1565,7 +1600,7 @@
     },
     {
      "t": 309,
-     "clock": "12:25:09",
+     "clock": "12:35:09",
      "stage": "stay",
      "levers": {
       "hvacC": 22.0,
@@ -1601,7 +1636,7 @@
     },
     {
      "t": 399,
-     "clock": "12:26:39",
+     "clock": "12:36:39",
      "stage": "stay",
      "levers": {
       "hvacC": 22.0,
@@ -1639,7 +1674,7 @@
     },
     {
      "t": 409,
-     "clock": "12:26:49",
+     "clock": "12:36:49",
      "stage": "stay",
      "levers": {
       "hvacC": 22.0,
@@ -1678,7 +1713,7 @@
     },
     {
      "t": 454,
-     "clock": "12:27:34",
+     "clock": "12:37:34",
      "stage": "stay",
      "levers": {
       "hvacC": 22.0,
@@ -1697,7 +1732,7 @@
      },
      "screen": {
       "title": "",
-      "body": "12:27",
+      "body": "12:37",
       "buttons": [
        "마치기"
       ]
@@ -1718,7 +1753,7 @@
     },
     {
      "t": 461,
-     "clock": "12:27:41",
+     "clock": "12:37:41",
      "stage": "closing",
      "levers": {
       "hvacC": 22.0,
@@ -1757,7 +1792,7 @@
     },
     {
      "t": 465,
-     "clock": "12:27:45",
+     "clock": "12:37:45",
      "stage": "closing",
      "levers": {
       "hvacC": 22.0,
@@ -1795,7 +1830,7 @@
     },
     {
      "t": 470,
-     "clock": "12:27:50",
+     "clock": "12:37:50",
      "stage": "return",
      "levers": {
       "hvacC": 22.0,
@@ -1819,7 +1854,7 @@
      },
      "sound": {
       "tts": "",
-      "bgm": "wood_x3",
+      "bgm": "bell_once",
       "vol": -14
      },
      "signals": [],
@@ -1831,7 +1866,7 @@
     },
     {
      "t": 478,
-     "clock": "12:27:58",
+     "clock": "12:37:58",
      "stage": "return",
      "levers": {
       "hvacC": 22.0,
@@ -1862,7 +1897,7 @@
     },
     {
      "t": 490,
-     "clock": "12:28:10",
+     "clock": "12:38:10",
      "stage": "done",
      "levers": {
       "hvacC": 22.0,
@@ -1881,10 +1916,8 @@
      },
      "screen": {
       "title": "끝났어요.",
-      "body": "12시 28분이에요.",
-      "buttons": [
-       "닫기"
-      ]
+      "body": "12시 38분이에요.",
+      "buttons": []
      },
      "sound": {
       "tts": "",
@@ -1895,7 +1928,7 @@
     },
     {
      "t": 500,
-     "clock": "12:28:20",
+     "clock": "12:38:20",
      "stage": "leave",
      "levers": {
       "hvacC": 22.0,
@@ -1929,7 +1962,7 @@
     },
     {
      "t": 515,
-     "clock": "12:28:35",
+     "clock": "12:38:35",
      "stage": "leave",
      "levers": {
       "hvacC": 22.0,
@@ -1944,7 +1977,7 @@
       },
       "window": 0,
       "lock": true,
-      "mirrorFolded": true
+      "mirrorFolded": false
      },
      "screen": {
       "title": "",
@@ -1962,7 +1995,7 @@
     },
     {
      "t": 590,
-     "clock": "12:29:50",
+     "clock": "12:39:50",
      "stage": "after",
      "levers": {
       "hvacC": 22.0,
@@ -1977,7 +2010,7 @@
       },
       "window": 0,
       "lock": true,
-      "mirrorFolded": true
+      "mirrorFolded": false
      },
      "screen": {
       "title": "",
@@ -2003,7 +2036,7 @@
     "intendedSec": 600,
     "driveMin": 25,
     "hour": 18,
-    "pack": "none",
+    "pack": "protestant",
     "place": "마트 옥상 주차장, 비",
     "outsideC": 9,
     "car": "그랜저 하이브리드 [가정]"
@@ -2088,7 +2121,7 @@
       "hvacC": 22.0,
       "fan": 2,
       "recirc": false,
-      "seatHeat": 1,
+      "seatHeat": 0,
       "backrest": 0.55,
       "ambient": {
        "pct": 20,
@@ -2108,7 +2141,7 @@
      },
      "sound": {
       "tts": "문을 닫고, 숨을 한 번 고를게요.",
-      "bgm": "wood_x3",
+      "bgm": "bell_once",
       "vol": -12
      },
      "signals": [
@@ -2129,7 +2162,7 @@
       "hvacC": 22.0,
       "fan": 1,
       "recirc": false,
-      "seatHeat": 1,
+      "seatHeat": 0,
       "backrest": 0.45,
       "ambient": {
        "pct": 20,
@@ -2165,7 +2198,7 @@
       "hvacC": 22.0,
       "fan": 1,
       "recirc": false,
-      "seatHeat": 1,
+      "seatHeat": 0,
       "backrest": 0.45,
       "ambient": {
        "pct": 15,
@@ -2206,7 +2239,7 @@
       "hvacC": 22.0,
       "fan": 1,
       "recirc": false,
-      "seatHeat": 1,
+      "seatHeat": 0,
       "backrest": 0.45,
       "ambient": {
        "pct": 22,
@@ -2246,7 +2279,7 @@
       "hvacC": 22.0,
       "fan": 1,
       "recirc": false,
-      "seatHeat": 1,
+      "seatHeat": 0,
       "backrest": 0.45,
       "ambient": {
        "pct": 15,
@@ -2286,7 +2319,7 @@
       "hvacC": 22.0,
       "fan": 1,
       "recirc": false,
-      "seatHeat": 1,
+      "seatHeat": 0,
       "backrest": 0.45,
       "ambient": {
        "pct": 30,
@@ -2324,7 +2357,7 @@
       "hvacC": 22.0,
       "fan": 1,
       "recirc": false,
-      "seatHeat": 1,
+      "seatHeat": 0,
       "backrest": 0.45,
       "ambient": {
        "pct": 30,
@@ -2339,8 +2372,7 @@
       "title": "이어서 머물까요?",
       "body": "",
       "buttons": [
-       "이어서 머물기",
-       "마치기"
+       "이어서 머물기"
       ]
      },
      "sound": {
@@ -2366,7 +2398,7 @@
       "hvacC": 22.0,
       "fan": 1,
       "recirc": false,
-      "seatHeat": 1,
+      "seatHeat": 0,
       "backrest": 0.45,
       "ambient": {
        "pct": 15,
@@ -2512,7 +2544,7 @@
       "fan": 3,
       "recirc": false,
       "seatHeat": 0,
-      "backrest": 0.45,
+      "backrest": 0.55,
       "ambient": {
        "pct": 30,
        "hex": "#FFFFFF",
@@ -2524,11 +2556,8 @@
      },
      "screen": {
       "title": "",
-      "body": "등받이를 운전 자세로 돌릴까요?",
-      "buttons": [
-       "돌리기",
-       "그대로"
-      ]
+      "body": "등받이를 운전 자세로 돌려놓았어요.",
+      "buttons": []
      },
      "sound": {
       "tts": "",
