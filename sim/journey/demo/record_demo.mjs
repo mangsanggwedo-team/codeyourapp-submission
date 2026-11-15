@@ -17,10 +17,10 @@ const overlay = () => page.evaluate(fonts => {
   if (document.getElementById("dcap")) return;
   const s = document.createElement("style");
   s.textContent = `#dcap{position:fixed;left:0;right:0;top:18px;z-index:99999;display:flex;justify-content:center;pointer-events:none;font-family:${fonts}}
-  #dcap .c{max-width:56%;background:rgba(14,13,18,.88);color:#EEEAF8;font-size:22px;font-weight:600;line-height:1.5;padding:12px 24px;border-radius:12px;border:1px solid rgba(143,115,255,.45);text-align:center;opacity:0;transition:opacity .35s}
+  #dcap .c{max-width:56%;background:rgba(9,8,11,.92);color:#EEEAF8;font-size:22px;font-weight:600;line-height:1.5;padding:12px 24px;border-radius:12px;border:1px solid rgba(143,115,255,.45);text-align:center;opacity:0;transition:opacity .35s}
   #dcap .c.on{opacity:1}#dcap .e{color:#B9A6FF;font-size:14px;font-weight:700;margin-right:10px;letter-spacing:.3px}
-  #dcard{position:fixed;inset:0;z-index:100000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;background:radial-gradient(1100px 650px at 50% 38%,#1E1A2C,#0B0A0F 75%);color:#EEEAF8;font-family:${fonts};opacity:0;transition:opacity .6s;pointer-events:none}
-  #dcard.on{opacity:1}#dcard .l{font-size:16px;letter-spacing:4px;color:#B9A6FF;font-weight:700}#dcard h1{font-size:60px;margin:0;font-weight:800;letter-spacing:-1px}
+  #dcard{position:fixed;inset:0;z-index:100000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;background:#09080B;color:#EEEAF8;font-family:${fonts};opacity:0;transition:opacity .6s;pointer-events:none}
+  #dcard.on{opacity:1}#dcard .l{font-size:16px;letter-spacing:4px;color:#B9A6FF;font-weight:700}#dcard h1{font-family:"Noto Serif KR",serif;font-size:64px;margin:0;font-weight:600;letter-spacing:-.5px}
   #dcard p{font-size:24px;color:#B8B2C8;margin:0;max-width:66%;text-align:center;line-height:1.6}#dcard .t{font-size:15px;color:#E0B04A;border:1px solid rgba(201,133,0,.5);padding:6px 16px;border-radius:999px}`;
   document.head.appendChild(s);
   const c = document.createElement("div"); c.id = "dcap"; c.innerHTML = '<div class="c"></div>'; document.body.appendChild(c);

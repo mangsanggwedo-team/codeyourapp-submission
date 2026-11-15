@@ -6,6 +6,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>골방 · 여정 시뮬레이션</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600&display=swap">
 <style>
 :root{--bg:#0B0A0F;--s1:#14121A;--s2:#1C1924;--line:#2B2735;--ink:#ECEAF2;--ink2:#A8A3B8;--mute:#6F6A80;--p:#8F73FF;--amber:#F2B25C;--ok:#7FD99A}
 *{box-sizing:border-box;margin:0;padding:0}
@@ -43,6 +44,32 @@ button.on{background:var(--p);color:#0B0A0F;border-color:var(--p)}
 .tag{font-size:11px;color:var(--mute)}
 #hint{position:absolute;left:400px;top:104px;font-size:11px;color:var(--mute)}
 #note{position:absolute;left:400px;right:470px;top:140px;text-align:center;font-size:13px;color:var(--ink2)}
+/* ---- art direction v1: 박스 대신 헤어라인, 세리프는 목소리, 큰 숫자는 가늘게 ---- */
+:root{--bg:#09080B;--line:rgba(255,255,255,.08);--ink:#EDEAF2;--ink2:#A7A2B4;--mute:#6E6980;--serif:"Noto Serif KR",serif}
+#stage{background:#09080B}
+.panel{background:transparent;border:0;border-top:1px solid var(--line);border-radius:0;backdrop-filter:none}
+.lbl{font-size:10.5px;letter-spacing:.18em;color:var(--mute);font-weight:600}
+#bayes .p,#ctx .big{font-weight:300;font-size:46px;letter-spacing:-.03em;line-height:1.05}
+#bayes .p{margin-top:2px}
+#bayes .cue{font-size:12.5px;color:var(--ink2)}
+#ctx .row{font-size:12.5px;border-top:1px solid rgba(255,255,255,.05);padding-top:6px;margin-top:6px}
+#ctx .row b{font-weight:500;color:var(--ink)}
+#logp{font-size:11px;color:#8A8598}#logp b{font-weight:500;color:#CFCAD9}
+#screen{background:#0C0B0F;border:1px solid rgba(255,255,255,.10);border-radius:22px;box-shadow:0 40px 120px rgba(0,0,0,.6),inset 0 0 0 6px #050407}
+#screen .bar{border-bottom:0;color:#57526A;font-size:10.5px;letter-spacing:.06em;padding:0 22px;height:38px}
+#screen .t{font-family:var(--serif);font-weight:600;font-size:28px;letter-spacing:-.01em}
+#screen .b{font-family:var(--serif);font-size:22px;color:#D9D4E4;line-height:1.7}
+#screen .btns{left:30px;right:30px;bottom:26px}
+#screen .btns span{background:transparent;border:1px solid rgba(255,255,255,.12);border-radius:999px;font-size:13.5px;padding:12px 0}
+#screen .btns span.pri{background:#EDEAF2;color:#0B0A0F;border-color:#EDEAF2}
+#sub{font-family:var(--serif);font-weight:400;font-size:24px;letter-spacing:0;color:#F3EFF8}
+#sub small{font-family:Pretendard,sans-serif;font-size:11px;letter-spacing:.08em;color:var(--mute);margin-top:8px}
+#note{font-size:12.5px;color:#8A8598}
+#tl{background:transparent;border:0;border-top:1px solid var(--line);border-radius:0}
+button{background:transparent;border:1px solid rgba(255,255,255,.10);border-radius:999px;color:#9D98AC;font-weight:500}
+button.on{background:#EDEAF2;color:#09080B;border-color:#EDEAF2}
+#sig button{border-style:dashed}
+#hint{color:#4F4A5E}
 </style>
 </head>
 <body>
@@ -160,27 +187,28 @@ sv.innerHTML=`<defs>
 </defs>`;
 el('rect',{x:0,y:0,width:1600,height:900,fill:'url(#floor)'});
 for(let i=0;i<5;i++){el('ellipse',{cx:120+i*360,cy:0,rx:220,ry:260,fill:'url(#lamp)'});el('rect',{x:116+i*360,y:0,width:8,height:6,fill:'#6A6480',opacity:.6})}
-for(let i=0;i<6;i++)el('rect',{x:30+i*300,y:120,width:34,height:520,fill:'#121019',stroke:'#1E1B27'});
-el('line',{x1:0,y1:646,x2:1600,y2:646,stroke:'#221F2C','stroke-width':2});
+
+el('line',{x1:0,y1:646,x2:1600,y2:646,stroke:'rgba(255,255,255,.07)','stroke-width':1});
 for(let i=0;i<9;i++)el('rect',{x:60+i*190,y:656,width:110,height:5,rx:2,fill:'#2A2633',opacity:.6});
-const pillarTxt=el('text',{x:47,y:300,fill:'#3A3550','font-size':22,'font-weight':800,'text-anchor':'middle'});pillarTxt.textContent='B2';
+
 
 /* car */
 const car=el('g',{transform:'translate(-60,0)'});
 const ambGlow=el('ellipse',{cx:800,cy:470,rx:330,ry:120,fill:'url(#amb)',filter:'url(#blur20)'},car);
-el('path',{d:'M360 590 Q360 540 420 520 L520 420 Q560 362 650 352 L940 344 Q1010 344 1060 392 L1140 470 Q1240 482 1262 530 L1270 590 L1206 590 A56 56 0 0 0 1094 590 L526 590 A56 56 0 0 0 414 590 Z',fill:'#17151F',stroke:'#3A3550','stroke-width':2},car);
+const floorSpill=el('ellipse',{cx:815,cy:652,rx:420,ry:16,fill:'url(#amb)',filter:'url(#blur20)',opacity:.7},car);
+el('path',{d:'M360 590 Q360 540 420 520 L520 420 Q560 362 650 352 L940 344 Q1010 344 1060 392 L1140 470 Q1240 482 1262 530 L1270 590 L1206 590 A56 56 0 0 0 1094 590 L526 590 A56 56 0 0 0 414 590 Z',fill:'#0E0D12',stroke:'rgba(255,255,255,.16)','stroke-width':1.2},car);
 const cabin=el('g',{'clip-path':'url(#cabin)'},car);
-el('rect',{x:470,y:340,width:660,height:270,fill:'#100E16'},cabin);
-const ambInside=el('rect',{x:470,y:340,width:660,height:270,fill:'#8F73FF',opacity:.1},cabin);
+el('rect',{x:470,y:340,width:660,height:270,fill:'#0B0A0E'},cabin);
+const ambInside=el('ellipse',{cx:780,cy:525,rx:380,ry:190,fill:'url(#amb)',opacity:.5},cabin);
 const ambStrip=el('rect',{x:560,y:520,width:470,height:4,rx:2,fill:'#8F73FF'},cabin);
 const ambStripBlur=el('rect',{x:560,y:514,width:470,height:16,rx:8,fill:'#8F73FF',filter:'url(#blur8)',opacity:.8},cabin);
 /* windows (glass that rises) */
-const winFront=el('path',{d:'M528 418 Q562 368 650 360 L780 356 L780 470 L500 470 Z',fill:'url(#glass)',stroke:'#3A3550'},car);
-const winRearMask=el('path',{d:'M800 358 L936 352 Q996 352 1034 390 L1084 462 L800 462 Z',fill:'url(#glass)',stroke:'#3A3550'},car);
+const winFront=el('path',{d:'M528 418 Q562 368 650 360 L780 356 L780 470 L500 470 Z',fill:'url(#glass)',stroke:'rgba(255,255,255,.10)'},car);
+const winRearMask=el('path',{d:'M800 358 L936 352 Q996 352 1034 390 L1084 462 L800 462 Z',fill:'url(#glass)',stroke:'rgba(255,255,255,.10)'},car);
 const winOpen=el('rect',{x:496,y:352,width:290,height:0,fill:'#0B0A0F','clip-path':'url(#frontwin)'},car);
-el('line',{x1:790,y1:352,x2:790,y2:586,stroke:'#3A3550','stroke-width':3},car);
+el('line',{x1:790,y1:352,x2:790,y2:586,stroke:'rgba(255,255,255,.10)','stroke-width':1.5},car);
 /* dashboard + display + vent particles */
-el('path',{d:'M470 470 L560 455 L600 480 L470 500 Z',fill:'#1E1B27',stroke:'#3A3550'},cabin);
+el('path',{d:'M470 470 L560 455 L600 480 L470 500 Z',fill:'#121117',stroke:'rgba(255,255,255,.08)'},cabin);
 const dash=el('rect',{x:548,y:440,width:40,height:26,rx:4,fill:'#211D2B',stroke:'#4A4458'},cabin);
 const dashGlow=el('rect',{x:550,y:442,width:36,height:22,rx:3,fill:'#8F73FF',opacity:.5},cabin);
 const vents=el('g',{},cabin);const parts=[];for(let i=0;i<26;i++){parts.push({c:el('circle',{r:1.6,fill:'#C9BDFF',opacity:0},vents),x:0,y:0,life:Math.random()})}
@@ -189,15 +217,15 @@ const seatG=el('g',{},cabin);
 el('rect',{x:640,y:520,width:130,height:26,rx:10,fill:'#2A2633'},seatG);
 const back=el('g',{},seatG);el('rect',{x:752,y:400,width:26,height:130,rx:12,fill:'#2A2633'},back);el('rect',{x:748,y:380,width:30,height:28,rx:10,fill:'#2F2A3B'},back);
 const person=el('g',{},seatG);
-const torso=el('path',{d:'M712 520 Q700 470 720 440 L748 440 Q758 480 752 520 Z',fill:'#3A3550'},person);
+const torso=el('path',{d:'M712 520 Q700 470 720 440 L748 440 Q758 480 752 520 Z',fill:'#2A2633'},person);
 const head=el('circle',{cx:732,cy:418,r:19,fill:'#4A4458'},person);
 const heat=el('rect',{x:646,y:530,width:118,height:6,rx:3,fill:'#F2B25C',opacity:0},seatG);
 /* door lock + mirror */
 const lockG=el('g',{transform:'translate(880,540)'},car);el('rect',{x:-11,y:-2,width:22,height:16,rx:3,fill:'#2A2633',stroke:'#6F6A80'},lockG);
 const shack=el('path',{d:'M-6 -2 L-6 -8 Q0 -15 6 -8 L6 -2',fill:'none',stroke:'#6F6A80','stroke-width':2.2},lockG);
 const mirror=el('g',{transform:'translate(505,440)'},car);const mirP=el('path',{d:'M0 0 L-34 -8 Q-44 -4 -42 8 L-6 10 Z',fill:'#2A2633',stroke:'#4A4458'},mirror);
-el('circle',{cx:470,cy:600,r:46,fill:'#0E0C13',stroke:'#3A3550','stroke-width':3},car);el('circle',{cx:1150,cy:600,r:46,fill:'#0E0C13',stroke:'#3A3550','stroke-width':3},car);
-el('circle',{cx:470,cy:600,r:20,fill:'#1C1924'},car);el('circle',{cx:1150,cy:600,r:20,fill:'#1C1924'},car);
+el('circle',{cx:470,cy:600,r:46,fill:'#070609',stroke:'rgba(255,255,255,.14)','stroke-width':1.2},car);el('circle',{cx:1150,cy:600,r:46,fill:'#070609',stroke:'rgba(255,255,255,.14)','stroke-width':1.2},car);
+el('circle',{cx:470,cy:600,r:20,fill:'#0E0D12',stroke:'rgba(255,255,255,.08)'},car);el('circle',{cx:1150,cy:600,r:20,fill:'#0E0D12',stroke:'rgba(255,255,255,.08)'},car);
 const gearTxt=el('text',{x:600,y:500,fill:'#A8A3B8','font-size':13,'font-weight':800},cabin);gearTxt.textContent='P';
 /* lever readout chips on the car */
 const chips=el('g',{},sv);
@@ -214,7 +242,7 @@ function itx(px){const v=(px-LX)/LW;for(let i=1;i<KN.length;i++){const[a0,b0]=KN
 function drawTimeline(){tl.innerHTML='';buildAxis();const x=tx,rowH=22;
  TRACKS.forEach(([n],i)=>{const y=8+i*rowH;const t=document.createElementNS(NS,'text');t.setAttribute('x',0);t.setAttribute('y',y+15);t.setAttribute('fill','#6F6A80');t.setAttribute('font-size','11.5');t.textContent=n;tl.appendChild(t);
   if(i){const v=document.createElementNS(NS,'text');v.id='tv'+i;v.setAttribute('x',LX-8);v.setAttribute('y',y+15);v.setAttribute('fill','#BDB7CC');v.setAttribute('font-size','11.5');v.setAttribute('font-weight','700');v.setAttribute('text-anchor','end');tl.appendChild(v)}
-  const bg=document.createElementNS(NS,'rect');bg.setAttribute('x',LX);bg.setAttribute('y',y+3);bg.setAttribute('width',LW);bg.setAttribute('height',rowH-6);bg.setAttribute('rx',4);bg.setAttribute('fill','#17151F');tl.appendChild(bg)});
+  const bg=document.createElementNS(NS,'rect');bg.setAttribute('x',LX);bg.setAttribute('y',y+3);bg.setAttribute('width',LW);bg.setAttribute('height',rowH-6);bg.setAttribute('rx',4);bg.setAttribute('fill','rgba(255,255,255,.025)');tl.appendChild(bg)});
  // stages
  const sk=[];S.kf.forEach(k=>{if(k.stage&&(!sk.length||sk[sk.length-1].s!==k.stage))sk.push({s:k.stage,t:k.t})});
  sk.forEach((s,i)=>{const t1=i<sk.length-1?sk[i+1].t:S.duration,r=document.createElementNS(NS,'rect');r.setAttribute('x',x(s.t)+1);r.setAttribute('y',11);r.setAttribute('width',Math.max(2,x(t1)-x(s.t)-2));r.setAttribute('height',18);r.setAttribute('rx',4);
@@ -255,7 +283,7 @@ function render(dt){const l=leverAt(T),f=frameAt(T),stage=stageAt(T),p=posterior
  if(p>EM.thresholds[0]&&stage==='머묾')pct+= (p-EM.thresholds[0])*20;
  const o=Math.max(0,Math.min(1,pct/40));
  ['ambS0'].forEach(id=>$(id).setAttribute('stop-color',amb.hex));$('ambS0').setAttribute('stop-opacity',(.15+.6*o).toFixed(3));
- ambStrip.setAttribute('fill',amb.hex);ambStripBlur.setAttribute('fill',amb.hex);ambStripBlur.setAttribute('opacity',(.3+.7*o).toFixed(2));ambInside.setAttribute('fill',amb.hex);ambInside.setAttribute('opacity',(.03+.14*o).toFixed(3));
+ ambStrip.setAttribute('fill',amb.hex);ambStripBlur.setAttribute('fill',amb.hex);ambStripBlur.setAttribute('opacity',(.3+.7*o).toFixed(2));ambInside.setAttribute('opacity',(.25+.6*o).toFixed(3));
  dashGlow.setAttribute('opacity',f.screen&&f.screen.dim?.12:.55);
  // backrest: 0 reclined(-26deg) 1 upright(-4deg)
  const br=l.backrest??.3,ang=-26+22*br;back.setAttribute('transform',`rotate(${ang} 764 528)`);
@@ -275,7 +303,7 @@ function render(dt){const l=leverAt(T),f=frameAt(T),stage=stageAt(T),p=posterior
  // chips
  chips.innerHTML='';const cl=[`공조 ${(l.hvacC??22).toFixed(1)}℃ · 풍량 ${fan} · ${l.recirc?'내기':'외기'}`,`등받이 ${br>.6?'세움':'편안히'}`,`운전석 창문 ${Math.round(w)}%`,`문 ${l.lock?'잠금':'열림'}`];
  let cx=0;const ws=cl.map(t=>t.length*7.4+26),cw=ws.reduce((a,b)=>a+b,0)+10*(cl.length-1);cx=740-cw/2;
- cl.forEach((t,i)=>{const g=el('g',{},chips);el('rect',{x:cx,y:290,width:ws[i],height:26,rx:13,fill:'#17151F',stroke:'#2F2A3B'},g);const tx=el('text',{x:cx+ws[i]/2,y:307,fill:'#BDB7CC','font-size':12.5,'text-anchor':'middle'},g);tx.textContent=t;cx+=ws[i]+10});
+ cl.forEach((t,i)=>{const g=el('g',{},chips);if(i)el('line',{x1:cx-5,x2:cx-5,y1:294,y2:310,stroke:'rgba(255,255,255,.12)'},g);const tx=el('text',{x:cx+ws[i]/2,y:307,fill:'#A7A2B4','font-size':12.5,'letter-spacing':'.02em','text-anchor':'middle'},g);tx.textContent=t;cx+=ws[i]+10});
  // screen
  if(f!==lastScreen){lastScreen=f;const s=f.screen||{};const body=$('scBody');body.style.opacity=0;setTimeout(()=>{$('scT').textContent=s.title||'';$('scB').textContent=s.body||'';$('scBtns').innerHTML=(s.buttons||[]).map((b,i)=>`<span class="${i===1&&s.buttons.length>2||i===0&&s.buttons.length===2?'pri':''}">${b}</span>`).join('');body.style.opacity=s.dim?0:1},300);
   const sub=$('sub');const tts=f.sound&&f.sound.tts;sub.style.opacity=0;setTimeout(()=>{sub.innerHTML=tts?`“${tts}”<small>차 안에서 만든 음성 (TTS · ON_DEVICE)</small>`:'';sub.style.opacity=1},250)}
