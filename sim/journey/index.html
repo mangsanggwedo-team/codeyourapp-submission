@@ -73,6 +73,15 @@ button.on{background:#EDEAF2;color:#09080B;border-color:#EDEAF2}
 #sub{font-size:28px;line-height:1.5;top:150px}#sub small{color:#8A8599}
 #hint{color:#8A8599}button.on{background:#FFB15C;border-color:#FFB15C;color:#09080B}
 #stage{background:radial-gradient(60% 50% at 50% 55%,#141012,#09080B 70%)}
+#sub{left:38px;right:auto;width:350px;top:22px;text-align:left;font-size:26px;line-height:1.45;min-height:0}
+#sub small{margin:0 0 12px;font-size:10.5px;letter-spacing:.18em;font-weight:600}
+#bayes{top:236px}#logp{top:462px}
+#fork{position:absolute;left:1296px;width:282px;top:506px;font-size:12px;color:#8A8599}
+#fork .lbl{display:block;margin-bottom:6px}
+#sub,#screen .b,#screen .t{word-break:keep-all}#sub{font-size:24px}#fork{top:502px}#fork a{padding:5px 0 5px 22px}#fork a i{top:6px}
+#fork a{display:block;padding:7px 0 7px 22px;border-top:1px solid rgba(255,255,255,.08);cursor:pointer;position:relative;line-height:1.45}
+#fork a b{display:block;color:#EDEAF2;font-weight:500;font-size:13.5px}#fork a i{position:absolute;left:2px;top:8px;font-style:normal;color:#FFB15C}
+#fork a:hover b,#fork a.on b{color:#FFB15C}
 </style>
 </head>
 <body>
@@ -88,8 +97,9 @@ button.on{background:#EDEAF2;color:#09080B;border-color:#EDEAF2}
     <div class="body" id="scBody"><div class="t" id="scT"></div><div class="b" id="scB"></div></div><div class="btns" id="scBtns"></div><div class="glow" id="scGlow"></div></div>
   <div id="sub"></div>
   <div id="ctrl"></div>
+  <div id="fork"></div>
   <div id="sig"><span class="tag">신호 넣기:</span></div>
-  <div id="hint">설계값 재생 · 실차 실측 아님 · [소리 켜기]로 종과 바람 · 스페이스 재생 · ← → 단계 이동 · 타임라인 클릭으로 이동</div><div id="note"></div>
+  <div id="hint">설계값 재생 · 실차 실측 아님 · [소리 켜기]로 종과 바람 · 스페이스 재생 · ← → 단계 이동 · 1 2 3 갈림길 · 타임라인 클릭으로 이동</div><div id="note"></div>
   <div class="panel" id="tl"><svg id="tlsvg" width="1524" height="182"></svg></div>
 </div></div>
 
@@ -283,12 +293,12 @@ function render(dt){const l=leverAt(T),f=frameAt(T),stage=stageAt(T),p=posterior
  cl.forEach((t,i)=>{const g=el('g',{},chips);if(i)el('line',{x1:cx-5,x2:cx-5,y1:294,y2:310,stroke:'rgba(255,255,255,.12)'},g);const tx=el('text',{x:cx+ws[i]/2,y:307,fill:'#A7A2B4','font-size':12.5,'letter-spacing':'.02em','text-anchor':'middle'},g);tx.textContent=t;cx+=ws[i]+10});
  // screen
  if(f!==lastScreen){lastScreen=f;const s=f.screen||{};const body=$('scBody');body.style.opacity=0;setTimeout(()=>{$('scT').textContent=s.title||'';$('scB').textContent=s.body||'';$('scBtns').innerHTML=(s.buttons||[]).map((b,i)=>`<span class="${i===1&&s.buttons.length>2||i===0&&s.buttons.length===2?'pri':''}">${b}</span>`).join('');body.style.opacity=s.dim?0:1},300);
-  const sub=$('sub');const tts=f.sound&&f.sound.tts;sub.style.opacity=0;setTimeout(()=>{sub.innerHTML=tts?`“${tts}”<small>음성 안내 (TTS) 예정 · 지금은 화면 문장과 종</small>`:'';sub.style.opacity=1},250)}
+  const sub=$('sub');const tts=f.sound&&f.sound.tts;sub.style.opacity=0;setTimeout(()=>{const say=tts||s.body||s.title||'';sub.innerHTML=`<small>${stageAt(T)} · 차가 하는 말</small>`+(say&&!/^[●○ ]+$|^\d/.test(say)?say:'<span style="color:#8A8599">(차는 말하지 않습니다)</span>');sub.style.opacity=1},250)}
  const nt=noteAt(T);$('note').textContent=nt?nt.note:'';
  $('scGlow').style.background=`radial-gradient(120% 80% at 50% 120%, ${amb.hex}${Math.round(20+40*o).toString(16).padStart(2,'0')}, transparent 60%)`;
  // context
  const [hh,mm]=S.clock.split(':').map(Number);const tot=hh*60+mm+T/60;const clk=`${String(Math.floor(tot/60)%24).padStart(2,'0')}:${String(Math.floor(tot%60)).padStart(2,'0')}`;
- const lg=S.kf.filter(k=>k.t<=T&&k.log&&k.log.length).slice(-3).reverse();$('log').innerHTML=lg.map(k=>`<div><b>${k.clock||''}</b> ${k.log.join(' · ')}</div>`).join('');
+ const lg=S.kf.filter(k=>k.t<=T&&k.log&&k.log.length).slice(-2).reverse();$('log').innerHTML=lg.map(k=>`<div><b>${k.clock||''}</b> ${k.log.join(' · ')}</div>`).join('');
  $('cxClock').textContent=clk;$('scClock').textContent=clk;$('cxPlace').textContent=S.place;$('cxDrive').textContent=S.drive+'분';$('cxIntent').textContent=S.intent;$('cxStage').textContent=stage;$('cxPersona').textContent=S.persona||'';
  // bayes
  $('pval').textContent=p.toFixed(2);$('pval').style.color=p>EM.thresholds[2]?'#FFB15C':p>EM.thresholds[0]?'#E8C98F':'#ECEAF2';
@@ -304,6 +314,11 @@ let AC=null,wind=null,sndOn=false,sndLast=null;
 function bell(){const t=AC.currentTime;[[528,.22,5],[1056,.07,3],[1584,.035,2]].forEach(([f,g,d])=>{const o=AC.createOscillator(),a=AC.createGain();o.frequency.value=f;a.gain.setValueAtTime(g,t);a.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(a).connect(AC.destination);o.start(t);o.stop(t+d)})}
 function setWind(v){if(!wind){const b=AC.createBuffer(1,AC.sampleRate*2,AC.sampleRate),d=b.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1;const n=AC.createBufferSource();n.buffer=b;n.loop=true;const f=AC.createBiquadFilter();f.type='lowpass';f.frequency.value=420;wind=AC.createGain();wind.gain.value=0;n.connect(f).connect(wind).connect(AC.destination);n.start()}wind.gain.linearRampToValueAtTime(v,AC.currentTime+1.5)}
 function soundTick(){if(!sndOn||!AC)return;const e=playing?curSnd(T):null;if(e===sndLast||(e&&sndLast&&e.t===sndLast.t))return;sndLast=e;if(e&&e.bgm==='bell_once')bell();setWind(e&&e.bgm==='leaves_wind'?.05*Math.pow(10,((e.vol??-18)+18)/20):0)}
+/* ---------- 갈림길: 예외 장면(C)의 해당 지점으로 이동. 숫자 키 1~3 ---------- */
+const FORKS=[['통화 · 멈춤','전화가 온다','소리 0, 시계 멈춤. 끊으면 멈춘 자리에서 이어서'],['문 열림','문이 열린다','빛을 1.5초에 원래대로. 닫으면 이어서 머물기 하나만'],['안전 복원','기어를 옮긴다','묻지 않고 전부 되돌리고 화면을 비운다']];
+function goFork(i){const sc=DATA.scenarios.find(x=>x.id==='C');if(!sc)return;const k=sc.kf.find(k=>k.stage===FORKS[i][0]);if(!k)return;S=sc;T=k.t;userSig=[];lastScreen=null;buildCtrl();drawTimeline()}
+function buildFork(){const f=$('fork');f.innerHTML='<span class="lbl">갈림길 · 머무는 중에 생기는 일</span>';FORKS.forEach((x,i)=>{const a=document.createElement('a');a.innerHTML=`<i>${i+1}</i><b>${x[1]}</b>${x[2]}`;a.onclick=()=>goFork(i);f.appendChild(a)})}
+document.addEventListener('keydown',e=>{if(['1','2','3'].includes(e.key))goFork(+e.key-1)});
 /* ---------- controls ---------- */
 function buildCtrl(){const c=$('ctrl');c.innerHTML='';
  DATA.scenarios.forEach(s=>{const b=document.createElement('button');b.textContent=s.id+' · '+s.name.split(',')[0];b.title=s.name;b.className=s===S?'on':'';b.onclick=()=>{S=s;T=0;userSig=[];lastScreen=null;buildCtrl();drawTimeline()};c.appendChild(b)});
@@ -316,7 +331,7 @@ document.addEventListener('keydown',e=>{if(e.code==='Space'){playing=!playing;bu
  if(e.key==='ArrowRight'){const n=sk.find(s=>s.t>T+.5);if(n)T=n.t}if(e.key==='ArrowLeft'){const p=sk.filter(s=>s.t<T-1).pop();T=p?p.t:0}});
 function fit(){const s=Math.min(innerWidth/1600,innerHeight/900);$('stage').style.transform=`scale(${s})`}addEventListener('resize',fit);fit();
 const qs=new URLSearchParams(location.search);if(qs.get('s')){S=DATA.scenarios.find(x=>x.id===qs.get('s'))||S}if(qs.get('t'))T=+qs.get('t');if(qs.get('paused'))playing=false;
-buildCtrl();drawTimeline();
+buildCtrl();buildFork();drawTimeline();
 function loop(now){const dt=Math.min(.05,(now-last)/1000);last=now;if(playing){T+=dt*speed;if(T>S.duration){T=S.duration;playing=false;buildCtrl()}}render(dt);soundTick();requestAnimationFrame(loop)}requestAnimationFrame(loop);
 </script>
 </body></html>
