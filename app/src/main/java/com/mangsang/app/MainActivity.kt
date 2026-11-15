@@ -7,6 +7,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.SizeTransform
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.FastOutSlowInEasing
@@ -265,7 +266,7 @@ private fun Room(moment: Moment, car: RoomCar, paused: Boolean, demoSec: Int, le
                     Box(Modifier.fillMaxHeight(0.56f).fillMaxWidth(), contentAlignment = Alignment.BottomCenter) {
                         Fading(words) { Text(it, style = Voice, fontSize = 54.sp, textAlign = TextAlign.Center, modifier = Modifier.padding(bottom = 56.dp)) }
                     }
-                    Spacer(Modifier.height(if (phase == Phase.STAY) 96.dp else 132.dp))
+                    Spacer(Modifier.height(if (phase == Phase.STAY) 116.dp else 132.dp))
                     Fading(sub) {
                         Text(it, style = Voice, color = Text2, fontSize = if (phase == Phase.STAY && !held) 30.sp else 28.sp, textAlign = TextAlign.Center, lineHeight = 1.7.em)
                     }
@@ -304,7 +305,10 @@ private fun Room(moment: Moment, car: RoomCar, paused: Boolean, demoSec: Int, le
 private fun Fading(text: String, content: @Composable (String) -> Unit) {
     AnimatedContent(
         targetState = text,
-        transitionSpec = { (fadeIn(tween(600)) + slideInVertically(tween(600)) { 8 }) togetherWith fadeOut(tween(400)) },
+        modifier = Modifier.fillMaxWidth(),
+        contentAlignment = Alignment.Center,
+        // 크기 전환 중에 글자가 잘리지 않게 자르지 않는다
+        transitionSpec = { (fadeIn(tween(600)) + slideInVertically(tween(600)) { 8 }) togetherWith fadeOut(tween(400)) using SizeTransform(clip = false) },
         label = "words",
     ) { if (it.isNotEmpty()) content(it) else Spacer(Modifier.height(1.dp)) }
 }
