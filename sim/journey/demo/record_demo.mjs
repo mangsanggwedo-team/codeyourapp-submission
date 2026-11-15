@@ -21,16 +21,17 @@ const overlay = () => page.evaluate(fonts => {
   #dcap .c.on{opacity:1}#dcap .e{color:#B9A6FF;font-size:14px;font-weight:700;margin-right:10px;letter-spacing:.3px}
   #dcard{position:fixed;inset:0;z-index:100000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;background:#09080B;color:#EEEAF8;font-family:${fonts};opacity:0;transition:opacity .6s;pointer-events:none}
   #dcard.on{opacity:1}#dcard .l{font-size:16px;letter-spacing:4px;color:#B9A6FF;font-weight:700}#dcard h1{font-size:72px;margin:0;font-weight:600;letter-spacing:-.5px}
+  #dcard .ln{height:1px;width:0;background:linear-gradient(90deg,transparent,#F0C36A,transparent);box-shadow:0 0 14px rgba(240,195,106,.7);transition:width 1.8s ease-out .3s}#dcard.on .ln{width:340px}
   #dcard p{font-size:24px;color:#B8B2C8;margin:0;max-width:66%;text-align:center;line-height:1.6}#dcard .t{font-size:15px;color:#E0B04A;border:1px solid rgba(201,133,0,.5);padding:6px 16px;border-radius:999px}`;
   document.head.appendChild(s);
   const c = document.createElement("div"); c.id = "dcap"; c.innerHTML = '<div class="c"></div>'; document.body.appendChild(c);
-  const k = document.createElement("div"); k.id = "dcard"; k.innerHTML = '<div class="l"></div><h1></h1><p></p><div class="t"></div>'; document.body.appendChild(k);
+  const k = document.createElement("div"); k.id = "dcard"; k.innerHTML = '<div class="l"></div><div class="ln"></div><h1></h1><p></p><div class="t"></div>'; document.body.appendChild(k);
 }, FONTS);
 const cap = (e, t) => page.evaluate(([e, t]) => { const el = document.querySelector("#dcap .c"); el.innerHTML = (e ? `<span class="e">${e}</span>` : "") + t; el.classList.add("on"); }, [e, t]);
 const capOff = async () => { await page.evaluate(() => document.querySelector("#dcap .c").classList.remove("on")); await wait(400); };
-const card = async (l, h, p, t, hold) => { await page.evaluate(([l, h, p, t]) => { const k = document.getElementById("dcard"); k.querySelector(".l").textContent = l; k.querySelector("h1").textContent = h; k.querySelector("p").innerHTML = p; const tg = k.querySelector(".t"); tg.textContent = t; tg.style.display = t ? "" : "none"; k.classList.add("on"); }, [l, h, p, t]); await wait(hold); };
+const card = async (l, h, p, t, hold) => { await page.evaluate(([l, h, p, t]) => { const k = document.getElementById("dcard"); k.querySelector(".l").textContent = l; const h1 = k.querySelector("h1"); h1.textContent = h; h1.style.letterSpacing = /^[A-Z0-9 ]+$/.test(h) ? ".28em" : ""; h1.style.fontWeight = /^[A-Z0-9 ]+$/.test(h) ? "400" : ""; k.querySelector("p").innerHTML = p; const tg = k.querySelector(".t"); tg.textContent = t; tg.style.display = t ? "" : "none"; k.classList.add("on"); }, [l, h, p, t]); await wait(hold); };
 const cardOff = async () => { await page.evaluate(() => document.getElementById("dcard").classList.remove("on")); await wait(700); };
-const go = async (q) => { await page.goto(BASE + q, { waitUntil: "networkidle" }); await wait(600); await overlay(); await page.addStyleTag({ content: "#ctrl,#hint{visibility:hidden}" }); };
+const go = async (q) => { await page.goto(BASE + q, { waitUntil: "networkidle" }); await wait(600); await overlay(); await page.addStyleTag({ content: "#ctrl,#hint,#sig{visibility:hidden}" }); };
 // 시뮬레이션 전역(T, speed, playing)을 직접 움직인다. 시뮬레이터 T는 첫 키프레임(-60초)을 0으로 옮기므로 사양 시각 + 60
 const runTo = async (specT, spd) => {
   const target = specT + 60;
@@ -51,7 +52,7 @@ const emu = async (src, text, ms) => {
 };
 
 await go("?s=B&t=50&paused=1");
-await card("TEAM 망상궤도 · PLEOS CODE YOUR APP", "룸19", "주차한 차가 잠깐, 기도하는 방이 된다.", "P단에서만 · 기기 안에서만 · 버튼 없이 닫힘", 4500);
+await card("TEAM 망상궤도 · PLEOS CODE YOUR APP", "ROOM 19", "주차한 차가 잠시 기도의 방이 됩니다", "P단에서만 · 기기 안에서만 · 버튼 없이 닫힘", 5000);
 await cardOff();
 
 await cap("낮", "점심, 회사 주차장. 기도 시간에 갈 방이 없다. 차를 세운다."); await runTo(6, 4); await wait(600);
@@ -80,7 +81,7 @@ await cap("끼어듦", "머무는 중에 전화가 온다. 끊지 않고 멈춰 
 await cap("끼어듦", "통화가 끝나면 그 자리에서 다시 이어간다."); await runTo(290, 9); await wait(1500);
 await capOff();
 
-await card("룸19", "차가 먼저 알아채고, 조용히 돌려놓는다", "Pleos Vehicle SDK로 문, 창문, 좌석, 공기, 빛을 한 흐름으로 바꾸고 되돌린다.<br>기도는 차 밖으로 나가지 않는다.", "시뮬레이션은 설계값 재생이며 실차 실측이 아님 · 좌석과 조명 제어는 실차 검증 예정", 6000);
+await card("ROOM 19 · 룸19", "차가 먼저 알아채고, 조용히 돌려놓는다", "Pleos Vehicle SDK로 문, 창문, 좌석, 공기, 빛을 한 흐름으로 바꾸고 되돌린다.<br>기도는 차 밖으로 나가지 않는다.", "시뮬레이션은 설계값 재생이며 실차 실측이 아님 · 좌석과 조명 제어는 실차 검증 예정", 6000);
 
 await ctx.close(); await browser.close();
 const webm = fs.readdirSync(OUT).find(f => f.endsWith(".webm"));
