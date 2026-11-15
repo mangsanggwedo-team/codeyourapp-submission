@@ -364,7 +364,8 @@ private fun Stages(phase: Phase, modifier: Modifier) {
 /** 차가 한 일. 마지막 세 줄만. 머묾에서는 거의 보이지 않게. */
 @Composable
 private fun CarLog(lines: List<String>, modifier: Modifier, dim: Boolean) {
-    val a by animateFloatAsState(if (dim) 0.35f else 1f, tween(800), label = "log")
+    // 차가 못 한 일은 머묾에서도 흐리지 않는다
+    val a by animateFloatAsState(if (dim && lines.none { "없어요" in it }) 0.35f else 1f, tween(800), label = "log")
     Column(modifier.alpha(a), verticalArrangement = Arrangement.spacedBy(6.dp)) {
         lines.takeLast(3).forEach { Text(it, style = Info, fontSize = 20.sp) }
     }
