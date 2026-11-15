@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>골방 · 여정 시뮬레이션</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+:root{--bg:#0B0A0F;--s1:#14121A;--s2:#1C1924;--line:#2B2735;--ink:#ECEAF2;--ink2:#A8A3B8;--mute:#6F6A80;--p:#8F73FF;--amber:#F2B25C;--ok:#7FD99A}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#050407;color:var(--ink);font-family:Pretendard,sans-serif;-webkit-font-smoothing:antialiased;overflow:hidden}
+#fit{position:absolute;inset:0;display:grid;place-items:center}
+#stage{width:1600px;height:900px;position:relative;background:var(--bg);transform-origin:center;overflow:hidden;border-radius:6px}
+svg text{font-family:Pretendard,sans-serif}
+.panel{position:absolute;background:rgba(20,18,26,.82);border:1px solid var(--line);border-radius:14px;backdrop-filter:blur(6px)}
+.lbl{font-size:11px;letter-spacing:.16em;color:var(--mute);text-transform:uppercase;font-weight:700}
+#ctx{top:22px;right:22px;width:300px;padding:14px 16px}
+#ctx .big{font-size:30px;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+#ctx .row{display:flex;justify-content:space-between;font-size:13px;color:var(--ink2);margin-top:6px}
+#bayes{top:22px;left:22px;width:360px;height:218px;padding:14px 16px}
+#bayes .p{font-size:30px;font-weight:800;font-variant-numeric:tabular-nums}
+#bayes .cue{font-size:12.5px;color:var(--ink2);margin-top:2px;min-height:18px}
+#screen{right:22px;top:196px;width:420px;height:300px;padding:0;overflow:hidden;border-radius:18px;background:#0F0D14;border:1px solid #2F2A3B;box-shadow:0 30px 80px rgba(0,0,0,.55)}
+#screen .bar{height:30px;display:flex;align-items:center;justify-content:space-between;padding:0 14px;font-size:11px;color:var(--mute);border-bottom:1px solid #221E2B}
+#screen .body{padding:26px 26px 0;transition:opacity .6s}
+#screen .t{font-size:24px;font-weight:700;letter-spacing:-.02em;line-height:1.35}
+#screen .b{font-size:15px;color:var(--ink2);margin-top:10px;line-height:1.6;white-space:pre-line}
+#screen .btns{position:absolute;left:26px;right:26px;bottom:22px;display:flex;gap:10px}
+#screen .btns span{flex:1;text-align:center;padding:11px 0;border-radius:12px;background:#221E2B;font-size:14px;color:var(--ink2)}
+#screen .btns span.pri{background:var(--p);color:#0B0A0F;font-weight:700}
+#screen .glow{position:absolute;inset:0;pointer-events:none;transition:background 1s}
+#sub{position:absolute;left:400px;right:470px;bottom:248px;text-align:center;font-size:19px;font-weight:600;letter-spacing:-.01em;min-height:28px;text-shadow:0 2px 12px rgba(0,0,0,.8);transition:opacity .5s}
+#sub small{display:block;font-size:12px;color:var(--mute);font-weight:500;margin-top:4px}
+#tl{left:22px;right:22px;bottom:22px;height:206px;padding:12px 16px}
+#ctrl{position:absolute;left:400px;top:22px;display:flex;gap:8px;align-items:center}
+button{font:600 12.5px Pretendard;color:var(--ink2);background:var(--s2);border:1px solid var(--line);border-radius:10px;padding:7px 12px;cursor:pointer}
+button:hover{color:var(--ink);border-color:#4A4458}
+button.on{background:var(--p);color:#0B0A0F;border-color:var(--p)}
+#sig{position:absolute;left:400px;top:62px;display:flex;gap:6px;align-items:center}
+#sig button{font-size:11.5px;padding:5px 10px}
+.tag{font-size:11px;color:var(--mute)}
+#hint{position:absolute;left:400px;top:104px;font-size:11px;color:var(--mute)}
+#note{position:absolute;left:400px;right:470px;top:140px;text-align:center;font-size:13px;color:var(--ink2)}
+</style>
+</head>
+<body>
+<div id="fit"><div id="stage">
+  <svg id="scene" width="1600" height="900" viewBox="0 0 1600 900" style="position:absolute;inset:0"></svg>
+  <div class="panel" id="bayes"><div class="lbl">마칠 준비 · 베이지안 추정</div>
+    <div style="display:flex;align-items:baseline;gap:10px;margin-top:6px"><div class="p" id="pval">0.00</div><div class="cue" id="pcue">아직 머무는 중</div></div>
+    <svg id="pchart" width="328" height="120" style="margin-top:6px"></svg></div>
+  <div class="panel" id="ctx"><div class="lbl" id="cxPlace">장소</div><div class="big" id="cxClock">21:40</div>
+    <div class="row"><span>오늘 운전</span><b id="cxDrive">40분</b></div><div class="row"><span>의향</span><b id="cxIntent">기도 · 개신교</b></div><div class="row"><span>단계</span><b id="cxStage">준비</b></div></div>
+  <div class="panel" id="screen"><div class="bar"><span>Pleos Connect</span><span id="scClock">21:40</span></div>
+    <div class="body" id="scBody"><div class="t" id="scT"></div><div class="b" id="scB"></div></div><div class="btns" id="scBtns"></div><div class="glow" id="scGlow"></div></div>
+  <div id="sub"></div>
+  <div id="ctrl"></div>
+  <div id="sig"><span class="tag">신호 넣기:</span></div>
+  <div id="hint">스페이스 재생 · ← → 단계 이동 · 타임라인 클릭으로 이동</div><div id="note"></div>
+  <div class="panel" id="tl"><svg id="tlsvg" width="1524" height="182"></svg></div>
+</div></div>
+
+<script src="scenarios.js"></script>
+<script>
+/* ---------- data: scenarios.js(window.SCENARIOS) 가 있으면 그것, 없으면 아래 기본값 ---------- */
+const FALLBACK={endingModel:{mu:Math.log(15*60),sigma:0.35,thresholds:[0.5,0.7,0.85],signals:{wake:{lr:2.2,label:'화면 깨움'},backrest:{lr:3.0,label:'등받이 당김'},lean:{lr:0.35,label:'다시 기대기(반대)'}},halfLife:90},
+scenarios:[
+{id:'A',name:'귀가 직전 · 기도',place:'아파트 지하주차장 B2',clock:'21:40',drive:40,intent:'기도 · 개신교',duration:960,mu:Math.log(15*60),
+ kf:[
+ {t:0,stage:'준비',levers:{hvacC:23,fan:3,recirc:0,seatHeat:0,backrest:.3,ambient:{pct:30,hex:'#E9E4FF'},window:15,lock:0,mirrorFolded:0},screen:{title:'도착했어요.',body:'40분 운전하셨네요.',buttons:[]},sound:{tts:''}},
+ {t:20,stage:'준비',screen:{title:'잠시 이곳에 머무시겠어요?',body:'오늘은 15분을 권해요.\n지난번처럼 기도로 시작할게요.',buttons:['10분','15분','다음에']},sound:{tts:'잠시 이곳에 머무시겠어요?'}},
+ {t:32,stage:'문턱',levers:{lock:1,window:1,backrest:.75,ambient:{pct:22,hex:'#8F73FF'},mirrorFolded:1},screen:{title:'바깥은 잠시 내려놓을게요.',body:'문을 잠그고 창문을 닫았어요.',buttons:[]},sound:{tts:'바깥은 잠시 내려놓을게요.'}},
+ {t:52,stage:'숨',levers:{fan:1,recirc:1,hvacC:22,ambient:{pct:18,hex:'#8F73FF'}},screen:{title:'숨을 세 번 고를게요.',body:'빛이 밝아지면 들이쉬고,\n어두워지면 내쉬세요.',buttons:[]},sound:{tts:'숨을 세 번 고를게요.'},breath:true},
+ {t:110,stage:'머묾',levers:{fan:1,ambient:{pct:12,hex:'#6E55E8'}},screen:{title:'',body:'',buttons:[],dim:true},sound:{tts:''}},
+ {t:600,stage:'머묾',levers:{recirc:0,fan:1},screen:{title:'',body:'',buttons:[],dim:true},note:'환기: 내기 10분 뒤 외기로 조용히 전환'},
+ {t:700,stage:'머묾',levers:{recirc:1}},
+ {t:880,stage:'돌아옴',levers:{ambient:{pct:35,hex:'#F2B25C'},fan:2},screen:{title:'여기 두고 가셔도 돼요.',body:'',buttons:[]},sound:{tts:'오늘 마음은 여기 두고 가셔도 돼요.'},ending:true},
+ {t:925,stage:'출발 준비',levers:{lock:0,window:15,backrest:.3,mirrorFolded:0,recirc:0,fan:3,hvacC:23,ambient:{pct:30,hex:'#E9E4FF'}},screen:{title:'출발할 수 있어요.',body:'모든 설정을 처음처럼 돌려놓았어요.',buttons:[]},sound:{tts:''}},
+ {t:960,stage:'출발 준비'}],
+ signals:[{t:820,type:'wake'},{t:845,type:'backrest'}]},
+{id:'B',name:'점심 · 조용히 머물기',place:'회사 지상주차장 3층',clock:'12:20',drive:15,intent:'조용히 머물기 · 무교',duration:520,mu:Math.log(8*60),
+ kf:[
+ {t:0,stage:'준비',levers:{hvacC:21,fan:3,recirc:0,seatHeat:0,backrest:.35,ambient:{pct:25,hex:'#E9E4FF'},window:20,lock:0,mirrorFolded:0},screen:{title:'점심 잘 드셨어요?',body:'오후 전에 잠깐 쉬어 갈까요?',buttons:['8분','다음에']}},
+ {t:18,stage:'문턱',levers:{lock:1,window:1,backrest:.7,ambient:{pct:18,hex:'#8F73FF'}},screen:{title:'조용히 머물게요.',body:'',buttons:[]},sound:{tts:'조용히 머물게요.'}},
+ {t:34,stage:'숨',levers:{fan:1,recirc:1},screen:{title:'숨 한 번.',body:'',buttons:[]},breath:true},
+ {t:70,stage:'머묾',levers:{ambient:{pct:10,hex:'#6E55E8'}},screen:{dim:true,title:'',body:'',buttons:[]}},
+ {t:450,stage:'돌아옴',levers:{ambient:{pct:35,hex:'#F2B25C'},fan:2},screen:{title:'오후도 천천히.',body:'',buttons:[]},sound:{tts:'오후도 천천히 가요.'},ending:true},
+ {t:490,stage:'출발 준비',levers:{lock:0,window:20,backrest:.35,recirc:0,fan:3,ambient:{pct:25,hex:'#E9E4FF'}},screen:{title:'다녀오세요.',body:'',buttons:[]}},
+ {t:520,stage:'출발 준비'}],
+ signals:[{t:400,type:'wake'}]},
+{id:'C',name:'예외 · 기어 이탈',place:'아파트 지하주차장 B2',clock:'21:40',drive:40,intent:'기도 · 개신교',duration:300,mu:Math.log(15*60),
+ kf:[
+ {t:0,stage:'머묾',levers:{hvacC:22,fan:1,recirc:1,seatHeat:1,backrest:.75,ambient:{pct:12,hex:'#6E55E8'},window:1,lock:1,mirrorFolded:1},screen:{dim:true,title:'',body:'',buttons:[]}},
+ {t:120,stage:'머묾',screen:{title:'기어가 P에서 벗어났어요.',body:'안전을 위해 바로 처음 상태로 돌려놓았어요.',buttons:[]},levers:{lock:0,window:15,backrest:.3,mirrorFolded:0,recirc:0,fan:3,hvacC:23,seatHeat:0,ambient:{pct:30,hex:'#E9E4FF'}},sound:{tts:''},alert:true,note:'즉시 복원: 0.2초 안에 모든 레버를 시작 전 값으로'},
+ {t:300,stage:'출발 준비'}],
+ signals:[]}]};
+const DATA=(window.SCENARIOS&&window.SCENARIOS.scenarios)?window.SCENARIOS:FALLBACK;
+const EM=DATA.endingModel||FALLBACK.endingModel;
+const STAGES=['준비','문턱','숨','머묾','돌아옴','출발 준비'];
+
+/* ---------- state ---------- */
+let S=DATA.scenarios[0],T=0,playing=true,speed=20,last=performance.now(),userSig=[];
+const $=id=>document.getElementById(id);
+
+/* ---------- interpolation ---------- */
+function leverAt(t){const st={};let ks=S.kf.filter(k=>k.levers);
+ const keys=['hvacC','fan','recirc','seatHeat','backrest','window','lock','mirrorFolded'];
+ const cur={},prev={};for(const k of ks){if(k.t<=t){for(const [n,v] of Object.entries(k.levers)){prev[n]={t:k.t,v}}}}
+ for(const n of [...keys,'ambient']){const p=prev[n];if(!p)continue;const dur=n==='backrest'?6:n==='window'?4:n==='ambient'?(p.v.ms||3000)/1000:n==='hvacC'?20:0;
+  // find value before p
+  let before=null;for(const k of ks){if(k.t<p.t&&k.levers[n]!==undefined)before=k.levers[n]}
+  const a=dur?Math.min(1,(t-p.t)/dur):1,e=a<.5?2*a*a:1-Math.pow(-2*a+2,2)/2;
+  if(n==='ambient'){const b=before||p.v;st.amb={pct:lerp(b.pct,p.v.pct,e),hex:mixHex(b.hex,p.v.hex,e)}}
+  else if(typeof p.v==='number'&&before!=null&&['hvacC','backrest','window'].includes(n))st[n]=lerp(before,p.v,e);else st[n]=p.v}
+ return st}
+const lerp=(a,b,e)=>a+(b-a)*e;
+function mixHex(a,b,e){const pa=parseInt(a.slice(1),16),pb=parseInt(b.slice(1),16);const c=[16,8,0].map(s=>Math.round(lerp(pa>>s&255,pb>>s&255,e)));return '#'+c.map(v=>v.toString(16).padStart(2,'0')).join('')}
+function frameAt(t){let f=S.kf[0];for(const k of S.kf)if(k.t<=t&&k.screen)f=k;return f}
+function noteAt(t){let n=null;for(const k of S.kf)if(k.t<=t&&(k.note||k.screen))n=k;return n&&n.note?n:null}
+function stageAt(t){let s=S.kf[0].stage;for(const k of S.kf)if(k.t<=t&&k.stage)s=k.stage;return s}
+
+/* ---------- bayes: prior lognormal CDF on session length + signal likelihood ratios with decay ---------- */
+function erf(x){const s=Math.sign(x);x=Math.abs(x);const t=1/(1+.3275911*x);return s*(1-((((1.061405429*t-1.453152027)*t+1.421413741)*t-.284496736)*t+.254829592)*t*Math.exp(-x*x))}
+function prior(t){const mu=S.mu||EM.mu,sg=EM.sigma;if(t<=0)return 1e-4;return Math.max(1e-4,Math.min(.9999,.5*(1+erf((Math.log(t)-mu)/(sg*Math.SQRT2)))))}
+function posterior(t){let lo=Math.log(prior(t)/(1-prior(t)));const sigs=[...S.signals,...userSig];
+ for(const s of sigs){if(s.t>t)continue;const spec=EM.signals[s.type];if(!spec)continue;const w=Math.pow(.5,(t-s.t)/(EM.halfLife||90));lo+=Math.log(spec.lr)*w}
+ return 1/(1+Math.exp(-lo))}
+
+/* ---------- scene ---------- */
+const NS='http://www.w3.org/2000/svg',sv=$('scene');
+function el(tag,attrs,parent){const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);(parent||sv).appendChild(e);return e}
+sv.innerHTML=`<defs>
+<radialGradient id="lamp" cx="50%" cy="0%" r="70%"><stop offset="0" stop-color="#3A3550" stop-opacity=".55"/><stop offset="1" stop-color="#0B0A0F" stop-opacity="0"/></radialGradient>
+<linearGradient id="floor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#14121A"/><stop offset="1" stop-color="#0B0A0F"/></linearGradient>
+<linearGradient id="glass" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2A2638" stop-opacity=".55"/><stop offset="1" stop-color="#15131C" stop-opacity=".35"/></linearGradient>
+<radialGradient id="amb" cx="50%" cy="50%" r="50%"><stop offset="0" id="ambS0" stop-color="#8F73FF" stop-opacity=".55"/><stop offset="1" id="ambS1" stop-color="#8F73FF" stop-opacity="0"/></radialGradient>
+<filter id="blur8"><feGaussianBlur stdDeviation="8"/></filter><filter id="blur20"><feGaussianBlur stdDeviation="22"/></filter>
+<clipPath id="cabin"><path d="M470 520 L520 420 Q560 362 650 352 L940 344 Q1010 344 1060 392 L1120 468 L1120 600 L470 600 Z"/></clipPath>
+</defs>`;
+el('rect',{x:0,y:0,width:1600,height:900,fill:'url(#floor)'});
+for(let i=0;i<5;i++){el('ellipse',{cx:120+i*360,cy:0,rx:220,ry:260,fill:'url(#lamp)'});el('rect',{x:116+i*360,y:0,width:8,height:6,fill:'#6A6480',opacity:.6})}
+for(let i=0;i<6;i++)el('rect',{x:30+i*300,y:120,width:34,height:520,fill:'#121019',stroke:'#1E1B27'});
+el('line',{x1:0,y1:640,x2:1600,y2:640,stroke:'#221F2C','stroke-width':2});
+for(let i=0;i<9;i++)el('rect',{x:60+i*190,y:700,width:110,height:5,rx:2,fill:'#2A2633',opacity:.6});
+const pillarTxt=el('text',{x:47,y:300,fill:'#3A3550','font-size':22,'font-weight':800,'text-anchor':'middle'});pillarTxt.textContent='B2';
+
+/* car */
+const car=el('g',{transform:'translate(-40,40)'});
+const ambGlow=el('ellipse',{cx:800,cy:470,rx:330,ry:120,fill:'url(#amb)',filter:'url(#blur20)'},car);
+el('path',{d:'M360 600 Q360 540 420 520 L520 420 Q560 362 650 352 L940 344 Q1010 344 1060 392 L1140 470 Q1240 482 1262 530 L1270 600 Z',fill:'#17151F',stroke:'#3A3550','stroke-width':2},car);
+const cabin=el('g',{'clip-path':'url(#cabin)'},car);
+el('rect',{x:470,y:340,width:660,height:270,fill:'#100E16'},cabin);
+const ambInside=el('rect',{x:470,y:340,width:660,height:270,fill:'#8F73FF',opacity:.1},cabin);
+const ambStrip=el('rect',{x:560,y:520,width:470,height:4,rx:2,fill:'#8F73FF'},cabin);
+const ambStripBlur=el('rect',{x:560,y:514,width:470,height:16,rx:8,fill:'#8F73FF',filter:'url(#blur8)',opacity:.8},cabin);
+/* windows (glass that rises) */
+const winFront=el('path',{d:'M528 418 Q562 368 650 360 L780 356 L780 470 L500 470 Z',fill:'url(#glass)',stroke:'#3A3550'},car);
+const winRearMask=el('rect',{x:800,y:352,width:250,height:118,fill:'url(#glass)',stroke:'#3A3550'},car);
+const winOpen=el('rect',{x:800,y:352,width:250,height:0,fill:'#0B0A0F'},car);
+el('line',{x1:790,y1:352,x2:790,y2:600,stroke:'#3A3550','stroke-width':3},car);
+/* dashboard + display + vent particles */
+el('path',{d:'M470 470 L560 455 L600 480 L470 500 Z',fill:'#1E1B27',stroke:'#3A3550'},cabin);
+const dash=el('rect',{x:548,y:440,width:40,height:26,rx:4,fill:'#211D2B',stroke:'#4A4458'},cabin);
+const dashGlow=el('rect',{x:550,y:442,width:36,height:22,rx:3,fill:'#8F73FF',opacity:.5},cabin);
+const vents=el('g',{},cabin);const parts=[];for(let i=0;i<26;i++){parts.push({c:el('circle',{r:1.6,fill:'#C9BDFF',opacity:0},vents),x:0,y:0,life:Math.random()})}
+/* seat + person */
+const seatG=el('g',{},cabin);
+el('rect',{x:640,y:520,width:130,height:26,rx:10,fill:'#2A2633'},seatG);
+const back=el('g',{},seatG);el('rect',{x:752,y:400,width:26,height:130,rx:12,fill:'#2A2633'},back);el('rect',{x:748,y:380,width:30,height:28,rx:10,fill:'#2F2A3B'},back);
+const person=el('g',{},seatG);
+const torso=el('path',{d:'M712 520 Q700 470 720 440 L748 440 Q758 480 752 520 Z',fill:'#3A3550'},person);
+const head=el('circle',{cx:732,cy:418,r:19,fill:'#4A4458'},person);
+const heat=el('rect',{x:646,y:530,width:118,height:6,rx:3,fill:'#F2B25C',opacity:0},seatG);
+/* door lock + mirror */
+const lockG=el('g',{transform:'translate(880,540)'},car);el('rect',{x:-11,y:-2,width:22,height:16,rx:3,fill:'#2A2633',stroke:'#6F6A80'},lockG);
+const shack=el('path',{d:'M-6 -2 L-6 -8 Q0 -15 6 -8 L6 -2',fill:'none',stroke:'#6F6A80','stroke-width':2.2},lockG);
+const mirror=el('g',{transform:'translate(505,440)'},car);const mirP=el('path',{d:'M0 0 L-34 -8 Q-44 -4 -42 8 L-6 10 Z',fill:'#2A2633',stroke:'#4A4458'},mirror);
+el('circle',{cx:470,cy:600,r:46,fill:'#0E0C13',stroke:'#3A3550','stroke-width':3},car);el('circle',{cx:1150,cy:600,r:46,fill:'#0E0C13',stroke:'#3A3550','stroke-width':3},car);
+el('circle',{cx:470,cy:600,r:20,fill:'#1C1924'},car);el('circle',{cx:1150,cy:600,r:20,fill:'#1C1924'},car);
+const gearTxt=el('text',{x:600,y:500,fill:'#A8A3B8','font-size':13,'font-weight':800},cabin);gearTxt.textContent='P';
+/* lever readout chips on the car */
+const chips=el('g',{},sv);
+
+/* ---------- timeline ---------- */
+const tl=$('tlsvg'),TW=1524,LX=120,LW=TW-LX-10;
+const TRACKS=[['단계',null],['앰비언트','amb'],['공조','fan'],['등받이','backrest'],['창문','window'],['잠금','lock'],['마칠 준비 p','p']];
+function drawTimeline(){tl.innerHTML='';const x=t=>LX+t/S.duration*LW,rowH=24;
+ TRACKS.forEach(([n],i)=>{const y=8+i*rowH;const t=document.createElementNS(NS,'text');t.setAttribute('x',0);t.setAttribute('y',y+15);t.setAttribute('fill','#6F6A80');t.setAttribute('font-size','11.5');t.textContent=n;tl.appendChild(t);
+  const bg=document.createElementNS(NS,'rect');bg.setAttribute('x',LX);bg.setAttribute('y',y+3);bg.setAttribute('width',LW);bg.setAttribute('height',rowH-6);bg.setAttribute('rx',4);bg.setAttribute('fill','#17151F');tl.appendChild(bg)});
+ // stages
+ const sk=[];S.kf.forEach(k=>{if(k.stage&&(!sk.length||sk[sk.length-1].s!==k.stage))sk.push({s:k.stage,t:k.t})});
+ sk.forEach((s,i)=>{const t1=i<sk.length-1?sk[i+1].t:S.duration,r=document.createElementNS(NS,'rect');r.setAttribute('x',x(s.t)+1);r.setAttribute('y',11);r.setAttribute('width',Math.max(2,x(t1)-x(s.t)-2));r.setAttribute('height',18);r.setAttribute('rx',4);
+  const idx=STAGES.indexOf(s.s);r.setAttribute('fill',s.s==='돌아옴'?'#F2B25C':s.s==='출발 준비'?'#4A4458':['#3A3260','#5B4CA8','#7461D6','#8F73FF'][Math.max(0,idx)]||'#8F73FF');r.setAttribute('opacity',.9);r.style.cursor='pointer';r.onclick=()=>{T=s.t};tl.appendChild(r);
+  if(x(t1)-x(s.t)>44){const tx=document.createElementNS(NS,'text');tx.setAttribute('x',x(s.t)+8);tx.setAttribute('y',24);tx.setAttribute('fill','#0B0A0F');tx.setAttribute('font-size','11');tx.setAttribute('font-weight','700');tx.textContent=s.s;tl.appendChild(tx)}});
+ // lever tracks sampled
+ const N=240;const rows={amb:[],fan:[],backrest:[],window:[],lock:[],p:[]};
+ for(let i=0;i<=N;i++){const t=i/N*S.duration,l=leverAt(t);rows.amb.push([t,(l.amb?l.amb.pct:0)/40,l.amb?l.amb.hex:'#8F73FF']);rows.fan.push([t,(l.fan||0)/6]);rows.backrest.push([t,l.backrest||0]);rows.window.push([t,(l.window||0)/30]);rows.lock.push([t,l.lock||0]);rows.p.push([t,posterior(t)])}
+ TRACKS.slice(1).forEach(([n,k],i)=>{const y=8+(i+1)*rowH,h=rowH-8;let d='';rows[k].forEach(([t,v],j)=>{d+=(j?'L':'M')+x(t).toFixed(1)+' '+(y+4+h-Math.min(1,v)*h).toFixed(1)});
+  const p=document.createElementNS(NS,'path');p.setAttribute('d',d);p.setAttribute('fill','none');p.setAttribute('stroke',k==='p'?'#F2B25C':'#8F73FF');p.setAttribute('stroke-width','2');tl.appendChild(p);
+  if(k==='p')EM.thresholds.forEach(th=>{const l=document.createElementNS(NS,'line');l.setAttribute('x1',LX);l.setAttribute('x2',LX+LW);const yy=y+4+h-th*h;l.setAttribute('y1',yy);l.setAttribute('y2',yy);l.setAttribute('stroke','#3A3550');l.setAttribute('stroke-dasharray','2 4');tl.appendChild(l)})});
+ // signals marks
+ [...S.signals,...userSig].forEach(s=>{const c=document.createElementNS(NS,'circle');c.setAttribute('cx',x(s.t));c.setAttribute('cy',8+6*rowH+12);c.setAttribute('r',4);c.setAttribute('fill',s.type==='lean'?'#7FD99A':'#ECEAF2');tl.appendChild(c)});
+ // minute ticks
+ for(let m=0;m<=S.duration/60;m++){if(S.duration>600&&m%2)continue;const tx=document.createElementNS(NS,'text');tx.setAttribute('x',x(m*60));tx.setAttribute('y',178);tx.setAttribute('fill','#4A4458');tx.setAttribute('font-size','10');tx.setAttribute('text-anchor','middle');tx.textContent=m+'분';tl.appendChild(tx)}
+ const ph=document.createElementNS(NS,'line');ph.id='ph';ph.setAttribute('y1',4);ph.setAttribute('y2',168);ph.setAttribute('stroke','#ECEAF2');ph.setAttribute('stroke-width','1.5');tl.appendChild(ph);
+ tl.onclick=e=>{const r=tl.getBoundingClientRect(),sc=r.width/TW,px=(e.clientX-r.left)/sc;if(px>LX)T=Math.max(0,Math.min(S.duration,(px-LX)/LW*S.duration))};
+}
+
+/* ---------- bayes chart ---------- */
+const pc=$('pchart');
+function drawP(){pc.innerHTML='';const W=328,H=120,x=t=>t/S.duration*W,y=p=>H-6-p*(H-14);
+ EM.thresholds.forEach((th,i)=>{const l=document.createElementNS(NS,'line');l.setAttribute('x1',0);l.setAttribute('x2',W);l.setAttribute('y1',y(th));l.setAttribute('y2',y(th));l.setAttribute('stroke','#2B2735');l.setAttribute('stroke-dasharray','2 4');pc.appendChild(l);
+  const tx=document.createElementNS(NS,'text');tx.setAttribute('x',W-2);tx.setAttribute('y',y(th)-3);tx.setAttribute('text-anchor','end');tx.setAttribute('fill','#4A4458');tx.setAttribute('font-size','9.5');tx.textContent=['빛 +2%','소리 페이드','마침 문장'][i]+' '+th;pc.appendChild(tx)});
+ let dP='',dPr='';for(let i=0;i<=120;i++){const t=i/120*Math.min(T,S.duration);dP+=(i?'L':'M')+x(t)+' '+y(posterior(t));dPr+=(i?'L':'M')+x(t)+' '+y(prior(t))}
+ const a=document.createElementNS(NS,'path');a.setAttribute('d',dPr);a.setAttribute('stroke','#4A4458');a.setAttribute('fill','none');a.setAttribute('stroke-width','1.2');a.setAttribute('stroke-dasharray','3 3');pc.appendChild(a);
+ const b=document.createElementNS(NS,'path');b.setAttribute('d',dP);b.setAttribute('stroke','#F2B25C');b.setAttribute('fill','none');b.setAttribute('stroke-width','2');pc.appendChild(b);
+ const c=document.createElementNS(NS,'circle');c.setAttribute('cx',x(Math.min(T,S.duration)));c.setAttribute('cy',y(posterior(T)));c.setAttribute('r',4);c.setAttribute('fill','#F2B25C');pc.appendChild(c)}
+
+/* ---------- render ---------- */
+let lastStage='',lastScreen=null;
+function render(dt){const l=leverAt(T),f=frameAt(T),stage=stageAt(T),p=posterior(T);
+ // ambient
+ const amb=l.amb||{pct:20,hex:'#8F73FF'};let pct=amb.pct;const fr=S.kf.filter(k=>k.t<=T&&k.breath).pop();
+ if(fr&&stage==='숨'){pct=pct+10*Math.sin((T-fr.t)/5*Math.PI*2/1.6)}
+ if(p>EM.thresholds[0]&&stage==='머묾')pct+= (p-EM.thresholds[0])*20;
+ const o=Math.max(0,Math.min(1,pct/40));
+ ['ambS0'].forEach(id=>$(id).setAttribute('stop-color',amb.hex));$('ambS0').setAttribute('stop-opacity',(.15+.6*o).toFixed(3));
+ ambStrip.setAttribute('fill',amb.hex);ambStripBlur.setAttribute('fill',amb.hex);ambStripBlur.setAttribute('opacity',(.3+.7*o).toFixed(2));ambInside.setAttribute('fill',amb.hex);ambInside.setAttribute('opacity',(.03+.14*o).toFixed(3));
+ dashGlow.setAttribute('opacity',f.screen&&f.screen.dim?.12:.55);
+ // backrest: 0 reclined(-26deg) 1 upright(-4deg)
+ const br=l.backrest??.3,ang=-26+22*br;back.setAttribute('transform',`rotate(${ang} 764 528)`);
+ const lean=ang*.55;person.setAttribute('transform',`rotate(${lean} 735 520)`);
+ // breathing head bob
+ if(stage==='숨'||stage==='머묾'){head.setAttribute('cy',418+Math.sin(T/4.5*Math.PI)*1.2)}
+ heat.setAttribute('opacity',(l.seatHeat||0)*.35);
+ // window: % open (0 closed)
+ const w=l.window??10;winOpen.setAttribute('height',(118*w/100).toFixed(1));
+ // lock
+ const lk=l.lock?1:0;shack.setAttribute('d',lk?'M-6 -2 L-6 -8 Q0 -15 6 -8 L6 -2':'M-6 -2 L-6 -8 Q0 -15 6 -8 L6 -6');shack.setAttribute('stroke',lk?'#8F73FF':'#6F6A80');
+ mirror.setAttribute('transform',`translate(505,440) rotate(${l.mirrorFolded?28:0})`);
+ // vent particles by fan
+ const fan=l.fan||0;parts.forEach(q=>{q.life+=dt*(.25+fan*.18);if(q.life>1){q.life=0;q.x=588;q.y=452+Math.random()*8}const a=q.life;q.c.setAttribute('cx',(588+a*(60+fan*22)).toFixed(1));q.c.setAttribute('cy',(q.y-a*18+Math.sin(a*6+q.y)*3).toFixed(1));q.c.setAttribute('opacity',fan?((1-a)*.12*fan).toFixed(3):0)});
+ // gear
+ const alert=S.kf.find(k=>k.alert&&k.t<=T);gearTxt.textContent=alert&&T-alert.t<4?'D':'P';gearTxt.setAttribute('fill',alert&&T-alert.t<4?'#F2B25C':'#A8A3B8');
+ // chips
+ chips.innerHTML='';const cl=[[`${(l.hvacC??22).toFixed(1)}℃ · 풍량 ${fan}${l.recirc?' · 내기':' · 외기'}`,560,330],[`등받이 ${br>.6?'세움':'편안히'}`,760,340],[`창문 ${Math.round(w)}%`,930,330],[l.lock?'잠금':'열림',880,580]];
+ cl.forEach(([t,x,y])=>{const g=el('g',{},chips);const tx=el('text',{x,y,fill:'#A8A3B8','font-size':12,'text-anchor':'middle'},g);tx.textContent=t});
+ // screen
+ if(f!==lastScreen){lastScreen=f;const s=f.screen||{};const body=$('scBody');body.style.opacity=0;setTimeout(()=>{$('scT').textContent=s.title||'';$('scB').textContent=s.body||'';$('scBtns').innerHTML=(s.buttons||[]).map((b,i)=>`<span class="${i===1&&s.buttons.length>2||i===0&&s.buttons.length===2?'pri':''}">${b}</span>`).join('');body.style.opacity=s.dim?0:1},300);
+  const sub=$('sub');const tts=f.sound&&f.sound.tts;sub.style.opacity=0;setTimeout(()=>{sub.innerHTML=tts?`“${tts}”<small>차 안에서 만든 음성 (TTS · ON_DEVICE)</small>`:'';sub.style.opacity=1},250)}
+ const nt=noteAt(T);$('note').textContent=nt?nt.note:'';
+ $('scGlow').style.background=`radial-gradient(120% 80% at 50% 120%, ${amb.hex}${Math.round(20+40*o).toString(16).padStart(2,'0')}, transparent 60%)`;
+ // context
+ const [hh,mm]=S.clock.split(':').map(Number);const tot=hh*60+mm+T/60;const clk=`${String(Math.floor(tot/60)%24).padStart(2,'0')}:${String(Math.floor(tot%60)).padStart(2,'0')}`;
+ $('cxClock').textContent=clk;$('scClock').textContent=clk;$('cxPlace').textContent=S.place;$('cxDrive').textContent=S.drive+'분';$('cxIntent').textContent=S.intent;$('cxStage').textContent=stage;
+ // bayes
+ $('pval').textContent=p.toFixed(2);$('pval').style.color=p>EM.thresholds[2]?'#F2B25C':p>EM.thresholds[0]?'#E8C98F':'#ECEAF2';
+ $('pcue').textContent=p>EM.thresholds[2]?'마침 문장 · 빛 호박색으로':p>EM.thresholds[1]?'배경음 천천히 줄이는 중':p>EM.thresholds[0]?'빛을 분당 2%씩 올리는 중':'아직 머무는 중 · 아무것도 하지 않음';
+ drawP();const ph=$('ph');if(ph){const x=LX+Math.min(T,S.duration)/S.duration*LW;ph.setAttribute('x1',x);ph.setAttribute('x2',x)}
+}
+
+/* ---------- controls ---------- */
+function buildCtrl(){const c=$('ctrl');c.innerHTML='';
+ DATA.scenarios.forEach(s=>{const b=document.createElement('button');b.textContent=s.id+' · '+s.name;b.className=s===S?'on':'';b.onclick=()=>{S=s;T=0;userSig=[];lastScreen=null;buildCtrl();drawTimeline()};c.appendChild(b)});
+ const pp=document.createElement('button');pp.textContent=playing?'일시정지':'재생';pp.onclick=()=>{playing=!playing;buildCtrl()};c.appendChild(pp);
+ [5,20,60].forEach(v=>{const b=document.createElement('button');b.textContent=v+'×';b.className=speed===v?'on':'';b.onclick=()=>{speed=v;buildCtrl()};c.appendChild(b)});
+ const sg=$('sig');sg.querySelectorAll('button').forEach(b=>b.remove());Object.entries(EM.signals).forEach(([k,v])=>{const b=document.createElement('button');b.textContent=v.label+(v.lr<1?' ↓':' ↑');b.onclick=()=>{userSig.push({t:T,type:k});drawTimeline()};sg.appendChild(b)})}
+document.addEventListener('keydown',e=>{if(e.code==='Space'){playing=!playing;buildCtrl();e.preventDefault()}
+ const sk=[];S.kf.forEach(k=>{if(k.stage&&(!sk.length||sk[sk.length-1].s!==k.stage))sk.push({s:k.stage,t:k.t})});
+ if(e.key==='ArrowRight'){const n=sk.find(s=>s.t>T+.5);if(n)T=n.t}if(e.key==='ArrowLeft'){const p=sk.filter(s=>s.t<T-1).pop();T=p?p.t:0}});
+function fit(){const s=Math.min(innerWidth/1600,innerHeight/900);$('stage').style.transform=`scale(${s})`}addEventListener('resize',fit);fit();
+const qs=new URLSearchParams(location.search);if(qs.get('s')){S=DATA.scenarios.find(x=>x.id===qs.get('s'))||S}if(qs.get('t'))T=+qs.get('t');if(qs.get('paused'))playing=false;
+buildCtrl();drawTimeline();
+function loop(now){const dt=Math.min(.05,(now-last)/1000);last=now;if(playing){T+=dt*speed;if(T>S.duration){T=S.duration;playing=false;buildCtrl()}}render(dt);requestAnimationFrame(loop)}requestAnimationFrame(loop);
+</script>
+</body></html>
