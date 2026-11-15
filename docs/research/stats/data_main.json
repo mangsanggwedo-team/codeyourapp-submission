@@ -1,0 +1,588 @@
+{
+ "embrain": {
+  "label": "혼자 있고 싶을 때 차에 머문다",
+  "points": [
+   [
+    2018,
+    16.9
+   ],
+   [
+    2024,
+    26.8
+   ]
+  ],
+  "unit": "%",
+  "source": "엠브레인 트렌드모니터",
+  "year": "2024",
+  "sample": "19~59세 1,000명",
+  "url": "http://www.newsian.co.kr/news/articleView.html?idxno=72262",
+  "level": "원문확인"
+ },
+ "gallup_norel": {
+  "label": "한국 성인 종교 없음",
+  "value": 60,
+  "unit": "%",
+  "source": "한국갤럽 한국인의 종교",
+  "year": "2025",
+  "sample": "",
+  "url": "",
+  "level": "원문확인"
+ },
+ "gallup_age": {
+  "label": "연령별 종교 없음",
+  "rows": [
+   [
+    "20대",
+    76
+   ],
+   [
+    "30대",
+    71
+   ],
+   [
+    "40대",
+    63
+   ],
+   [
+    "50대",
+    55
+   ],
+   [
+    "60대+",
+    48
+   ]
+  ],
+  "unit": "%",
+  "source": "한국갤럽 한국인의 종교 (언론 보도 경유, 종교 있음 비율에서 계산)",
+  "year": "2025",
+  "url": "https://www.mt.co.kr/society/2026/05/04/2026050408105890295",
+  "level": "후보"
+ },
+ "drivers": {
+  "label": "기준 인구",
+  "value": 2650,
+  "unit": "만",
+  "source": "국토교통부 자동차 등록 2025년 말 26,515천 대(원문 확인)를 운전자 수의 대용으로 사용(가정)",
+  "year": "2025",
+  "url": "https://gits.gg.go.kr/web/newboard/3386.do?mode=view&schBcode=&schCon=&schStr=&schType=list&pageIndex=1&pageUnit=8&idx=198617804",
+  "level": "가정"
+ },
+ "pleos_share": {
+  "label": "Pleos 탑재 차 비중",
+  "value": 1,
+  "unit": "%",
+  "source": "가정: 2025년 그랜저 71,775 + 아반떼 79,335 = 연 15.1만 대(원문 확인) → 등록 차량의 연 약 0.6%",
+  "year": "2025",
+  "url": "https://www.hyundaimotorgroup.com/ko/news/hyundai-motor-company-sales-4138180-units-2025",
+  "level": "가정"
+ },
+ "partial_share": {
+  "label": "일부 레버만 되는 차 비중",
+  "value": 35,
+  "unit": "%",
+  "source": "가정: 커스텀 모드로 조명·공조 일부만 연동되는 차",
+  "year": "",
+  "url": "",
+  "level": "가정"
+ },
+ "halfords_todo": {
+  "label": "차에 머물 때 하는 일",
+  "rows": [
+   [
+    "조용히 앉아 있기",
+    39
+   ],
+   [
+    "SNS 보기",
+    28
+   ],
+   [
+    "간식 먹기",
+    26
+   ],
+   [
+    "마음 준비",
+    26
+   ]
+  ],
+  "unit": "%",
+  "source": "Halfords·OnePoll (보도자료 원문 404, 보도 경유)",
+  "year": "2025",
+  "sample": "영국 운전자 2,000명(보도 기준)",
+  "url": "https://www.halfordscompany.com/news-and-media/press-releases/halfords-news/brits-spend-half-a-day-a-year-in-their-cars-searching-for-peace-and-quiet/",
+  "level": "후보"
+ },
+ "halfords_stay": {
+  "label": "영국 운전자 평균 머무는 시간",
+  "value": 13,
+  "unit": "분",
+  "source": "Halfords·OnePoll (보도 경유, 원문 404)",
+  "year": "2025",
+  "sample": "영국 운전자 2,000명",
+  "url": "https://www.scotsman.com/read-this/half-of-drivers-admit-theyve-hidden-in-their-car-for-peace-and-quiet-5388061",
+  "level": "후보"
+ },
+ "parking_syndrome": {
+  "label": "주차장 증후군 (온라인 커뮤니티)",
+  "range": [
+   10,
+   30
+  ],
+  "unit": "분",
+  "source": "커뮤니티 글 모음(오마이뉴스 등), 공식 통계 아님",
+  "year": "2025",
+  "url": "",
+  "level": "후보"
+ },
+ "solitude15": {
+  "label": "15분 혼자 있기 실험",
+  "value": 15,
+  "unit": "분",
+  "source": "Nguyen, Ryan, Deci (2018) PSPB",
+  "year": "2018",
+  "url": "https://selfdeterminationtheory.org/wp-content/uploads/2018/05/2018_NguyenRyanDeci_PSPB.pdf",
+  "level": "원문확인",
+  "sample": "114명"
+ },
+ "wilson": {
+  "label": "혼자 생각만 하기보다 전기충격을 고른 비율",
+  "men": 67,
+  "women": 25,
+  "unit": "%",
+  "source": "Wilson et al. (2014) Science",
+  "year": "2014",
+  "url": "https://dtg.sites.fas.harvard.edu/WILSON%20ET%20AL%202014.pdf",
+  "level": "원문확인",
+  "sample": "남성 18명 중 12명, 여성 24명 중 6명"
+ },
+ "hallow": {
+  "label": "Hallow 2025 순매출 추정 (미국 가톨릭 기도 앱)",
+  "value": 40,
+  "display": "$4천만<small> 추정</small>",
+  "unit": "",
+  "source": "Appfigures 추정치 (회사 공식 아님)",
+  "year": "2025",
+  "url": "https://appfigures.com/resources/insights/hallow-lent-surge-prayer-app-revenue",
+  "level": "후보"
+ },
+ "retention": {
+  "label": "앱 30일 유지율 중앙값",
+  "rows": [
+   [
+    "앱 전체",
+    3.3
+   ],
+   [
+    "명상·마음챙김 앱",
+    4.7
+   ]
+  ],
+  "unit": "%",
+  "source": "Baumel et al. (2019) JMIR",
+  "year": "2019",
+  "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:10.2196/14567&resultType=core&format=json",
+  "level": "원문확인"
+ },
+ "rev_seg": {
+  "label": "현대차 2025 매출 부문",
+  "rows": [
+   [
+    "차량",
+    145.6
+   ],
+   [
+    "금융",
+    30.2
+   ],
+   [
+    "기타",
+    10.4
+   ]
+  ],
+  "unit": "조 원",
+  "source": "현대자동차 2025 연결감사보고서 주석 37",
+  "year": "2025",
+  "url": "https://www.hyundai.com/content/dam/hyundai/ww/en/images/company/investor-relations/financial-Information/report-en/2025/2025-q4-consolidated-audit-report-en.pdf",
+  "level": "원문확인"
+ },
+ "region": {
+  "label": "지역별 판매 대수 비중(소매) vs 매출 비중(법인 소재지 기준)",
+  "rows": [
+   [
+    "북미",
+    29.0,
+    44.8
+   ],
+   [
+    "한국",
+    17.4,
+    29.7
+   ],
+   [
+    "유럽",
+    14.7,
+    13.2
+   ],
+   [
+    "아시아(인도·아태·중국)",
+    21.5,
+    9.3
+   ]
+  ],
+  "unit": "%",
+  "source": "판매: 현대차 2025 글로벌 소매 판매 발표(원문 확인) / 매출: 2025 연결감사보고서 주석 37(6) 북미 83.4·한국 55.3·유럽 24.5·아시아 17.3조 원을 연결 매출 186.25조 원으로 나눈 값. 아시아 판매는 인도+아태+중국 합산(지역 정의가 달라 근사)",
+  "year": "2025",
+  "url": "https://www.hyundai.com/worldwide/en/newsroom/detail/hyundai-motor-reports-2025-global-retail-sales-results-0000001111",
+  "level": "원문확인"
+ },
+ "countries": {
+  "label": "10개국 지표",
+  "source": "GNI: World Bank API(Atlas, 2025) · 판매: 현대차 발표, GAIKINDO, 미확인은 null · 기도 일상성·점수: Gemini DR 모델 추정",
+  "level": "혼합",
+  "rows": [
+   {
+    "c": "미국",
+    "iso": "USA",
+    "gni": 88810,
+    "sales": 984017,
+    "salesLv": "원문확인",
+    "P": 3.2,
+    "S": 5.0,
+    "I": 4.5,
+    "R": 0.85,
+    "pleos": "발표"
+   },
+   {
+    "c": "한국",
+    "iso": "KOR",
+    "gni": 37880,
+    "sales": 712954,
+    "salesLv": "원문확인",
+    "P": 1.2,
+    "S": 4.5,
+    "I": 4.2,
+    "R": 0.8,
+    "pleos": "출시"
+   },
+   {
+    "c": "인도",
+    "iso": "IND",
+    "gni": 2760,
+    "sales": 574536,
+    "salesLv": "원문확인",
+    "P": 3.6,
+    "S": 3.8,
+    "I": 2.4,
+    "R": 0.7,
+    "pleos": "미정"
+   },
+   {
+    "c": "독일",
+    "iso": "DEU",
+    "gni": 60200,
+    "sales": 94000,
+    "salesLv": "후보",
+    "P": 1.1,
+    "S": 2.8,
+    "I": 3.8,
+    "R": 0.75,
+    "pleos": "발표"
+   },
+   {
+    "c": "영국",
+    "iso": "GBR",
+    "gni": 54550,
+    "sales": 93000,
+    "salesLv": "후보",
+    "P": 1.0,
+    "S": 2.5,
+    "I": 3.7,
+    "R": 0.78,
+    "pleos": "발표"
+   },
+   {
+    "c": "사우디",
+    "iso": "SAU",
+    "gni": 36070,
+    "sales": null,
+    "salesLv": "못찾음",
+    "P": 4.5,
+    "S": 3.2,
+    "I": 3.6,
+    "R": 0.55,
+    "pleos": "미정"
+   },
+   {
+    "c": "UAE",
+    "iso": "ARE",
+    "gni": 51550,
+    "sales": null,
+    "salesLv": "못찾음",
+    "P": 3.8,
+    "S": 1.2,
+    "I": 4.4,
+    "R": 0.62,
+    "pleos": "미정"
+   },
+   {
+    "c": "인도네시아",
+    "iso": "IDN",
+    "gni": 5120,
+    "sales": 19007,
+    "salesLv": "원문확인",
+    "P": 5.0,
+    "S": 1.5,
+    "I": 2.0,
+    "R": 0.7,
+    "pleos": "미정"
+   },
+   {
+    "c": "튀르키예",
+    "iso": "TUR",
+    "gni": 16300,
+    "sales": 67000,
+    "salesLv": "후보",
+    "P": 2.5,
+    "S": 2.0,
+    "I": 2.8,
+    "R": 0.72,
+    "pleos": "미정"
+   },
+   {
+    "c": "브라질",
+    "iso": "BRA",
+    "gni": 10550,
+    "sales": null,
+    "salesLv": "못찾음",
+    "P": 4.0,
+    "S": 1.8,
+    "I": 1.9,
+    "R": 0.75,
+    "pleos": "미정"
+   }
+  ]
+ },
+ "pleos_tl": {
+  "label": "Pleos Connect 출시 순서",
+  "rows": [
+   [
+    "2026-05",
+    "한국",
+    "그랜저 첫 탑재",
+    "원문확인"
+   ],
+   [
+    "2026-H2",
+    "한국",
+    "아반떼 (예정)",
+    "원문확인"
+   ],
+   [
+    "2026",
+    "유럽",
+    "아이오닉 3 첫 탑재",
+    "원문확인"
+   ],
+   [
+    "2027 초",
+    "미국",
+    "2027 투싼 첫 탑재",
+    "원문확인"
+   ],
+   [
+    "2030",
+    "전 세계",
+    "현대·기아·제네시스 약 2천만 대 목표",
+    "원문확인"
+   ]
+  ],
+  "source": "Hyundai Europe 보도자료(2026-04-30), Brand Journal(2026-09-23), Hyundai Motor America 보도자료(2026-10-01)",
+  "year": "2026",
+  "url": "https://www.hyundai.news/eu/articles/press-releases/pleos-connect-infotainment-system.html",
+  "level": "원문확인"
+ },
+ "clock": {
+  "label": "기도 시각과 출퇴근",
+  "commute": [
+   [
+    7,
+    9.5,
+    "출근"
+   ],
+   [
+    17.5,
+    20,
+    "퇴근"
+   ]
+  ],
+  "prayers": [
+   [
+    6,
+    "삼종기도",
+    "천"
+   ],
+   [
+    12,
+    "삼종기도",
+    "천"
+   ],
+   [
+    18,
+    "삼종기도",
+    "천"
+   ],
+   [
+    4.0,
+    "새벽예불",
+    "불"
+   ],
+   [
+    18.5,
+    "저녁예불",
+    "불"
+   ],
+   [
+    5.1,
+    "파즈르",
+    "이"
+   ],
+   [
+    12.5,
+    "두흐르",
+    "이"
+   ],
+   [
+    15.3,
+    "아스르",
+    "이"
+   ],
+   [
+    17.4,
+    "마그립",
+    "이"
+   ],
+   [
+    18.8,
+    "이샤",
+    "이"
+   ]
+  ],
+  "source": "삼종기도 6·12·18시: 한국가톨릭대사전(원문 확인) · 사찰 예불 시각: 후보 · 이슬람: 서울 11월 MWL 예시 · 출퇴근대: 가정(평균 통근 30.0분, 승용차 통근 50.8%, 2020 센서스 보도 경유)",
+  "year": "2026",
+  "url": "https://encyclopedia.catholic.or.kr/entry/3058",
+  "level": "후보"
+ },
+ "levers": {
+  "label": "레버 × 단계",
+  "stages": [
+   "준비",
+   "문턱",
+   "숨",
+   "머묾",
+   "돌아옴",
+   "출발 준비"
+  ],
+  "rows": [
+   [
+    "기어 P 확인",
+    [
+     1,
+     1,
+     1,
+     1,
+     1,
+     1
+    ],
+    "ok"
+   ],
+   [
+    "도어 잠금",
+    [
+     0,
+     1,
+     1,
+     1,
+     0,
+     0
+    ],
+    "ok-p"
+   ],
+   [
+    "창문 닫힘",
+    [
+     0,
+     1,
+     0,
+     0,
+     0,
+     0
+    ],
+    "ok"
+   ],
+   [
+    "앰비언트 조명",
+    [
+     0,
+     1,
+     1,
+     1,
+     1,
+     0
+    ],
+    "ok"
+   ],
+   [
+    "공조 온도·풍량",
+    [
+     0,
+     0,
+     1,
+     1,
+     1,
+     0
+    ],
+    "ok"
+   ],
+   [
+    "좌석 등받이 세움",
+    [
+     0,
+     1,
+     0,
+     0,
+     1,
+     0
+    ],
+    "ok-p"
+   ],
+   [
+    "운전석 열선",
+    [
+     0,
+     0,
+     0,
+     1,
+     0,
+     0
+    ],
+    "ok"
+   ],
+   [
+    "설정 복원",
+    [
+     0,
+     0,
+     0,
+     0,
+     1,
+     1
+    ],
+    "plan"
+   ]
+  ],
+  "source": "Vehicle SDK 2.3.2 에뮬레이터 실측 (2026-11-15 새벽)",
+  "year": "2026",
+  "url": "",
+  "level": "원문확인"
+ }
+}

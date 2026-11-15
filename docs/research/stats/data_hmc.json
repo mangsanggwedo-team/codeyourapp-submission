@@ -1,0 +1,1061 @@
+{
+ "datasets": [
+  {
+   "id": "annual_pl",
+   "title": "현대차 매출은 늘었는데 영업이익은 2023년 정점 후 내려갔다",
+   "kind": "timeseries",
+   "unit": "십억원, %",
+   "columns": [
+    "연도",
+    "매출",
+    "영업이익",
+    "영업이익률(%)"
+   ],
+   "rows": [
+    [
+     2019,
+     105746.4,
+     3605.5,
+     3.4
+    ],
+    [
+     2020,
+     103997.6,
+     2781.3,
+     2.7
+    ],
+    [
+     2021,
+     117611,
+     6679,
+     5.7
+    ],
+    [
+     2022,
+     142528,
+     9820,
+     6.9
+    ],
+    [
+     2023,
+     162663.6,
+     15126.9,
+     9.3
+    ],
+    [
+     2024,
+     175231.2,
+     14239.6,
+     8.1
+    ],
+    [
+     2025,
+     186254.5,
+     11467.9,
+     6.2
+    ]
+   ],
+   "source": "현대차 IR 실적발표(2022 4Q 연간 PDF), 2020 4Q·2023 Q4·2025 연간 보도자료, 2025 4Q 경영실적 발표",
+   "url": "https://www.hyundai.com/worldwide/en/newsroom/detail/hyundai-motor-announces-2020-4th-quarter-business-results-0000000559 ; https://www.hyundai.com/worldwide/en/newsroom/detail/hyundai-motor-announces-2023-q4-business-results-0000000405 ; https://www.hyundai.com/worldwide/en/newsroom/detail/hyundai-motor-announces-2025-annual-and-q4-business-results-0000001116 ; https://www.hyundai.com/content/hyundai/ww/data/ir/calendar/2023/0000000374/files/23-02-17-hmc-2022-4q-annual-pt-final.pdf",
+   "where": "각 자료 연간 실적표. 2019,2020 마진은 매출·영업이익으로 계산(회사 미공표). 2021 2022 수치는 2022 PDF 원수치(2023 보도자료의 2022 재작성치는 매출 142,151.5 영업이익 9,824.9)",
+   "level": "원문확인"
+  },
+  {
+   "id": "quarterly_pl",
+   "title": "2025년 분기별 영업이익률이 8.2%에서 3.6%로 떨어졌다",
+   "kind": "timeseries",
+   "unit": "십억원, %",
+   "columns": [
+    "분기",
+    "매출",
+    "영업이익",
+    "영업이익률(%)"
+   ],
+   "rows": [
+    [
+     "2024Q1",
+     40659,
+     3557,
+     8.7
+    ],
+    [
+     "2024Q2",
+     45021,
+     4279,
+     9.5
+    ],
+    [
+     "2024Q3",
+     42928,
+     3581,
+     8.3
+    ],
+    [
+     "2024Q4",
+     46623.7,
+     2822.2,
+     6.1
+    ],
+    [
+     "2025Q1",
+     44408,
+     3634,
+     8.2
+    ],
+    [
+     "2025Q2",
+     48287,
+     3602,
+     7.5
+    ],
+    [
+     "2025Q3",
+     46721,
+     2537,
+     5.4
+    ],
+    [
+     "2025Q4",
+     46838.6,
+     1695.4,
+     3.6
+    ]
+   ],
+   "source": "현대차 2025 Q1~Q4 실적 보도자료(전년 동기 비교표 포함)",
+   "url": "https://www.hyundai.com/worldwide/en/newsroom/detail/hyundai-motor-announces-2025-q1-business-results-0000000948 ; https://www.hyundai.com/worldwide/en/newsroom/detail/hyundai-motor-announces-2025-q2-business-results-0000000989 ; https://www.hyundai.com/worldwide/en/newsroom/detail/hyundai-motor-announces-2025-q3-business-results-0000001042 ; https://www.hyundai.com/worldwide/en/newsroom/detail/hyundai-motor-announces-2025-annual-and-q4-business-results-0000001116",
+   "where": "각 분기 실적표. 2024Q1~Q3 마진은 계산값, 2024Q4 6.1 2025 각 분기는 회사 공표",
+   "level": "원문확인"
+  },
+  {
+   "id": "wholesale_global",
+   "title": "글로벌 도매 판매는 2019년 442만대에서 2025년 414만대, 그러나 매출은 76% 증가",
+   "kind": "timeseries",
+   "unit": "대(도매)",
+   "columns": [
+    "연도",
+    "글로벌",
+    "국내",
+    "해외"
+   ],
+   "rows": [
+    [
+     2019,
+     4425528,
+     741842,
+     3683686
+    ],
+    [
+     2020,
+     3744737,
+     787854,
+     2956890
+    ],
+    [
+     2021,
+     3891000,
+     null,
+     null
+    ],
+    [
+     2022,
+     3942922,
+     688884,
+     3254038
+    ],
+    [
+     2023,
+     4216898,
+     762077,
+     3454821
+    ],
+    [
+     2024,
+     4141959,
+     705010,
+     3436949
+    ],
+    [
+     2025,
+     4138389,
+     712954,
+     3425435
+    ]
+   ],
+   "source": "현대차 연간 실적 보도자료, 2022 4Q IR PDF(2021은 천대 단위 3,891)",
+   "url": "https://www.hyundai.com/worldwide/en/newsroom/detail/hyundai-motor-announces-2020-4th-quarter-business-results-0000000559 ; https://www.hyundai.com/worldwide/en/newsroom/detail/hyundai-motor-announces-2023-q4-business-results-0000000405 ; https://www.hyundai.com/worldwide/en/newsroom/detail/hyundai-motor-announces-2025-annual-and-q4-business-results-0000001116",
+   "where": "연간 판매 표. 2021 국내 해외 분리는 미확보",
+   "level": "원문확인"
+  },
+  {
+   "id": "region_2025_wholesale",
+   "title": "2025년 현대차 도매 판매의 30%가 북미, 국내는 17%",
+   "kind": "composition",
+   "unit": "천대(도매), %",
+   "columns": [
+    "지역",
+    "도매(천대)",
+    "소매(천대)",
+    "비중(%)"
+   ],
+   "rows": [
+    [
+     "북미",
+     1224,
+     1193,
+     29.57
+    ],
+    [
+     "한국",
+     713,
+     713,
+     17.23
+    ],
+    [
+     "유럽",
+     601,
+     604,
+     14.52
+    ],
+    [
+     "인도",
+     572,
+     575,
+     13.82
+    ],
+    [
+     "중남미",
+     328,
+     321,
+     7.93
+    ],
+    [
+     "아중동",
+     317,
+     317,
+     7.66
+    ],
+    [
+     "아태",
+     191,
+     193,
+     4.61
+    ],
+    [
+     "중국(BHMC)",
+     128,
+     null,
+     3.09
+    ],
+    [
+     "기타",
+     65,
+     67,
+     1.57
+    ]
+   ],
+   "source": "현대차 지속가능성 보고서 FY2025 p.7 주요 시장별 판매, 4Q25 경영실적 발표 p.6",
+   "url": "https://www.hyundai.com/content/dam/hyundai/kr/ko/data/company-report/2026/10/26/hmc-sr-kor-2026.pdf",
+   "where": "Hyundai at a Glance 주요 시장별 판매(비중은 2025 도매 4,138,389대 기준). 소매는 4Q25 p.6과 일부 불일치 가능(중국 도매 보고서 128 vs 발표자료 130), 소매 중국은 비움",
+   "level": "원문확인"
+  },
+  {
+   "id": "region_2024_2025_wholesale_retail",
+   "title": "미국 도매 100만대 돌파, 인도와 유럽은 감소",
+   "kind": "table",
+   "unit": "천대",
+   "columns": [
+    "지역",
+    "2024 도매",
+    "2025 도매",
+    "2024 소매",
+    "2025 소매"
+   ],
+   "rows": [
+    [
+     "북미(미국만 도매)",
+     988,
+     1007,
+     912,
+     984
+    ],
+    [
+     "유럽",
+     609,
+     601,
+     606,
+     604
+    ],
+    [
+     "국내",
+     705,
+     713,
+     705,
+     713
+    ],
+    [
+     "인도",
+     605,
+     572,
+     593,
+     575
+    ],
+    [
+     "중국",
+     128,
+     130,
+     157,
+     128
+    ],
+    [
+     "중남미",
+     315,
+     328,
+     313,
+     321
+    ],
+    [
+     "아태",
+     211,
+     191,
+     210,
+     193
+    ],
+    [
+     "아중동",
+     313,
+     317,
+     302,
+     317
+    ],
+    [
+     "기타",
+     268,
+     279,
+     247,
+     274
+    ],
+    [
+     "글로벌",
+     4142,
+     4138,
+     4045,
+     4109
+    ]
+   ],
+   "source": "현대차 2025 4Q 경영실적 발표",
+   "url": "https://file.alphasquare.co.kr/media/pdfs/company-ir/20260129%ED%98%84%EB%8C%80%EC%9E%90%EB%8F%99%EC%B0%A8_2025%EB%85%84_4%EB%B6%84%EA%B8%B0_%EA%B2%BD%EC%98%81%EC%8B%A4%EC%A0%81%EB%B0%9C%ED%91%9C.pdf",
+   "where": "p.6 글로벌 도소매판매 현황(연간), 막대 라벨 직접 판독. 미국 행은 미국 기준(북미 2025 도매 1,224 소매 1,193)",
+   "level": "원문확인"
+  },
+  {
+   "id": "region_revenue_2025",
+   "title": "2025 지역별 매출 대 판매 대수",
+   "kind": "table",
+   "unit": "조원",
+   "columns": [
+    "지역",
+    "매출"
+   ],
+   "rows": [],
+   "source": "현대차 사업보고서 주석 영업부문 정보",
+   "url": "",
+   "where": "못찾음: 사업보고서·DART 원문 접근 실패. 팀 제공 수치(북미 83.4 한국 55.3 유럽 24.5 아시아 17.3)는 미검증",
+   "level": "못찾음"
+  },
+  {
+   "id": "mix_2025_segment",
+   "title": "2025 차급별 도매: SUV 61.6% 제네시스 3.6%",
+   "kind": "composition",
+   "unit": "천대(도매)",
+   "columns": [
+    "구분",
+    "2025",
+    "Q4 2024",
+    "Q4 2025"
+   ],
+   "rows": [
+    [
+     "SUV(제네시스 제외 포함)",
+     2547,
+     638,
+     638
+    ],
+    [
+     "  그중 제네시스 SUV",
+     149,
+     38,
+     39
+    ],
+    [
+     "승용(PV)",
+     1390,
+     374,
+     351
+    ],
+    [
+     "  그중 제네시스 PV",
+     73,
+     20,
+     19
+    ],
+    [
+     "상용",
+     201,
+     54,
+     44
+    ],
+    [
+     "총계",
+     4138,
+     1066,
+     1033
+    ]
+   ],
+   "source": "현대차 2025 4Q 경영실적 발표",
+   "url": "https://file.alphasquare.co.kr/media/pdfs/company-ir/20260129%ED%98%84%EB%8C%80%EC%9E%90%EB%8F%99%EC%B0%A8_2025%EB%85%84_4%EB%B6%84%EA%B8%B0_%EA%B2%BD%EC%98%81%EC%8B%A4%EC%A0%81%EB%B0%9C%ED%91%9C.pdf",
+   "where": "p.10 차급별 판매(SUV는 제네시스 SUV 포함, 일부 MPV 포함). SUV 비중 61.6%와 제네시스 합계 222천대 5.4%는 계산값",
+   "level": "원문확인"
+  },
+  {
+   "id": "eco_2025",
+   "title": "친환경차 96만대, HEV가 66%",
+   "kind": "composition",
+   "unit": "천대(도매)",
+   "columns": [
+    "구분",
+    "2025",
+    "Q1",
+    "Q2",
+    "Q3",
+    "Q4"
+   ],
+   "rows": [
+    [
+     "EV",
+     276,
+     64,
+     79,
+     76,
+     57
+    ],
+    [
+     "HEV",
+     635,
+     137,
+     169,
+     161,
+     168
+    ],
+    [
+     "PHEV",
+     44,
+     10,
+     13,
+     11,
+     8
+    ],
+    [
+     "FCEV",
+     7,
+     1,
+     1,
+     4,
+     2
+    ],
+    [
+     "친환경 합계",
+     962,
+     212,
+     262,
+     252,
+     235
+    ]
+   ],
+   "source": "현대차 2025 4Q 경영실적 발표",
+   "url": "https://file.alphasquare.co.kr/media/pdfs/company-ir/20260129%ED%98%84%EB%8C%80%EC%9E%90%EB%8F%99%EC%B0%A8_2025%EB%85%84_4%EB%B6%84%EA%B8%B0_%EA%B2%BD%EC%98%81%EC%8B%A4%EC%A0%81%EB%B0%9C%ED%91%9C.pdf",
+   "where": "p.10 친환경차 판매",
+   "level": "원문확인"
+  },
+  {
+   "id": "eco_trend",
+   "title": "친환경차 판매 2023년 70만대에서 2025년 96만대",
+   "kind": "timeseries",
+   "unit": "대(도매)",
+   "columns": [
+    "연도",
+    "친환경 합계",
+    "EV",
+    "HEV",
+    "HEV 비중(%)"
+   ],
+   "rows": [
+    [
+     2023,
+     695382,
+     268785,
+     373941,
+     null
+    ],
+    [
+     2024,
+     null,
+     null,
+     null,
+     12.0
+    ],
+    [
+     2025,
+     961812,
+     275669,
+     634990,
+     15.3
+    ]
+   ],
+   "source": "현대차 2023 Q4 및 2025 연간 보도자료",
+   "url": "https://www.hyundai.com/worldwide/en/newsroom/detail/hyundai-motor-announces-2023-q4-business-results-0000000405 ; https://www.hyundai.com/worldwide/en/newsroom/detail/hyundai-motor-announces-2025-annual-and-q4-business-results-0000001116",
+   "where": "합계에는 PHEV FCEV 포함(2023 세부합 불일치 주석 있음). 2021 2022 2024 합계는 미확보. 2025 친환경 비중 약 23%, 연 +27%",
+   "level": "원문확인"
+  },
+  {
+   "id": "us_sales",
+   "title": "미국 판매 2025년 도매 100만대, 소매 98만대",
+   "kind": "table",
+   "unit": "대",
+   "columns": [
+    "항목",
+    "2024",
+    "2025"
+   ],
+   "rows": [
+    [
+     "미국 도매(천대)",
+     988,
+     1007
+    ],
+    [
+     "미국 소매(천대, 현대+제네시스)",
+     912,
+     984
+    ],
+    [
+     "현대 브랜드 미국 총판매(소매+플릿)",
+     null,
+     901686
+    ],
+    [
+     "제네시스 미국",
+     null,
+     82331
+    ],
+    [
+     "미국 도매 정밀치",
+     null,
+     1006613
+    ],
+    [
+     "미국 HEV 비중 Q4(%)",
+     16.2,
+     22.6
+    ],
+    [
+     "미국 제네시스 비중 Q4(%)",
+     null,
+     8.9
+    ]
+   ],
+   "source": "현대차 2025 4Q 경영실적 발표, 2025 글로벌 소매 보도자료, Hyundai Motor America 2026-01-03 보도자료",
+   "url": "https://file.alphasquare.co.kr/media/pdfs/company-ir/20260129%ED%98%84%EB%8C%80%EC%9E%90%EB%8F%99%EC%B0%A8_2025%EB%85%84_4%EB%B6%84%EA%B8%B0_%EA%B2%BD%EC%98%81%EC%8B%A4%EC%A0%81%EB%B0%9C%ED%91%9C.pdf ; https://www.hyundai.com/worldwide/en/newsroom/detail/0000001111 ; https://www.hyundainews.com/releases/4661",
+   "where": "4Q25 p.6, p.7 / 글로벌 소매 표. 미국 2019~2023 연도별과 점유율(6%대 유지는 Q4 문구)은 미확보",
+   "level": "원문확인"
+  },
+  {
+   "id": "korea_top_models",
+   "title": "2025 국내 차종 판매 상위(일부)",
+   "kind": "table",
+   "unit": "대",
+   "columns": [
+    "순위",
+    "차종",
+    "판매"
+   ],
+   "rows": [
+    [
+     1,
+     "기아 쏘렌토",
+     100002
+    ],
+    [
+     2,
+     "현대 아반떼",
+     79335
+    ],
+    [
+     3,
+     "기아 카니발",
+     78218
+    ],
+    [
+     5,
+     "현대 그랜저",
+     71775
+    ],
+    [
+     8,
+     "현대 포터",
+     56538
+    ],
+    [
+     9,
+     "기아 셀토스",
+     55917
+    ],
+    [
+     10,
+     "현대 투싼",
+     53901
+    ]
+   ],
+   "source": "오토트리뷴 2025 국산차 판매량 TOP10(검색 요약)",
+   "url": "https://www.autotribune.co.kr/news/articleView.html?idxno=42360",
+   "where": "4 6 7위 미확인, 팰리세이드 연간 미확인(상하반기 합 약 6.1만 추정)",
+   "level": "후보"
+  },
+  {
+   "id": "segments_pl",
+   "title": "금융 부문이 자동차 이익 급감을 일부 방어: 영업이익 자동차 -34%, 금융 +21%",
+   "kind": "table",
+   "unit": "십억원",
+   "columns": [
+    "구분",
+    "2024 매출",
+    "2025 매출",
+    "2024 영업이익",
+    "2025 영업이익"
+   ],
+   "rows": [
+    [
+     "자동차",
+     136725,
+     145632,
+     11075,
+     7359
+    ],
+    [
+     "금융",
+     28447,
+     30233,
+     1795,
+     2164
+    ],
+    [
+     "기타",
+     10059,
+     10389,
+     1033,
+     833
+    ],
+    [
+     "연결조정",
+     null,
+     null,
+     337,
+     1112
+    ],
+    [
+     "합계",
+     175231,
+     186254,
+     14240,
+     11468
+    ]
+   ],
+   "source": "현대차 2025 4Q 경영실적 발표",
+   "url": "https://file.alphasquare.co.kr/media/pdfs/company-ir/20260129%ED%98%84%EB%8C%80%EC%9E%90%EB%8F%99%EC%B0%A8_2025%EB%85%84_4%EB%B6%84%EA%B8%B0_%EA%B2%BD%EC%98%81%EC%8B%A4%EC%A0%81%EB%B0%9C%ED%91%9C.pdf",
+   "where": "p.13 손익계산서 요약(연간)",
+   "level": "원문확인"
+  },
+  {
+   "id": "segments_rev_2021_2022",
+   "title": "2021~2022 부문별 매출",
+   "kind": "table",
+   "unit": "십억원",
+   "columns": [
+    "구분",
+    "2021",
+    "2022"
+   ],
+   "rows": [
+    [
+     "자동차",
+     94143,
+     113718
+    ],
+    [
+     "금융",
+     16782,
+     20038
+    ],
+    [
+     "기타",
+     6686,
+     8772
+    ]
+   ],
+   "source": "현대차 2022 4Q 연간 IR PDF",
+   "url": "https://www.hyundai.com/content/hyundai/ww/data/ir/calendar/2023/0000000374/files/23-02-17-hmc-2022-4q-annual-pt-final.pdf",
+   "where": "p.12 Revenue by Division(Annual). 2023 부문값 미확보",
+   "level": "원문확인"
+  },
+  {
+   "id": "op_bridge_2025",
+   "title": "2025 영업이익 증감 요인: 관세 -4.1조가 가장 크다",
+   "kind": "table",
+   "unit": "십억원",
+   "columns": [
+    "항목",
+    "금액"
+   ],
+   "rows": [
+    [
+     "2024 영업이익",
+     14240
+    ],
+    [
+     "환율(자동차)",
+     1749
+    ],
+    [
+     "물량",
+     -370
+    ],
+    [
+     "믹스+인센티브 합",
+     -2189
+    ],
+    [
+     "금융",
+     369
+    ],
+    [
+     "관세",
+     -4110
+    ],
+    [
+     "기타",
+     1780
+    ],
+    [
+     "2025 영업이익",
+     11468
+    ]
+   ],
+   "source": "현대차 2025 4Q 경영실적 발표",
+   "url": "https://file.alphasquare.co.kr/media/pdfs/company-ir/20260129%ED%98%84%EB%8C%80%EC%9E%90%EB%8F%99%EC%B0%A8_2025%EB%85%84_4%EB%B6%84%EA%B8%B0_%EA%B2%BD%EC%98%81%EC%8B%A4%EC%A0%81%EB%B0%9C%ED%91%9C.pdf",
+   "where": "p.15 주요 증감 사유 분석(연간). 합계 검산 일치(반올림 1)",
+   "level": "원문확인"
+  },
+  {
+   "id": "op_bridge_q4_2025",
+   "title": "2025 Q4 영업이익 증감 요인",
+   "kind": "table",
+   "unit": "십억원",
+   "columns": [
+    "항목",
+    "금액"
+   ],
+   "rows": [
+    [
+     "Q4 2024 영업이익",
+     2822
+    ],
+    [
+     "환율",
+     710
+    ],
+    [
+     "물량",
+     -402
+    ],
+    [
+     "믹스+인센티브 합",
+     -502
+    ],
+    [
+     "금융",
+     -10
+    ],
+    [
+     "관세",
+     -1461
+    ],
+    [
+     "기타",
+     538
+    ],
+    [
+     "Q4 2025 영업이익",
+     1695
+    ]
+   ],
+   "source": "현대차 2025 4Q 경영실적 발표",
+   "url": "https://file.alphasquare.co.kr/media/pdfs/company-ir/20260129%ED%98%84%EB%8C%80%EC%9E%90%EB%8F%99%EC%B0%A8_2025%EB%85%84_4%EB%B6%84%EA%B8%B0_%EA%B2%BD%EC%98%81%EC%8B%A4%EC%A0%81%EB%B0%9C%ED%91%9C.pdf",
+   "where": "p.14 주요 증감 사유 분석(분기)",
+   "level": "원문확인"
+  },
+  {
+   "id": "rev_bridge_2025",
+   "title": "2025 매출 증감 요인",
+   "kind": "table",
+   "unit": "십억원",
+   "columns": [
+    "항목",
+    "금액"
+   ],
+   "rows": [
+    [
+     "2024 매출",
+     175231
+    ],
+    [
+     "물량",
+     -1742
+    ],
+    [
+     "믹스(인센티브 합산)",
+     4975
+    ],
+    [
+     "환율",
+     5674
+    ],
+    [
+     "기타",
+     2116
+    ],
+    [
+     "2025 매출",
+     186254
+    ]
+   ],
+   "source": "현대차 2025 4Q 경영실적 발표",
+   "url": "https://file.alphasquare.co.kr/media/pdfs/company-ir/20260129%ED%98%84%EB%8C%80%EC%9E%90%EB%8F%99%EC%B0%A8_2025%EB%85%84_4%EB%B6%84%EA%B8%B0_%EA%B2%BD%EC%98%81%EC%8B%A4%EC%A0%81%EB%B0%9C%ED%91%9C.pdf",
+   "where": "p.14 매출액 증감(연간) 막대 라벨 판독, 항목 순서는 차트 배치 기준",
+   "level": "원문확인"
+  },
+  {
+   "id": "tariff_fx_quarterly",
+   "title": "분기별 관세 비용과 평균 환율(2025)",
+   "kind": "table",
+   "unit": "십억원, 원/달러",
+   "columns": [
+    "분기",
+    "관세 비용",
+    "평균환율"
+   ],
+   "rows": [
+    [
+     "Q2",
+     828,
+     1404
+    ],
+    [
+     "Q3",
+     1821,
+     1385
+    ],
+    [
+     "Q4",
+     1461,
+     1451
+    ],
+    [
+     "연간",
+     4110,
+     null
+    ]
+   ],
+   "source": "컨퍼런스콜 보도(Q2 Q3는 검색 요약), Q4와 연간은 4Q25 경영실적 발표 p.14~15",
+   "url": "https://www.newspim.com/news/view/20260129000959",
+   "where": "Q4 연간 관세는 원문확인, Q2 Q3 관세와 환율은 후보. 관세 약 60%는 비용절감으로 상쇄(보도)",
+   "level": "후보"
+  },
+  {
+   "id": "margin_other_facts",
+   "title": "2025 기타 지표",
+   "kind": "table",
+   "unit": "혼합",
+   "columns": [
+    "항목",
+    "값"
+   ],
+   "rows": [
+    [
+     "매출총이익률 2024(%)",
+     20.4
+    ],
+    [
+     "매출총이익률 2025(%)",
+     18.4
+    ],
+    [
+     "EBITDA 2024 십억원",
+     18836
+    ],
+    [
+     "EBITDA 2025 십억원",
+     16836
+    ],
+    [
+     "2026 가이던스 도매(대)",
+     4158300
+    ],
+    [
+     "2026 가이던스 매출성장률",
+     "1~2%"
+    ],
+    [
+     "2026 가이던스 영업이익률",
+     "6.3~7.3%"
+    ]
+   ],
+   "source": "현대차 2025 4Q 경영실적 발표",
+   "url": "https://file.alphasquare.co.kr/media/pdfs/company-ir/20260129%ED%98%84%EB%8C%80%EC%9E%90%EB%8F%99%EC%B0%A8_2025%EB%85%84_4%EB%B6%84%EA%B8%B0_%EA%B2%BD%EC%98%81%EC%8B%A4%EC%A0%81%EB%B0%9C%ED%91%9C.pdf",
+   "where": "p.22 및 보도자료",
+   "level": "원문확인"
+  },
+  {
+   "id": "us_hyundai_brand",
+   "title": "미국 현대 브랜드 판매 2021~2025",
+   "kind": "timeseries",
+   "unit": "대",
+   "columns": [
+    "연도",
+    "현대 브랜드 미국 판매"
+   ],
+   "rows": [
+    [
+     2021,
+     738081
+    ],
+    [
+     2022,
+     724265
+    ],
+    [
+     2023,
+     801195
+    ],
+    [
+     2024,
+     836802
+    ],
+    [
+     2025,
+     901686
+    ]
+   ],
+   "source": "Hyundai Motor America 연간 판매 보도자료(검색 요약, 2025는 원문 보도자료 요약)",
+   "url": "https://www.hyundainews.com/releases/4037 ; https://www.hyundainews.com/releases/4661",
+   "where": "2019 2020 미확보, 제네시스 별도. GoodCarBadCar 등 외부 집계는 값이 다름",
+   "level": "후보"
+  },
+  {
+   "id": "kia_2025",
+   "title": "기아 2025 실적",
+   "kind": "table",
+   "unit": "혼합",
+   "columns": [
+    "항목",
+    "값"
+   ],
+   "rows": [
+    [
+     "도매(대)",
+     3135873
+    ],
+    [
+     "매출(억원)",
+     1141409
+    ],
+    [
+     "영업이익(억원)",
+     90781
+    ],
+    [
+     "영업이익률(%)",
+     8.0
+    ],
+    [
+     "영업이익 증감(%)",
+     -28.3
+    ],
+    [
+     "친환경차(천대)",
+     749
+    ],
+    [
+     "2026 가이던스 영업이익(조원)",
+     10.2
+    ]
+   ],
+   "source": "기아 2025 4Q 경영실적(보도 요약)",
+   "url": "https://www.newswire.co.kr/newsRead.php?no=1027715&sourceType=rss",
+   "where": "언론 요약만 확인",
+   "level": "후보"
+  },
+  {
+   "id": "group_rank_2025",
+   "title": "2025 글로벌 완성차 그룹 판매 순위",
+   "kind": "table",
+   "unit": "대",
+   "columns": [
+    "순위",
+    "그룹",
+    "판매"
+   ],
+   "rows": [
+    [
+     1,
+     "토요타",
+     11322575
+    ],
+    [
+     2,
+     "폭스바겐",
+     8983807
+    ],
+    [
+     3,
+     "현대차그룹",
+     7244408
+    ],
+    [
+     4,
+     "스텔란티스",
+     5510368
+    ],
+    [
+     5,
+     "BYD",
+     4602436
+    ]
+   ],
+   "source": "WhichCar 정리(회사 공시 기반, 출처별 편차 있음)",
+   "url": "https://www.whichcar.com.au/news/toyota-leads-global-sales-race-byd-cracks-top-five-2025",
+   "where": "현대차그룹은 출처별 7.24~7.27백만 대, MarkLines는 6.91백만",
+   "level": "후보"
+  },
+  {
+   "id": "asp",
+   "title": "대당 평균판매가(ASP)와 미국 인센티브",
+   "kind": "table",
+   "unit": "",
+   "columns": [],
+   "rows": [],
+   "source": "",
+   "url": "",
+   "where": "못찾음(이번 라운드 미조사 또는 원문 미확보). ASP는 IR이 수치 없이 개선 문구만 제시",
+   "level": "못찾음"
+  }
+ ]
+}

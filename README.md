@@ -21,13 +21,19 @@
   <a href=".github/workflows/ci.yml"><img src="https://github.com/mangsanggwedo-team/codeyourapp-submission/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
 </p>
 
-# 앱 이름: 한 줄 소개
+# 골방 (가제): 주차한 차가 잠깐 나만의 골방이 된다
 
-**비유 한 줄 (아이디어 확정 후)**
+**집에 들어가기 전, 차 안의 몇 분을 휴대폰이 아니라 기도와 고요한 머묾으로.** 차가 먼저 묻고, 문을 닫고, 방해하지 않고, 끝날 때를 알아채 조용히 돌려놓는다.
+
+> **심사위원이 3분 안에 볼 것**
+> 1. [여정 시뮬레이션](sim/journey/index.html): 브라우저로 열면 시나리오 A(귀가 직전 기도 15분)가 재생된다
+> 2. [초정밀 여정](docs/journey/여정_초정밀.md)과 [베이지안 마침 모델](docs/journey/마침_모델.md): 마치기 버튼 없이 끝나는 이유
+> 3. [근거](docs/research/): 원문 대조로 검증한 통계와 APA 참고문헌
+> 4. 코드: [`:core` EndingPolicy](core/src/main/kotlin/com/mangsang/app/core/EndingPolicy.kt) (테스트 10개 통과), [차량 제어 실측](docs/04-vehicle-integration.md#제어-실측-2026-11-15)
 
 | 앱 이름 | 한 줄 소개 | 테스트 환경 | APK | 실행 |
 |---|---|---|---|---|
-| 미정 | 미정 | Pleos Connect 에뮬레이터 v2.1.0 (API 34) · 2560x1440 | [`apk/`](apk/) · Releases | [실행 방법](#실행-방법) |
+| 골방 (가제) | 주차한 차를 짧은 기도·고독의 공간으로 바꾸고 되돌린다 | Pleos Connect 에뮬레이터 v2.1.0 (API 34) · 2560x1440 | [`apk/`](apk/) · Releases | [실행 방법](#실행-방법) |
 
 <!-- 시연 GIF가 생기면 주석 해제
 <p align="center"><img src="docs/assets/demo.gif" alt="시연 15초" width="600"><br>

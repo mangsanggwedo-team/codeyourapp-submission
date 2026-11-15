@@ -1,0 +1,2546 @@
+{
+ "version": 1,
+ "generated": "2026-11-15",
+ "note": "웹 시뮬레이터 재생용. t는 기어 P가 된 순간 0 기준 초. levers는 매 키프레임 전체 상태(차분 아님). ambient.ms는 그 값까지 가는 전이 시간. backrest 0~1은 세움 정도(SDK는 위치 지정 불가, 이동·정지만, P에서만). mirrorFolded는 앱 제어 불가, 차량 자체 동작 표시. vol은 앱 기준 음량 대비 dB, null은 무음. session.p는 EndingPolicy 사후확률(코드와 같은 식).",
+ "assumptions": [
+  "intendedSec·운전 시간·LR·비용·σ는 [가정] 초깃값",
+  "외기온·차종은 [가정]",
+  "bell_once·wood_x3·leaves_wind는 자체 녹음 또는 CC0 예정 음원 이름"
+ ],
+ "endingModel": {
+  "prior": {
+   "family": "lognormal",
+   "baseline": "max(60, intendedSec-90) * exp(0.10*ln(driveMin/30) + (hour>=22||hour<5 ? -0.10 : 0))",
+   "nig": {
+    "m": 0.0,
+    "kappa": 2.0,
+    "alpha": 3.0,
+    "beta": 0.0648
+   },
+   "predictiveSigma": 0.18
+  },
+  "update": "p <- p + (1-p) * (F(t)-F(t_prev))/(1-F(t_prev)); 신호마다 odds <- odds * LR",
+  "likelihoodRatios": {
+   "SCREEN_TOUCH": 3.0,
+   "SEAT_BACKREST_FORWARD": 6.0,
+   "SEAT_BACKREST_BACK": 0.3,
+   "SEATBELT_FASTENED": 8.0,
+   "SEATBELT_UNFASTENED": 0.5,
+   "HEADLAMP_ON": 5.0,
+   "HVAC_MANUAL": 2.0,
+   "WINDOW_MANUAL": 2.5,
+   "BRAKE_PRESSED": 10.0,
+   "TURN_SIGNAL": 10.0
+  },
+  "costs": {
+   "lightEarly": 1.0,
+   "soundEarly": 2.3333333333333335,
+   "wordsEarly": 5.666666666666667,
+   "late": 1.0
+  },
+  "thresholds": {
+   "LIGHT_RISE": 0.5,
+   "SOUND_FADE": 0.7,
+   "CLOSING_WORDS": 0.85
+  },
+  "hysteresis": 0.1,
+  "hardCapSec": 1800,
+  "returnSec": 90,
+  "outputs": {
+   "LIGHT_RISE": "앰비언트 +2%/분",
+   "SOUND_FADE": "배경음 -1dB/5초 페이드 시작",
+   "CLOSING_WORDS": "마침 문장 TTS 1회, 3분 안 재발화 금지"
+  }
+ },
+ "scenarios": [
+  {
+   "id": "A",
+   "title": "평일 밤 귀가 직전, 지하주차장 기도",
+   "persona": "정은 씨 (가상, 30대 후반, 개신교)",
+   "context": {
+    "intendedSec": 900,
+    "driveMin": 40,
+    "hour": 21,
+    "pack": "protestant",
+    "place": "아파트 지하주차장 B2",
+    "outsideC": 6,
+    "car": "그랜저 하이브리드 [가정]"
+   },
+   "t0Clock": "21:40:00",
+   "sessionStartT": 14,
+   "keyframes": [
+    {
+     "t": -60,
+     "clock": "21:39:00",
+     "stage": "drive",
+     "levers": {
+      "hvacC": 22.0,
+      "fan": 3,
+      "recirc": false,
+      "seatHeat": 0,
+      "backrest": 0.55,
+      "ambient": {
+       "pct": 30,
+       "hex": "#FFFFFF",
+       "ms": 0
+      },
+      "window": 0,
+      "lock": true,
+      "mirrorFolded": false
+     },
+     "screen": {
+      "title": "",
+      "body": "",
+      "buttons": []
+     },
+     "sound": {
+      "tts": "",
+      "bgm": "none",
+      "vol": null
+     },
+     "signals": [
+      "gear:D",
+      "speedKph:9",
+      "seat.driver.occupied:true"
+     ]
+    },
+    {
+     "t": -20,
+     "clock": "21:39:40",
+     "stage": "park-in",
+     "levers": {
+      "hvacC": 22.0,
+      "fan": 3,
+      "recirc": false,
+      "seatHeat": 0,
+      "backrest": 0.55,
+      "ambient": {
+       "pct": 30,
+       "hex": "#FFFFFF",
+       "ms": 0
+      },
+      "window": 0,
+      "lock": true,
+      "mirrorFolded": false
+     },
+     "screen": {
+      "title": "",
+      "body": "",
+      "buttons": []
+     },
+     "sound": {
+      "tts": "",
+      "bgm": "none",
+      "vol": null
+     },
+     "signals": [
+      "gear:R",
+      "speedKph:3"
+     ]
+    },
+    {
+     "t": 0,
+     "clock": "21:40:00",
+     "stage": "arrive",
+     "levers": {
+      "hvacC": 22.0,
+      "fan": 3,
+      "recirc": false,
+      "seatHeat": 0,
+      "backrest": 0.55,
+      "ambient": {
+       "pct": 30,
+       "hex": "#FFFFFF",
+       "ms": 0
+      },
+      "window": 0,
+      "lock": true,
+      "mirrorFolded": false
+     },
+     "screen": {
+      "title": "",
+      "body": "",
+      "buttons": []
+     },
+     "sound": {
+      "tts": "",
+      "bgm": "none",
+      "vol": null
+     },
+     "signals": [
+      "gear:P",
+      "speedKph:0",
+      "door.driver.open:false"
+     ]
+    },
+    {
+     "t": 7,
+     "clock": "21:40:07",
+     "stage": "offer",
+     "levers": {
+      "hvacC": 22.0,
+      "fan": 3,
+      "recirc": false,
+      "seatHeat": 0,
+      "backrest": 0.55,
+      "ambient": {
+       "pct": 30,
+       "hex": "#FFFFFF",
+       "ms": 0
+      },
+      "window": 0,
+      "lock": true,
+      "mirrorFolded": false
+     },
+     "screen": {
+      "title": "잠시 머물다 갈까요",
+      "body": "기도 · 15분",
+      "buttons": [
+       "머물기",
+       "오늘은 그냥 갈게요"
+      ]
+     },
+     "sound": {
+      "tts": "",
+      "bgm": "none",
+      "vol": null
+     },
+     "signals": [
+      "gear:P"
+     ]
+    },
+    {
+     "t": 14,
+     "clock": "21:40:14",
+     "stage": "threshold",
+     "levers": {
+      "hvacC": 22.0,
+      "fan": 3,
+      "recirc": false,
+      "seatHeat": 0,
+      "backrest": 0.55,
+      "ambient": {
+       "pct": 20,
+       "hex": "#FFB15C",
+       "ms": 8000
+      },
+      "window": 0,
+      "lock": true,
+      "mirrorFolded": false
+     },
+     "screen": {
+      "title": "",
+      "body": "문을 닫고, 숨을 한 번 고를게요.",
+      "buttons": [
+       "마치기"
+      ]
+     },
+     "sound": {
+      "tts": "문을 닫고, 숨을 한 번 고를게요.",
+      "bgm": "none",
+      "vol": -12
+     },
+     "signals": [
+      "ui:start",
+      "saved:get_all"
+     ],
+     "session": {
+      "s": 0,
+      "p": 0,
+      "endingStage": "STAY"
+     }
+    },
+    {
+     "t": 16,
+     "clock": "21:40:16",
+     "stage": "threshold",
+     "levers": {
+      "hvacC": 22.0,
+      "fan": 2,
+      "recirc": false,
+      "seatHeat": 1,
+      "backrest": 0.55,
+      "ambient": {
+       "pct": 20,
+       "hex": "#FFB15C",
+       "ms": 8000
+      },
+      "window": 0,
+      "lock": true,
+      "mirrorFolded": false
+     },
+     "screen": {
+      "title": "",
+      "body": "",
+      "buttons": []
+     },
+     "sound": {
+      "tts": "",
+      "bgm": "none",
+      "vol": null
+     },
+     "signals": [],
+     "session": {
+      "s": 2,
+      "p": 0.0,
+      "endingStage": "STAY"
+     }
+    },
+    {
+     "t": 17,
+     "clock": "21:40:17",
+     "stage": "threshold",
+     "levers": {
+      "hvacC": 22.0,
+      "fan": 2,
+      "recirc": false,
+      "seatHeat": 1,
+      "backrest": 0.62,
+      "ambient": {
+       "pct": 20,
+       "hex": "#FFB15C",
+       "ms": 8000
+      },
+      "window": 0,
+      "lock": true,
+      "mirrorFolded": false
+     },
+     "screen": {
+      "title": "",
+      "body": "",
+      "buttons": []
+     },
+     "sound": {
+      "tts": "",
+      "bgm": "none",
+      "vol": null
+     },
+     "signals": [],
+     "session": {
+      "s": 3,
+      "p": 0.0,
+      "endingStage": "STAY"
+     }
+    },
+    {
+     "t": 19,
+     "clock": "21:40:19",
+     "stage": "threshold",
+     "levers": {
+      "hvacC": 22.0,
+      "fan": 1,
+      "recirc": false,
+      "seatHeat": 1,
+      "backrest": 0.62,
+      "ambient": {
+       "pct": 20,
+       "hex": "#FFB15C",
+       "ms": 8000
+      },
+      "window": 0,
+      "lock": true,
+      "mirrorFolded": false
+     },
+     "screen": {
+      "title": "",
+      "body": "",
+      "buttons": []
+     },
+     "sound": {
+      "tts": "",
+      "bgm": "none",
+      "vol": null
+     },
+     "signals": [],
+     "session": {
+      "s": 5,
+      "p": 0.0,
+      "endingStage": "STAY"
+     }
+    },
+    {
+     "t": 22,
+     "clock": "21:40:22",
+     "stage": "threshold",
+     "levers": {
+      "hvacC": 22.0,
+      "fan": 1,
+      "recirc": false,
+      "seatHeat": 1,
+      "backrest": 0.62,
+      "ambient": {
+       "pct": 20,
+       "hex": "#FFB15C",
+       "ms": 8000
+      },
+      "window": 0,
+      "lock": true,
+      "mirrorFolded": false
+     },
+     "screen": {
+      "title": "",
+      "body": "",
+      "buttons": []
+     },
+     "sound": {
+      "tts": "",
+      "bgm": "bell_once",
+      "vol": -14
+     },
+     "signals": [],
+     "session": {
+      "s": 8,
+      "p": 0.0,
+      "endingStage": "STAY"
+     }
+    },
+    {
+     "t": 24,
+     "clock": "21:40:24",
+     "stage": "breath",
+     "levers": {
+      "hvacC": 22.0,
+      "fan": 1,
+      "recirc": false,
+      "seatHeat": 1,
+      "backrest": 0.62,
+      "ambient": {
+       "pct": 26,
+       "hex": "#FFB15C",
+       "ms": 4000
+      },
+      "window": 0,
+      "lock": true,
+      "mirrorFolded": false
+     },
+     "screen": {
+      "title": "",
+      "body": "들이쉬고",
+      "buttons": [
+       "마치기"
+      ]
+     },
+     "sound": {
+      "tts": "들이쉬고",
+      "bgm": "none",
+      "vol": -14
+     },
+     "signals": [],
+     "session": {
+      "s": 10,
+      "p": 0.0,
+      "endingStage": "STAY"
+     }
+    },
+    {
+     "t": 28,
+     "clock": "21:40:28",
+     "stage": "breath",
+     "levers": {
+      "hvacC": 22.0,
+      "fan": 1,
+      "recirc": false,
+      "seatHeat": 1,
+      "backrest": 0.62,
+      "ambient": {
+       "pct": 20,
+       "hex": "#FFB15C",
+       "ms": 6000
+      },
+      "window": 0,
+      "lock": true,
+      "mirrorFolded": false
+     },
+     "screen": {
+      "title": "",
+      "body": "내쉬고",
+      "buttons": [
+       "마치기"
+      ]
+     },
+     "sound": {
+      "tts": "내쉬고",
+      "bgm": "none",
+      "vol": -14
+     },
+     "signals": [],
+     "session": {
+      "s": 14,
+      "p": 0.0,
+      "endingStage": "STAY"
+     }
+    },
+    {
+     "t": 34,
+     "clock": "21:40:34",
+     "stage": "breath",
+     "levers": {
+      "hvacC": 22.0,
+      "fan": 1,
+      "recirc": false,
+      "seatHeat": 1,
+      "backrest": 0.62,
+      "ambient": {
+       "pct": 26,
+       "hex": "#FFB15C",
+       "ms": 4000
+      },
+      "window": 0,
+      "lock": true,
+      "mirrorFolded": false
+     },
+     "screen": {
+      "title": "",
+      "body": "",
+      "buttons": [
+       "마치기"
+      ]
+     },
+     "sound": {
+      "tts": "",
+      "bgm": "none",
+      "vol": null
+     },
+     "signals": [],
+     "session": {
+      "s": 20,
+      "p": 0.0,
+      "endingStage": "STAY"
+     }
+    },
+    {
+     "t": 38,
+     "clock": "21:40:38",
+     "stage": "breath",
+     "levers": {
+      "hvacC": 22.0,
+      "fan": 1,
+      "recirc": false,
+      "seatHeat": 1,
+      "backrest": 0.62,
+      "ambient": {
+       "pct": 20,
+       "hex": "#FFB15C",
+       "ms": 6000
+      },
+      "window": 0,
+      "lock": true,
+      "mirrorFolded": false
+     },
+     "screen": {
+      "title": "",
+      "body": "",
+      "buttons": []
+     },
+     "sound": {
+      "tts": "",
+      "bgm": "none",
+      "vol": null
+     },
+     "signals": [],
+     "session": {
+      "s": 24,
+      "p": 0.0,
+      "endingStage": "STAY"
+     }
+    },
+    {
+     "t": 84,
+     "clock": "21:41:24",
+     "stage": "stay",
+     "levers": {
+      "hvacC": 22.0,
+      "fan": 1,
+      "recirc": false,
+      "seatHeat": 1,
+      "backrest": 0.62,
+      "ambient": {
+       "pct": 15,
+       "hex": "#FF9A3C",
+       "ms": 20000
+      },
+      "window": 0,
+      "lock": true,
+      "mirrorFolded": false
+     },
+     "screen": {
+      "title": "",
+      "body": "● ○ ○",
+      "buttons": [
+       "마치기"
+      ]
+     },
+     "sound": {
+      "tts": "너는 기도할 때에 네 골방에 들어가 문을 닫고 은밀한 중에 계신 네 아버지께 기도하라",
+      "bgm": "none",
+      "vol": -12
+     },
+     "signals": [],
+     "session": {
+      "s": 70,
+      "p": 0.0,
+      "endingStage": "STAY"
+     }
+    },
+    {
+     "t": 100,
+     "clock": "21:41:40",
+     "stage": "stay",
+     "levers": {
+      "hvacC": 22.0,
+      "fan": 1,
+      "recirc": false,
+      "seatHeat": 1,
+      "backrest": 0.62,
+      "ambient": {
+       "pct": 15,
+       "hex": "#FF9A3C",
+       "ms": 20000
+      },
+      "window": 0,
+      "lock": true,
+      "mirrorFolded": false
+     },
+     "screen": {
+      "title": "",
+      "body": "",
+      "buttons": [
+       "마치기"
+      ]
+     },
+     "sound": {
+      "tts": "",
+      "bgm": "none",
+      "vol": null
+     },
+     "signals": [],
+     "session": {
+      "s": 86,
+      "p": 0.0,
+      "endingStage": "STAY"
+     }
+    },
+    {
+     "t": 614,
+     "clock": "21:50:14",
+     "stage": "stay",
+     "levers": {
+      "hvacC": 22.0,
+      "fan": 1,
+      "recirc": false,
+      "seatHeat": 1,
+      "backrest": 0.62,
+      "ambient": {
+       "pct": 15,
+       "hex": "#FF9A3C",
+       "ms": 20000
+      },
+      "window": 0,
+      "lock": true,
+      "mirrorFolded": false
+     },
+     "screen": {
+      "title": "",
+      "body": "",
+      "buttons": [
+       "마치기"
+      ]
+     },
+     "sound": {
+      "tts": "",
+      "bgm": "none",
+      "vol": null
+     },
+     "signals": [],
+     "session": {
+      "s": 600,
+      "p": 0.034,
+      "endingStage": "STAY"
+     }
+    },
+    {
+     "t": 734,
+     "clock": "21:52:14",
+     "stage": "stay",
+     "levers": {
+      "hvacC": 22.0,
+      "fan": 1,
+      "recirc": false,
+      "seatHeat": 1,
+      "backrest": 0.62,
+      "ambient": {
+       "pct": 15,
+       "hex": "#FF9A3C",
+       "ms": 20000
+      },
+      "window": 0,
+      "lock": true,
+      "mirrorFolded": false
+     },
+     "screen": {
+      "title": "",
+      "body": "",
+      "buttons": []
+     },
+     "sound": {
+      "tts": "",
+      "bgm": "none",
+      "vol": null
+     },
+     "signals": [],
+     "session": {
+      "s": 720,
+      "p": 0.208,
+      "endingStage": "STAY"
+     }
+    },
+    {
+     "t": 844,
+     "clock": "21:54:04",
+     "stage": "stay",
+     "levers": {
+      "hvacC": 22.0,
+      "fan": 1,
+      "recirc": false,
+      "seatHeat": 1,
+      "backrest": 0.62,
+      "ambient": {
+       "pct": 17,
+       "hex": "#FF9A3C",
+       "ms": 60000
+      },
+      "window": 0,
+      "lock": true,
+      "mirrorFolded": false
+     },
+     "screen": {
+      "title": "",
+      "body": "● ● ○",
+      "buttons": [
+       "마치기"
+      ]
+     },
+     "sound": {
+      "tts": "",
+      "bgm": "none",
+      "vol": null
+     },
+     "signals": [
+      "ending:SCREEN_TOUCH"
+     ],
+     "session": {
+      "s": 830,
+      "p": 0.743,
+      "endingStage": "SOUND_FADE"
+     }
+    },
+    {
+     "t": 894,
+     "clock": "21:54:54",
+     "stage": "closing",
+     "levers": {
+      "hvacC": 22.0,
+      "fan": 1,
+      "recirc": false,
+      "seatHeat": 1,
+      "backrest": 0.68,
+      "ambient": {
+       "pct": 17,
+       "hex": "#FF9A3C",
+       "ms": 60000
+      },
+      "window": 0,
+      "lock": true,
+      "mirrorFolded": false
+     },
+     "screen": {
+      "title": "",
+      "body": "",
+      "buttons": []
+     },
+     "sound": {
+      "tts": "",
+      "bgm": "none",
+      "vol": null
+     },
+     "signals": [
+      "ending:SEAT_BACKREST_FORWARD",
+      "seat.backrest:user_forward"
+     ],
+     "session": {
+      "s": 880,
+      "p": 0.962,
+      "endingStage": "CLOSING_WORDS"
+     }
+    },
+    {
+     "t": 898,
+     "clock": "21:54:58",
+     "stage": "closing",
+     "levers": {
+      "hvacC": 22.0,
+      "fan": 1,
+      "recirc": false,
+      "seatHeat": 1,
+      "backrest": 0.68,
+      "ambient": {
+       "pct": 17,
+       "hex": "#FF9A3C",
+       "ms": 60000
+      },
+      "window": 0,
+      "lock": true,
+      "mirrorFolded": false
+     },
+     "screen": {
+      "title": "",
+      "body": "이제 천천히 돌아올게요.",
+      "buttons": [
+       "마치기"
+      ]
+     },
+     "sound": {
+      "tts": "이제 천천히 돌아올게요.",
+      "bgm": "none",
+      "vol": -14
+     },
+     "signals": [],
+     "session": {
+      "s": 884,
+      "p": 0.963,
+      "endingStage": "CLOSING_WORDS"
+     }
+    },
+    {
+     "t": 903,
+     "clock": "21:55:03",
+     "stage": "return",
+     "levers": {
+      "hvacC": 22.0,
+      "fan": 1,
+      "recirc": false,
+      "seatHeat": 1,
+      "backrest": 0.68,
+      "ambient": {
+       "pct": 30,
+       "hex": "#FFFFFF",
+       "ms": 25000
+      },
+      "window": 0,
+      "lock": true,
+      "mirrorFolded": false
+     },
+     "screen": {
+      "title": "",
+      "body": "",
+      "buttons": []
+     },
+     "sound": {
+      "tts": "",
+      "bgm": "bell_once",
+      "vol": -14
+     },
+     "signals": [],
+     "session": {
+      "s": 889,
+      "p": 0.964,
+      "endingStage": "CLOSING_WORDS"
+     }
+    },
+    {
+     "t": 915,
+     "clock": "21:55:15",
+     "stage": "return",
+     "levers": {
+      "hvacC": 22.0,
+      "fan": 1,
+      "recirc": false,
+      "seatHeat": 1,
+      "backrest": 0.55,
+      "ambient": {
+       "pct": 30,
+       "hex": "#FFFFFF",
+       "ms": 25000
+      },
+      "window": 0,
+      "lock": true,
+      "mirrorFolded": false
+     },
+     "screen": {
+      "title": "",
+      "body": "좌석을 원래대로 돌리고 있어요.",
+      "buttons": []
+     },
+     "sound": {
+      "tts": "",
+      "bgm": "none",
+      "vol": null
+     },
+     "signals": []
+    },
+    {
+     "t": 933,
+     "clock": "21:55:33",
+     "stage": "return",
+     "levers": {
+      "hvacC": 22.0,
+      "fan": 2,
+      "recirc": false,
+      "seatHeat": 1,
+      "backrest": 0.55,
+      "ambient": {
+       "pct": 30,
+       "hex": "#FFFFFF",
+       "ms": 25000
+      },
+      "window": 0,
+      "lock": true,
+      "mirrorFolded": false
+     },
+     "screen": {
+      "title": "",
+      "body": "",
+      "buttons": []
+     },
+     "sound": {
+      "tts": "",
+      "bgm": "none",
+      "vol": null
+     },
+     "signals": []
+    },
+    {
+     "t": 943,
+     "clock": "21:55:43",
+     "stage": "return",
+     "levers": {
+      "hvacC": 22.0,
+      "fan": 3,
+      "recirc": false,
+      "seatHeat": 1,
+      "backrest": 0.55,
+      "ambient": {
+       "pct": 30,
+       "hex": "#FFFFFF",
+       "ms": 25000
+      },
+      "window": 0,
+      "lock": true,
+      "mirrorFolded": false
+     },
+     "screen": {
+      "title": "",
+      "body": "",
+      "buttons": []
+     },
+     "sound": {
+      "tts": "",
+      "bgm": "none",
+      "vol": null
+     },
+     "signals": []
+    },
+    {
+     "t": 945,
+     "clock": "21:55:45",
+     "stage": "done",
+     "levers": {
+      "hvacC": 22.0,
+      "fan": 3,
+      "recirc": false,
+      "seatHeat": 1,
+      "backrest": 0.55,
+      "ambient": {
+       "pct": 30,
+       "hex": "#FFFFFF",
+       "ms": 25000
+      },
+      "window": 0,
+      "lock": true,
+      "mirrorFolded": false
+     },
+     "screen": {
+      "title": "끝났어요.",
+      "body": "좌석과 공조를 원래대로 돌렸어요.",
+      "buttons": [
+       "닫기"
+      ]
+     },
+     "sound": {
+      "tts": "",
+      "bgm": "none",
+      "vol": null
+     },
+     "signals": []
+    },
+    {
+     "t": 960,
+     "clock": "21:56:00",
+     "stage": "done",
+     "levers": {
+      "hvacC": 22.0,
+      "fan": 3,
+      "recirc": false,
+      "seatHeat": 0,
+      "backrest": 0.55,
+      "ambient": {
+       "pct": 30,
+       "hex": "#FFFFFF",
+       "ms": 25000
+      },
+      "window": 0,
+      "lock": true,
+      "mirrorFolded": false
+     },
+     "screen": {
+      "title": "",
+      "body": "",
+      "buttons": []
+     },
+     "sound": {
+      "tts": "",
+      "bgm": "none",
+      "vol": null
+     },
+     "signals": [
+      "ignition:OFF_requested"
+     ]
+    },
+    {
+     "t": 972,
+     "clock": "21:56:12",
+     "stage": "leave",
+     "levers": {
+      "hvacC": 22.0,
+      "fan": 3,
+      "recirc": false,
+      "seatHeat": 0,
+      "backrest": 0.55,
+      "ambient": {
+       "pct": 30,
+       "hex": "#FFFFFF",
+       "ms": 25000
+      },
+      "window": 0,
+      "lock": true,
+      "mirrorFolded": false
+     },
+     "screen": {
+      "title": "",
+      "body": "",
+      "buttons": []
+     },
+     "sound": {
+      "tts": "",
+      "bgm": "none",
+      "vol": null
+     },
+     "signals": [
+      "door.driver.open:true",
+      "seat.driver.occupied:false"
+     ]
+    },
+    {
+     "t": 980,
+     "clock": "21:56:20",
+     "stage": "leave",
+     "levers": {
+      "hvacC": 22.0,
+      "fan": 3,
+      "recirc": false,
+      "seatHeat": 0,
+      "backrest": 0.55,
+      "ambient": {
+       "pct": 30,
+       "hex": "#FFFFFF",
+       "ms": 25000
+      },
+      "window": 0,
+      "lock": true,
+      "mirrorFolded": false
+     },
+     "screen": {
+      "title": "",
+      "body": "",
+      "buttons": []
+     },
+     "sound": {
+      "tts": "",
+      "bgm": "none",
+      "vol": null
+     },
+     "signals": [
+      "door.driver.open:false"
+     ]
+    },
+    {
+     "t": 990,
+     "clock": "21:56:30",
+     "stage": "leave",
+     "levers": {
+      "hvacC": 22.0,
+      "fan": 3,
+      "recirc": false,
+      "seatHeat": 0,
+      "backrest": 0.55,
+      "ambient": {
+       "pct": 0,
+       "hex": "#FFFFFF",
+       "ms": 3000
+      },
+      "window": 0,
+      "lock": true,
+      "mirrorFolded": true
+     },
+     "screen": {
+      "title": "",
+      "body": "",
+      "buttons": []
+     },
+     "sound": {
+      "tts": "",
+      "bgm": "none",
+      "vol": null
+     },
+     "signals": [
+      "vehicle:auto_lock",
+      "vehicle:mirror_auto_fold"
+     ]
+    },
+    {
+     "t": 1062,
+     "clock": "21:57:42",
+     "stage": "after",
+     "levers": {
+      "hvacC": 22.0,
+      "fan": 3,
+      "recirc": false,
+      "seatHeat": 0,
+      "backrest": 0.55,
+      "ambient": {
+       "pct": 0,
+       "hex": "#FFFFFF",
+       "ms": 3000
+      },
+      "window": 0,
+      "lock": true,
+      "mirrorFolded": true
+     },
+     "screen": {
+      "title": "",
+      "body": "",
+      "buttons": []
+     },
+     "sound": {
+      "tts": "",
+      "bgm": "none",
+      "vol": null
+     },
+     "signals": [
+      "prior.update:readySec=880"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "B",
+   "title": "점심 회사 주차장, 조용히 머물기",
+   "persona": "정은 씨의 동료 하늘 씨 (가상, 20대 후반, 무교)",
+   "context": {
+    "intendedSec": 480,
+    "driveMin": 12,
+    "hour": 12,
+    "pack": "none",
+    "place": "회사 옥외 주차장",
+    "outsideC": 12,
+    "car": "그랜저 하이브리드 [가정]"
+   },
+   "t0Clock": "12:20:00",
+   "sessionStartT": 9,
+   "keyframes": [
+    {
+     "t": -60,
+     "clock": "12:19:00",
+     "stage": "drive",
+     "levers": {
+      "hvacC": 22.0,
+      "fan": 3,
+      "recirc": false,
+      "seatHeat": 0,
+      "backrest": 0.55,
+      "ambient": {
+       "pct": 30,
+       "hex": "#FFFFFF",
+       "ms": 0
+      },
+      "window": 0,
+      "lock": true,
+      "mirrorFolded": false
+     },
+     "screen": {
+      "title": "",
+      "body": "",
+      "buttons": []
+     },
+     "sound": {
+      "tts": "",
+      "bgm": "none",
+      "vol": null
+     },
+     "signals": [
+      "gear:D",
+      "speedKph:15",
+      "seat.driver.occupied:true"
+     ]
+    },
+    {
+     "t": -12,
+     "clock": "12:19:48",
+     "stage": "park-in",
+     "levers": {
+      "hvacC": 22.0,
+      "fan": 3,
+      "recirc": false,
+      "seatHeat": 0,
+      "backrest": 0.55,
+      "ambient": {
+       "pct": 30,
+       "hex": "#FFFFFF",
+       "ms": 0
+      },
+      "window": 0,
+      "lock": true,
+      "mirrorFolded": false
+     },
+     "screen": {
+      "title": "",
+      "body": "",
+      "buttons": []
+     },
+     "sound": {
+      "tts": "",
+      "bgm": "none",
+      "vol": null
+     },
+     "signals": [
+      "gear:D",
+      "speedKph:2"
+     ]
+    },
+    {
+     "t": 0,
+     "clock": "12:20:00",
+     "stage": "arrive",
+     "levers": {
+      "hvacC": 22.0,
+      "fan": 3,
+      "recirc": false,
+      "seatHeat": 0,
+      "backrest": 0.55,
+      "ambient": {
+       "pct": 30,
+       "hex": "#FFFFFF",
+       "ms": 0
+      },
+      "window": 0,
+      "lock": true,
+      "mirrorFolded": false
+     },
+     "screen": {
+      "title": "",
+      "body": "",
+      "buttons": []
+     },
+     "sound": {
+      "tts": "",
+      "bgm": "none",
+      "vol": null
+     },
+     "signals": [
+      "gear:P",
+      "speedKph:0"
+     ]
+    },
+    {
+     "t": 6,
+     "clock": "12:20:06",
+     "stage": "offer",
+     "levers": {
+      "hvacC": 22.0,
+      "fan": 3,
+      "recirc": false,
+      "seatHeat": 0,
+      "backrest": 0.55,
+      "ambient": {
+       "pct": 30,
+       "hex": "#FFFFFF",
+       "ms": 0
+      },
+      "window": 0,
+      "lock": true,
+      "mirrorFolded": false
+     },
+     "screen": {
+      "title": "잠시 머물다 갈까요",
+      "body": "조용히 머물기 · 12시 28분까지",
+      "buttons": [
+       "머물기",
+       "오늘은 그냥 갈게요"
+      ]
+     },
+     "sound": {
+      "tts": "",
+      "bgm": "none",
+      "vol": null
+     },
+     "signals": []
+    },
+    {
+     "t": 9,
+     "clock": "12:20:09",
+     "stage": "threshold",
+     "levers": {
+      "hvacC": 22.0,
+      "fan": 3,
+      "recirc": false,
+      "seatHeat": 0,
+      "backrest": 0.55,
+      "ambient": {
+       "pct": 25,
+       "hex": "#FFB15C",
+       "ms": 8000
+      },
+      "window": 0,
+      "lock": true,
+      "mirrorFolded": false
+     },
+     "screen": {
+      "title": "",
+      "body": "문을 닫고, 숨을 한 번 고를게요.",
+      "buttons": [
+       "마치기"
+      ]
+     },
+     "sound": {
+      "tts": "문을 닫고, 숨을 한 번 고를게요.",
+      "bgm": "wood_x3",
+      "vol": -12
+     },
+     "signals": [
+      "ui:start",
+      "saved:get_all"
+     ],
+     "session": {
+      "s": 0,
+      "p": 0,
+      "endingStage": "STAY"
+     }
+    },
+    {
+     "t": 11,
+     "clock": "12:20:11",
+     "stage": "threshold",
+     "levers": {
+      "hvacC": 22.0,
+      "fan": 2,
+      "recirc": false,
+      "seatHeat": 0,
+      "backrest": 0.55,
+      "ambient": {
+       "pct": 25,
+       "hex": "#FFB15C",
+       "ms": 8000
+      },
+      "window": 0,
+      "lock": true,
+      "mirrorFolded": false
+     },
+     "screen": {
+      "title": "",
+      "body": "",
+      "buttons": []
+     },
+     "sound": {
+      "tts": "",
+      "bgm": "none",
+      "vol": null
+     },
+     "signals": [],
+     "session": {
+      "s": 2,
+      "p": 0.0,
+      "endingStage": "STAY"
+     }
+    },
+    {
+     "t": 14,
+     "clock": "12:20:14",
+     "stage": "threshold",
+     "levers": {
+      "hvacC": 22.0,
+      "fan": 2,
+      "recirc": false,
+      "seatHeat": 0,
+      "backrest": 0.55,
+      "ambient": {
+       "pct": 25,
+       "hex": "#FFB15C",
+       "ms": 8000
+      },
+      "window": 0,
+      "lock": true,
+      "mirrorFolded": false
+     },
+     "screen": {
+      "title": "",
+      "body": "",
+      "buttons": []
+     },
+     "sound": {
+      "tts": "",
+      "bgm": "none",
+      "vol": null
+     },
+     "signals": [
+      "ending:SEATBELT_UNFASTENED",
+      "seatbelt.driver:off"
+     ],
+     "session": {
+      "s": 5,
+      "p": 0.0,
+      "endingStage": "STAY"
+     }
+    },
+    {
+     "t": 19,
+     "clock": "12:20:19",
+     "stage": "breath",
+     "levers": {
+      "hvacC": 22.0,
+      "fan": 2,
+      "recirc": false,
+      "seatHeat": 0,
+      "backrest": 0.55,
+      "ambient": {
+       "pct": 25,
+       "hex": "#FFB15C",
+       "ms": 8000
+      },
+      "window": 0,
+      "lock": true,
+      "mirrorFolded": false
+     },
+     "screen": {
+      "title": "",
+      "body": "들이쉬고",
+      "buttons": [
+       "마치기"
+      ]
+     },
+     "sound": {
+      "tts": "들이쉬고",
+      "bgm": "none",
+      "vol": -14
+     },
+     "signals": [],
+     "session": {
+      "s": 10,
+      "p": 0.0,
+      "endingStage": "STAY"
+     }
+    },
+    {
+     "t": 23,
+     "clock": "12:20:23",
+     "stage": "breath",
+     "levers": {
+      "hvacC": 22.0,
+      "fan": 2,
+      "recirc": false,
+      "seatHeat": 0,
+      "backrest": 0.55,
+      "ambient": {
+       "pct": 25,
+       "hex": "#FFB15C",
+       "ms": 8000
+      },
+      "window": 0,
+      "lock": true,
+      "mirrorFolded": false
+     },
+     "screen": {
+      "title": "",
+      "body": "내쉬고",
+      "buttons": [
+       "마치기"
+      ]
+     },
+     "sound": {
+      "tts": "내쉬고",
+      "bgm": "none",
+      "vol": -14
+     },
+     "signals": [],
+     "session": {
+      "s": 14,
+      "p": 0.0,
+      "endingStage": "STAY"
+     }
+    },
+    {
+     "t": 49,
+     "clock": "12:20:49",
+     "stage": "stay",
+     "levers": {
+      "hvacC": 22.0,
+      "fan": 2,
+      "recirc": false,
+      "seatHeat": 0,
+      "backrest": 0.55,
+      "ambient": {
+       "pct": 20,
+       "hex": "#FF9A3C",
+       "ms": 15000
+      },
+      "window": 0,
+      "lock": true,
+      "mirrorFolded": false
+     },
+     "screen": {
+      "title": "",
+      "body": "● ○ ○",
+      "buttons": [
+       "마치기"
+      ]
+     },
+     "sound": {
+      "tts": "",
+      "bgm": "leaves_wind",
+      "vol": -18
+     },
+     "signals": [],
+     "session": {
+      "s": 40,
+      "p": 0.0,
+      "endingStage": "STAY"
+     }
+    },
+    {
+     "t": 189,
+     "clock": "12:23:09",
+     "stage": "stay",
+     "levers": {
+      "hvacC": 22.0,
+      "fan": 2,
+      "recirc": false,
+      "seatHeat": 0,
+      "backrest": 0.55,
+      "ambient": {
+       "pct": 20,
+       "hex": "#FF9A3C",
+       "ms": 15000
+      },
+      "window": 0,
+      "lock": true,
+      "mirrorFolded": false
+     },
+     "screen": {
+      "title": "",
+      "body": "",
+      "buttons": [
+       "마치기"
+      ]
+     },
+     "sound": {
+      "tts": "",
+      "bgm": "none",
+      "vol": null
+     },
+     "signals": [],
+     "session": {
+      "s": 180,
+      "p": 0.0,
+      "endingStage": "STAY"
+     }
+    },
+    {
+     "t": 309,
+     "clock": "12:25:09",
+     "stage": "stay",
+     "levers": {
+      "hvacC": 22.0,
+      "fan": 2,
+      "recirc": false,
+      "seatHeat": 0,
+      "backrest": 0.55,
+      "ambient": {
+       "pct": 20,
+       "hex": "#FF9A3C",
+       "ms": 15000
+      },
+      "window": 0,
+      "lock": true,
+      "mirrorFolded": false
+     },
+     "screen": {
+      "title": "",
+      "body": "",
+      "buttons": []
+     },
+     "sound": {
+      "tts": "",
+      "bgm": "leaves_wind",
+      "vol": -24
+     },
+     "signals": [],
+     "session": {
+      "s": 300,
+      "p": 0.171,
+      "endingStage": "STAY"
+     }
+    },
+    {
+     "t": 399,
+     "clock": "12:26:39",
+     "stage": "stay",
+     "levers": {
+      "hvacC": 22.0,
+      "fan": 2,
+      "recirc": false,
+      "seatHeat": 0,
+      "backrest": 0.55,
+      "ambient": {
+       "pct": 21,
+       "hex": "#FF9A3C",
+       "ms": 30000
+      },
+      "window": 0,
+      "lock": true,
+      "mirrorFolded": false
+     },
+     "screen": {
+      "title": "",
+      "body": "● ● ○",
+      "buttons": [
+       "마치기"
+      ]
+     },
+     "sound": {
+      "tts": "",
+      "bgm": "none",
+      "vol": null
+     },
+     "signals": [],
+     "session": {
+      "s": 390,
+      "p": 0.695,
+      "endingStage": "LIGHT_RISE"
+     }
+    },
+    {
+     "t": 409,
+     "clock": "12:26:49",
+     "stage": "stay",
+     "levers": {
+      "hvacC": 22.0,
+      "fan": 2,
+      "recirc": false,
+      "seatHeat": 0,
+      "backrest": 0.5,
+      "ambient": {
+       "pct": 20,
+       "hex": "#FF9A3C",
+       "ms": 20000
+      },
+      "window": 0,
+      "lock": true,
+      "mirrorFolded": false
+     },
+     "screen": {
+      "title": "",
+      "body": "",
+      "buttons": []
+     },
+     "sound": {
+      "tts": "",
+      "bgm": "leaves_wind",
+      "vol": -24
+     },
+     "signals": [
+      "ending:SEAT_BACKREST_BACK",
+      "seat.backrest:user_back"
+     ],
+     "session": {
+      "s": 400,
+      "p": 0.463,
+      "endingStage": "LIGHT_RISE"
+     }
+    },
+    {
+     "t": 454,
+     "clock": "12:27:34",
+     "stage": "stay",
+     "levers": {
+      "hvacC": 22.0,
+      "fan": 2,
+      "recirc": false,
+      "seatHeat": 0,
+      "backrest": 0.5,
+      "ambient": {
+       "pct": 20,
+       "hex": "#FF9A3C",
+       "ms": 20000
+      },
+      "window": 0,
+      "lock": true,
+      "mirrorFolded": false
+     },
+     "screen": {
+      "title": "",
+      "body": "12:27",
+      "buttons": [
+       "마치기"
+      ]
+     },
+     "sound": {
+      "tts": "",
+      "bgm": "none",
+      "vol": null
+     },
+     "signals": [
+      "ending:SCREEN_TOUCH"
+     ],
+     "session": {
+      "s": 445,
+      "p": 0.913,
+      "endingStage": "CLOSING_WORDS"
+     }
+    },
+    {
+     "t": 461,
+     "clock": "12:27:41",
+     "stage": "closing",
+     "levers": {
+      "hvacC": 22.0,
+      "fan": 2,
+      "recirc": false,
+      "seatHeat": 0,
+      "backrest": 0.6,
+      "ambient": {
+       "pct": 20,
+       "hex": "#FF9A3C",
+       "ms": 20000
+      },
+      "window": 0,
+      "lock": true,
+      "mirrorFolded": false
+     },
+     "screen": {
+      "title": "",
+      "body": "",
+      "buttons": []
+     },
+     "sound": {
+      "tts": "",
+      "bgm": "leaves_wind",
+      "vol": -40
+     },
+     "signals": [
+      "ending:SEAT_BACKREST_FORWARD",
+      "seat.backrest:user_forward"
+     ],
+     "session": {
+      "s": 452,
+      "p": 0.987,
+      "endingStage": "CLOSING_WORDS"
+     }
+    },
+    {
+     "t": 465,
+     "clock": "12:27:45",
+     "stage": "closing",
+     "levers": {
+      "hvacC": 22.0,
+      "fan": 2,
+      "recirc": false,
+      "seatHeat": 0,
+      "backrest": 0.6,
+      "ambient": {
+       "pct": 20,
+       "hex": "#FF9A3C",
+       "ms": 20000
+      },
+      "window": 0,
+      "lock": true,
+      "mirrorFolded": false
+     },
+     "screen": {
+      "title": "",
+      "body": "이제 천천히 돌아올게요.",
+      "buttons": [
+       "마치기"
+      ]
+     },
+     "sound": {
+      "tts": "이제 천천히 돌아올게요.",
+      "bgm": "none",
+      "vol": -14
+     },
+     "signals": [],
+     "session": {
+      "s": 456,
+      "p": 0.988,
+      "endingStage": "CLOSING_WORDS"
+     }
+    },
+    {
+     "t": 470,
+     "clock": "12:27:50",
+     "stage": "return",
+     "levers": {
+      "hvacC": 22.0,
+      "fan": 2,
+      "recirc": false,
+      "seatHeat": 0,
+      "backrest": 0.6,
+      "ambient": {
+       "pct": 30,
+       "hex": "#FFFFFF",
+       "ms": 20000
+      },
+      "window": 0,
+      "lock": true,
+      "mirrorFolded": false
+     },
+     "screen": {
+      "title": "",
+      "body": "",
+      "buttons": []
+     },
+     "sound": {
+      "tts": "",
+      "bgm": "wood_x3",
+      "vol": -14
+     },
+     "signals": [],
+     "session": {
+      "s": 461,
+      "p": 0.989,
+      "endingStage": "CLOSING_WORDS"
+     }
+    },
+    {
+     "t": 478,
+     "clock": "12:27:58",
+     "stage": "return",
+     "levers": {
+      "hvacC": 22.0,
+      "fan": 2,
+      "recirc": false,
+      "seatHeat": 0,
+      "backrest": 0.55,
+      "ambient": {
+       "pct": 30,
+       "hex": "#FFFFFF",
+       "ms": 20000
+      },
+      "window": 0,
+      "lock": true,
+      "mirrorFolded": false
+     },
+     "screen": {
+      "title": "",
+      "body": "",
+      "buttons": []
+     },
+     "sound": {
+      "tts": "",
+      "bgm": "none",
+      "vol": null
+     },
+     "signals": []
+    },
+    {
+     "t": 490,
+     "clock": "12:28:10",
+     "stage": "done",
+     "levers": {
+      "hvacC": 22.0,
+      "fan": 3,
+      "recirc": false,
+      "seatHeat": 0,
+      "backrest": 0.55,
+      "ambient": {
+       "pct": 30,
+       "hex": "#FFFFFF",
+       "ms": 20000
+      },
+      "window": 0,
+      "lock": true,
+      "mirrorFolded": false
+     },
+     "screen": {
+      "title": "끝났어요.",
+      "body": "12시 28분이에요.",
+      "buttons": [
+       "닫기"
+      ]
+     },
+     "sound": {
+      "tts": "",
+      "bgm": "none",
+      "vol": null
+     },
+     "signals": []
+    },
+    {
+     "t": 500,
+     "clock": "12:28:20",
+     "stage": "leave",
+     "levers": {
+      "hvacC": 22.0,
+      "fan": 3,
+      "recirc": false,
+      "seatHeat": 0,
+      "backrest": 0.55,
+      "ambient": {
+       "pct": 30,
+       "hex": "#FFFFFF",
+       "ms": 20000
+      },
+      "window": 0,
+      "lock": true,
+      "mirrorFolded": false
+     },
+     "screen": {
+      "title": "",
+      "body": "",
+      "buttons": []
+     },
+     "sound": {
+      "tts": "",
+      "bgm": "none",
+      "vol": null
+     },
+     "signals": [
+      "ignition:OFF",
+      "door.driver.open:true"
+     ]
+    },
+    {
+     "t": 515,
+     "clock": "12:28:35",
+     "stage": "leave",
+     "levers": {
+      "hvacC": 22.0,
+      "fan": 3,
+      "recirc": false,
+      "seatHeat": 0,
+      "backrest": 0.55,
+      "ambient": {
+       "pct": 0,
+       "hex": "#FFFFFF",
+       "ms": 3000
+      },
+      "window": 0,
+      "lock": true,
+      "mirrorFolded": true
+     },
+     "screen": {
+      "title": "",
+      "body": "",
+      "buttons": []
+     },
+     "sound": {
+      "tts": "",
+      "bgm": "none",
+      "vol": null
+     },
+     "signals": [
+      "vehicle:auto_lock"
+     ]
+    },
+    {
+     "t": 590,
+     "clock": "12:29:50",
+     "stage": "after",
+     "levers": {
+      "hvacC": 22.0,
+      "fan": 3,
+      "recirc": false,
+      "seatHeat": 0,
+      "backrest": 0.55,
+      "ambient": {
+       "pct": 0,
+       "hex": "#FFFFFF",
+       "ms": 3000
+      },
+      "window": 0,
+      "lock": true,
+      "mirrorFolded": true
+     },
+     "screen": {
+      "title": "",
+      "body": "",
+      "buttons": []
+     },
+     "sound": {
+      "tts": "",
+      "bgm": "none",
+      "vol": null
+     },
+     "signals": [
+      "prior.update:readySec=452"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "C",
+   "title": "예외: 전화, 문 열림, 기어 이탈",
+   "persona": "정은 씨 (가상)",
+   "context": {
+    "intendedSec": 600,
+    "driveMin": 25,
+    "hour": 18,
+    "pack": "none",
+    "place": "마트 옥상 주차장, 비",
+    "outsideC": 9,
+    "car": "그랜저 하이브리드 [가정]"
+   },
+   "t0Clock": "18:50:00",
+   "sessionStartT": 8,
+   "keyframes": [
+    {
+     "t": -60,
+     "clock": "18:49:00",
+     "stage": "drive",
+     "levers": {
+      "hvacC": 22.0,
+      "fan": 3,
+      "recirc": false,
+      "seatHeat": 0,
+      "backrest": 0.55,
+      "ambient": {
+       "pct": 30,
+       "hex": "#FFFFFF",
+       "ms": 0
+      },
+      "window": 0,
+      "lock": true,
+      "mirrorFolded": false
+     },
+     "screen": {
+      "title": "",
+      "body": "",
+      "buttons": []
+     },
+     "sound": {
+      "tts": "",
+      "bgm": "none",
+      "vol": null
+     },
+     "signals": [
+      "gear:D",
+      "speedKph:10",
+      "wiper:INTERMITTENT"
+     ]
+    },
+    {
+     "t": 0,
+     "clock": "18:50:00",
+     "stage": "arrive",
+     "levers": {
+      "hvacC": 22.0,
+      "fan": 3,
+      "recirc": false,
+      "seatHeat": 0,
+      "backrest": 0.55,
+      "ambient": {
+       "pct": 30,
+       "hex": "#FFFFFF",
+       "ms": 0
+      },
+      "window": 0,
+      "lock": true,
+      "mirrorFolded": false
+     },
+     "screen": {
+      "title": "",
+      "body": "",
+      "buttons": []
+     },
+     "sound": {
+      "tts": "",
+      "bgm": "none",
+      "vol": null
+     },
+     "signals": [
+      "gear:P",
+      "speedKph:0"
+     ]
+    },
+    {
+     "t": 8,
+     "clock": "18:50:08",
+     "stage": "threshold",
+     "levers": {
+      "hvacC": 22.0,
+      "fan": 2,
+      "recirc": false,
+      "seatHeat": 1,
+      "backrest": 0.55,
+      "ambient": {
+       "pct": 20,
+       "hex": "#FFB15C",
+       "ms": 8000
+      },
+      "window": 0,
+      "lock": true,
+      "mirrorFolded": false
+     },
+     "screen": {
+      "title": "",
+      "body": "문을 닫고, 숨을 한 번 고를게요.",
+      "buttons": [
+       "마치기"
+      ]
+     },
+     "sound": {
+      "tts": "문을 닫고, 숨을 한 번 고를게요.",
+      "bgm": "wood_x3",
+      "vol": -12
+     },
+     "signals": [
+      "ui:start",
+      "saved:get_all"
+     ],
+     "session": {
+      "s": 0,
+      "p": 0,
+      "endingStage": "STAY"
+     }
+    },
+    {
+     "t": 11,
+     "clock": "18:50:11",
+     "stage": "threshold",
+     "levers": {
+      "hvacC": 22.0,
+      "fan": 1,
+      "recirc": false,
+      "seatHeat": 1,
+      "backrest": 0.62,
+      "ambient": {
+       "pct": 20,
+       "hex": "#FFB15C",
+       "ms": 8000
+      },
+      "window": 0,
+      "lock": true,
+      "mirrorFolded": false
+     },
+     "screen": {
+      "title": "",
+      "body": "",
+      "buttons": []
+     },
+     "sound": {
+      "tts": "",
+      "bgm": "none",
+      "vol": null
+     },
+     "signals": [],
+     "session": {
+      "s": 3,
+      "p": 0.0,
+      "endingStage": "STAY"
+     }
+    },
+    {
+     "t": 78,
+     "clock": "18:51:18",
+     "stage": "stay",
+     "levers": {
+      "hvacC": 22.0,
+      "fan": 1,
+      "recirc": false,
+      "seatHeat": 1,
+      "backrest": 0.62,
+      "ambient": {
+       "pct": 15,
+       "hex": "#FF9A3C",
+       "ms": 20000
+      },
+      "window": 0,
+      "lock": true,
+      "mirrorFolded": false
+     },
+     "screen": {
+      "title": "",
+      "body": "● ○ ○",
+      "buttons": [
+       "마치기"
+      ]
+     },
+     "sound": {
+      "tts": "",
+      "bgm": "none",
+      "vol": null
+     },
+     "signals": [
+      "wiper:OFF_after_park",
+      "bgm:skip_rain_because_real_rain"
+     ],
+     "session": {
+      "s": 70,
+      "p": 0.0,
+      "endingStage": "STAY"
+     }
+    },
+    {
+     "t": 208,
+     "clock": "18:53:28",
+     "stage": "pause_call",
+     "levers": {
+      "hvacC": 22.0,
+      "fan": 1,
+      "recirc": false,
+      "seatHeat": 1,
+      "backrest": 0.62,
+      "ambient": {
+       "pct": 22,
+       "hex": "#FF9A3C",
+       "ms": 3000
+      },
+      "window": 0,
+      "lock": true,
+      "mirrorFolded": false
+     },
+     "screen": {
+      "title": "",
+      "body": "잠시 멈춰 둘게요.",
+      "buttons": [
+       "마치기"
+      ]
+     },
+     "sound": {
+      "tts": "",
+      "bgm": "none",
+      "vol": null
+     },
+     "signals": [
+      "audiofocus:LOSS_TRANSIENT"
+     ],
+     "session": {
+      "s": 200,
+      "p": 0.0,
+      "endingStage": "STAY"
+     }
+    },
+    {
+     "t": 278,
+     "clock": "18:54:38",
+     "stage": "resume",
+     "levers": {
+      "hvacC": 22.0,
+      "fan": 1,
+      "recirc": false,
+      "seatHeat": 1,
+      "backrest": 0.62,
+      "ambient": {
+       "pct": 15,
+       "hex": "#FF9A3C",
+       "ms": 8000
+      },
+      "window": 0,
+      "lock": true,
+      "mirrorFolded": false
+     },
+     "screen": {
+      "title": "",
+      "body": "이어서 머물러요.",
+      "buttons": [
+       "마치기"
+      ]
+     },
+     "sound": {
+      "tts": "",
+      "bgm": "none",
+      "vol": null
+     },
+     "signals": [
+      "audiofocus:GAIN"
+     ],
+     "session": {
+      "s": 200,
+      "p": 0.0,
+      "endingStage": "STAY"
+     }
+    },
+    {
+     "t": 420,
+     "clock": "18:57:00",
+     "stage": "door_open",
+     "levers": {
+      "hvacC": 22.0,
+      "fan": 1,
+      "recirc": false,
+      "seatHeat": 1,
+      "backrest": 0.62,
+      "ambient": {
+       "pct": 30,
+       "hex": "#FFFFFF",
+       "ms": 1500
+      },
+      "window": 0,
+      "lock": true,
+      "mirrorFolded": false
+     },
+     "screen": {
+      "title": "",
+      "body": "",
+      "buttons": []
+     },
+     "sound": {
+      "tts": "",
+      "bgm": "none",
+      "vol": null
+     },
+     "signals": [
+      "door.driver.open:true"
+     ],
+     "session": {
+      "s": 342,
+      "p": 0.017,
+      "endingStage": "STAY"
+     }
+    },
+    {
+     "t": 475,
+     "clock": "18:57:55",
+     "stage": "door_closed",
+     "levers": {
+      "hvacC": 22.0,
+      "fan": 1,
+      "recirc": false,
+      "seatHeat": 1,
+      "backrest": 0.62,
+      "ambient": {
+       "pct": 30,
+       "hex": "#FFFFFF",
+       "ms": 1500
+      },
+      "window": 0,
+      "lock": true,
+      "mirrorFolded": false
+     },
+     "screen": {
+      "title": "이어서 머물까요?",
+      "body": "",
+      "buttons": [
+       "이어서 머물기",
+       "마치기"
+      ]
+     },
+     "sound": {
+      "tts": "",
+      "bgm": "none",
+      "vol": null
+     },
+     "signals": [
+      "door.driver.open:false",
+      "seat.driver.occupied:true"
+     ],
+     "session": {
+      "s": 342,
+      "p": 0.017,
+      "endingStage": "STAY"
+     }
+    },
+    {
+     "t": 482,
+     "clock": "18:58:02",
+     "stage": "resume",
+     "levers": {
+      "hvacC": 22.0,
+      "fan": 1,
+      "recirc": false,
+      "seatHeat": 1,
+      "backrest": 0.62,
+      "ambient": {
+       "pct": 15,
+       "hex": "#FF9A3C",
+       "ms": 8000
+      },
+      "window": 0,
+      "lock": true,
+      "mirrorFolded": false
+     },
+     "screen": {
+      "title": "",
+      "body": "",
+      "buttons": [
+       "마치기"
+      ]
+     },
+     "sound": {
+      "tts": "",
+      "bgm": "none",
+      "vol": null
+     },
+     "signals": [
+      "ui:resume"
+     ],
+     "session": {
+      "s": 342,
+      "p": 0.017,
+      "endingStage": "STAY"
+     }
+    },
+    {
+     "t": 560,
+     "clock": "18:59:20",
+     "stage": "safety_exit",
+     "levers": {
+      "hvacC": 22.0,
+      "fan": 3,
+      "recirc": false,
+      "seatHeat": 0,
+      "backrest": 0.62,
+      "ambient": {
+       "pct": 30,
+       "hex": "#FFFFFF",
+       "ms": 0
+      },
+      "window": 0,
+      "lock": true,
+      "mirrorFolded": false
+     },
+     "screen": {
+      "title": "",
+      "body": "원래대로 돌렸어요.",
+      "buttons": []
+     },
+     "sound": {
+      "tts": "",
+      "bgm": "none",
+      "vol": null
+     },
+     "signals": [
+      "gear:R"
+     ],
+     "session": {
+      "s": 420,
+      "p": 0.164,
+      "endingStage": "STAY"
+     }
+    },
+    {
+     "t": 561,
+     "clock": "18:59:21",
+     "stage": "safety_exit",
+     "levers": {
+      "hvacC": 22.0,
+      "fan": 3,
+      "recirc": false,
+      "seatHeat": 0,
+      "backrest": 0.62,
+      "ambient": {
+       "pct": 30,
+       "hex": "#FFFFFF",
+       "ms": 0
+      },
+      "window": 0,
+      "lock": true,
+      "mirrorFolded": false
+     },
+     "screen": {
+      "title": "",
+      "body": "",
+      "buttons": []
+     },
+     "sound": {
+      "tts": "",
+      "bgm": "none",
+      "vol": null
+     },
+     "signals": [
+      "seat.backrest:set_rejected_50001"
+     ]
+    },
+    {
+     "t": 575,
+     "clock": "18:59:35",
+     "stage": "drive",
+     "levers": {
+      "hvacC": 22.0,
+      "fan": 3,
+      "recirc": false,
+      "seatHeat": 0,
+      "backrest": 0.62,
+      "ambient": {
+       "pct": 30,
+       "hex": "#FFFFFF",
+       "ms": 0
+      },
+      "window": 0,
+      "lock": true,
+      "mirrorFolded": false
+     },
+     "screen": {
+      "title": "",
+      "body": "",
+      "buttons": []
+     },
+     "sound": {
+      "tts": "",
+      "bgm": "none",
+      "vol": null
+     },
+     "signals": [
+      "gear:D",
+      "speedKph:6"
+     ]
+    },
+    {
+     "t": 650,
+     "clock": "19:00:50",
+     "stage": "after",
+     "levers": {
+      "hvacC": 22.0,
+      "fan": 3,
+      "recirc": false,
+      "seatHeat": 0,
+      "backrest": 0.62,
+      "ambient": {
+       "pct": 30,
+       "hex": "#FFFFFF",
+       "ms": 0
+      },
+      "window": 0,
+      "lock": true,
+      "mirrorFolded": false
+     },
+     "screen": {
+      "title": "",
+      "body": "등받이를 운전 자세로 돌릴까요?",
+      "buttons": [
+       "돌리기",
+       "그대로"
+      ]
+     },
+     "sound": {
+      "tts": "",
+      "bgm": "none",
+      "vol": null
+     },
+     "signals": [
+      "gear:P",
+      "prior.update:skipped_censored"
+     ]
+    }
+   ]
+  }
+ ]
+}
