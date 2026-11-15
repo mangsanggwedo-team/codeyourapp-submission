@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>골방 | 주차한 차가, 잠깐 골방이 됩니다</title>
+<meta name="description" content="골방은 주차한 차를 몇 분 동안 기도와 고요한 머묾의 방으로 바꾸고, 끝나면 조용히 되돌려 놓는 Pleos 앱입니다. 망상궤도, Pleos Code your App 2026 출품작.">
+<meta name="theme-color" content="#09080B">
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600&display=swap">
+<style>
+:root{
+  --room:#09080B; --room-2:#100E13; --hair:rgba(255,255,255,.08);
+  --t1:#EDEAF2; --t2:#A7A2B4; --t3:#8A8599;
+  --sill:#FFB15C; --stay:#FF9A3C; --ret:#FFC489; --accent:#8E7BEA;
+  --serif:"Noto Serif KR",serif;
+  --sans:"Pretendard",-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo",sans-serif;
+  --wrap:1120px; --pad:clamp(20px,5vw,64px);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--room);color:var(--t1);font:400 17px/1.75 var(--sans);word-break:keep-all;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:2px}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 var(--pad)}
+.skip{position:absolute;left:-9999px}.skip:focus{left:16px;top:16px;background:var(--t1);color:var(--room);padding:8px 12px;z-index:10}
+
+/* 상단 */
+.top{position:fixed;inset:0 0 auto;z-index:5;background:linear-gradient(var(--room) 40%,transparent)}
+.top .wrap{display:flex;justify-content:space-between;align-items:center;height:64px}
+.brand{font:400 19px/1 var(--serif);text-decoration:none;letter-spacing:.02em}
+.top nav{display:flex;gap:24px;font-size:14px;color:var(--t2)}
+.top nav a{text-decoration:none;padding:10px 0}
+.top nav a:hover{color:var(--t1)}
+
+/* 문턱선 */
+.sill{position:relative;height:2px;margin:0 auto;background:var(--sill);border-radius:2px;
+  box-shadow:0 0 6px rgba(255,177,92,.9),0 0 18px rgba(255,177,92,.35)}
+.sill::after{content:"";position:absolute;left:8%;right:8%;top:2px;height:120px;pointer-events:none;
+  background:radial-gradient(50% 100% at 50% 0,rgba(255,154,60,.22),transparent 70%)}
+.sill.short{width:72px;margin:0 0 40px}
+.sill.short::after{height:40px}
+.sill.ret{background:var(--ret)}
+
+/* 히어로 */
+.hero{min-height:100svh;display:grid;place-items:center;text-align:center;padding:120px var(--pad) 80px;position:relative}
+.hero h1{font:400 clamp(30px,5.2vw,64px)/1.35 var(--serif);margin:0 0 clamp(40px,7vh,72px);letter-spacing:-.01em}
+.hero .sill{width:min(820px,82vw);animation:close 8s linear 1.2s both}
+.hero .sill-in{opacity:0;animation:fadein 1.6s ease-out .3s forwards}
+@keyframes close{from{width:min(820px,82vw)}to{width:min(510px,52vw)}}
+@keyframes fadein{to{opacity:1}}
+.hero p.lede{max-width:34em;margin:clamp(96px,14vh,150px) auto 0;color:var(--t2);font-size:17px}
+.hero .meta{max-width:none;margin:0;position:absolute;bottom:28px;left:0;right:0;font-size:13px;color:var(--t3)}
+
+/* 섹션 */
+section{padding:clamp(96px,14vw,168px) 0;border-top:1px solid var(--hair)}
+h2{font:400 clamp(26px,3.4vw,40px)/1.45 var(--serif);margin:0 0 28px;letter-spacing:-.01em;max-width:22em}
+h3{font:600 18px/1.5 var(--sans);margin:0 0 8px}
+p{margin:0 0 1em;max-width:36em}
+.sub{color:var(--t2)}
+.small{font-size:14px;color:var(--t3)}
+.cite{font-size:13px;color:var(--t3)}
+
+/* 문제 */
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,5vw,72px);margin:64px 0 0}
+.stat b{display:block;font:400 clamp(56px,8vw,96px)/1 var(--serif);color:var(--t1);margin-bottom:16px;font-variant-numeric:tabular-nums}
+.stat p{color:var(--t2);margin:0 0 6px}
+
+/* 단계 */
+.stages{list-style:none;margin:72px 0 0;padding:0;counter-reset:s}
+.stage{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(24px,5vw,72px);align-items:center;padding:56px 0;border-top:1px solid var(--hair)}
+.stage .n{font-size:13px;color:var(--t3);font-variant-numeric:tabular-nums;margin-bottom:12px}
+.stage blockquote{margin:0 0 16px;font:400 clamp(21px,2.2vw,26px)/1.5 var(--serif)}
+.stage p{color:var(--t2);margin:0}
+.screen{border-radius:10px;overflow:hidden;border:1px solid var(--hair);background:#000}
+figure{margin:0}
+figcaption{font-size:13px;color:var(--t3);margin-top:12px}
+
+/* 차가 하는 일 */
+.levers{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--hair);border:1px solid var(--hair);border-radius:10px;overflow:hidden;margin:56px 0 40px}
+.lever{background:var(--room);padding:28px 22px}
+.lever h3{font-size:16px}
+.lever p{font-size:14px;color:var(--t2);margin:0}
+.measure{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 28px;padding-top:8px}
+.measure b{font:400 clamp(40px,5vw,56px)/1 var(--serif);font-variant-numeric:tabular-nums}
+.measure b span{color:var(--t3);font-size:.6em}
+
+/* 그림 판 */
+.plate{display:block;background:#fff;border-radius:8px;overflow:hidden;max-width:880px;margin:56px auto 0}
+.plate img{width:100%}
+.plate+figcaption{max-width:880px;margin:12px auto 0}
+
+/* 사생활 */
+.vows{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(24px,4vw,48px);margin:56px 0 0}
+.vows div{border-top:1px solid var(--hair);padding-top:24px}
+.vows b{display:block;font:400 22px/1.4 var(--serif);margin-bottom:10px}
+.vows p{color:var(--t2);font-size:15px;margin:0}
+
+/* 두 판 */
+.editions{display:grid;grid-template-columns:7fr 5fr;gap:clamp(24px,4vw,56px);margin-top:56px}
+.edition h3{font:400 24px/1.4 var(--serif);margin-bottom:6px}
+.edition .sub{font-size:15px;margin-bottom:24px}
+.phones{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.phones img{border-radius:12px;border:1px solid var(--hair)}
+
+/* 사업 */
+.biz{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(24px,4vw,56px);margin:56px 0 0}
+.formula{font:400 clamp(20px,2.4vw,26px)/1.6 var(--serif);margin:48px 0 8px}
+.tag{font:500 12px/1 var(--sans);color:var(--ret);border:1px solid rgba(255,196,137,.4);border-radius:4px;padding:4px 6px;vertical-align:middle;margin-left:6px}
+
+/* 링크 */
+.links{list-style:none;padding:0;margin:48px 0 0;border-top:1px solid var(--hair)}
+.links li{border-bottom:1px solid var(--hair)}
+.links a{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px;align-items:baseline;padding:22px 0;text-decoration:none}
+.links a strong{font:400 22px/1.4 var(--serif)}
+.links a span{color:var(--t3);font-size:14px;text-align:right}
+.links a:hover strong{text-decoration:underline;text-decoration-color:var(--sill);text-underline-offset:6px;text-decoration-thickness:1px}
+
+footer{border-top:1px solid var(--hair);padding:56px 0 72px;color:var(--t3);font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+
+/* 드러남: 한 번만, 조용히 */
+.rv{opacity:0;transform:translateY(8px);transition:opacity .6s ease-out,transform .6s ease-out}
+.rv.in{opacity:1;transform:none}
+.no-js .rv{opacity:1;transform:none}
+
+@media (max-width:900px){
+  .stage,.editions,.biz{grid-template-columns:1fr}
+  .levers{grid-template-columns:1fr 1fr}
+  .levers .lever:last-child{grid-column:1/-1}
+  .vows{grid-template-columns:1fr}
+}
+@media (max-width:560px){
+  body{font-size:16px}
+  .top nav a.opt{display:none}
+  .stats{grid-template-columns:1fr}
+  .levers{grid-template-columns:1fr}
+  .links a{grid-template-columns:1fr}
+  .links a span{text-align:left}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .hero .sill{animation:none;width:min(640px,66vw)}
+  .hero .sill-in{animation:none;opacity:1}
+  .rv{opacity:1;transform:none;transition:none}
+}
+</style>
+</head>
+<body class="no-js">
+<a class="skip" href="#problem">본문으로 건너뛰기</a>
+<header class="top"><div class="wrap">
+  <a class="brand" href="#">골방</a>
+  <nav aria-label="바로가기">
+    <a class="opt" href="#stages">여섯 단계</a>
+    <a class="opt" href="#business">사업</a>
+    <a href="../sim/journey/index.html">시뮬레이션</a>
+    <a href="#links">자료</a>
+  </nav>
+</div></header>
+
+<main>
+<section class="hero" style="border-top:0" aria-label="소개">
+  <div>
+    <h1>주차한 차가,<br>잠깐 골방이 됩니다.</h1>
+    <div class="sill-in"><div class="sill" role="presentation"></div></div>
+    <p class="lede">집에 들어가기 전 차 안의 몇 분을 휴대폰 대신 기도와 고요한 머묾으로. 차가 먼저 묻고, 문을 닫고, 방해하지 않고, 끝날 때를 알아채 조용히 되돌려 놓습니다.</p>
+  </div>
+  <p class="meta">Pleos Code your App 2026 출품작</p>
+</section>
+
+<section id="problem"><div class="wrap">
+  <div class="sill short rv" role="presentation"></div>
+  <h2 class="rv">매일 기도하는 사람은 많지만,<br>문을 닫을 방이 없습니다.</h2>
+  <p class="sub rv">집에는 가족이, 일터에는 동료가 있습니다. 그래서 이미 주차한 차에 몇 분 앉아 있지만, 밝은 실내등과 켜진 화면, 잠기지 않은 문 사이에서 차는 기도의 자리가 되지 못하고 손은 휴대폰으로 갑니다.</p>
+  <div class="stats">
+    <div class="stat rv"><b>25%</b><p>한국인 가운데 매일 기도하는 사람</p><span class="cite">Pew Research Center, 2025c</span></div>
+    <div class="stat rv"><b>77%</b><p>차 안에서 쉬는 습관이 있는 영국 차량 보유자</p><span class="cite">Halfords, 2025</span></div>
+  </div>
+</div></section>
+
+<section id="stages"><div class="wrap">
+  <div class="sill short rv" role="presentation"></div>
+  <h2 class="rv">화면에는 빛 한 줄과 한 문장만 있습니다.</h2>
+  <p class="sub rv">닫힌 문 아래로 새는 빛 한 줄. 여섯 단계 내내 같은 자리에서 길이와 색과 밝기만 바뀝니다. 차 안 앰비언트 빛과 같은 색이라 화면은 실내 빛의 일부처럼 보입니다.</p>
+  <ol class="stages">
+    <li class="stage rv">
+      <div><div class="n">0 준비</div><blockquote>잠시 머물다 갈까요</blockquote><p>주차하면 차가 먼저 조용히 묻습니다. 보던 화면을 다 덮지 않도록 반쪽으로 뜨고, 거절해도 됩니다. 같은 곳에서 두 번 거절하면 다시 묻지 않습니다.</p></div>
+      <figure><img class="screen" src="assets/s1.webp" width="1600" height="900" loading="lazy" alt="차량 화면 왼쪽 절반에 '잠시 머물다 갈까요, 기도 15분' 문장과 흐린 흰 빛 한 줄, 머물기와 오늘은 그냥 갈게요 버튼"></figure>
+    </li>
+    <li class="stage rv">
+      <div><div class="n">1 문턱</div><blockquote>문을 닫고, 숨을 한 번 고를게요.</blockquote><p>바꾸기 전에 원래 값을 저장합니다. 문을 잠그고 창을 닫고, 빛을 8초에 걸쳐 호박색으로 낮춥니다. 차가 하는 일은 화면 아래에 낱말로 적습니다.</p></div>
+      <figure><img class="screen" src="assets/s2.webp" width="1600" height="900" loading="lazy" alt="'문을 닫고, 숨을 한 번 고를게요.' 문장 아래 호박색 빛 한 줄, 바닥에 문 잠김, 창문 닫힘, 빛 낮추는 중 표시"></figure>
+    </li>
+    <li class="stage rv">
+      <div><div class="n">2 숨</div><blockquote>들이쉬고, 내쉬고</blockquote><p>원이 들숨 4초, 날숨 6초에 맞춰 커졌다 작아집니다. 숨을 재거나 채점하지 않습니다.</p></div>
+      <figure><img class="screen" src="assets/s3.webp" width="1600" height="900" loading="lazy" alt="빛 한 줄 위에 '들이쉬고'라고 적힌 호박색 원"></figure>
+    </li>
+    <li class="stage rv">
+      <div><div class="n">3 머묾</div><blockquote>(차는 말하지 않습니다)</blockquote><p>빛은 가장 짧고 가장 어둡고, 움직이지 않습니다. 아무도 재촉하지 않는 시간입니다.</p></div>
+      <figure><img class="screen" src="assets/s4.webp" width="1600" height="900" loading="lazy" alt="거의 검은 화면 가운데 짧고 어두운 호박색 빛 한 줄"></figure>
+    </li>
+    <li class="stage rv">
+      <div><div class="n">4 돌아옴</div><blockquote>이제 천천히 돌아올게요.</blockquote><p>마칠 때를 알아채면 빛을 25초에 걸쳐 따뜻한 흰빛으로 넓히고, 등받이를 운전 자세로 세웁니다. 내릴 때보다 천천히 올라옵니다.</p></div>
+      <figure><img class="screen" src="assets/s5.webp" width="1600" height="900" loading="lazy" alt="'이제 천천히 돌아올게요.' 문장 아래 넓어지는 웜화이트 빛 한 줄, 바닥에 빛 올리는 중, 등받이 곧 운전 자세로 표시"></figure>
+    </li>
+    <li class="stage rv">
+      <div><div class="n">5 출발 준비</div><blockquote>끝났어요.</blockquote><p>좌석과 공조, 빛을 원래대로 돌린 값을 보여 줍니다. 빛 한 줄은 화면 끝에서 끝까지 이어집니다. 문이 열렸습니다.</p></div>
+      <figure><img class="screen" src="assets/s6.webp" width="1600" height="900" loading="lazy" alt="'끝났어요. 좌석과 공조를 원래대로 돌렸어요.' 문장과 등받이, 바람, 온도, 빛 복원 값, 화면 폭 전체의 빛 한 줄, 닫기 버튼"></figure>
+    </li>
+  </ol>
+  <figure class="rv"><a class="plate" href="assets/fig-3-1.webp"><img src="assets/fig-3-1.webp" width="1600" height="1790" loading="lazy" alt="그림 3-1. 여섯 단계 띠: 단계마다 화면, 빛, 차량 레버가 어떻게 바뀌는지"></a><figcaption>그림 3-1. 여섯 단계와 단계마다 바뀌는 것</figcaption></figure>
+</div></section>
+
+<section id="car"><div class="wrap">
+  <div class="sill short rv" role="presentation"></div>
+  <h2 class="rv">차가 대신 하는 일</h2>
+  <p class="sub rv">사용자는 아무것도 설정하지 않습니다. 차가 방을 만들고, 끝나면 저장해 둔 값으로 돌려놓습니다. 읽지 못한 값은 바꾸지 않습니다.</p>
+  <div class="levers rv">
+    <div class="lever"><h3>문</h3><p>잠그고, 끝나면 원래대로. 문이 열리면 페이드 없이 즉시 복원합니다.</p></div>
+    <div class="lever"><h3>창문</h3><p>닫아서 바깥 소리와 시선을 막습니다.</p></div>
+    <div class="lever"><h3>좌석</h3><p>등받이를 기대게 했다가 운전 자세로 세웁니다.</p></div>
+    <div class="lever"><h3>공조</h3><p>바람을 낮추고, 마칠 때 바깥 공기로 맑게 끝냅니다.</p></div>
+    <div class="lever"><h3>빛</h3><p>앰비언트를 화면의 빛 한 줄과 같은 색, 같은 시계로 움직입니다.</p></div>
+  </div>
+  <div class="measure rv">
+    <b>9<span> / 10</span></b>
+    <p class="sub" style="margin:0">Pleos 에뮬레이터에서 제어 호출 10개 중 9개가 반영됐습니다. 좌석과 잠금은 P단에서만 허용됩니다.</p>
+  </div>
+</div></section>
+
+<section id="ending"><div class="wrap">
+  <div class="sill short rv" role="presentation"></div>
+  <h2 class="rv">버튼 없이 끝납니다.</h2>
+  <p class="sub rv">타이머는 기도 중인 사람을 자르고, "마치겠습니까?"는 눈을 뜨고 답하게 만듭니다. 골방은 마칠 준비 확률 p를 매 초 다시 계산합니다. 이 사람의 지난 머묾 길이를 사전분포로, 화면 터치와 등받이 같은 차 안의 신호를 관측으로 삼는 베이지안 모델입니다. p가 0.5를 넘으면 빛을 아주 천천히 올리고, 0.7에서 소리를 줄이고, 0.85에서 한 문장을 한 번만 말합니다.</p>
+  <figure class="rv"><a class="plate" href="assets/fig-5-3.webp"><img src="assets/fig-5-3.webp" width="1600" height="2188" loading="lazy" alt="그림 5-3. 시나리오 A에서 마칠 준비 확률 p가 경과 시간으로 천천히 오르다 화면 깨움과 등받이 세움 신호에서 뛰어올라 0.85를 넘는 곡선"></a><figcaption>그림 5-3. 마침 모델. 설계값 시뮬레이션이며 실차 실측이 아닙니다.</figcaption></figure>
+</div></section>
+
+<section id="privacy"><div class="wrap">
+  <div class="sill short rv" role="presentation"></div>
+  <h2 class="rv">기도는 차 밖으로 나가지 않습니다.</h2>
+  <div class="vows">
+    <div class="rv"><b>마이크를 쓰지 않습니다</b><p>기도 내용을 듣거나 녹음하거나 분석하지 않습니다.</p></div>
+    <div class="rv"><b>서버가 없습니다</b><p>계정도 동기화도 없습니다. 머묾 길이의 학습도 기기 안에서 끝납니다.</p></div>
+    <div class="rv"><b>아무것도 보내지 않습니다</b><p>기록은 차 안에만 남습니다. 그래서 사용자당 변동비도 0에 가깝습니다.</p></div>
+  </div>
+  <figure class="rv"><a class="plate" href="assets/fig-5-1.webp"><img src="assets/fig-5-1.webp" width="1600" height="1465" loading="lazy" alt="그림 5-1. 골방 구조도: 차량과 분리된 코어, 차량 어댑터, 기기 안에 머무는 데이터"></a><figcaption>그림 5-1. 구조도</figcaption></figure>
+</div></section>
+
+<section id="editions"><div class="wrap">
+  <div class="sill short rv" role="presentation"></div>
+  <h2 class="rv">같은 코어, 두 가지 판</h2>
+  <div class="editions">
+    <div class="edition rv">
+      <h3>Pleos판</h3>
+      <p class="sub">차가 문, 창문, 좌석, 공조, 빛을 직접 바꾸고 되돌립니다. 기본 탑재를 목표로 합니다.</p>
+      <img class="screen" src="assets/s2.webp" width="1600" height="900" loading="lazy" alt="Pleos 차량 화면의 문턱 단계">
+    </div>
+    <div class="edition rv">
+      <h3>휴대폰 간이판</h3>
+      <p class="sub">Pleos가 없는 차를 위해. 차량 제어 없이 블루투스 끊김과 정지 감지로 문턱, 숨, 머묾, 마침을 합니다.</p>
+      <div class="phones">
+        <img src="assets/p1.webp" width="780" height="1688" loading="lazy" alt="휴대폰 화면: 잠시 머물다 갈까요">
+        <img src="assets/p2.webp" width="780" height="1688" loading="lazy" alt="휴대폰 화면: 내쉬고">
+        <img src="assets/p3.webp" width="780" height="1688" loading="lazy" alt="휴대폰 화면: 끝났어요">
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<section id="business"><div class="wrap">
+  <div class="sill short rv" role="presentation"></div>
+  <h2 class="rv">주차된 시간을 매일 쓰는 차 안 경험으로</h2>
+  <div class="biz">
+    <div class="rv"><h3>1순위: 현대자동차 기본 탑재 라이선스</h3><p class="sub">Vehicle SDK의 제어와 복원을 가장 잘 보여 주는 기본 앱. 주행이 아닌 주차 시간에 차량 제어를 매일 쓰게 만듭니다.</p></div>
+    <div class="rv"><h3>2순위: 고급 기능 구독</h3><p class="sub">심화 의례 팩, 상황별 프리셋, 기도 일지. 안전, 복원, 마침, 개인 학습은 무료로 둡니다.</p></div>
+  </div>
+  <p class="formula rv">MAU = 국내 Pleos 탑재 차량 × 설치율 × 월 활성 비율<br>30만 대 × 5% × 60% ≈ 9,000명<span class="tag">가정</span></p>
+  <p class="small rv">2027년 말 기준. 보수 3,000명, 낙관 25,200명. 세 값 모두 팀 가정이며 식을 그대로 공개합니다.</p>
+  <div>
+    <figure class="rv"><a class="plate" href="assets/fig-6-4.webp"><img src="assets/fig-6-4.webp" width="1600" height="1015" loading="lazy" alt="그림 6-4. MAU 산식과 보수, 기준, 낙관 시나리오"></a><figcaption>그림 6-4. 예상 MAU [가정]</figcaption></figure>
+    <figure class="rv"><a class="plate" href="assets/fig-6-5.webp"><img src="assets/fig-6-5.webp" width="1600" height="1843" loading="lazy" alt="그림 6-5. 확장 경로: 휴대폰 간이판 검증에서 Pleos 차량 기본 탑재, 해외와 다른 의례 팩으로"></a><figcaption>그림 6-5. 확장 경로</figcaption></figure>
+  </div>
+</div></section>
+
+<section id="links"><div class="wrap">
+  <div class="sill short rv" role="presentation"></div>
+  <h2 class="rv">직접 보기</h2>
+  <ul class="links rv">
+    <li><a href="../sim/journey/index.html"><strong>여정 시뮬레이션</strong><span>브라우저에서 시나리오 A, 귀가 직전 기도 15분 재생</span></a></li>
+    <li><a href="https://github.com/mangsanggwedo-team/codeyourapp-submission"><strong>GitHub 저장소</strong><span>코드, 테스트, 실행 방법</span></a></li>
+    <li><a href="../apk/망상궤도_골방_release.apk" download><strong>APK 내려받기</strong><span>Pleos Connect 에뮬레이터 v2.1.0, 약 20MB</span></a></li>
+    <li><a href="../docs/"><strong>문서</strong><span>문제, 해법, 구조, 차량 연동, 사업</span></a></li>
+  </ul>
+</div></section>
+</main>
+
+<footer><div class="wrap">
+  <span>Pleos Code your App 2026 출품작</span>
+  <span>망상궤도</span>
+</div></footer>
+
+<script>
+document.body.classList.remove('no-js');
+(function(){
+  var els=document.querySelectorAll('.rv');
+  if(!('IntersectionObserver' in window)||matchMedia('(prefers-reduced-motion: reduce)').matches){els.forEach(function(e){e.classList.add('in')});return}
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px'});
+  els.forEach(function(e){io.observe(e)});
+})();
+</script>
+</body>
+</html>

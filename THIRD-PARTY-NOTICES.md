@@ -7,3 +7,4 @@
 | 에뮬레이터 화면 캡처 | 팀 직접 캡처 | 캡처 조건은 각 캡션에 ([DESIGN](DESIGN.md) 4절) |
 | 앱 의존성 | 앱 골격 생성 후 기입 | 라이브러리별 라이선스 |
 | 재현 무대 `sim/` (three.js MIT · Vite MIT · Poly Haven HDRI CC0, HDRI는 저장소에 넣지 않음) | npm · polyhaven.com | 상세 [sim/THIRD-PARTY.md](sim/THIRD-PARTY.md) |
+| 랜딩 페이지 `site/` 글꼴: Pretendard (SIL OFL 1.1) · Noto Serif KR (SIL OFL 1.1) | jsDelivr CDN · Google Fonts. 저장소에 파일을 넣지 않고 링크로 불러옴 | 각 글꼴의 OFL. `site/assets/`의 그림과 화면은 모두 팀 자작 |

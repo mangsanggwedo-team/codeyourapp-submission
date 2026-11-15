@@ -8,6 +8,7 @@
 -->
 
 <p align="center">
+  <a href="https://mangsanggwedo-team.github.io/codeyourapp-submission/site/"><strong>소개 페이지</strong></a> ·
   <a href="#실행-방법"><strong>실행 방법</strong></a> ·
   <a href="docs/README.md"><strong>문서</strong></a> ·
   <a href="docs/05-demo.md"><strong>시연 시나리오</strong></a> ·
