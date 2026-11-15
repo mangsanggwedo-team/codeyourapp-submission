@@ -1,0 +1,132 @@
+project:
+  name: "룸19"
+  domain: "in-vehicle-ritual-app"
+  stage: "competition-submission (2관문: MLP 정의·사용자 여정·모델링, PM 검토 대기)"
+  owner: "PM (팀 망상궤도)"
+  repo: "codeyourapp-submission (public), prj-2026-hyundai-codeyourapp (private)"
+  last_updated: "2026-11-15"
+  method: "Idea -> DDBM -> Harness -> SDD -> Evidence -> Demo/Pitch -> Handoff"
+  canonical: "60_submission/harness/ (40_app/harness/docs/ 는 정본 아님)"
+
+gates:
+  gate1_intake_ddbm: "작성 완료, PM 검토 대기 (GATE1_검토요청.md)"
+  gate2_product_definition: "작성 완료, PM 검토 대기 (GATE2_검토요청.md). 06 13~16절, 08 F-18~F-22, 05 9절, 09 5~6절, models/ 10장. docs/_병합대기/ 와의 병합은 아직"
+  gate3_architecture_controls: "대기. 07, 09, 10 은 옮기기만 함. rules/, evals/ 는 TODO 틀"
+
+artifacts:
+  source_log: "docs/00_source-log.md"          # 1관문
+  meeting_log: "docs/01_meeting-log.md"        # 1관문
+  business_model: "docs/01_business-model.md"  # 1관문
+  ddbm_canvas_source: "docs/01_ddbm_canvas.json"  # 렌더러 ../proposal/visuals/_canvas.py
+  cps: "docs/02_cps.md"                        # 2관문 대기
+  principles: "docs/03_principles.md"          # 2관문 대기
+  definitions: "docs/04_definitions.md"        # 2관문 대기
+  domain_model: "docs/05_domain-model.md"      # 2관문 대기
+  prd: "docs/06_prd.md"                        # 2관문 대기
+  architecture: "docs/07_architecture.md"      # 3관문 대기
+  feature_spec: "docs/08_feature-spec.md"      # 2관문 대기
+  flow: "docs/09_flow.md"                      # 3관문 대기
+  eval_plan: "docs/10_eval-plan.md"            # 3관문 대기
+  change_log: "docs/11_change-log.md"
+  handoff: "docs/12_handoff.md"                # TODO
+  gate1_review: "GATE1_검토요청.md"
+  gate2_review: "GATE2_검토요청.md"
+  models: "models/ (PNG 10장, 원본 models/src/, 렌더러 models/build.py)"
+  merge_inputs: "docs/_병합대기/"
+  proposal_5_6: "../proposal/2026-11-15_5-6_최종안.md, ../proposal/2026-11-15_5-6_v2.md"
+
+rules:   # 전부 TODO 틀, 3관문
+  naming: "rules/naming-rules.md"
+  imports: "rules/import-export-rules.md"
+  ui: "rules/ui-rules.md"
+  data: "rules/data-rules.md"
+  agent: "rules/agent-rules.md"
+  compliance: "rules/compliance-rules.md"
+
+evals:   # 전부 TODO 틀, 3관문
+  golden_cases: "evals/golden-cases.md"
+  rubric: "evals/rubric.md"
+  failure_modes: "evals/failure-modes.md"
+
+quality_gates:
+  intake_sources_traceable: true     # 1관문. S1~S38, 대회 요건 표
+  ddbm_11_blocks_complete: true      # 1관문. PM 검토 전
+  ddbm_pm_reviewed: false
+  docs_complete: false
+  principles_enforced: false
+  domain_model_complete: false       # 초안 두 벌이 있으나 2관문 병합 전이라 false 로 되돌림
+  features_trace_to_problem: false   # 위와 같음
+  lint_rules_defined: false
+  evals_defined: false
+  demo_flow_rehearsed: true          # 이전 값 유지(여정 시뮬레이션, 시연영상 초안). 이번 실행에서 다시 확인하지 않음
+  known_risks_disclosed: true        # Risk-ID 15개
+  handoff_ready: false
+
+risks:
+  - {id: RISK-SAFETY-001, summary: "주행 중 의례 진행, 기어 이탈 중 좌석 이동, 잠긴 상태의 비상", mitigation: "P단·차속 0·착좌일 때만 명령, 이탈 시 즉시 복원, 값을 모르면 금지"}
+  - {id: RISK-SLEEP-001, summary: "차 안에서 잠듦, 닫힌 공간의 공기 정체", mitigation: "상한 30분, 10분마다 외기, 자세 복원과 바깥 공기로 깨움"}
+  - {id: RISK-IDLE-001, summary: "내연기관 공회전, 지역 공회전 제한", mitigation: "전기차·하이브리드 우선, 공조 최소와 시간 상한"}
+  - {id: RISK-BATTERY-001, summary: "시동 끈 상태의 배터리와 복원 불확실", mitigation: "시동 상태 확인 후 시작, 복원은 시동 끄기 전"}
+  - {id: RISK-PRIVACY-001, summary: "팩 종류와 기도 시각이 신앙을 드러냄", mitigation: "마이크·서버·네트워크 없음, 전체 삭제, 팩 종류는 집계 제외"}
+  - {id: RISK-RELIGION-001, summary: "종교 편향, 교리 오류, 브랜드가 한 종교와 묶임", mitigation: "감수 없이 문구 내지 않음, 선택형 진입, 엔진과 팩 분리"}
+  - {id: RISK-CONTENT-001, summary: "성경 번역본·찬양 저작권, 교단 차이", mitigation: "자체 문구로 시작, 인용은 권리 확인 뒤"}
+  - {id: RISK-DEMAND-001, summary: "차 안 기도 수요가 가설", mitigation: "간이판 파일럿으로 재방문과 완주율 측정"}
+  - {id: RISK-NAME-001, summary: "같은 이름의 기도 앱, 낡은 어감", mitigation: "가제 유지, 본선 전 상표 검색과 대체 후보"}
+  - {id: RISK-DEPEND-001, summary: "의존, 공동체 예배 대체 오해, 사용 시간 늘리기 유혹", mitigation: "연속 기록 보상과 시간 목표 없음, 세션 상한"}
+  - {id: RISK-EXCLUDE-001, summary: "무교와 다른 종교 사용자의 배제", mitigation: "엔진과 팩 분리, 확장 계획, 두 번 거절하면 다시 묻지 않음"}
+  - {id: RISK-BUYER-001, summary: "현대자동차 한 곳 의존, 탑재 라이선스 방식 미확인", mitigation: "마켓 등록에서 협의로 가는 단계 경로, 구독과 파일럿 자료"}
+  - {id: RISK-MEASURE-001, summary: "무전송과 MAU·유지율 측정의 충돌", mitigation: "앱 마켓 통계 우선, 유지율은 파일럿에서"}
+  - {id: RISK-MODEL-001, summary: "마침 오판, 시연에서 신호 재현 안 됨", mitigation: "비대칭 문턱, 되돌릴 수 있는 것부터, 재현되는 신호로 시연"}
+  - {id: RISK-APPROVAL-001, summary: "양산 제어 권한 승인, 차종별 지원 차이", mitigation: "지원 조회 후 제어, 미지원 레버 없이도 의례 성립"}
+
+decisions:
+  - {id: DEC-001, summary: "2026-11-10 현대 UX 결에 맞는 새 경험을 찾는다"}
+  - {id: DEC-002, summary: "2026-11-14 기도(명상) 방향"}
+  - {id: DEC-003, summary: "2026-11-14 분담·분량·산출물, 숏폼 안 함"}
+  - {id: DEC-004, summary: "2026-11-15 기도 컨셉 유지, 타깃 좁히기"}
+  - {id: DEC-005, summary: "2026-11-15 가제 룸19"}
+  - {id: DEC-006, summary: "수익 1순위 현대자동차 기본 탑재 라이선스, 고도 기능 구독"}
+  - {id: DEC-007, summary: "휴대폰 간이판을 본선 전에도 준비(검증·유입)"}
+  - {id: DEC-008, summary: "첫 타깃: 매일 기도하는 한국 개신교 성인 운전자"}
+  - {id: DEC-009, summary: "종교 콘텐츠 파트너 미정, 확정처럼 쓰지 않음"}
+  - {id: DEC-010, summary: "조명 색은 근거로 결정, 그 전까지 시나리오 값 [가정]"}
+  - {id: DEC-011, summary: "이름 룸19 유지, 겹침은 위험으로 기록"}
+  - {id: DEC-012, summary: "무교 조용히 머물기는 확장 단계에서"}
+  - {id: DEC-013, summary: "P단 전용, 마침 모델로 닫음, 기록은 기기 밖으로 나가지 않음, 마이크·서버 없음"}
+  - {id: DEC-014, summary: "하네스 정본은 60_submission/harness, ID 체계 통일 (PM 확인 대기)"}
+  - {id: DEC-015, summary: "바깥 문서에는 수익 구조와 MAU 식만, 안전·복원·마침·개인 학습은 무료 (PM 확인 대기)"}
+  - {id: DEC-017, summary: "2026-11-15 범위 기준은 MLP: 머물기 한 번, 레버 넷(잠금·빛·바람·등받이), 들어섬 신호, 메뉴 없는 끝, 기도 한 번은 무료 (PM 확인 대기)"}
+  - {id: DEC-018, summary: "2026-11-15 PM 정정: 등받이는 시작할 때 뒤로 조금, 돌아옴에서 운전 자세로"}
+  - {id: DEC-019, summary: "2026-11-15 PM 추가 요구 반영: 들어섬 순서, 함께 머묾과 추천, 뜻을 짐작하는 건넴, 멈춘 자리에서 잇는 멈춤, 목소리 규칙 (세부는 PM 확인 대기)"}
+  - {id: DEC-016, summary: "2026-11-15 쓰는 순간은 둘: 귀가 직전 주차한 뒤, 일과 중 정한 기도 시간에 세워 둔 차로 가서. 첫 타깃과 무교 확장은 그대로"}
+
+open_questions:
+  - {id: OQ-01, summary: "라이선스 단위와 금액", default: "첫 해 연 정액, 이후 대당 [가정]", status: "열림"}
+  - {id: OQ-02, summary: "무료와 유료의 경계", default: "개인 학습 전부 무료", status: "기본값 진행"}
+  - {id: OQ-03, summary: "무전송에서 MAU·유지율 측정", default: "앱 마켓 통계만, 유지율은 파일럿", status: "열림"}
+  - {id: OQ-04, summary: "종교 콘텐츠 파트너 첫 접근", default: "목회자·실천신학 자문 감수, 문구는 자체 작성", status: "열림"}
+  - {id: OQ-05, summary: "간이판 범위와 시점, 파일럿 기간", default: "본선 전 10명 1주, 본선 후 30명 4주", status: "열림"}
+  - {id: OQ-06, summary: "이름의 겹침과 어감", default: "가제 유지", status: "기본값 진행"}
+  - {id: OQ-07, summary: "구독 가격과 결제 경로", default: "월 4,900원 [가정], 경로 미정", status: "기본값 진행"}
+  - {id: OQ-08, summary: "첫 화면에서 종교를 드러내는 방식", default: "사용자가 고르는 진입", status: "열림"}
+  - {id: OQ-09, summary: "머묾·돌아옴 조명 값", default: "D14 v2 (호박색 15%, 웜화이트 25초)", status: "열림"}
+  - {id: OQ-10, summary: "기획서 6번에 수익 숫자", default: "구조와 식만", status: "닫힘"}
+  - {id: OQ-11, summary: "간이판의 개인 값을 차로 옮기나", default: "옮기지 않음", status: "열림"}
+  - {id: OQ-12, summary: "MAU 식과 첫 타깃의 정합", default: "식 유지, 보조 식 준비", status: "열림"}
+  - {id: OQ-13, summary: "현대자동차에 무엇을 파나, 라이선스까지의 경로", default: "앱을 팔고 단계 경로", status: "열림"}
+  - {id: OQ-14, summary: "비용 가정의 인원과 인건비", default: "전담 3명 [가정]", status: "기본값 진행"}
+  - {id: OQ-15, summary: "개발 계획 문서의 자리", default: "SDD 단계에서 sdd/ 로", status: "기본값 진행"}
+  - {id: OQ-16, summary: "공개 저장소 사업 문서를 PM 결정에 맞춰 고치나", default: "타깃 문장만 수정", status: "열림"}
+  - {id: Q-PRD-001, summary: "시나리오 C 재생 데이터의 의향", status: "2관문"}
+  - {id: Q-PRD-002, summary: "제안 카드 무응답 시간 60초 [가정]", status: "2관문"}
+  - {id: Q-PRD-003, summary: "착좌·벨트·브레이크·오디오 포커스·시동 끔 실측", status: "2관문"}
+  - {id: Q-PRD-004, summary: "성경 번역본 인용 사용 조건", status: "2관문"}
+  - {id: Q-PRD-006, summary: "기본 길이 15분인가 10분인가", default: "15분", status: "2관문 (GATE2 질문 1)"}
+  - {id: Q-PRD-007, summary: "등받이를 뒤로 보내는 양과 졸음, 동승자가 있을 때", default: "짧게, 동승자 있으면 움직이지 않음", status: "2관문 (GATE2 질문 2)"}
+  - {id: Q-PRD-008, summary: "끝 화면의 조금 더 머물기", default: "끝이 일렀을 법할 때만 하나, 평소는 길게 누름", status: "2관문 (GATE2 질문 3)"}
+  - {id: Q-PRD-009, summary: "말로 끼어들기와 마이크 권한", default: "MLP에 넣지 않음, 가능성만 확인", status: "2관문 (GATE2 질문 4)"}
+  - {id: Q-PRD-010, summary: "함께 머묾의 본선 범위", default: "설계만, 시연은 혼자", status: "2관문 (GATE2 질문 5)"}
+  - {id: Q-PRD-011, summary: "바꾼 문구와 감수", default: "감수 전 초안으로 시연", status: "2관문 (GATE2 질문 6)"}
+  - {id: Q-PRD-012, summary: "에뮬레이터에서 들어가는 길(직접 열기 대 스스로 뜨는 제안)", default: "직접 열기", status: "2관문 (GATE2 질문 7)"}
+  - {id: Q-PRD-013, summary: "본선 전 인터뷰와 기록 없음 유지", default: "5~8명 인터뷰, 기록 없음 유지", status: "2관문 (GATE2 질문 8)"}
+  - {id: Q-PRD-005, summary: "기도 시간 알림: 원칙 P7 예외 범위, Pleos판만 쓰는 사용자에게 알릴 경로, 무료 범위", default: "본인이 정한 시각에 휴대폰으로 한 번, 무료 [가정]", status: "2관문"}

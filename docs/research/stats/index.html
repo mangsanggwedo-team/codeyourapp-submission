@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>골방 · 숫자로 보는 차 안의 머묾</title>
+<title>룸19 · 숫자로 보는 차 안의 머묾</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
 <script src="https://cdn.jsdelivr.net/npm/d3-sankey@0.12.3/dist/d3-sankey.min.js"></script>
@@ -70,7 +70,7 @@ footer{padding:48px 0 80px;color:var(--mute);font-size:12px;border-top:1px solid
 
 <header class="hero"><div class="wrap">
   <div class="eyebrow">망상궤도 · Code your App · 통계 인사이트 · 2026.11.15</div>
-  <h1>차 안의 <em>골방</em>,<br>숫자로 보면</h1>
+  <h1>차 안의 <em>룸19</em>,<br>숫자로 보면</h1>
   <p class="lede">누가 차에 머무는지, 그 시간은 얼마인지, 어떤 차가 그 시간을 바꿀 수 있는지. 한국에서 시작해 북미와 세계로. 슬라이더를 움직이면 가정이 바뀌고 그림이 다시 계산됩니다.</p>
   <div class="legend-trust">
     <span><i class="sw solid"></i>원문 확인 (PT에서 그대로 인용 가능)</span>
@@ -87,11 +87,11 @@ footer{padding:48px 0 80px;color:var(--mute);font-size:12px;border-top:1px solid
 <main class="wrap">
 
 <section class="sec" id="A">
-  <div class="sec-h"><span class="n">A</span><h2>한국: 누가, 어떤 차로 골방에 들어가나</h2></div>
-  <p class="sec-sub">운전자 가운데 혼자 있고 싶을 때 차에 머무는 사람, 그중 종교가 있는 사람과 없는 사람, 그리고 그들이 탄 차가 골방을 얼마나 자동으로 만들 수 있는지.</p>
+  <div class="sec-h"><span class="n">A</span><h2>한국: 누가, 어떤 차로 룸19에 들어가나</h2></div>
+  <p class="sec-sub">운전자 가운데 혼자 있고 싶을 때 차에 머무는 사람, 그중 종교가 있는 사람과 없는 사람, 그리고 그들이 탄 차가 룸19를 얼마나 자동으로 만들 수 있는지.</p>
   <div class="card" data-chart="sankey">
     <button class="png">PNG</button>
-    <h3>골방에 닿는 사람의 흐름</h3>
+    <h3>룸19에 닿는 사람의 흐름</h3>
     <div class="q">운전자 → 차에 머묾 → 종교 유무 → 차량 등급 (전 레버 자동 / 일부 레버 / 폰만)</div>
     <div class="controls">
       <label class="ctl">기준 인구: 자가용 운전자 (만 명) <output id="o_drv"></output><input id="s_drv" type="range" min="1000" max="3500" step="50"></label>
@@ -101,7 +101,7 @@ footer{padding:48px 0 80px;color:var(--mute);font-size:12px;border-top:1px solid
       <label class="ctl">일부 레버만 되는 차 비중 (%) <output id="o_part"></output><input id="s_part" type="range" min="0" max="70" step="1"></label>
     </div>
     <svg id="sankey" width="100%" height="460"></svg>
-    <div class="take"><b>읽는 법:</b> 기본값에서 골방이 닿는 사람은 <b id="t_total"></b>, 그중 종교가 있는 사람은 <b id="t_rel"></b>. Pleos 탑재 차가 늘수록 보라 흐름(전 레버 자동)이 굵어진다. 탑재되지 않은 차도 커스텀 모드로 일부 레버를 쓰면 청록 흐름으로 들어온다.</div>
+    <div class="take"><b>읽는 법:</b> 기본값에서 룸19가 닿는 사람은 <b id="t_total"></b>, 그중 종교가 있는 사람은 <b id="t_rel"></b>. Pleos 탑재 차가 늘수록 보라 흐름(전 레버 자동)이 굵어진다. 탑재되지 않은 차도 커스텀 모드로 일부 레버를 쓰면 청록 흐름으로 들어온다.</div>
     <div class="meta" id="m_sankey"></div>
   </div>
   <div class="grid g3" style="margin-top:20px">
@@ -122,16 +122,16 @@ footer{padding:48px 0 80px;color:var(--mute);font-size:12px;border-top:1px solid
 
 <section class="sec" id="B">
   <div class="sec-h"><span class="n">B</span><h2>시간: 왜 15분인가</h2></div>
-  <p class="sec-sub">사람들이 실제로 차에 머무는 시간과, 혼자 있는 시간이 마음을 가라앉히는 데 필요한 시간이 같은 자리에 겹친다. 그 위에 골방의 6단계를 얹었다.</p>
+  <p class="sec-sub">사람들이 실제로 차에 머무는 시간과, 혼자 있는 시간이 마음을 가라앉히는 데 필요한 시간이 같은 자리에 겹친다. 그 위에 룸19의 6단계를 얹었다.</p>
   <div class="card" data-chart="time"><button class="png">PNG</button>
-    <h3>머무는 시간의 근거와 골방 세션</h3>
+    <h3>머무는 시간의 근거와 룸19 세션</h3>
     <div class="q">운전 시간이 길수록 세션도 조금 길어진다 (가정 모형)</div>
     <div class="controls">
       <label class="ctl">오늘 운전한 시간 (분) <output id="o_drive"></output><input id="s_drive" type="range" min="5" max="120" step="5" value="40"></label>
       <div class="ctl" style="min-width:320px">권장 세션 = 10 + 0.12 × 운전 시간, 10~20분 사이로 자름<output id="o_sess"></output></div>
     </div>
     <svg id="time" width="100%" height="300"></svg>
-    <div class="take"><b>PT 한 줄:</b> 영국 차량 보유자 77%가 차 안에서 쉬는 습관이 있다(Halfords). 15분 혼자 앉아 있으면 들뜬 감정이 가라앉는다는 실험이 있다(Nguyen 외 2018). 골방은 그 시간에 형식을 준다.</div>
+    <div class="take"><b>PT 한 줄:</b> 영국 차량 보유자 77%가 차 안에서 쉬는 습관이 있다(Halfords). 15분 혼자 앉아 있으면 들뜬 감정이 가라앉는다는 실험이 있다(Nguyen 외 2018). 룸19는 그 시간에 형식을 준다.</div>
     <div class="meta" id="m_time"></div>
   </div>
 </section>
@@ -146,7 +146,7 @@ footer{padding:48px 0 80px;color:var(--mute);font-size:12px;border-top:1px solid
     <div class="card"><h3>시계에서 보이는 것</h3>
       <div class="take" style="margin-top:16px"><b>출근 직전 7~9시:</b> 천주교 삼종기도(6시), 사찰 새벽예불, 이슬람 새벽 기도가 그 앞에 있다. 집을 나서기 전, 주차장에서 마음을 모으는 순간.</div>
       <div class="take"><b>점심 12시:</b> 삼종기도와 이슬람 정오 기도. PM 메모의 "점심시간 차 안 기도" 장면.</div>
-      <div class="take"><b>퇴근 18~20시:</b> 삼종기도(18시), 저녁예불, 이슬람 일몰 기도. 귀가 직전 지하주차장, 골방의 주인공 순간.</div>
+      <div class="take"><b>퇴근 18~20시:</b> 삼종기도(18시), 저녁예불, 이슬람 일몰 기도. 귀가 직전 지하주차장, 룸19의 주인공 순간.</div>
       <div class="take" style="border-color:var(--c2)"><b>이슬람 의무 기도는 차 밖에서.</b> 차는 시간 알림, 방향, 두아, 준비와 복귀를 돕는다.</div>
     </div>
   </div>
@@ -187,7 +187,7 @@ footer{padding:48px 0 80px;color:var(--mute);font-size:12px;border-top:1px solid
     <div class="card" data-chart="dumbbell" style="grid-column:span 2"><button class="png">PNG</button>
       <h3>대수 비중 vs 매출 비중</h3><div class="q">북미는 판매 대수의 29%지만 매출의 45%. 아시아는 대수 21%, 매출 9%</div>
       <svg id="dumbbell" width="100%" height="290"></svg>
-      <div class="take">비싼 차, 옵션 많은 차는 <b>북미</b>에서 팔린다. 골방의 첫 해외 확장지가 미국인 이유.</div>
+      <div class="take">비싼 차, 옵션 많은 차는 <b>북미</b>에서 팔린다. 룸19의 첫 해외 확장지가 미국인 이유.</div>
       <div class="meta" id="m_dumbbell"></div></div>
   </div>
   <div class="grid g3" style="margin-top:20px">
@@ -198,7 +198,7 @@ footer{padding:48px 0 80px;color:var(--mute);font-size:12px;border-top:1px solid
     <div class="card"><h3>사람은 혼자 생각만 하는 걸 힘들어한다</h3>
       <div class="stat" id="w_stat">67<small>%</small></div>
       <div class="q" id="w_txt">남성 참가자의 67%가 6~15분 혼자 생각만 하는 동안 스스로 전기충격을 한 번 이상 눌렀다 (여성 25%)</div>
-      <div class="take">그래서 골방은 <b>빈 방이 아니라 형식이 있는 방</b>이다.</div><div class="meta" id="m_wilson"></div></div>
+      <div class="take">그래서 룸19는 <b>빈 방이 아니라 형식이 있는 방</b>이다.</div><div class="meta" id="m_wilson"></div></div>
     <div class="card"><h3>기도에 돈을 쓰는 사람들</h3>
       <div class="stat" id="h_stat">?</div><div class="q" id="h_txt">Hallow (미국 가톨릭 기도 앱)</div>
       <div class="take">신앙의 시간에 이미 <b>지불하는 시장</b>이 있다.</div><div class="meta" id="m_hallow"></div></div>
@@ -207,7 +207,7 @@ footer{padding:48px 0 80px;color:var(--mute);font-size:12px;border-top:1px solid
 
 <section class="sec" id="F">
   <div class="sec-h"><span class="n">F</span><h2>차가 하는 일: 단계 × 레버</h2></div>
-  <p class="sec-sub">골방 세션의 단계마다 차의 무엇이 바뀌는지. 칸의 색은 에뮬레이터(Vehicle SDK 2.3.2)에서 직접 바꿔 본 결과.</p>
+  <p class="sec-sub">룸19 세션의 단계마다 차의 무엇이 바뀌는지. 칸의 색은 에뮬레이터(Vehicle SDK 2.3.2)에서 직접 바꿔 본 결과.</p>
   <div class="card" data-chart="heat"><button class="png">PNG</button>
     <h3>레버 × 단계</h3><div class="q">진한 칸 = 그 단계에서 쓰는 레버 · 테두리 = 실측 결과</div>
     <svg id="heat" width="100%" height="330"></svg><div class="meta" id="m_heat"></div></div>
@@ -886,18 +886,18 @@ function drawTime(){const T=+document.getElementById('s_drive').value;document.g
  const svg=d3.select('#time');svg.selectAll('*').remove();defs(svg);const w=W('#time'),h=300,m={l:150,r:30,t:20,b:34};
  const x=d3.scaleLinear().domain([0,32]).range([m.l,w-m.r]);
  const rows=[['주차장 증후군',D.parking_syndrome.range[0],D.parking_syndrome.range[1],D.parking_syndrome.level],['영국 평균 머묾 (2차)',D.halfords_stay.value-0.3,D.halfords_stay.value+0.3,D.halfords_stay.level],['15분 혼자 있기 실험',D.solitude15.value-0.3,D.solitude15.value+0.3,D.solitude15.level]];
- const y=d3.scaleBand().domain([...rows.map(r=>r[0]),'골방 세션']).range([m.t,h-m.b]).padding(.35);
+ const y=d3.scaleBand().domain([...rows.map(r=>r[0]),'룸19 세션']).range([m.t,h-m.b]).padding(.35);
  svg.append('g').attr('transform',`translate(0,${h-m.b})`).call(d3.axisBottom(x).ticks(8).tickFormat(d=>d+'분').tickSize(-(h-m.b-m.t))).call(g=>{g.select('.domain').remove();g.selectAll('line').attr('stroke',C.line);g.selectAll('text').attr('fill',C.mute)});
  rows.forEach(r=>{const ok=r[3]==='원문확인';svg.append('rect').attr('x',x(r[1])).attr('y',y(r[0])).attr('width',Math.max(6,x(r[2])-x(r[1]))).attr('height',y.bandwidth()).attr('rx',4)
    .attr('fill',ok?C.c2:'url(#hatch2)').attr('stroke',C.c2).on('mousemove',e=>showTip(e,`${r[0]}: ${r[2]-r[1]>1?r[1]+'~'+r[2]:Math.round(r[1]+.3)}분 (${r[3]})`)).on('mouseleave',hideTip);
   svg.append('text').attr('x',m.l-10).attr('y',y(r[0])+y.bandwidth()/2).attr('dy','.35em').attr('text-anchor','end').attr('fill',C.ink2).attr('font-size',13).text(r[0])});
  const st=[['준비',.5],['문턱',.33],['숨',1.5],['머묾',0],['돌아옴',1.25],['출발 준비',.5]];const fixed=d3.sum(st,s=>s[1]);st[3][1]=Math.max(1,L-fixed);
  let acc=0;const sc=d3.scaleOrdinal().domain(st.map(s=>s[0])).range(['#5B4CA8','#7461D6',C.c1,'#A994FF','#7461D6','#5B4CA8']);
- st.forEach(s=>{svg.append('rect').attr('x',x(acc)+1).attr('y',y('골방 세션')).attr('width',Math.max(1,x(acc+s[1])-x(acc)-2)).attr('height',y.bandwidth()).attr('rx',4).attr('fill',sc(s[0]))
+ st.forEach(s=>{svg.append('rect').attr('x',x(acc)+1).attr('y',y('룸19 세션')).attr('width',Math.max(1,x(acc+s[1])-x(acc)-2)).attr('height',y.bandwidth()).attr('rx',4).attr('fill',sc(s[0]))
    .on('mousemove',e=>showTip(e,`${s[0]} <b>${s[1].toFixed(1)}분</b>`)).on('mouseleave',hideTip);
-  if(s[1]>1.2)svg.append('text').attr('x',x(acc+s[1]/2)).attr('y',y('골방 세션')+y.bandwidth()/2).attr('dy','.35em').attr('text-anchor','middle').attr('fill','#0E0D12').attr('font-size',12).attr('font-weight',700).text(s[0]);acc+=s[1]});
- svg.append('text').attr('x',m.l-10).attr('y',y('골방 세션')+y.bandwidth()/2).attr('dy','.35em').attr('text-anchor','end').attr('fill',C.ink).attr('font-size',13).attr('font-weight',700).text('골방 세션');
- svg.append('text').attr('x',x(L)+6).attr('y',y('골방 세션')+y.bandwidth()/2).attr('dy','.35em').attr('fill',C.ink).attr('font-size',13).attr('font-weight',700).text(L.toFixed(1)+'분');}
+  if(s[1]>1.2)svg.append('text').attr('x',x(acc+s[1]/2)).attr('y',y('룸19 세션')+y.bandwidth()/2).attr('dy','.35em').attr('text-anchor','middle').attr('fill','#0E0D12').attr('font-size',12).attr('font-weight',700).text(s[0]);acc+=s[1]});
+ svg.append('text').attr('x',m.l-10).attr('y',y('룸19 세션')+y.bandwidth()/2).attr('dy','.35em').attr('text-anchor','end').attr('fill',C.ink).attr('font-size',13).attr('font-weight',700).text('룸19 세션');
+ svg.append('text').attr('x',x(L)+6).attr('y',y('룸19 세션')+y.bandwidth()/2).attr('dy','.35em').attr('fill',C.ink).attr('font-size',13).attr('font-weight',700).text(L.toFixed(1)+'분');}
 document.getElementById('s_drive').oninput=drawTime;
 meta('m_time',{level:'혼합',source:'15분: Nguyen·Ryan·Deci 2018 PSPB, 114명(원문 확인, 들뜬 감정 감소 p<.05) · 13분: 72Point 배포문(2차, Halfords 원문에 없음, 인용 금지) · 10~30분: 커뮤니티 글(공식 통계 아님) · 세션 식: 가정'});
 

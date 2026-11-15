@@ -1,4 +1,4 @@
-# 골방 통계 사이트
+# 룸19 통계 사이트
 
 - `index.html`: 파일 하나로 열린다(D3 CDN 필요). 섹션 A~F 요약 그래프 + G 자료실(데이터셋 전부 자동 시각화).
 - 데이터: `data_main.json`(요약 그래프용, index.html 안에도 포함), `data_hmc.json`(현대차 재무·판매), `data_social.json`(한국·세계 사회), `verified_new.json`(1차 확인 메모).

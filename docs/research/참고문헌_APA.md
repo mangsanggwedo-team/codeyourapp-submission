@@ -68,7 +68,7 @@ sources: D12_글로벌타깃/05_PT_인용카드.md, D13_통계사이트/audit_so
     (본문 인용 형식: Goyal et al., 2014) (감사: 감사 외, DOI Crossref 확인. DOI·제목·저자 15명은 Crossref 확인, 쪽수 357-368은 Crossref가 시작쪽 357만 주고 PubMed 서지(PMID 24395196, https://pubmed.ncbi.nlm.nih.gov/24395196/)에서 357-368 확인. 부제는 PubMed 제목과 일치) (기획서 2, 6, 선택. "효과는 작거나 중간"이라는 한계 문장에만)
 
 18. Halfords. (2025, November 5). *Brits spend half a day a year in their cars searching for peace and quiet* [Press release]. https://web.archive.org/web/20260114020627/https://www.halfordscompany.com/news-and-media/press-releases/halfords-news/brits-spend-half-a-day-a-year-in-their-cars-searching-for-peace-and-quiet/
-    (본문 인용 형식: Halfords, 2025) (감사: 출처교체필요였으나 이 아카이브 URL로 교체하면 통과. 77%, 39/28/26/26%, 11.6시간 1차 일치. "평균 13분"과 "처가·시가 8%"는 2차에만 있어 사용 금지) (기획서 2) 원문 보도자료는 현재 404라 아카이브가 원문 대체. 조사는 OnePoll, 영국 차량 보유자 2,000명, 2025-08-29~09-02.
+    (본문 인용 형식: Halfords, 2025) (감사: 출처교체필요였으나 이 아카이브 URL로 교체하면 통과. 77%, 39/28/26/26%, 11.6시간 1차 일치. 평균 시간과 처가·시가 비율은 2차에만 있어 사용 금지) (기획서 2) 원문 보도자료는 현재 404라 아카이브가 원문 대체. 조사는 OnePoll, 영국 차량 보유자 2,000명, 2025-08-29~09-02.
 
 19. Hyundai Motor America. (2026, October 1). *Hyundai introduces Pleos Connect in the U.S. on the all-new 2027 Tucson* [Press release]. https://www.hyundainews.com/releases/hyundai-introduces-pleos-connect-in-the-us-on-the-all-new-2027-tucson
     (본문 인용 형식: Hyundai Motor America, 2026) (감사: 통과, pleos_tl에서 투싼 미국 첫 탑재 일치, 단 "2027 초"의 '초'는 원문에 없음) (기획서 6) 제목은 같은 보도자료의 hyundainews.com 릴리스 페이지(검색 결과 표기 "Hyundai Introduces Pleos Connect in the U.S. on the All-New 2027 TUCSON")를 APA 문장형 대소문자로 적었다. 원래 PDF URL과 릴리스 페이지 모두 curl·WebFetch에는 로고만 있는 빈 껍데기를 돌려줘 본문·게시일(2026-10-01)은 직접 열람하지 못했고 검색 요약으로만 확인했다. 브라우저로 한 번 열어 날짜 확인 필요.
@@ -142,7 +142,7 @@ sources: D12_글로벌타깃/05_PT_인용카드.md, D13_통계사이트/audit_so
 | Edwards 1994, Nair 2015, Sonnentag 2007, Laborde 2022, Redelmeier 2003, Ashforth 2000, Nguyen 2018 | 14, 27, 33, 26, 32, 11, 28 | 목록에만 있음: 05 준비 문서가 3번(차량 특화) 근거로 지정. 3번 본문 확정 때 쓰는 것만 남긴다 |
 | Pleos 공식 문서 (developers.pleos.ai) | 24, 25 | 목록에만 있음: 3, 5번에서 "Pleos 가이드를 따랐다"고 쓰면 인용 |
 | Pew Research Center(2024) 한국 매일 기도 25% (06-business.md, 5-6-7 초안) | 31 Pew Research Center (2025c) | 표기 수정(완료): 연도를 2024에서 2025c로 고침. 2024는 조사 시점이고 보고서 게시는 2025-06-25. 목록에 31번을 추가 |
-| 본문에 있으나 목록에 없는 인용 | (없음) | 현재 확인한 6건은 전부 목록에 대응 항목이 있다. 단 팀원 초안 전문을 직접 읽지 않았고 전달받은 인용 목록 기준이다 |
+| 본문에 있으나 목록에 없는 인용 | (없음) | 현재 확인한 6건은 전부 목록에 대응 항목이 있다. 단 민주 초안 전문을 직접 읽지 않았고 전달받은 인용 목록 기준이다 |
 
 확인 결과(2026-11-15). (1) 1번 제목·게시일 해결. (2) 19번 제목은 릴리스 페이지 제목으로 교체, 게시일 2026-10-01은 직접 열람 못 해 미해결(검색 요약 기준). (3) 25번 해결. (4) 6번 발행처 한국교회사연구소 해결. (5) 11, 17, 31번(현 32번) 쪽수·저자 해결. (6) 본문 대조 해결, 단 아래 미해결 한 건 참고.
 
@@ -152,6 +152,11 @@ sources: D12_글로벌타깃/05_PT_인용카드.md, D13_통계사이트/audit_so
 
 참고문헌 목록과 5-6-7 초안 HTML에는 성구를 직접 인용한 곳이 없다. 성구를 인용한 곳은 docs/journey/여정_초정밀.md(TTS 문구)와 docs/02-solution.md(마 6:6 표기)다. 대한성서공회 개역한글(HAN) 마태복음 6장 6절 원문(2026-11-15 열람):
 
-"너는 기도할 때에 네 골방에 들어가 문을 닫고 은밀한 중에 계신 네 아버지께 기도하라 은밀한 중에 보시는 네 아버지께서 갚으시리라"
+"너는 기도할 때에 네 룸19에 들어가 문을 닫고 은밀한 중에 계신 네 아버지께 기도하라 은밀한 중에 보시는 네 아버지께서 갚으시리라"
 
-출처: https://www.bskorea.or.kr/bible/korbibReadpage.php?version=HAN&book=mat&chap=6&sec=6 (교차 확인: https://www.blueletterbible.org/verse/kor/mat/6/6/). 여정 문서의 TTS 문구 "너는 기도할 때에 네 골방에 들어가 문을 닫고 은밀한 중에 계신 네 아버지께 기도하라"는 절의 앞 문장과 한 글자도 다르지 않다. 개역한글은 저작권 보호기간이 끝난 판본으로 알려져 있으나 이 점은 법적으로 확인하지 못했다.
+출처: https://www.bskorea.or.kr/bible/korbibReadpage.php?version=HAN&book=mat&chap=6&sec=6 (교차 확인: https://www.blueletterbible.org/verse/kor/mat/6/6/). 여정 문서의 TTS 문구 "너는 기도할 때에 네 룸19에 들어가 문을 닫고 은밀한 중에 계신 네 아버지께 기도하라"는 절의 앞 문장과 한 글자도 다르지 않다. 개역한글은 저작권 보호기간이 끝난 판본으로 알려져 있으나 이 점은 법적으로 확인하지 못했다.
+
+## 추가 (2026-11-15, 기획서 2번 완성안에서 새로 인용)
+
+- 목회데이터연구소. (2023, 9월 27일). *기독교 통계(209호): 한국 개신교인의 교회 생활*. https://www.mhdata.or.kr/bbs/board.php?bo_table=gugnae&wr_id=96
+  (본문 인용 형식: 목회데이터연구소, 2023) 2026-11-15 열람. 개신교인 하루 평균 기도 24분, QT 35%를 원문에서 확인. 한국기독교목회자협의회 의뢰 조사. 번호 목록에 넣을 때는 국문 2번 자리.
