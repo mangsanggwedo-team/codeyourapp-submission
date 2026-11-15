@@ -49,6 +49,6 @@ dependencies {
 val copyReleaseApk by tasks.registering(Copy::class) {
     from(layout.buildDirectory.file("outputs/apk/release/app-release.apk"))
     into(rootProject.file("apk"))
-    rename { "망상궤도_앱이름_release.apk" }
+    rename { "망상궤도_골방_release.apk" }
 }
 tasks.matching { it.name == "assembleRelease" }.configureEach { finalizedBy(copyReleaseApk) }
