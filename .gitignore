@@ -19,3 +19,9 @@ keystore.properties
 .DS_Store
 # 공모전 양식 원본은 이 저장소에 두지 않는다
 **/form-original/
+
+# 시연영상 산출물 (재생성 스크립트만 커밋)
+sim/journey/demo/out/
+sim/journey/demo/node_modules
+*.mp4
+*.webm

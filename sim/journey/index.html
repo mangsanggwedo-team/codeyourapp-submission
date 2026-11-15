@@ -106,7 +106,8 @@ function adapt(J){const M=J.endingModel||{};const LR=M.likelihoodRatios||{};cons
  ['SCREEN_TOUCH','SEAT_BACKREST_FORWARD','SEAT_BACKREST_BACK','SEATBELT_FASTENED'].forEach(k=>{if(LR[k])em.signals[k]={lr:LR[k],label:SIG_KO[k]}});
  const sc=J.scenarios.map(x=>{const t0=x.keyframes[0].t;const kf=x.keyframes.map(k=>{const L=k.levers||{};return {t:k.t-t0,clock:k.clock,stage:STAGE_KO[k.stage]||k.stage,
    levers:{hvacC:L.hvacC,fan:L.fan,recirc:L.recirc?1:0,seatHeat:L.seatHeat,backrest:L.backrest,ambient:L.ambient,window:L.window,lock:L.lock?1:0,mirrorFolded:L.mirrorFolded?1:0},
-   screen:{title:(k.screen||{}).title||'',body:(k.screen||{}).body||'',buttons:(k.screen||{}).buttons||[],dim:!((k.screen||{}).title||(k.screen||{}).body)},
+   screen:(()=>{const c=k.screen||{};const has=c.title||c.body||(c.buttons||[]).length;return has?{title:c.title||'',body:c.body||'',buttons:c.buttons||[],dim:false}:null})(), // 빈 화면 = 변화 없음, 앞 화면 유지
+   
    sound:k.sound,log:k.signals||[],p:k.session?k.session.p:null,endingStage:k.session?k.session.endingStage:null,alert:(k.signals||[]).some(v=>/gear:(D|R)/.test(v))&&k.t>0}});
   const sig=[];kf.forEach(k=>k.log.forEach(v=>{const m=v.match(/^ending:(\w+)/);if(m)sig.push({t:k.t,type:m[1]})}));
   const c=x.context||{};return {id:x.id,name:x.title,place:c.place||'',clock:(x.keyframes[0].clock||'21:00').slice(0,5),drive:c.driveMin||0,intent:PACK_KO[c.pack]||c.pack||'',duration:kf[kf.length-1].t,kf,signals:sig,persona:x.persona,adapted:true}});
