@@ -90,6 +90,7 @@ class MainActivity : ComponentActivity() {
     private lateinit var speedSource: SpeedSource
     private lateinit var car: RoomCar
     private var paused by mutableStateOf(false)
+    private var settings by mutableStateOf(Settings())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -100,11 +101,25 @@ class MainActivity : ComponentActivity() {
         else requestPermissions(arrayOf(SPEED), 1)
         // 시연용: `--ei sec 200`으로 세션 길이를 초로 줄인다. 없으면 화면에서 고른 분.
         val demoSec = intent.getIntExtra("sec", 0)
+        settings = Settings.load(this)
         setContent {
             val gear by gearSource.gear.collectAsState()
             val speed by speedSource.speedMps.collectAsState()
-            val moment = MomentDetector.detect(VehicleSnapshot(gear = gear, moving = speed?.let { it > MOVING_MPS }))
-            Room(moment, car, paused, demoSec) { finish() }
+            var fakeDrive by remember { mutableStateOf(false) }
+            val moment = if (fakeDrive) Moment.DRIVING else MomentDetector.detect(VehicleSnapshot(gear = gear, moving = speed?.let { it > MOVING_MPS }))
+            var intro by remember { mutableStateOf(!settings.introSeen) }
+            var setup by remember { mutableStateOf(false) }
+            var settingsOpen by remember { mutableStateOf(false) }
+            val put = { n: Settings -> settings = n; n.save(this) }
+            when {
+                intro -> Intro { intro = false; put(settings.copy(introSeen = true)) }
+                !settings.onboarded || setup -> Setup(settings) { setup = false; put(it) }
+                settingsOpen -> SettingsScreen(settings, put,
+                    replayIntro = { settingsOpen = false; intro = true },
+                    reset = { Settings.reset(this); settings = Settings(); settingsOpen = false; intro = true },
+                    back = { settingsOpen = false })
+                else -> Room(moment, car, paused, demoSec, settings, fakeDrive, { fakeDrive = !fakeDrive }, { settingsOpen = true }) { finish() }
+            }
         }
     }
 
@@ -125,36 +140,46 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-private enum class Phase { OFFER, SILL, BREATH, STAY, RETURN, DONE }
+private enum class Phase(val label: String) { OFFER(""), READY("준비"), SILL("문턱"), BREATH("숨"), STAY("머묾"), RETURN("돌아옴"), DONE("출발 준비") }
 
 // 디자인 컨셉 3절 토큰(밤)
-private val RoomBg = Color(0xFF09080B)
-private val Text1 = Color(0xFFEDEAF2)
-private val Text2 = Color(0xFFA7A2B4)
-private val Text3 = Color(0xFF8A8599)
-private val TextRest = Color(0xFF4A4656)
-private val LightSill = Color(0xFFFFB15C)
-private val LightStay = Color(0xFFFF9A3C)
-private val LightReturn = Color(0xFFFFC489)
+internal val RoomBg = Color(0xFF09080B)
+internal val Text1 = Color(0xFFEDEAF2)
+internal val Text2 = Color(0xFFA7A2B4)
+internal val Text3 = Color(0xFF8A8599)
+internal val TextRest = Color(0xFF4A4656)
+internal val LightSill = Color(0xFFFFB15C)
+internal val LightStay = Color(0xFFFF9A3C)
+internal val LightReturn = Color(0xFFFFC489)
 
 // 목소리는 명조. 시스템 serif가 한글을 고딕으로 돌려주는 기기가 있어 Noto Serif CJK(KR 면)를 직접 연다. 없으면 시스템 serif
-private val Myeongjo: FontFamily = runCatching {
+internal val Myeongjo: FontFamily = runCatching {
     FontFamily(Typeface.Builder(File("/system/fonts/NotoSerifCJK-Regular.ttc")).setTtcIndex(1).build())
 }.getOrDefault(FontFamily.Serif)
-private val Voice = TextStyle(fontFamily = Myeongjo, fontWeight = FontWeight.Normal, color = Text1, letterSpacing = (-0.012).em, lineHeight = 1.38.em)
-private val Info = TextStyle(fontFamily = FontFamily.SansSerif, color = Text3, fontSize = 22.sp)
+internal val Voice = TextStyle(fontFamily = Myeongjo, fontWeight = FontWeight.Normal, color = Text1, letterSpacing = (-0.012).em, lineHeight = 1.38.em)
+internal val Info = TextStyle(fontFamily = FontFamily.SansSerif, color = Text3, fontSize = 22.sp)
 
-private const val SILL_SEC = 12f   // 0.6~6 레버, 6~7 고요, 7 종, 9 첫 문장
-private const val BELL_AT = 7f
-private const val WORDS_AT = 9f
+private const val READY_SEC = 1.6f // 준비: P와 정지를 확인하고 한 줄씩 적는다
+private const val SILL_SEC = 10f   // 문턱: 0~1 고요, 1 종과 함께 빛이 8초에 걸쳐 20%로, 3.5 첫 문장
+private const val BELL_AT = 1f
+private const val WORDS_AT = 3.5f
 private const val BREATH_SEC = 50f // 들숨 4 + 날숨 6, 다섯 번
 private const val VERSE_SEC = 20f  // 머묾에 들어설 때 구절이 떠 있는 시간
 private const val VERSE = "너는 기도할 때에 네 골방에 들어가 문을 닫고\n은밀한 중에 계신 네 아버지께 기도하라"
 
 @Composable
-private fun Room(moment: Moment, car: RoomCar, paused: Boolean, demoSec: Int, leave: () -> Unit) {
+private fun Room(
+    moment: Moment, car: RoomCar, paused: Boolean, demoSec: Int, settings: Settings,
+    fakeDrive: Boolean, toggleDrive: () -> Unit, openSettings: () -> Unit, leave: () -> Unit,
+) {
     var phase by remember { mutableStateOf(Phase.OFFER) }
-    var minutes by remember { mutableIntStateOf(15) }
+    var minutes by remember(settings.minutes) { mutableIntStateOf(settings.minutes) }
+    var fast by remember { mutableStateOf(false) }
+    var debug by remember { mutableStateOf(false) }
+    var interrupt by remember { mutableStateOf<String?>(null) } // 문 열림, 전화
+    var seatFail by remember { mutableStateOf(false) }
+    var notice by remember { mutableStateOf("") }
+    val log by car.log.collectAsState()
     var t by remember { mutableFloatStateOf(0f) } // 세션 초. 멈춘 동안에는 흐르지 않는다
     var hold by remember { mutableStateOf(false) }
     var wake by remember { mutableIntStateOf(0) }
@@ -164,15 +189,17 @@ private fun Room(moment: Moment, car: RoomCar, paused: Boolean, demoSec: Int, le
     var handoff by remember { mutableStateOf("") }
     var policy by remember { mutableStateOf<EndingPolicy?>(null) }
     val levers by car.levers.collectAsState()
-    val held = hold || paused
+    val held = hold || paused || interrupt != null
     val inRoom = phase != Phase.OFFER && phase != Phase.DONE
 
     fun begin() {
         val hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
-        policy = EndingPolicy(EndingContext(intendedSec = if (demoSec > 0) demoSec else minutes * 60, hour = hour))
-        t = 0f; hold = false; rising = false; awake = false
-        car.enter()
-        phase = Phase.SILL
+        // 알아서(0분)는 끝 시각 없이 10분을 기준으로 마침 모델이 짐작한다
+        policy = EndingPolicy(EndingContext(intendedSec = if (demoSec > 0) demoSec else if (minutes == 0) 600 else minutes * 60, hour = hour))
+        t = 0f; hold = false; rising = false; awake = false; notice = ""
+        car.log.value = emptyList()
+        car.note("기어 P ✓"); car.note("멈춤 0 km/h ✓")
+        phase = Phase.READY
     }
 
     /** quiet = 일찍 마침 또는 출발: 문장도 종도 없이 되돌린다. */
@@ -189,10 +216,15 @@ private fun Room(moment: Moment, car: RoomCar, paused: Boolean, demoSec: Int, le
         phase = Phase.DONE
     }
 
-    // 물러남: 방 안에서 P를 벗어나면 그 순간 말없이 되돌리고 사라진다
+    // 문제 (가) 물러남: 방 안에서 P를 벗어나면 그 순간 모두 되돌리고 멈춘다. 한 줄만 남긴다
     LaunchedEffect(moment) {
-        if (moment != Moment.PARKED && inRoom) { car.restore(); phase = Phase.OFFER }
+        if (moment != Moment.PARKED && inRoom) {
+            car.restore(); phase = Phase.OFFER; interrupt = null
+            notice = "기어가 P를 벗어나 차를 모두 처음대로 되돌렸어요."
+        }
     }
+    LaunchedEffect(notice) { if (notice.isNotEmpty()) { delay(12_000); notice = "" } }
+    LaunchedEffect(seatFail) { car.simulateSeatFail = seatFail }
     LaunchedEffect(wake) { if (wake > 0) { awake = true; delay(5000); awake = false } }
     LaunchedEffect(phase) { if (phase == Phase.DONE) { delay(30_000); phase = Phase.OFFER } }
 
@@ -202,12 +234,17 @@ private fun Room(moment: Moment, car: RoomCar, paused: Boolean, demoSec: Int, le
         while (true) {
             val now = withFrameNanos { it }
             val prev = t
-            t += (now - last) / 1e9f
+            t += (now - last) / 1e9f * (if (fast) 10f else 1f)
             last = now
             when (phase) {
+                Phase.READY -> if (t >= READY_SEC) {
+                    t = 0f
+                    car.enter(settings.lightCap, settings.fanLow, listOf(0L, 1200L, 2400L)[settings.recline])
+                    phase = Phase.SILL
+                }
                 Phase.SILL -> {
-                    if (prev < BELL_AT && t >= BELL_AT) Bell.ring()
-                    if (t >= SILL_SEC) { car.breath(true); phase = Phase.BREATH }
+                    if (prev < BELL_AT && t >= BELL_AT && settings.bell) Bell.ring()
+                    if (t >= SILL_SEC) { car.breath(true, first = true); phase = Phase.BREATH }
                 }
                 Phase.BREATH -> {
                     val b = (t - SILL_SEC) % 10f
@@ -218,8 +255,9 @@ private fun Room(moment: Moment, car: RoomCar, paused: Boolean, demoSec: Int, le
                 }
                 Phase.STAY -> if (t.toInt() != prev.toInt()) {
                     val stage = policy?.tick(t.toDouble()) ?: EndingStage.STAY
-                    if (stage != EndingStage.STAY && !rising) { rising = true; car.comeBack() }
-                    if (stage == EndingStage.CLOSING_WORDS) { returnAt = t; Bell.ring(); phase = Phase.RETURN }
+                    if (stage != EndingStage.STAY && !rising) { rising = true; car.comeBack(if (fast) 2500 else 25_000) }
+                    // 종은 끝 시각을 정한 사람에게만, 끝나기 전에 한 번
+                    if (stage == EndingStage.CLOSING_WORDS) { returnAt = t; if (settings.bell && minutes != 0) Bell.ring(); phase = Phase.RETURN }
                 }
                 Phase.RETURN -> if (t - returnAt >= 25f) end(quiet = false)
                 else -> {}
@@ -242,21 +280,29 @@ private fun Room(moment: Moment, car: RoomCar, paused: Boolean, demoSec: Int, le
         Sill(phase, t, held)
 
         when (phase) {
-            Phase.OFFER -> Offer(moment, minutes, { minutes = if (minutes >= 20) 5 else minutes + 5 }, ::begin, leave)
-            Phase.DONE -> Done(handoff, levers)
+            Phase.OFFER -> {
+                Offer(moment, minutes, { minutes = Settings.LENGTHS[(Settings.LENGTHS.indexOf(minutes) + 1) % Settings.LENGTHS.size] }, ::begin, leave)
+                if (moment == Moment.PARKED) Text("설정", style = Info, color = Text2, fontSize = 22.sp,
+                    modifier = Modifier.align(Alignment.TopEnd).padding(top = 40.dp, end = 56.dp).clickable(onClick = openSettings).padding(horizontal = 28.dp, vertical = 20.dp))
+                if (notice.isNotEmpty()) Text(notice, style = Info, color = Text2, fontSize = 24.sp, modifier = Modifier.align(Alignment.BottomStart).padding(start = 96.dp, bottom = 64.dp))
+            }
+            Phase.DONE -> { Done(handoff, levers); CarLog(log, Modifier.align(Alignment.BottomStart).padding(start = 96.dp, bottom = 56.dp), dim = false) }
             else -> {
                 val words = when {
                     held -> "잠시 멈췄어요."
+                    phase == Phase.READY -> "차를 확인할게요."
                     phase == Phase.SILL && t >= WORDS_AT -> "문을 닫았어요. 숨을 한 번 고를게요."
                     phase == Phase.RETURN -> "이제 천천히 돌아올게요."
                     else -> ""
                 }
                 val inhale = (t - SILL_SEC) % 10f < 4f
                 val sub = when {
+                    interrupt != null -> interrupt!!
+                    paused -> "돌아오면 그 자리에서 이어갈게요."
                     held -> "길게 누르면 이어져요."
                     phase == Phase.SILL && t >= WORDS_AT -> "네 골방에 들어가 문을 닫고  ·  마태복음 6:6"
                     phase == Phase.BREATH -> if (inhale) "네 골방에 들어가" else "문을 닫고"
-                    phase == Phase.STAY && t < SILL_SEC + BREATH_SEC + VERSE_SEC -> VERSE
+                    phase == Phase.STAY && settings.verse && t < SILL_SEC + BREATH_SEC + VERSE_SEC -> VERSE
                     else -> ""
                 }
                 // 첫 숨만 말로 이끈다
@@ -268,7 +314,8 @@ private fun Room(moment: Moment, car: RoomCar, paused: Boolean, demoSec: Int, le
                     }
                     Spacer(Modifier.height(if (phase == Phase.STAY) 116.dp else 132.dp))
                     Fading(sub) {
-                        Text(it, style = Voice, color = Text2, fontSize = if (phase == Phase.STAY && !held) 30.sp else 28.sp, textAlign = TextAlign.Center, lineHeight = 1.7.em)
+                        // 구절은 좌우 여백 안에서 줄바꿈한다(오른쪽 잘림 방지)
+                        Text(it, style = Voice, color = Text2, fontSize = if (phase == Phase.STAY && !held) 30.sp else 28.sp, textAlign = TextAlign.Center, lineHeight = 1.7.em, softWrap = true, modifier = Modifier.fillMaxWidth().padding(horizontal = 72.dp))
                     }
                 }
 
@@ -277,14 +324,7 @@ private fun Room(moment: Moment, car: RoomCar, paused: Boolean, demoSec: Int, le
                     Fading(cue) { Text(it, style = Voice, fontSize = 38.sp, modifier = Modifier.padding(bottom = 218.dp)) }
                 }
 
-                // 문턱에서만: 차가 바꾼 것의 이름. 설명은 없다
-                if (phase == Phase.SILL || phase == Phase.RETURN) Row(
-                    Modifier.align(Alignment.BottomStart).padding(start = 72.dp, bottom = 76.dp),
-                    horizontalArrangement = Arrangement.spacedBy(44.dp),
-                ) {
-                    if (phase == Phase.SILL) Lever.entries.forEach { l -> levers[l]?.let { Text("${l.label} $it", style = Info) } }
-                    else Text("빛 올리는 중", style = Info)
-                }
+                CarLog(log, Modifier.align(Alignment.BottomStart).padding(start = 72.dp, bottom = 56.dp), dim = phase == Phase.STAY && !awake)
 
                 // 마치기는 늘 같은 자리. 머묾에서는 일부러 흐리고, 두드리면 5초 또렷해진다
                 val endColor by animateColorAsState(if (phase == Phase.STAY && !awake && !held) TextRest else Text2, tween(600), label = "end")
@@ -297,6 +337,36 @@ private fun Room(moment: Moment, car: RoomCar, paused: Boolean, demoSec: Int, le
                 ) { Text("마치기", style = Info, color = endColor, fontSize = 21.sp, fontWeight = FontWeight.Medium) }
             }
         }
+
+        if (phase != Phase.OFFER) Stages(phase, Modifier.align(Alignment.TopEnd).padding(top = 48.dp, end = 72.dp))
+        Wordmark(Modifier.align(Alignment.TopStart).padding(start = 84.dp, top = 44.dp), color = if (inRoom) TextRest else Text3) { debug = !debug }
+        if (debug) DebugPanel(
+            fast, fakeDrive, interrupt, seatFail,
+            onFast = { fast = !fast }, onDrive = toggleDrive,
+            onDoor = { interrupt = if (interrupt == DOOR_OPEN) null else DOOR_OPEN },
+            onCall = { interrupt = if (interrupt == PHONE_CALL) null else PHONE_CALL },
+            onSeatFail = { seatFail = !seatFail }, close = { debug = false },
+        )
+    }
+}
+
+/** 여섯 단계 중 지금 어디인지. 조용한 한 줄. */
+@Composable
+private fun Stages(phase: Phase, modifier: Modifier) {
+    Row(modifier, horizontalArrangement = Arrangement.spacedBy(22.dp)) {
+        Phase.entries.drop(1).forEach { p ->
+            val c by animateColorAsState(if (p == phase) Text1 else TextRest, tween(800), label = "stage")
+            Text(p.label, style = Info, color = c, fontSize = 19.sp)
+        }
+    }
+}
+
+/** 차가 한 일. 마지막 세 줄만. 머묾에서는 거의 보이지 않게. */
+@Composable
+private fun CarLog(lines: List<String>, modifier: Modifier, dim: Boolean) {
+    val a by animateFloatAsState(if (dim) 0.35f else 1f, tween(800), label = "log")
+    Column(modifier.alpha(a), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+        lines.takeLast(3).forEach { Text(it, style = Info, fontSize = 20.sp) }
     }
 }
 
@@ -319,11 +389,11 @@ private fun Sill(phase: Phase, t: Float, held: Boolean) {
     val width = remember { Animatable(0.30f) }
     LaunchedEffect(phase) {
         when (phase) {
-            Phase.OFFER -> width.animateTo(0.30f, tween(1200))
+            Phase.OFFER, Phase.READY -> width.animateTo(0.30f, tween(1200))
             Phase.SILL -> {
                 // 닫히는 문틈: 넓게 열렸다가 7초에 걸쳐 좁아지고, 종과 함께 가운데로 모였다 가라앉는다
                 width.animateTo(1f, tween(500, easing = FastOutSlowInEasing))
-                width.animateTo(0.62f, tween(6500, easing = LinearEasing))
+                width.animateTo(0.62f, tween(500, easing = LinearEasing)) // 1초 고요 뒤 종
                 width.animateTo(0.10f, tween(600, easing = FastOutSlowInEasing))
                 width.animateTo(0.46f, tween(1800, easing = FastOutSlowInEasing))
             }
@@ -376,14 +446,13 @@ private fun Sill(phase: Phase, t: Float, held: Boolean) {
 private fun Offer(moment: Moment, minutes: Int, cycle: () -> Unit, stay: () -> Unit, leave: () -> Unit) {
     // 방은 주차(P)에서만 열린다. 주행 중에는 아무것도 띄우지 않는다
     if (moment == Moment.DRIVING) return
-    Text("룸19", style = Info, fontSize = 18.sp, letterSpacing = 0.08.em, modifier = Modifier.padding(start = 96.dp, top = 56.dp))
     Column(Modifier.fillMaxSize().padding(start = 96.dp)) {
         // 문장은 문틈의 빛(62%) 위에, 버튼은 그 아래에
         Column(Modifier.fillMaxHeight(0.56f), verticalArrangement = Arrangement.Bottom) {
             if (moment != Moment.PARKED) Text("주차하면 방이 열려요", style = Voice, color = Text2, fontSize = 40.sp)
             else {
                 Text("잠시 머물다 갈까요", style = Voice, fontSize = 60.sp)
-                Text("기도 ${minutes}분", style = Info, color = Text2, fontSize = 26.sp, modifier = Modifier.padding(top = 8.dp).clickable(onClick = cycle).padding(vertical = 10.dp))
+                Text("기도 ${Settings.lengthLabel(minutes)}", style = Info, color = Text2, fontSize = 26.sp, modifier = Modifier.padding(top = 8.dp).clickable(onClick = cycle).padding(vertical = 10.dp))
             }
         }
         Spacer(Modifier.height(150.dp))
@@ -396,7 +465,7 @@ private fun Offer(moment: Moment, minutes: Int, cycle: () -> Unit, stay: () -> U
 }
 
 @Composable
-private fun Choice(label: String, filled: Boolean, onClick: () -> Unit) {
+internal fun Choice(label: String, filled: Boolean, onClick: () -> Unit) {
     Box(
         Modifier.width(300.dp).height(92.dp)
             .background(if (filled) Color.White.copy(alpha = 0.10f) else Color.Transparent, RoundedCornerShape(2.dp))
