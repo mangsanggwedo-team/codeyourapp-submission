@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600&display=swap">
 <style>
-:root{--bg:#0B0A0F;--s1:#14121A;--s2:#1C1924;--line:#2B2735;--ink:#ECEAF2;--ink2:#A8A3B8;--mute:#6F6A80;--p:#FFB15C;--amber:#F2B25C;--ok:#7FD99A}
+:root{--bg:#0B0A0F;--s1:#14121A;--s2:#1C1924;--line:#2B2735;--ink:#ECEAF2;--ink2:#A8A3B8;--mute:#6F6A80;--p:#FFB15C;--amber:#FFB15C;--ok:#7FD99A}
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%;background:#050407;color:var(--ink);font-family:Pretendard,sans-serif;-webkit-font-smoothing:antialiased;overflow:hidden}
 #fit{position:absolute;inset:0;display:grid;place-items:center}
@@ -70,6 +70,9 @@ button{background:transparent;border:1px solid rgba(255,255,255,.10);border-radi
 button.on{background:#EDEAF2;color:#09080B;border-color:#EDEAF2}
 #sig button{border-style:dashed}
 #hint{color:#4F4A5E}
+#sub{font-size:28px;line-height:1.5;top:150px}#sub small{color:#8A8599}
+#hint{color:#8A8599}button.on{background:#FFB15C;border-color:#FFB15C;color:#09080B}
+#stage{background:radial-gradient(60% 50% at 50% 55%,#141012,#09080B 70%)}
 </style>
 </head>
 <body>
@@ -86,7 +89,7 @@ button.on{background:#EDEAF2;color:#09080B;border-color:#EDEAF2}
   <div id="sub"></div>
   <div id="ctrl"></div>
   <div id="sig"><span class="tag">신호 넣기:</span></div>
-  <div id="hint">설계값 재생 · 실차 실측 아님 · 스페이스 재생 · ← → 단계 이동 · 타임라인 클릭으로 이동</div><div id="note"></div>
+  <div id="hint">설계값 재생 · 실차 실측 아님 · [소리 켜기]로 종과 바람 · 스페이스 재생 · ← → 단계 이동 · 타임라인 클릭으로 이동</div><div id="note"></div>
   <div class="panel" id="tl"><svg id="tlsvg" width="1524" height="182"></svg></div>
 </div></div>
 
@@ -149,7 +152,7 @@ function posterior(t){if(S.adapted){let a=null,b=null;for(const k of S.kf){if(k.
 const NS='http://www.w3.org/2000/svg',sv=$('scene');
 function el(tag,attrs,parent){const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);(parent||sv).appendChild(e);return e}
 sv.innerHTML=`<defs>
-<radialGradient id="lamp" cx="50%" cy="0%" r="70%"><stop offset="0" stop-color="#3A3550" stop-opacity=".55"/><stop offset="1" stop-color="#0B0A0F" stop-opacity="0"/></radialGradient>
+<radialGradient id="lamp" cx="50%" cy="0%" r="70%"><stop offset="0" stop-color="#3A3632" stop-opacity=".55"/><stop offset="1" stop-color="#0B0A0F" stop-opacity="0"/></radialGradient>
 <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#14121A"/><stop offset="1" stop-color="#0B0A0F"/></linearGradient>
 <linearGradient id="glass" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2A2638" stop-opacity=".55"/><stop offset="1" stop-color="#15131C" stop-opacity=".35"/></linearGradient>
 <radialGradient id="amb" cx="50%" cy="50%" r="50%"><stop offset="0" id="ambS0" stop-color="#FFB15C" stop-opacity=".55"/><stop offset="1" id="ambS1" stop-color="#FFB15C" stop-opacity="0"/></radialGradient>
@@ -182,7 +185,7 @@ el('line',{x1:790,y1:352,x2:790,y2:586,stroke:'rgba(255,255,255,.10)','stroke-wi
 el('path',{d:'M470 470 L560 455 L600 480 L470 500 Z',fill:'#121117',stroke:'rgba(255,255,255,.08)'},cabin);
 const dash=el('rect',{x:548,y:440,width:40,height:26,rx:4,fill:'#211D2B',stroke:'#4A4458'},cabin);
 const dashGlow=el('rect',{x:550,y:442,width:36,height:22,rx:3,fill:'#FFB15C',opacity:.5},cabin);
-const vents=el('g',{},cabin);const parts=[];for(let i=0;i<26;i++){parts.push({c:el('circle',{r:1.6,fill:'#C9BDFF',opacity:0},vents),x:0,y:0,life:Math.random()})}
+const vents=el('g',{},cabin);const parts=[];for(let i=0;i<26;i++){parts.push({c:el('circle',{r:1.6,fill:'#EDEAF2',opacity:0},vents),x:0,y:0,life:Math.random()})}
 /* seat + person */
 const seatG=el('g',{},cabin);
 el('rect',{x:640,y:520,width:130,height:26,rx:10,fill:'#2A2633'},seatG);
@@ -190,7 +193,7 @@ const back=el('g',{},seatG);el('rect',{x:752,y:400,width:26,height:130,rx:12,fil
 const person=el('g',{},seatG);
 const torso=el('path',{d:'M712 520 Q700 470 720 440 L748 440 Q758 480 752 520 Z',fill:'#2A2633'},person);
 const head=el('circle',{cx:732,cy:418,r:19,fill:'#4A4458'},person);
-const heat=el('rect',{x:646,y:530,width:118,height:6,rx:3,fill:'#F2B25C',opacity:0},seatG);
+const heat=el('rect',{x:646,y:530,width:118,height:6,rx:3,fill:'#FFB15C',opacity:0},seatG);
 /* door lock + mirror */
 const lockG=el('g',{transform:'translate(880,540)'},car);el('rect',{x:-11,y:-2,width:22,height:16,rx:3,fill:'#2A2633',stroke:'#6F6A80'},lockG);
 const shack=el('path',{d:'M-6 -2 L-6 -8 Q0 -15 6 -8 L6 -2',fill:'none',stroke:'#6F6A80','stroke-width':2.2},lockG);
@@ -203,28 +206,31 @@ const chips=el('g',{},sv);
 
 /* ---------- timeline ---------- */
 const tl=$('tlsvg'),TW=1524,LX=120,LW=TW-LX-10;
-const TRACKS=[['단계',null],['앰비언트','amb'],['공조','fan'],['등받이','backrest'],['창문','window'],['잠금','lock'],['마칠 준비 p','p']];
+const TRACKS=[['단계',null],['앰비언트','amb'],['공조','fan'],['등받이','backrest'],['창문','window'],['잠금','lock'],['마칠 준비 p','p'],['소리','snd'],['말씀','verse']];
 let KN=[[0,0],[1,1]];
 function buildAxis(){const st=n=>{const k=S.kf.find(k=>k.stage===n);return k?k.t:null};const D=S.duration;
  const a=st('머묾'),b=st('돌아옴');if(a==null||b==null||b-a<240){KN=[[0,0],[1,1]];return}
  const k1=(a+20)/D,k2=(b-20)/D,ar=st('도착');KN=ar!=null&&ar>0&&ar/D<k1?[[0,0],[ar/D,.06],[k1,.40],[k2,.64],[1,1]]:[[0,0],[k1,.40],[k2,.64],[1,1]]}
 function tx(t){const u=Math.max(0,Math.min(1,t/S.duration));for(let i=1;i<KN.length;i++){const[a0,b0]=KN[i-1],[a1,b1]=KN[i];if(u<=a1)return LX+(b0+(u-a0)/(a1-a0||1)*(b1-b0))*LW}return LX+LW}
 function itx(px){const v=(px-LX)/LW;for(let i=1;i<KN.length;i++){const[a0,b0]=KN[i-1],[a1,b1]=KN[i];if(v<=b1)return (a0+(v-b0)/(b1-b0||1)*(a1-a0))*S.duration}return S.duration}
-function drawTimeline(){tl.innerHTML='';buildAxis();const x=tx,rowH=22;
+function drawTimeline(){tl.innerHTML='';buildAxis();const x=tx,rowH=18;
  TRACKS.forEach(([n],i)=>{const y=8+i*rowH;const t=document.createElementNS(NS,'text');t.setAttribute('x',0);t.setAttribute('y',y+15);t.setAttribute('fill','#6F6A80');t.setAttribute('font-size','11.5');t.textContent=n;tl.appendChild(t);
   if(i){const v=document.createElementNS(NS,'text');v.id='tv'+i;v.setAttribute('x',LX-8);v.setAttribute('y',y+15);v.setAttribute('fill','#BDB7CC');v.setAttribute('font-size','11.5');v.setAttribute('font-weight','700');v.setAttribute('text-anchor','end');tl.appendChild(v)}
   const bg=document.createElementNS(NS,'rect');bg.setAttribute('x',LX);bg.setAttribute('y',y+3);bg.setAttribute('width',LW);bg.setAttribute('height',rowH-6);bg.setAttribute('rx',4);bg.setAttribute('fill','rgba(255,255,255,.025)');tl.appendChild(bg)});
  // stages
  const sk=[];S.kf.forEach(k=>{if(k.stage&&(!sk.length||sk[sk.length-1].s!==k.stage))sk.push({s:k.stage,t:k.t})});
  sk.forEach((s,i)=>{const t1=i<sk.length-1?sk[i+1].t:S.duration,r=document.createElementNS(NS,'rect');r.setAttribute('x',x(s.t)+1);r.setAttribute('y',11);r.setAttribute('width',Math.max(2,x(t1)-x(s.t)-2));r.setAttribute('height',18);r.setAttribute('rx',4);
-  const idx=STAGES.indexOf(s.s);const SC={'주행':'#2A2633','주차':'#332E40','도착':'#3A3260','준비':'#3A3260','문턱':'#5B4CA8','숨':'#7461D6','머묾':'#FFB15C','돌아옴':'#F2B25C','출발 준비':'#4A4458','하차 뒤':'#2A2633','문 열림':'#B8574F','통화 · 멈춤':'#6F6A80','안전 복원':'#B8574F'};r.setAttribute('fill',SC[s.s]||'#FFB15C');r.setAttribute('opacity',.9);r.style.cursor='pointer';r.onclick=()=>{T=s.t};tl.appendChild(r);
-  if(x(t1)-x(s.t)>=30){const tx=document.createElementNS(NS,'text');tx.setAttribute('x',x(s.t)+8);tx.setAttribute('y',24);tx.setAttribute('fill',['주행','주차','하차 뒤','출발 준비','통화 · 멈춤','도착','준비'].includes(s.s)?'#ECEAF2':'#0B0A0F');tx.setAttribute('font-size','11');tx.setAttribute('font-weight','700');tx.textContent=s.s;tl.appendChild(tx)}});
+  const idx=STAGES.indexOf(s.s);const SC={'주행':'#2A2633','주차':'#332E40','도착':'#2E2A30','준비':'#2E2A30','문턱':'#6B4A26','숨':'#A8743A','머묾':'#FF9A3C','돌아옴':'#FFC489','출발 준비':'#4A4458','하차 뒤':'#2A2633','문 열림':'#B8574F','통화 · 멈춤':'#6F6A80','안전 복원':'#B8574F'};r.setAttribute('fill',SC[s.s]||'#FFB15C');r.setAttribute('opacity',.9);r.style.cursor='pointer';r.onclick=()=>{T=s.t};tl.appendChild(r);
+  if(x(t1)-x(s.t)>=30){const tx=document.createElementNS(NS,'text');tx.setAttribute('x',x(s.t)+8);tx.setAttribute('y',24);tx.setAttribute('fill',['주행','주차','하차 뒤','출발 준비','통화 · 멈춤','도착','준비','문턱'].includes(s.s)?'#ECEAF2':'#0B0A0F');tx.setAttribute('font-size','11');tx.setAttribute('font-weight','700');tx.textContent=s.s;tl.appendChild(tx)}});
  // lever tracks sampled
- const N=480;const rows={amb:[],fan:[],backrest:[],window:[],lock:[],p:[]};
+ const N=480;const rows={amb:[],fan:[],backrest:[],window:[],lock:[],p:[],snd:[],verse:[]};
  for(let i=0;i<=N;i++){const t=i/N*S.duration,l=leverAt(t);rows.amb.push([t,(l.amb?l.amb.pct:0)/40,l.amb?l.amb.hex:'#FFB15C']);rows.fan.push([t,(l.fan||0)/6]);rows.backrest.push([t,l.backrest||0]);rows.window.push([t,(l.window||0)/30]);rows.lock.push([t,l.lock||0]);rows.p.push([t,posterior(t)])}
  TRACKS.slice(1).forEach(([n,k],i)=>{const y=8+(i+1)*rowH,h=rowH-8;let d='';rows[k].forEach(([t,v],j)=>{d+=(j?'L':'M')+x(t).toFixed(1)+' '+(y+4+h-Math.min(1,v)*h).toFixed(1)});
-  const p=document.createElementNS(NS,'path');p.setAttribute('d',d);p.setAttribute('fill','none');p.setAttribute('stroke',k==='p'?'#F2B25C':'#FFB15C');p.setAttribute('stroke-width','2');tl.appendChild(p);
-  if(k==='p')EM.thresholds.forEach(th=>{const l=document.createElementNS(NS,'line');l.setAttribute('x1',LX);l.setAttribute('x2',LX+LW);const yy=y+4+h-th*h;l.setAttribute('y1',yy);l.setAttribute('y2',yy);l.setAttribute('stroke','#3A3550');l.setAttribute('stroke-dasharray','2 4');tl.appendChild(l)})});
+  const p=document.createElementNS(NS,'path');p.setAttribute('d',d);p.setAttribute('fill','none');p.setAttribute('stroke',k==='p'?'#FFB15C':'#FFB15C');p.setAttribute('stroke-width','2');tl.appendChild(p);
+  if(k==='p')EM.thresholds.forEach(th=>{const l=document.createElementNS(NS,'line');l.setAttribute('x1',LX);l.setAttribute('x2',LX+LW);const yy=y+4+h-th*h;l.setAttribute('y1',yy);l.setAttribute('y2',yy);l.setAttribute('stroke','#3A3632');l.setAttribute('stroke-dasharray','2 4');tl.appendChild(l)})});
+ sndEvents().forEach((e,i,a)=>{const mk=(tag,at)=>{const n=document.createElementNS(NS,tag);for(const k in at)n.setAttribute(k,at[k]);tl.appendChild(n)};const ys=8+7*rowH+rowH/2+1,yv=8+8*rowH+rowH/2+1;
+  if(e.bgm==='bell_once')mk('circle',{cx:x(e.t),cy:ys,r:3.5,fill:'#FFC489'});else if(e.bgm&&e.bgm!=='none'){const n=a[i+1];mk('line',{x1:x(e.t),x2:x(n?n.t:S.duration),y1:ys,y2:ys,stroke:'#FFB15C','stroke-width':2,opacity:.55})}
+  if(e.tts)mk('rect',{x:x(e.t)-1,y:yv-5,width:e.tts.length>20?10:3,height:10,rx:1.5,fill:e.tts.length>20?'#FFB15C':'#EDEAF2'})});
  // signals marks
  [...S.signals,...userSig].forEach(s=>{const c=document.createElementNS(NS,'circle');c.setAttribute('cx',x(s.t));c.setAttribute('cy',8+6*rowH+12);c.setAttribute('r',4);c.setAttribute('fill',(EM.signals[s.type]&&EM.signals[s.type].lr<1)||s.type==='lean'?'#7FD99A':'#ECEAF2');tl.appendChild(c)});
  // minute ticks
@@ -242,8 +248,8 @@ function drawP(){pc.innerHTML='';const W=328,H=120,x=t=>t/S.duration*W,y=p=>H-6-
   const tx=document.createElementNS(NS,'text');tx.setAttribute('x',2);tx.setAttribute('y',y(th)-3);tx.setAttribute('text-anchor','start');tx.setAttribute('fill','#7C7790');tx.setAttribute('font-size','10.5');tx.textContent=['빛 +2%','소리 페이드','마침 문장'][i]+' '+th;pc.appendChild(tx)});
  let dP='',dPr='';for(let i=0;i<=120;i++){const t=i/120*Math.min(T,S.duration);dP+=(i?'L':'M')+x(t)+' '+y(posterior(t));const pr=prior(t);if(pr!=null)dPr+=(dPr?'L':'M')+x(t)+' '+y(pr)}
  const a=document.createElementNS(NS,'path');a.setAttribute('d',dPr);a.setAttribute('stroke','#4A4458');a.setAttribute('fill','none');a.setAttribute('stroke-width','1.2');a.setAttribute('stroke-dasharray','3 3');pc.appendChild(a);
- const b=document.createElementNS(NS,'path');b.setAttribute('d',dP);b.setAttribute('stroke','#F2B25C');b.setAttribute('fill','none');b.setAttribute('stroke-width','2');pc.appendChild(b);
- const c=document.createElementNS(NS,'circle');c.setAttribute('cx',x(Math.min(T,S.duration)));c.setAttribute('cy',y(posterior(T)));c.setAttribute('r',4);c.setAttribute('fill','#F2B25C');pc.appendChild(c)}
+ const b=document.createElementNS(NS,'path');b.setAttribute('d',dP);b.setAttribute('stroke','#FFB15C');b.setAttribute('fill','none');b.setAttribute('stroke-width','2');pc.appendChild(b);
+ const c=document.createElementNS(NS,'circle');c.setAttribute('cx',x(Math.min(T,S.duration)));c.setAttribute('cy',y(posterior(T)));c.setAttribute('r',4);c.setAttribute('fill','#FFB15C');pc.appendChild(c)}
 
 /* ---------- render ---------- */
 let lastStage='',lastScreen=null;
@@ -270,7 +276,7 @@ function render(dt){const l=leverAt(T),f=frameAt(T),stage=stageAt(T),p=posterior
  // vent particles by fan
  const fan=l.fan||0;parts.forEach(q=>{q.life+=dt*(.25+fan*.18);if(q.life>1){q.life=0;q.x=588;q.y=452+Math.random()*8}const a=q.life;q.c.setAttribute('cx',(588+a*(60+fan*22)).toFixed(1));q.c.setAttribute('cy',(q.y-a*18+Math.sin(a*6+q.y)*3).toFixed(1));q.c.setAttribute('opacity',fan?((1-a)*.12*fan).toFixed(3):0)});
  // gear
- let gear='P';for(const k of S.kf){if(k.t>T)break;(k.log||[]).forEach(v=>{const m=v.match(/^gear:(\w)/);if(m)gear=m[1]})}if(!S.adapted){const alert=S.kf.find(k=>k.alert&&k.t<=T);if(alert&&T-alert.t<4)gear='D'}gearTxt.textContent=gear;gearTxt.setAttribute('fill',gear==='P'?'#A8A3B8':'#F2B25C');
+ let gear='P';for(const k of S.kf){if(k.t>T)break;(k.log||[]).forEach(v=>{const m=v.match(/^gear:(\w)/);if(m)gear=m[1]})}if(!S.adapted){const alert=S.kf.find(k=>k.alert&&k.t<=T);if(alert&&T-alert.t<4)gear='D'}gearTxt.textContent=gear;gearTxt.setAttribute('fill',gear==='P'?'#A8A3B8':'#FFB15C');
  // chips
  chips.innerHTML='';const cl=[`공조 ${(l.hvacC??22).toFixed(1)}℃ · 풍량 ${fan} · ${l.recirc?'내기':'외기'}`,`등받이 ${br<.5?'편안히':'운전 자세'}`,`운전석 창문 ${Math.round(w)}%`,`문 ${l.lock?'잠금':'열림'}`];
  let cx=0;const ws=cl.map(t=>t.length*7.4+26),cw=ws.reduce((a,b)=>a+b,0)+10*(cl.length-1);cx=740-cw/2;
@@ -285,16 +291,25 @@ function render(dt){const l=leverAt(T),f=frameAt(T),stage=stageAt(T),p=posterior
  const lg=S.kf.filter(k=>k.t<=T&&k.log&&k.log.length).slice(-3).reverse();$('log').innerHTML=lg.map(k=>`<div><b>${k.clock||''}</b> ${k.log.join(' · ')}</div>`).join('');
  $('cxClock').textContent=clk;$('scClock').textContent=clk;$('cxPlace').textContent=S.place;$('cxDrive').textContent=S.drive+'분';$('cxIntent').textContent=S.intent;$('cxStage').textContent=stage;$('cxPersona').textContent=S.persona||'';
  // bayes
- $('pval').textContent=p.toFixed(2);$('pval').style.color=p>EM.thresholds[2]?'#F2B25C':p>EM.thresholds[0]?'#E8C98F':'#ECEAF2';
+ $('pval').textContent=p.toFixed(2);$('pval').style.color=p>EM.thresholds[2]?'#FFB15C':p>EM.thresholds[0]?'#E8C98F':'#ECEAF2';
  $('pcue').textContent=p>EM.thresholds[2]?'마침 문장 · 빛 호박색으로':p>EM.thresholds[1]?'배경음 천천히 줄이는 중':p>EM.thresholds[0]?'빛을 분당 2%씩 올리는 중':'아직 머무는 중 · 아무것도 하지 않음';
- drawP();{const vals=[`${Math.round(pct)}%`,`풍량 ${l.fan||0}`,br<.5?'편안히':'운전 자세',`${Math.round(w)}%`,l.lock?'잠금':'열림',p.toFixed(2)];vals.forEach((v,i)=>{const e=$('tv'+(i+1));if(e)e.textContent=v})}const ph=$('ph');if(ph){const x=tx(Math.min(T,S.duration));ph.setAttribute('x1',x);ph.setAttribute('x2',x)}
+ drawP();{const vals=[`${Math.round(pct)}%`,`풍량 ${l.fan||0}`,br<.5?'편안히':'운전 자세',`${Math.round(w)}%`,l.lock?'잠금':'열림',p.toFixed(2),SND_KO[(curSnd(T)||{}).bgm]||'고요',((curSnd(T)||{}).tts||'').length>20?'마태복음 6:6':((curSnd(T)||{}).tts?'안내 문장':'')];vals.forEach((v,i)=>{const e=$('tv'+(i+1));if(e)e.textContent=v})}const ph=$('ph');if(ph){const x=tx(Math.min(T,S.duration));ph.setAttribute('x1',x);ph.setAttribute('x2',x)}
 }
 
+/* ---------- sound: 종과 바람은 브라우저에서 합성(WebAudio), 음성 낭독은 예정 ---------- */
+const SND_KO={bell_once:'종 한 번',leaves_wind:'바람 소리',none:'고요'};
+function sndEvents(){const o=[];let last='';S.kf.forEach(k=>{if(!k.sound)return;const key=(k.sound.bgm||'')+'|'+(k.sound.tts||'');if(key===last)return;last=key;o.push({t:k.t,bgm:k.sound.bgm,tts:k.sound.tts,vol:k.sound.vol})});return o}
+function curSnd(t){let c=null;for(const e of sndEvents()){if(e.t<=t)c=e;else break}return c}
+let AC=null,wind=null,sndOn=false,sndLast=null;
+function bell(){const t=AC.currentTime;[[528,.22,5],[1056,.07,3],[1584,.035,2]].forEach(([f,g,d])=>{const o=AC.createOscillator(),a=AC.createGain();o.frequency.value=f;a.gain.setValueAtTime(g,t);a.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(a).connect(AC.destination);o.start(t);o.stop(t+d)})}
+function setWind(v){if(!wind){const b=AC.createBuffer(1,AC.sampleRate*2,AC.sampleRate),d=b.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1;const n=AC.createBufferSource();n.buffer=b;n.loop=true;const f=AC.createBiquadFilter();f.type='lowpass';f.frequency.value=420;wind=AC.createGain();wind.gain.value=0;n.connect(f).connect(wind).connect(AC.destination);n.start()}wind.gain.linearRampToValueAtTime(v,AC.currentTime+1.5)}
+function soundTick(){if(!sndOn||!AC)return;const e=playing?curSnd(T):null;if(e===sndLast||(e&&sndLast&&e.t===sndLast.t))return;sndLast=e;if(e&&e.bgm==='bell_once')bell();setWind(e&&e.bgm==='leaves_wind'?.05*Math.pow(10,((e.vol??-18)+18)/20):0)}
 /* ---------- controls ---------- */
 function buildCtrl(){const c=$('ctrl');c.innerHTML='';
- DATA.scenarios.forEach(s=>{const b=document.createElement('button');b.textContent=s.id+' · '+s.name;b.className=s===S?'on':'';b.onclick=()=>{S=s;T=0;userSig=[];lastScreen=null;buildCtrl();drawTimeline()};c.appendChild(b)});
+ DATA.scenarios.forEach(s=>{const b=document.createElement('button');b.textContent=s.id+' · '+s.name.split(',')[0];b.title=s.name;b.className=s===S?'on':'';b.onclick=()=>{S=s;T=0;userSig=[];lastScreen=null;buildCtrl();drawTimeline()};c.appendChild(b)});
  const pp=document.createElement('button');pp.textContent=playing?'일시정지':'재생';pp.onclick=()=>{playing=!playing;buildCtrl()};c.appendChild(pp);
  [5,20,60].forEach(v=>{const b=document.createElement('button');b.textContent=v+'×';b.className=speed===v?'on':'';b.onclick=()=>{speed=v;buildCtrl()};c.appendChild(b)});
+ const sb=document.createElement('button');sb.textContent=sndOn?'소리 끄기':'소리 켜기';sb.className=sndOn?'on':'';sb.onclick=()=>{sndOn=!sndOn;if(sndOn){AC=AC||new (window.AudioContext||window.webkitAudioContext)();AC.resume();sndLast=null}else if(wind)setWind(0);buildCtrl()};c.appendChild(sb);
  const sg=$('sig');sg.querySelectorAll('button').forEach(b=>b.remove());Object.entries(EM.signals).forEach(([k,v])=>{const b=document.createElement('button');b.textContent=v.label+(v.lr<1?' ↓':' ↑');b.onclick=()=>{userSig.push({t:T,type:k});drawTimeline()};sg.appendChild(b)})}
 document.addEventListener('keydown',e=>{if(e.code==='Space'){playing=!playing;buildCtrl();e.preventDefault()}
  const sk=[];S.kf.forEach(k=>{if(k.stage&&(!sk.length||sk[sk.length-1].s!==k.stage))sk.push({s:k.stage,t:k.t})});
@@ -302,6 +317,6 @@ document.addEventListener('keydown',e=>{if(e.code==='Space'){playing=!playing;bu
 function fit(){const s=Math.min(innerWidth/1600,innerHeight/900);$('stage').style.transform=`scale(${s})`}addEventListener('resize',fit);fit();
 const qs=new URLSearchParams(location.search);if(qs.get('s')){S=DATA.scenarios.find(x=>x.id===qs.get('s'))||S}if(qs.get('t'))T=+qs.get('t');if(qs.get('paused'))playing=false;
 buildCtrl();drawTimeline();
-function loop(now){const dt=Math.min(.05,(now-last)/1000);last=now;if(playing){T+=dt*speed;if(T>S.duration){T=S.duration;playing=false;buildCtrl()}}render(dt);requestAnimationFrame(loop)}requestAnimationFrame(loop);
+function loop(now){const dt=Math.min(.05,(now-last)/1000);last=now;if(playing){T+=dt*speed;if(T>S.duration){T=S.duration;playing=false;buildCtrl()}}render(dt);soundTick();requestAnimationFrame(loop)}requestAnimationFrame(loop);
 </script>
 </body></html>
