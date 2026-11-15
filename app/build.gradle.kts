@@ -13,8 +13,8 @@ android {
         applicationId = "com.mangsang.app"
         minSdk = 28
         targetSdk = 34
-        versionCode = 1
-        versionName = "0.1.0"
+        versionCode = 2
+        versionName = "0.2.0"
     }
 
     buildTypes {
@@ -49,6 +49,6 @@ dependencies {
 val copyReleaseApk by tasks.registering(Copy::class) {
     from(layout.buildDirectory.file("outputs/apk/release/app-release.apk"))
     into(rootProject.file("apk"))
-    rename { "망상궤도_골방_release.apk" }
+    rename { "망상궤도_룸19_release.apk" }
 }
 tasks.matching { it.name == "assembleRelease" }.configureEach { finalizedBy(copyReleaseApk) }
