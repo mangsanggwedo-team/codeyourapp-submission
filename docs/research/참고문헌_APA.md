@@ -14,8 +14,8 @@ sources: D12_글로벌타깃/05_PT_인용카드.md, D13_통계사이트/audit_so
 
 ## 국문
 
-1. 국토교통부. (2026). *자동차 등록 현황: 2025년 말 누적 26,515천 대* [게시물]. 경기도교통정보센터. https://gits.gg.go.kr/web/newboard/3386.do?mode=view&schBcode=&schCon=&schStr=&schType=list&pageIndex=1&pageUnit=8&idx=198617804
-   (본문 인용 형식: 국토교통부, 2026) (감사: 통과, car_reg_kr 검증통과, kr_car_registered는 2007·2025상반기 행만 확인불가) (기획서 2, 6) 주의: 페이지 제목은 "교통소식 자세히 보기"뿐이라 위 제목은 본문 내용 기준으로 붙인 것이다. 게시일 미확인이라 연도는 추정. 국토부 원 보도자료 URL을 찾으면 교체.
+1. 국토교통부. (2026, 1월 29일). *[국토교통부] 자동차 누적등록대수 26,515천대* [게시물]. 경기도교통정보센터. https://gits.gg.go.kr/web/newboard/3386.do?mode=view&schBcode=&schCon=&schStr=&schType=list&pageIndex=1&pageUnit=8&idx=198617804
+   (본문 인용 형식: 국토교통부, 2026) (감사: 통과, car_reg_kr 검증통과, kr_car_registered는 2007·2025상반기 행만 확인불가) (기획서 2, 6) 확인(2026-11-15 열람): 게시물 제목은 "[국토교통부] 자동차 누적등록대수 26,515천대", 작성일 2026-01-29(본문 등록일도 2026-01-29). 국토부 원 보도자료 URL은 못 찾아 경기도교통정보센터 게시물을 인용한다.
 
 2. 송유정. (2025, 8월 4일). 시동 꺼진 차에서 나 혼자... 이상한 사람 아닙니다. *오마이뉴스*. https://www.ohmynews.com/NWS_Web/View/at_pg.aspx?CNTN_CD=A0003151371
    (본문 인용 형식: 송유정, 2025) (감사: 후보, 시민기자 글이라 통계 아닌 사례로만 사용. data_main parking_syndrome은 "공식 통계 아님") (기획서 2) 저자명은 페이지 메타(dable:author)에서 확인.
@@ -29,8 +29,8 @@ sources: D12_글로벌타깃/05_PT_인용카드.md, D13_통계사이트/audit_so
 5. 이태영. (2024, 8월 20일). 나만의 '공간', 나만의 '시간', '혼자'가 익숙해지는 사회. *뉴시안*. http://www.newsian.co.kr/news/articleView.html?idxno=72262
    (본문 인용 형식: 이태영, 2024. 문장에서는 "엠브레인 트렌드모니터 2024년 조사를 보도한 기사") (감사: 2차, embrain_car 수정필요, 2024 원문 못 찾아 언론 경유만 확인) (기획서 2) 본문의 "엠브레인(2024)"에 해당한다. 원문 페이지를 확보하면 3번과 같은 형식의 엠브레인 항목으로 바꾼다.
 
-6. 한국가톨릭대사전. (n.d.). 삼종기도. https://encyclopedia.catholic.or.kr/entry/3058
-   (본문 인용 형식: 한국가톨릭대사전, n.d.) (감사: 통과, angelus 검증통과) (기획서 2, 4) 표제어 "삼종기도"와 발행 주체명은 페이지 메타에 없어 PT 인용카드 기재를 따랐다. 발행처 표기는 열어서 확인 필요.
+6. 한국가톨릭대사전. (n.d.). 삼종 기도. 한국교회사연구소. https://encyclopedia.catholic.or.kr/entry/3058
+   (본문 인용 형식: 한국가톨릭대사전, n.d.) (감사: 통과, angelus 검증통과) (기획서 2, 4) 확인(2026-11-15 열람): 표제어는 "삼종 기도"(띄어쓰기 있음, 三鐘祈禱, Angelus), 페이지 하단에 발행 주체 "한국교회사연구소" 표기. 집필·게재 연도는 페이지에 없어 n.d.
 
 7. 한국갤럽. (2021, 4월 7일). *한국인의 종교 1984-2021 (1) 종교 현황* [보고서]. 한국갤럽조사연구소. https://www.gallup.co.kr/gallupdb/reportContent.asp?seqNo=1208
    (본문 인용 형식: 한국갤럽, 2021) (감사: 통과, 20·30대 2004·2014·2021 값 일치) (기획서 2) 2025 보고서(8번)가 2014를 49로 적어 값이 다르다. 2014를 쓸 때 각주.
@@ -47,7 +47,7 @@ sources: D12_글로벌타깃/05_PT_인용카드.md, D13_통계사이트/audit_so
     (본문 인용 형식: Appfigures, 2026) (감사: 통과, main:hallow 검증통과, 단 분석사 추정치. new:hallow는 설치 2,400만 확인불가) (기획서 2, 6) 본문에 반드시 "앱 분석업체 추정"을 같이 쓴다. Hallow 2025 순매출 약 4천만 달러.
 
 11. Ashforth, B. E., Kreiner, G. E., & Fugate, M. (2000). All in a day's work: Boundaries and micro role transitions. *Academy of Management Review, 25*(3), 472-491. https://doi.org/10.2307/259305
-    (본문 인용 형식: Ashforth et al., 2000) (감사: 감사 외, 단 DOI·제목·권호 Crossref 확인. 쪽수 끝 491은 기억 기준이라 확인 필요) (기획서 3)
+    (본문 인용 형식: Ashforth et al., 2000) (감사: 감사 외. DOI·제목·권호는 Crossref 확인, 쪽수 472-491은 Crossref가 시작쪽 472만 주고 Penn State 연구DB 서지(https://pure.psu.edu/en/publications/all-in-a-days-work-boundaries-and-micro-role-transitions/)에서 472-491 확인) (기획서 3)
 
 12. Baumel, A., Muench, F., Edan, S., & Kane, J. M. (2019). Objective user engagement with mental health apps: Systematic search and panel-based usage analysis. *Journal of Medical Internet Research, 21*(9), Article e14567. https://doi.org/10.2196/14567
     (본문 인용 형식: Baumel et al., 2019) (감사: 통과, retention 검증통과. baumel2019_retention은 '유지율 데이터 59개(63%)'만 삭제) (기획서 6) 30일 유지율 중앙값 전체 3.3%, 명상 4.7%. 15일 3.9%와 섞지 않는다.
@@ -65,13 +65,13 @@ sources: D12_글로벌타깃/05_PT_인용카드.md, D13_통계사이트/audit_so
     (본문 인용 형식: GAIKINDO, 2026) (감사: 감사 외, PT 인용카드 14번. 원제의 줄표를 하이픈으로 바꿈) (기획서 6, 해외 확대 쓸 때만)
 
 17. Goyal, M., Singh, S., Sibinga, E. M. S., Gould, N. F., Rowland-Seymour, A., Sharma, R., Berger, Z., Sleicher, D., Maron, D. D., Shihab, H. M., Ranasinghe, P. D., Linn, S., Saha, S., Bass, E. B., & Haythornthwaite, J. A. (2014). Meditation programs for psychological stress and well-being: A systematic review and meta-analysis. *JAMA Internal Medicine, 174*(3), 357-368. https://doi.org/10.1001/jamainternmed.2013.13018
-    (본문 인용 형식: Goyal et al., 2014) (감사: 감사 외, DOI Crossref 확인. 쪽수 끝 368과 부제는 기억 기준이라 확인 필요) (기획서 2, 6, 선택. "효과는 작거나 중간"이라는 한계 문장에만)
+    (본문 인용 형식: Goyal et al., 2014) (감사: 감사 외, DOI Crossref 확인. DOI·제목·저자 15명은 Crossref 확인, 쪽수 357-368은 Crossref가 시작쪽 357만 주고 PubMed 서지(PMID 24395196, https://pubmed.ncbi.nlm.nih.gov/24395196/)에서 357-368 확인. 부제는 PubMed 제목과 일치) (기획서 2, 6, 선택. "효과는 작거나 중간"이라는 한계 문장에만)
 
 18. Halfords. (2025, November 5). *Brits spend half a day a year in their cars searching for peace and quiet* [Press release]. https://web.archive.org/web/20260114020627/https://www.halfordscompany.com/news-and-media/press-releases/halfords-news/brits-spend-half-a-day-a-year-in-their-cars-searching-for-peace-and-quiet/
     (본문 인용 형식: Halfords, 2025) (감사: 출처교체필요였으나 이 아카이브 URL로 교체하면 통과. 77%, 39/28/26/26%, 11.6시간 1차 일치. "평균 13분"과 "처가·시가 8%"는 2차에만 있어 사용 금지) (기획서 2) 원문 보도자료는 현재 404라 아카이브가 원문 대체. 조사는 OnePoll, 영국 차량 보유자 2,000명, 2025-08-29~09-02.
 
-19. Hyundai Motor America. (2026, October 1). *[Press release on the 2027 Tucson as the first U.S. vehicle with Pleos Connect]* [Press release]. https://www.hyundainews.com/assets/applications/original/73181-hyundai-pleos-connect-us-tucson-launch-092826-final.pdf
-    (본문 인용 형식: Hyundai Motor America, 2026) (감사: 통과, pleos_tl에서 투싼 미국 첫 탑재 일치, 단 "2027 초"의 '초'는 원문에 없음) (기획서 6) 대괄호 제목은 임시다. 해당 URL이 PDF 대신 HTML 껍데기를 돌려줘 정식 제목을 확인하지 못했다. 열어서 제목 교체 필요.
+19. Hyundai Motor America. (2026, October 1). *Hyundai introduces Pleos Connect in the U.S. on the all-new 2027 Tucson* [Press release]. https://www.hyundainews.com/releases/hyundai-introduces-pleos-connect-in-the-us-on-the-all-new-2027-tucson
+    (본문 인용 형식: Hyundai Motor America, 2026) (감사: 통과, pleos_tl에서 투싼 미국 첫 탑재 일치, 단 "2027 초"의 '초'는 원문에 없음) (기획서 6) 제목은 같은 보도자료의 hyundainews.com 릴리스 페이지(검색 결과 표기 "Hyundai Introduces Pleos Connect in the U.S. on the All-New 2027 TUCSON")를 APA 문장형 대소문자로 적었다. 원래 PDF URL과 릴리스 페이지 모두 curl·WebFetch에는 로고만 있는 빈 껍데기를 돌려줘 본문·게시일(2026-10-01)은 직접 열람하지 못했고 검색 요약으로만 확인했다. 브라우저로 한 번 열어 날짜 확인 필요.
 
 20. Hyundai Motor Company. (2026, January 21). *Hyundai Motor reports 2025 global retail sales results* [Press release]. https://www.hyundai.com/worldwide/en/newsroom/detail/hyundai-motor-reports-2025-global-retail-sales-results-0000001111
     (본문 인용 형식: Hyundai Motor Company, 2026a) (감사: 통과, region 판매 비중 북미 29.0·한국 17.4·유럽 14.7은 일치, 아시아 21.5는 21.8로 정정) (기획서 6) 소매 4,108,605대와 도매 4,138,389대를 섞지 않는다.
@@ -88,8 +88,8 @@ sources: D12_글로벌타깃/05_PT_인용카드.md, D13_통계사이트/audit_so
 24. Hyundai Motor Group. (n.d.-a). *Pleos Playground: Hyundai Motor Group's mobility software platform*. Retrieved November 15, 2026, from https://developers.pleos.ai
     (본문 인용 형식: Hyundai Motor Group, n.d.-a) (감사: 감사 외, URL 열림 200 확인, 변동 페이지) (기획서 3, 5)
 
-25. Hyundai Motor Group. (n.d.-b). Introduction. In *Pleos Connect UI design guide*. Retrieved November 15, 2026, from https://document.pleos.ai/docs/connect/guide/docs-design/Introduction/intro
-    (본문 인용 형식: Hyundai Motor Group, n.d.-b) (감사: 감사 외, URL 열림 200 확인, 원칙 Easy & Safe·Consistency·Glanceability는 시안 준비 문서에서 확인) (기획서 3, 5) 가이드 상위 제목은 "Pleos Connect UI design guide"로 적었으나 페이지 메타로 확인하지 못해 임시다. 같은 사이트의 주행 방해 가이드라인(pleos-only 경로)은 공개 여부가 불명확해 넣지 않았다.
+25. Hyundai Motor Group. (n.d.-b). *Pleos Connect UI design guide*. Pleos Playground. Retrieved November 15, 2026, from https://document.pleos.ai/docs/connect/guide/docs-design/Introduction/intro
+    (본문 인용 형식: Hyundai Motor Group, n.d.-b) (감사: 감사 외, URL 열림 200 확인, 원칙 Easy & Safe·Consistency·Glanceability는 시안 준비 문서에서 확인) (기획서 3, 5) 확인(2026-11-15 열람): 페이지 제목 "Pleos Connect UI Design Guide | Pleos Playground", 문서 h1 "Pleos Connect UI Design Guide"(상위 경로: Pleos Connect 개발자 가이드 > 앱 기획·설계 가이드 > 디자인 가이드). 이 URL 자체가 가이드의 첫 페이지라 "Introduction" 장 제목은 없다. 그래서 가이드 전체를 단일 웹 문서로 인용했다. 같은 사이트의 주행 방해 가이드라인(pleos-only 경로)은 공개 여부가 불명확해 넣지 않았다.
 
 26. Laborde, S., Allen, M. S., Borges, U., Dosseville, F., Hosang, T. J., Iskra, M., Mosley, E., Salvotti, C., Spolverato, L., Zammit, N., & Javelle, F. (2022). Effects of voluntary slow breathing on heart rate and heart rate variability: A systematic review and a meta-analysis. *Neuroscience & Biobehavioral Reviews, 138*, Article 104711. https://doi.org/10.1016/j.neubiorev.2022.104711
     (본문 인용 형식: Laborde et al., 2022) (감사: 감사 외, DOI Crossref 확인. Crossref 저자 이름 11명 중 중간 이름 이니셜은 공식 표기와 대조 필요) (기획서 3)
@@ -106,19 +106,22 @@ sources: D12_글로벌타깃/05_PT_인용카드.md, D13_통계사이트/audit_so
 30. Pew Research Center. (2025, June 9). *How the global religious landscape changed from 2010 to 2020*. https://www.pewresearch.org/religion/2025/06/09/how-the-global-religious-landscape-changed-from-2010-to-2020/
     (본문 인용 형식: Pew Research Center, 2025b) (감사: 통과, global_pew_religion_2010_2020, 단 2010 값은 변화폭에서 역산한 계산값) (기획서 6) 쓸 값: 미국 기독교 64.0%·무종교 29.7%, 인도네시아 무슬림 87.0% (PT 인용카드 11번, 2020 기준).
 
-31. Redelmeier, D. A., Katz, J., & Kahneman, D. (2003). Memories of colonoscopy: A randomized trial. *Pain, 104*(1-2), 187-194. https://doi.org/10.1016/S0304-3959(03)00003-4
-    (본문 인용 형식: Redelmeier et al., 2003) (감사: 감사 외, DOI가 Crossref에서 열림 확인. 저자 3명·쪽수는 기억 기준이라 확인 필요. 심리생리 근거 파일에서 n=682) (기획서 3)
+31. Pew Research Center. (2025, June 25). *Spirituality and religion: How the US compares with 35 other countries*. https://www.pewresearch.org/religion/2025/06/25/spirituality-and-religion-us-comparison-to-other-countries/
+    (본문 인용 형식: Pew Research Center, 2025c) (감사: 통과, global_pew_daily_prayer 한국 25%) (기획서 6) 확인(2026-11-15 열람): 표의 South Korea "Say they pray at least daily" 25. 게시일 2025-06-25, 한국은 2024 봄 조사. 페이지 title 태그는 "Spirituality & Religion: How the US Compares With 35 Other Countries", og:title은 "...How Does the U.S. Compare With Other Countries?"로 달라 title 태그를 따랐다. 본문의 "Pew Research Center, 2024"는 이 항목이므로 2025c로 고쳤다.
 
-32. Sonnentag, S., & Fritz, C. (2007). The recovery experience questionnaire: Development and validation of a measure for assessing recuperation and unwinding from work. *Journal of Occupational Health Psychology, 12*(3), 204-221. https://doi.org/10.1037/1076-8998.12.3.204
+32. Redelmeier, D. A., Katz, J., & Kahneman, D. (2003). Memories of colonoscopy: A randomized trial. *Pain, 104*(1-2), 187-194. https://doi.org/10.1016/S0304-3959(03)00003-4
+    (본문 인용 형식: Redelmeier et al., 2003) (감사: 감사 외, DOI가 Crossref에서 열림 확인. Crossref에서 저자 3명(Redelmeier, Katz, Kahneman)·제목·Pain 104(1)·쪽수 187-194 일치 확인. 심리생리 근거 파일에서 n=682) (기획서 3)
+
+33. Sonnentag, S., & Fritz, C. (2007). The recovery experience questionnaire: Development and validation of a measure for assessing recuperation and unwinding from work. *Journal of Occupational Health Psychology, 12*(3), 204-221. https://doi.org/10.1037/1076-8998.12.3.204
     (본문 인용 형식: Sonnentag & Fritz, 2007) (감사: 감사 외, DOI Crossref 확인. N=930) (기획서 3)
 
-33. Wilson, T. D., Reinhard, D. A., Westgate, E. C., Gilbert, D. T., Ellerbeck, N., Hahn, C., Brown, C. L., & Shaked, A. (2014). Just think: The challenges of the disengaged mind. *Science, 345*(6192), 75-77. https://doi.org/10.1126/science.1250830
+34. Wilson, T. D., Reinhard, D. A., Westgate, E. C., Gilbert, D. T., Ellerbeck, N., Hahn, C., Brown, C. L., & Shaked, A. (2014). Just think: The challenges of the disengaged mind. *Science, 345*(6192), 75-77. https://doi.org/10.1126/science.1250830
     (본문 인용 형식: Wilson et al., 2014. 국문 문장에서는 Wilson 외, 2014) (감사: 통과, wilson·wilson2014_shock 검증통과, 남 67%(12/18), 여 25%(6/24)) (기획서 2) 표현은 "혼자 생각 중 한 번 이상 스스로 충격을 선택". 이상치 1명(190회) 제외 각주 권장.
 
-34. World Bank. (n.d.). *GNI per capita, Atlas method (current US$)* (Indicator NY.GNP.PCAP.CD) [Data set]. Retrieved November 15, 2026, from https://api.worldbank.org/v2/country/USA;KOR;SAU;IDN;IND/indicator/NY.GNP.PCAP.CD
+35. World Bank. (n.d.). *GNI per capita, Atlas method (current US$)* (Indicator NY.GNP.PCAP.CD) [Data set]. Retrieved November 15, 2026, from https://api.worldbank.org/v2/country/USA;KOR;SAU;IDN;IND/indicator/NY.GNP.PCAP.CD
     (본문 인용 형식: World Bank, n.d.) (감사: GNI는 통과(audit_social countries 행: USA 88,810 등 일치), 점수 P/S/I/R은 근거 없음이라 사용 금지) (기획서 6, 해외 확대 쓸 때만)
 
-총 34건 (국문 9, 영문 25). 이 중 본문에서 확정으로 쓰는 것은 1, 2(후보 사례), 3~5, 8, 10, 12, 18, 28, 33과 6번 항목 일부이며 나머지는 3~6번 칸을 쓰면서 고른다. 6번 칸에서 실제로 인용하지 않는 항목은 제출 전에 지운다(목록에만 있는 항목 0 원칙).
+총 35건 (국문 9, 영문 26). 이 중 본문에서 확정으로 쓰는 것은 1, 2(후보 사례), 3~5, 8, 10, 12, 18, 28, 34와 6번 항목 일부이며 나머지는 3~6번 칸을 쓰면서 고른다. 6번 칸에서 실제로 인용하지 않는 항목은 제출 전에 지운다(목록에만 있는 항목 0 원칙).
 
 ## 본문 인용 ↔ 목록 대조표
 
@@ -136,8 +139,19 @@ sources: D12_글로벌타깃/05_PT_인용카드.md, D13_통계사이트/audit_so
 | 현대차 2025 판매 (그랜저·아반떼) | 9 현대자동차 (2026a) | 목록에만 있음: Pleos 탑재 규모 문장(6번)에서 쓰면 인용 |
 | 현대차 2025 매출·영업이익률 | 21 Hyundai Motor Company (2026b) | 목록에만 있음: 6번 사업성 문장에서 쓰면 인용 |
 | Baumel 2019 (30일 유지율) | 12 Baumel et al. (2019) | 목록에만 있음: 6번 Retention 칸 기준선(4.7%)으로 쓸 예정 |
-| Edwards 1994, Nair 2015, Sonnentag 2007, Laborde 2022, Redelmeier 2003, Ashforth 2000, Nguyen 2018 | 14, 27, 32, 26, 31, 11, 28 | 목록에만 있음: 05 준비 문서가 3번(차량 특화) 근거로 지정. 3번 본문 확정 때 쓰는 것만 남긴다 |
+| Edwards 1994, Nair 2015, Sonnentag 2007, Laborde 2022, Redelmeier 2003, Ashforth 2000, Nguyen 2018 | 14, 27, 33, 26, 32, 11, 28 | 목록에만 있음: 05 준비 문서가 3번(차량 특화) 근거로 지정. 3번 본문 확정 때 쓰는 것만 남긴다 |
 | Pleos 공식 문서 (developers.pleos.ai) | 24, 25 | 목록에만 있음: 3, 5번에서 "Pleos 가이드를 따랐다"고 쓰면 인용 |
+| Pew Research Center(2024) 한국 매일 기도 25% (06-business.md, 5-6-7 초안) | 31 Pew Research Center (2025c) | 표기 수정(완료): 연도를 2024에서 2025c로 고침. 2024는 조사 시점이고 보고서 게시는 2025-06-25. 목록에 31번을 추가 |
 | 본문에 있으나 목록에 없는 인용 | (없음) | 현재 확인한 6건은 전부 목록에 대응 항목이 있다. 단 팀원 초안 전문을 직접 읽지 않았고 전달받은 인용 목록 기준이다 |
 
-확정 전 확인 필요(제출 전 해결): (1) 1번 제목·게시일, (2) 19번 제목, (3) 25번 상위 제목, (4) 6번 발행처, (5) 11, 17, 31번의 쪽수·저자 확인, (6) 팀원 초안 본문과 대조표 재대조.
+확인 결과(2026-11-15). (1) 1번 제목·게시일 해결. (2) 19번 제목은 릴리스 페이지 제목으로 교체, 게시일 2026-10-01은 직접 열람 못 해 미해결(검색 요약 기준). (3) 25번 해결. (4) 6번 발행처 한국교회사연구소 해결. (5) 11, 17, 31번(현 32번) 쪽수·저자 해결. (6) 본문 대조 해결, 단 아래 미해결 한 건 참고.
+
+미해결: 19번 게시일. hyundainews.com 릴리스 페이지가 스크립트 렌더링이라 curl·WebFetch로 본문이 안 열린다. 브라우저에서 열어 날짜와 제목을 대조한다.
+
+## 성구 인용 대조 (마태복음 6:6, 개역한글)
+
+참고문헌 목록과 5-6-7 초안 HTML에는 성구를 직접 인용한 곳이 없다. 성구를 인용한 곳은 docs/journey/여정_초정밀.md(TTS 문구)와 docs/02-solution.md(마 6:6 표기)다. 대한성서공회 개역한글(HAN) 마태복음 6장 6절 원문(2026-11-15 열람):
+
+"너는 기도할 때에 네 골방에 들어가 문을 닫고 은밀한 중에 계신 네 아버지께 기도하라 은밀한 중에 보시는 네 아버지께서 갚으시리라"
+
+출처: https://www.bskorea.or.kr/bible/korbibReadpage.php?version=HAN&book=mat&chap=6&sec=6 (교차 확인: https://www.blueletterbible.org/verse/kor/mat/6/6/). 여정 문서의 TTS 문구 "너는 기도할 때에 네 골방에 들어가 문을 닫고 은밀한 중에 계신 네 아버지께 기도하라"는 절의 앞 문장과 한 글자도 다르지 않다. 개역한글은 저작권 보호기간이 끝난 판본으로 알려져 있으나 이 점은 법적으로 확인하지 못했다.
