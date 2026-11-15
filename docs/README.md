@@ -20,5 +20,8 @@ flowchart LR
 | 07 | [만드는 방식](07-process.md) | 일정·결정·품질·위험을 어떻게 관리했나? | 개발 산출물 · 팀 역량 |
 | AI | [ai/](../ai/README.md) · [toolchain](../ai/toolchain.md) | 두 사람이 AI·도구와 어떻게 만들었나? | 기술 활용성 · 팀 역량 |
 | - | [adr/](adr/) | 왜 이렇게 결정했나? | 전체 |
+| H | [harness/](harness/README.md) | 사업 모델에서 명세까지 어떤 관문을 거쳤나? | 전체 |
+| D | [design/](design/README.md) | 화면과 빛, 소리는 어떤 규칙으로 정했나? | 창의성 · 차량 특화성 |
+| R | [research/](research/README.md) · [AI 사용 요약](research/AI_사용_요약.md) | 숫자와 인용은 어디서 왔나? AI는 무엇을 했나? | 전체 |
 
 문서 종류 구분은 [Diátaxis](https://diataxis.fr/)를 따른다: 01·02·06 = 설명(Explanation) · 03·04 = 참조(Reference) · 05 = 따라하기(How-to). 구조도는 [C4 모델](https://c4model.com/)의 Context·Container 두 단계만 쓴다. 도식은 모두 Mermaid 텍스트가 원본이라 GitHub에서 바로 그려지고, 고친 내역이 diff로 남는다.
