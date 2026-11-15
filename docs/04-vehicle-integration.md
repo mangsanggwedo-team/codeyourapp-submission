@@ -9,7 +9,7 @@
 | 판단 규칙 | `:core` MomentDetector | 매 신호 | 신호를 못 받으면 주행으로 간주 | [DriveMoment.kt](../core/src/main/kotlin/com/mangsang/app/core/DriveMoment.kt) · [테스트](../core/src/test/kotlin/com/mangsang/app/core/MomentDetectorTest.kt) |
 | 문 잠금 | Vehicle `setDoorLock` (CONTROL_CAR_DOORS) | 문턱 | 이미 잠겼으면 다시 잠그지 않음(철컥 소리가 밖에 신호가 됨). P단에서만 동작, D단 거부(50001) 실측 | [실측 기록](#제어-실측-2026-11-15) |
 | 창문 | `setWindowPosition` | 문턱 · 복원 | 운전석 50% → 0 실측. 1cm 남김(환기) | 〃 |
-| 등받이 | `moveSeatBackrestAngle` (이동·정지) | 문턱 · 복원 | 세움. 각도 직접 지정 불가 → 이동 시간 제어. P단에서만 | 〃 |
+| 등받이 | `moveSeatBackrestAngle` (이동·정지) | 문턱 · 복원 | 문턱에서 조금 뒤로 기대게 하고, 끝나면 운전 자세로 되돌림. 각도 직접 지정 불가 → 이동 시간 제어. P단에서만 | 〃 |
 | 앰비언트 | `setAmbientLightBrightness` · `Color` | 숨 · 머묾 · 돌아옴 | 숨에 맞춰 밝기, 마침에 호박색 | 〃 |
 | 공조 | `setHvacTemperature` · `FanSpeed` · `Recirculation` | 머묾 | 풍량 낮춤, 내기 10분마다 외기(CO2 누적 방지) | 〃 |
 | 열선 | `setHvacSeatTemperature` | 머묾(계절) | 0 → 2 실측 | 〃 |
@@ -59,7 +59,7 @@ Pleos Connect 에뮬레이터, Vehicle SDK 2.3.2, 매니페스트에 `pleos.car.
 |---|---|
 | 공조 온도 22→18℃, 풍량 3→6, 내기순환 | 됨 (하단 공조 바도 바뀜) |
 | 운전석 열선 0→2 | 됨 |
-| 등받이 | P단에서 됨(이동·정지). D단에서는 정차여도 거부(50001) |
+| 등받이 | P단에서 됨(앞·뒤 이동과 정지). D단에서는 정차여도 거부(50001) |
 | 앰비언트 밝기 30→20, 색 흰색→보라 | 됨 |
 | 운전석 창문 50%→0 | 됨 |
 | 도어 잠금 | P단에서 됨, D단 거부 |

@@ -97,31 +97,31 @@ const FALLBACK={endingModel:{mu:Math.log(15*60),sigma:0.35,thresholds:[0.5,0.7,0
 scenarios:[
 {id:'A',name:'귀가 직전 · 기도',place:'아파트 지하주차장 B2',clock:'21:40',drive:40,intent:'기도 · 개신교',duration:960,mu:Math.log(15*60),
  kf:[
- {t:0,stage:'준비',levers:{hvacC:23,fan:3,recirc:0,seatHeat:0,backrest:.3,ambient:{pct:30,hex:'#E9E4FF'},window:15,lock:0,mirrorFolded:0},screen:{title:'도착했어요.',body:'40분 운전하셨네요.',buttons:[]},sound:{tts:''}},
+ {t:0,stage:'준비',levers:{hvacC:23,fan:3,recirc:0,seatHeat:0,backrest:.55,ambient:{pct:30,hex:'#E9E4FF'},window:15,lock:0,mirrorFolded:0},screen:{title:'도착했어요.',body:'40분 운전하셨네요.',buttons:[]},sound:{tts:''}},
  {t:20,stage:'준비',screen:{title:'잠시 이곳에 머무시겠어요?',body:'오늘은 15분을 권해요.\n지난번처럼 기도로 시작할게요.',buttons:['10분','15분','다음에']},sound:{tts:'잠시 이곳에 머무시겠어요?'}},
- {t:32,stage:'문턱',levers:{lock:1,window:1,backrest:.75,ambient:{pct:22,hex:'#8F73FF'},mirrorFolded:1},screen:{title:'바깥은 잠시 내려놓을게요.',body:'문을 잠그고 창문을 닫았어요.',buttons:[]},sound:{tts:'바깥은 잠시 내려놓을게요.'}},
+ {t:32,stage:'문턱',levers:{lock:1,window:1,backrest:.45,ambient:{pct:22,hex:'#8F73FF'},mirrorFolded:1},screen:{title:'바깥은 잠시 내려놓을게요.',body:'문을 잠그고 창문을 닫았어요.',buttons:[]},sound:{tts:'바깥은 잠시 내려놓을게요.'}},
  {t:52,stage:'숨',levers:{fan:1,recirc:1,hvacC:22,ambient:{pct:18,hex:'#8F73FF'}},screen:{title:'숨을 세 번 고를게요.',body:'빛이 밝아지면 들이쉬고,\n어두워지면 내쉬세요.',buttons:[]},sound:{tts:'숨을 세 번 고를게요.'},breath:true},
  {t:110,stage:'머묾',levers:{fan:1,ambient:{pct:12,hex:'#6E55E8'}},screen:{title:'',body:'',buttons:[],dim:true},sound:{tts:''}},
  {t:600,stage:'머묾',levers:{recirc:0,fan:1},screen:{title:'',body:'',buttons:[],dim:true},note:'환기: 내기 10분 뒤 외기로 조용히 전환'},
  {t:700,stage:'머묾',levers:{recirc:1}},
  {t:880,stage:'돌아옴',levers:{ambient:{pct:35,hex:'#F2B25C'},fan:2},screen:{title:'여기 두고 가셔도 돼요.',body:'',buttons:[]},sound:{tts:'오늘 마음은 여기 두고 가셔도 돼요.'},ending:true},
- {t:925,stage:'출발 준비',levers:{lock:0,window:15,backrest:.3,mirrorFolded:0,recirc:0,fan:3,hvacC:23,ambient:{pct:30,hex:'#E9E4FF'}},screen:{title:'출발할 수 있어요.',body:'모든 설정을 처음처럼 돌려놓았어요.',buttons:[]},sound:{tts:''}},
+ {t:925,stage:'출발 준비',levers:{lock:0,window:15,backrest:.55,mirrorFolded:0,recirc:0,fan:3,hvacC:23,ambient:{pct:30,hex:'#E9E4FF'}},screen:{title:'출발할 수 있어요.',body:'모든 설정을 처음처럼 돌려놓았어요.',buttons:[]},sound:{tts:''}},
  {t:960,stage:'출발 준비'}],
  signals:[{t:820,type:'wake'},{t:845,type:'backrest'}]},
 {id:'B',name:'점심 · 조용히 머물기',place:'회사 지상주차장 3층',clock:'12:20',drive:15,intent:'조용히 머물기 · 무교',duration:520,mu:Math.log(8*60),
  kf:[
- {t:0,stage:'준비',levers:{hvacC:21,fan:3,recirc:0,seatHeat:0,backrest:.35,ambient:{pct:25,hex:'#E9E4FF'},window:20,lock:0,mirrorFolded:0},screen:{title:'점심 잘 드셨어요?',body:'오후 전에 잠깐 쉬어 갈까요?',buttons:['8분','다음에']}},
- {t:18,stage:'문턱',levers:{lock:1,window:1,backrest:.7,ambient:{pct:18,hex:'#8F73FF'}},screen:{title:'조용히 머물게요.',body:'',buttons:[]},sound:{tts:'조용히 머물게요.'}},
+ {t:0,stage:'준비',levers:{hvacC:21,fan:3,recirc:0,seatHeat:0,backrest:.55,ambient:{pct:25,hex:'#E9E4FF'},window:20,lock:0,mirrorFolded:0},screen:{title:'점심 잘 드셨어요?',body:'오후 전에 잠깐 쉬어 갈까요?',buttons:['8분','다음에']}},
+ {t:18,stage:'문턱',levers:{lock:1,window:1,backrest:.45,ambient:{pct:18,hex:'#8F73FF'}},screen:{title:'조용히 머물게요.',body:'',buttons:[]},sound:{tts:'조용히 머물게요.'}},
  {t:34,stage:'숨',levers:{fan:1,recirc:1},screen:{title:'숨 한 번.',body:'',buttons:[]},breath:true},
  {t:70,stage:'머묾',levers:{ambient:{pct:10,hex:'#6E55E8'}},screen:{dim:true,title:'',body:'',buttons:[]}},
  {t:450,stage:'돌아옴',levers:{ambient:{pct:35,hex:'#F2B25C'},fan:2},screen:{title:'오후도 천천히.',body:'',buttons:[]},sound:{tts:'오후도 천천히 가요.'},ending:true},
- {t:490,stage:'출발 준비',levers:{lock:0,window:20,backrest:.35,recirc:0,fan:3,ambient:{pct:25,hex:'#E9E4FF'}},screen:{title:'다녀오세요.',body:'',buttons:[]}},
+ {t:490,stage:'출발 준비',levers:{lock:0,window:20,backrest:.55,recirc:0,fan:3,ambient:{pct:25,hex:'#E9E4FF'}},screen:{title:'다녀오세요.',body:'',buttons:[]}},
  {t:520,stage:'출발 준비'}],
  signals:[{t:400,type:'wake'}]},
 {id:'C',name:'예외 · 기어 이탈',place:'아파트 지하주차장 B2',clock:'21:40',drive:40,intent:'기도 · 개신교',duration:300,mu:Math.log(15*60),
  kf:[
- {t:0,stage:'머묾',levers:{hvacC:22,fan:1,recirc:1,seatHeat:1,backrest:.75,ambient:{pct:12,hex:'#6E55E8'},window:1,lock:1,mirrorFolded:1},screen:{dim:true,title:'',body:'',buttons:[]}},
- {t:120,stage:'머묾',screen:{title:'기어가 P에서 벗어났어요.',body:'안전을 위해 바로 처음 상태로 돌려놓았어요.',buttons:[]},levers:{lock:0,window:15,backrest:.3,mirrorFolded:0,recirc:0,fan:3,hvacC:23,seatHeat:0,ambient:{pct:30,hex:'#E9E4FF'}},sound:{tts:''},alert:true,note:'즉시 복원: 0.2초 안에 모든 레버를 시작 전 값으로'},
+ {t:0,stage:'머묾',levers:{hvacC:22,fan:1,recirc:1,seatHeat:1,backrest:.45,ambient:{pct:12,hex:'#6E55E8'},window:1,lock:1,mirrorFolded:1},screen:{dim:true,title:'',body:'',buttons:[]}},
+ {t:120,stage:'머묾',screen:{title:'기어가 P에서 벗어났어요.',body:'안전을 위해 바로 처음 상태로 돌려놓았어요.',buttons:[]},levers:{lock:0,window:15,backrest:.55,mirrorFolded:0,recirc:0,fan:3,hvacC:23,seatHeat:0,ambient:{pct:30,hex:'#E9E4FF'}},sound:{tts:''},alert:true,note:'즉시 복원: 0.2초 안에 모든 레버를 시작 전 값으로'},
  {t:300,stage:'출발 준비'}],
  signals:[]}]};
 
@@ -286,7 +286,7 @@ function render(dt){const l=leverAt(T),f=frameAt(T),stage=stageAt(T),p=posterior
  ambStrip.setAttribute('fill',amb.hex);ambStripBlur.setAttribute('fill',amb.hex);ambStripBlur.setAttribute('opacity',(.3+.7*o).toFixed(2));ambInside.setAttribute('opacity',(.25+.6*o).toFixed(3));
  dashGlow.setAttribute('opacity',f.screen&&f.screen.dim?.12:.55);
  // backrest: 0 reclined(-26deg) 1 upright(-4deg)
- const br=l.backrest??.3,ang=-26+22*br;back.setAttribute('transform',`rotate(${ang} 764 528)`);
+ const br=l.backrest??.55,ang=-26+22*br;back.setAttribute('transform',`rotate(${ang} 764 528)`);
  const lean=ang*.55;person.setAttribute('transform',`rotate(${lean} 735 520)`);
  // breathing head bob
  if(stage==='숨'||stage==='머묾'){head.setAttribute('cy',418+Math.sin(T/4.5*Math.PI)*1.2)}
@@ -301,7 +301,7 @@ function render(dt){const l=leverAt(T),f=frameAt(T),stage=stageAt(T),p=posterior
  // gear
  let gear='P';for(const k of S.kf){if(k.t>T)break;(k.log||[]).forEach(v=>{const m=v.match(/^gear:(\w)/);if(m)gear=m[1]})}if(!S.adapted){const alert=S.kf.find(k=>k.alert&&k.t<=T);if(alert&&T-alert.t<4)gear='D'}gearTxt.textContent=gear;gearTxt.setAttribute('fill',gear==='P'?'#A8A3B8':'#F2B25C');
  // chips
- chips.innerHTML='';const cl=[`공조 ${(l.hvacC??22).toFixed(1)}℃ · 풍량 ${fan} · ${l.recirc?'내기':'외기'}`,`등받이 ${br>.6?'세움':'편안히'}`,`운전석 창문 ${Math.round(w)}%`,`문 ${l.lock?'잠금':'열림'}`];
+ chips.innerHTML='';const cl=[`공조 ${(l.hvacC??22).toFixed(1)}℃ · 풍량 ${fan} · ${l.recirc?'내기':'외기'}`,`등받이 ${br<.5?'편안히':'운전 자세'}`,`운전석 창문 ${Math.round(w)}%`,`문 ${l.lock?'잠금':'열림'}`];
  let cx=0;const ws=cl.map(t=>t.length*7.4+26),cw=ws.reduce((a,b)=>a+b,0)+10*(cl.length-1);cx=740-cw/2;
  cl.forEach((t,i)=>{const g=el('g',{},chips);if(i)el('line',{x1:cx-5,x2:cx-5,y1:294,y2:310,stroke:'rgba(255,255,255,.12)'},g);const tx=el('text',{x:cx+ws[i]/2,y:307,fill:'#A7A2B4','font-size':12.5,'letter-spacing':'.02em','text-anchor':'middle'},g);tx.textContent=t;cx+=ws[i]+10});
  // screen
@@ -316,7 +316,7 @@ function render(dt){const l=leverAt(T),f=frameAt(T),stage=stageAt(T),p=posterior
  // bayes
  $('pval').textContent=p.toFixed(2);$('pval').style.color=p>EM.thresholds[2]?'#F2B25C':p>EM.thresholds[0]?'#E8C98F':'#ECEAF2';
  $('pcue').textContent=p>EM.thresholds[2]?'마침 문장 · 빛 호박색으로':p>EM.thresholds[1]?'배경음 천천히 줄이는 중':p>EM.thresholds[0]?'빛을 분당 2%씩 올리는 중':'아직 머무는 중 · 아무것도 하지 않음';
- drawP();{const vals=[`${Math.round(pct)}%`,`풍량 ${l.fan||0}`,br>.6?'세움':'편안히',`${Math.round(w)}%`,l.lock?'잠금':'열림',p.toFixed(2)];vals.forEach((v,i)=>{const e=$('tv'+(i+1));if(e)e.textContent=v})}const ph=$('ph');if(ph){const x=tx(Math.min(T,S.duration));ph.setAttribute('x1',x);ph.setAttribute('x2',x)}
+ drawP();{const vals=[`${Math.round(pct)}%`,`풍량 ${l.fan||0}`,br<.5?'편안히':'운전 자세',`${Math.round(w)}%`,l.lock?'잠금':'열림',p.toFixed(2)];vals.forEach((v,i)=>{const e=$('tv'+(i+1));if(e)e.textContent=v})}const ph=$('ph');if(ph){const x=tx(Math.min(T,S.duration));ph.setAttribute('x1',x);ph.setAttribute('x2',x)}
 }
 
 /* ---------- controls ---------- */

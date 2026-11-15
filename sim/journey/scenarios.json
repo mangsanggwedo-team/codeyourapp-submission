@@ -1,7 +1,7 @@
 {
  "version": 1,
  "generated": "2026-11-15",
- "note": "웹 시뮬레이터 재생용. t는 기어 P가 된 순간 0 기준 초. levers는 매 키프레임 전체 상태(차분 아님). ambient.ms는 그 값까지 가는 전이 시간. backrest 0~1은 세움 정도(SDK는 위치 지정 불가, 이동·정지만, P에서만). mirrorFolded는 앱 제어 불가, 차량 자체 동작 표시. vol은 앱 기준 음량 대비 dB, null은 무음. session.p는 EndingPolicy 사후확률(코드와 같은 식).",
+ "note": "웹 시뮬레이터 재생용. t는 기어 P가 된 순간 0 기준 초. levers는 매 키프레임 전체 상태(차분 아님). ambient.ms는 그 값까지 가는 전이 시간. backrest 0~1은 세움 정도(클수록 세움, 세션은 0.55에서 0.45로 조금 뒤로 기댔다가 끝에 0.55로 되돌림. SDK는 위치 지정 불가, 이동·정지만, P에서만). mirrorFolded는 앱 제어 불가, 차량 자체 동작 표시. vol은 앱 기준 음량 대비 dB, null은 무음. session.p는 EndingPolicy 사후확률(코드와 같은 식).",
  "assumptions": [
   "intendedSec·운전 시간·LR·비용·σ는 [가정] 초깃값",
   "외기온·차종은 [가정]",
@@ -295,7 +295,7 @@
       "fan": 2,
       "recirc": false,
       "seatHeat": 1,
-      "backrest": 0.62,
+      "backrest": 0.45,
       "ambient": {
        "pct": 20,
        "hex": "#FFB15C",
@@ -331,7 +331,7 @@
       "fan": 1,
       "recirc": false,
       "seatHeat": 1,
-      "backrest": 0.62,
+      "backrest": 0.45,
       "ambient": {
        "pct": 20,
        "hex": "#FFB15C",
@@ -367,7 +367,7 @@
       "fan": 1,
       "recirc": false,
       "seatHeat": 1,
-      "backrest": 0.62,
+      "backrest": 0.45,
       "ambient": {
        "pct": 20,
        "hex": "#FFB15C",
@@ -403,7 +403,7 @@
       "fan": 1,
       "recirc": false,
       "seatHeat": 1,
-      "backrest": 0.62,
+      "backrest": 0.45,
       "ambient": {
        "pct": 20,
        "hex": "#FFB15C",
@@ -441,7 +441,7 @@
       "fan": 1,
       "recirc": false,
       "seatHeat": 1,
-      "backrest": 0.62,
+      "backrest": 0.45,
       "ambient": {
        "pct": 15,
        "hex": "#FF9A3C",
@@ -479,7 +479,7 @@
       "fan": 1,
       "recirc": false,
       "seatHeat": 1,
-      "backrest": 0.62,
+      "backrest": 0.45,
       "ambient": {
        "pct": 20,
        "hex": "#FFB15C",
@@ -517,7 +517,7 @@
       "fan": 1,
       "recirc": false,
       "seatHeat": 1,
-      "backrest": 0.62,
+      "backrest": 0.45,
       "ambient": {
        "pct": 15,
        "hex": "#FF9A3C",
@@ -553,7 +553,7 @@
       "fan": 1,
       "recirc": false,
       "seatHeat": 1,
-      "backrest": 0.62,
+      "backrest": 0.45,
       "ambient": {
        "pct": 15,
        "hex": "#FF9A3C",
@@ -591,7 +591,7 @@
       "fan": 1,
       "recirc": false,
       "seatHeat": 1,
-      "backrest": 0.62,
+      "backrest": 0.45,
       "ambient": {
        "pct": 15,
        "hex": "#FF9A3C",
@@ -629,7 +629,7 @@
       "fan": 1,
       "recirc": false,
       "seatHeat": 1,
-      "backrest": 0.62,
+      "backrest": 0.45,
       "ambient": {
        "pct": 15,
        "hex": "#FF9A3C",
@@ -667,7 +667,7 @@
       "fan": 1,
       "recirc": false,
       "seatHeat": 1,
-      "backrest": 0.62,
+      "backrest": 0.45,
       "ambient": {
        "pct": 15,
        "hex": "#FF9A3C",
@@ -703,7 +703,7 @@
       "fan": 1,
       "recirc": false,
       "seatHeat": 1,
-      "backrest": 0.62,
+      "backrest": 0.45,
       "ambient": {
        "pct": 17,
        "hex": "#FF9A3C",
@@ -743,7 +743,7 @@
       "fan": 1,
       "recirc": false,
       "seatHeat": 1,
-      "backrest": 0.68,
+      "backrest": 0.52,
       "ambient": {
        "pct": 17,
        "hex": "#FF9A3C",
@@ -782,7 +782,7 @@
       "fan": 1,
       "recirc": false,
       "seatHeat": 1,
-      "backrest": 0.68,
+      "backrest": 0.52,
       "ambient": {
        "pct": 17,
        "hex": "#FF9A3C",
@@ -820,7 +820,7 @@
       "fan": 1,
       "recirc": false,
       "seatHeat": 1,
-      "backrest": 0.68,
+      "backrest": 0.52,
       "ambient": {
        "pct": 30,
        "hex": "#FFC489",
@@ -1345,7 +1345,7 @@
       "fan": 2,
       "recirc": false,
       "seatHeat": 0,
-      "backrest": 0.55,
+      "backrest": 0.45,
       "ambient": {
        "pct": 25,
        "hex": "#FFB15C",
@@ -1381,7 +1381,7 @@
       "fan": 2,
       "recirc": false,
       "seatHeat": 0,
-      "backrest": 0.55,
+      "backrest": 0.45,
       "ambient": {
        "pct": 25,
        "hex": "#FFB15C",
@@ -1420,7 +1420,7 @@
       "fan": 2,
       "recirc": false,
       "seatHeat": 0,
-      "backrest": 0.55,
+      "backrest": 0.45,
       "ambient": {
        "pct": 25,
        "hex": "#FFB15C",
@@ -1458,7 +1458,7 @@
       "fan": 2,
       "recirc": false,
       "seatHeat": 0,
-      "backrest": 0.55,
+      "backrest": 0.45,
       "ambient": {
        "pct": 25,
        "hex": "#FFB15C",
@@ -1496,7 +1496,7 @@
       "fan": 2,
       "recirc": false,
       "seatHeat": 0,
-      "backrest": 0.55,
+      "backrest": 0.45,
       "ambient": {
        "pct": 20,
        "hex": "#FF9A3C",
@@ -1534,7 +1534,7 @@
       "fan": 2,
       "recirc": false,
       "seatHeat": 0,
-      "backrest": 0.55,
+      "backrest": 0.45,
       "ambient": {
        "pct": 20,
        "hex": "#FF9A3C",
@@ -1572,7 +1572,7 @@
       "fan": 2,
       "recirc": false,
       "seatHeat": 0,
-      "backrest": 0.55,
+      "backrest": 0.45,
       "ambient": {
        "pct": 20,
        "hex": "#FF9A3C",
@@ -1608,7 +1608,7 @@
       "fan": 2,
       "recirc": false,
       "seatHeat": 0,
-      "backrest": 0.55,
+      "backrest": 0.45,
       "ambient": {
        "pct": 21,
        "hex": "#FF9A3C",
@@ -1646,7 +1646,7 @@
       "fan": 2,
       "recirc": false,
       "seatHeat": 0,
-      "backrest": 0.5,
+      "backrest": 0.4,
       "ambient": {
        "pct": 20,
        "hex": "#FF9A3C",
@@ -1685,7 +1685,7 @@
       "fan": 2,
       "recirc": false,
       "seatHeat": 0,
-      "backrest": 0.5,
+      "backrest": 0.4,
       "ambient": {
        "pct": 20,
        "hex": "#FF9A3C",
@@ -1725,7 +1725,7 @@
       "fan": 2,
       "recirc": false,
       "seatHeat": 0,
-      "backrest": 0.6,
+      "backrest": 0.52,
       "ambient": {
        "pct": 20,
        "hex": "#FF9A3C",
@@ -1764,7 +1764,7 @@
       "fan": 2,
       "recirc": false,
       "seatHeat": 0,
-      "backrest": 0.6,
+      "backrest": 0.52,
       "ambient": {
        "pct": 20,
        "hex": "#FF9A3C",
@@ -1802,7 +1802,7 @@
       "fan": 2,
       "recirc": false,
       "seatHeat": 0,
-      "backrest": 0.6,
+      "backrest": 0.52,
       "ambient": {
        "pct": 30,
        "hex": "#FFC489",
@@ -2130,7 +2130,7 @@
       "fan": 1,
       "recirc": false,
       "seatHeat": 1,
-      "backrest": 0.62,
+      "backrest": 0.45,
       "ambient": {
        "pct": 20,
        "hex": "#FFB15C",
@@ -2166,7 +2166,7 @@
       "fan": 1,
       "recirc": false,
       "seatHeat": 1,
-      "backrest": 0.62,
+      "backrest": 0.45,
       "ambient": {
        "pct": 15,
        "hex": "#FF9A3C",
@@ -2207,7 +2207,7 @@
       "fan": 1,
       "recirc": false,
       "seatHeat": 1,
-      "backrest": 0.62,
+      "backrest": 0.45,
       "ambient": {
        "pct": 22,
        "hex": "#FF9A3C",
@@ -2247,7 +2247,7 @@
       "fan": 1,
       "recirc": false,
       "seatHeat": 1,
-      "backrest": 0.62,
+      "backrest": 0.45,
       "ambient": {
        "pct": 15,
        "hex": "#FF9A3C",
@@ -2287,7 +2287,7 @@
       "fan": 1,
       "recirc": false,
       "seatHeat": 1,
-      "backrest": 0.62,
+      "backrest": 0.45,
       "ambient": {
        "pct": 30,
        "hex": "#FFFFFF",
@@ -2325,7 +2325,7 @@
       "fan": 1,
       "recirc": false,
       "seatHeat": 1,
-      "backrest": 0.62,
+      "backrest": 0.45,
       "ambient": {
        "pct": 30,
        "hex": "#FFFFFF",
@@ -2367,7 +2367,7 @@
       "fan": 1,
       "recirc": false,
       "seatHeat": 1,
-      "backrest": 0.62,
+      "backrest": 0.45,
       "ambient": {
        "pct": 15,
        "hex": "#FF9A3C",
@@ -2407,7 +2407,7 @@
       "fan": 3,
       "recirc": false,
       "seatHeat": 0,
-      "backrest": 0.62,
+      "backrest": 0.45,
       "ambient": {
        "pct": 30,
        "hex": "#FFFFFF",
@@ -2445,7 +2445,7 @@
       "fan": 3,
       "recirc": false,
       "seatHeat": 0,
-      "backrest": 0.62,
+      "backrest": 0.45,
       "ambient": {
        "pct": 30,
        "hex": "#FFFFFF",
@@ -2478,7 +2478,7 @@
       "fan": 3,
       "recirc": false,
       "seatHeat": 0,
-      "backrest": 0.62,
+      "backrest": 0.45,
       "ambient": {
        "pct": 30,
        "hex": "#FFFFFF",
@@ -2512,7 +2512,7 @@
       "fan": 3,
       "recirc": false,
       "seatHeat": 0,
-      "backrest": 0.62,
+      "backrest": 0.45,
       "ambient": {
        "pct": 30,
        "hex": "#FFFFFF",

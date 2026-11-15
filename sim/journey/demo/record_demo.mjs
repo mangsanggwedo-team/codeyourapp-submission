@@ -47,7 +47,7 @@ await cardOff();
 
 await cap("시나리오 A", "평일 21:40, 아파트 지하주차장. 40분 운전을 마치고 P단에 둔다."); await runTo(0, 5); await wait(800);
 await cap("준비", "차가 먼저 묻는다. 사용자는 아무것도 설정하지 않는다."); await runTo(14, 4); await wait(1200);
-await cap("문턱", "문 잠금, 창문, 등받이 세움, 조명. 이미 잠긴 문은 다시 잠그지 않는다."); await runTo(30, 3); await wait(1500);
+await cap("문턱", "문 잠금, 창문, 등받이 조금 뒤로, 조명. 이미 잠긴 문은 다시 잠그지 않는다."); await runTo(30, 3); await wait(1500);
 await cap("숨", "앰비언트가 들숨에 밝아지고 날숨에 어두워진다. 세 번."); await runTo(84, 5); await wait(800);
 await cap("머묾", "머무는 동안 차는 말하지 않는다. 마이크도 쓰지 않는다."); await runTo(420, 60); await wait(600);
 await cap("머묾", "왼쪽 위: 시간과 차량 신호로 '마칠 준비' 확률을 계속 추정한다."); await runTo(820, 60); await wait(800);
