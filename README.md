@@ -1,10 +1,10 @@
 <p align="center">
-  <img src="docs/assets/proposal/3-1_six-stage-band.png" alt="룸19의 여섯 단계(준비, 문턱, 숨, 머묾, 돌아옴, 출발 준비)를 가로축에 두고 좌석, 공조, 빛, 창문과 잠금, 소리 다섯 레인에서 앱이 차량 값을 바꾸는 지점을 표시한 띠 그림" width="860">
+  <img src="docs/assets/proposal/3-1_six-stage-band.png" alt="Room19(룸19)의 여섯 단계(준비, 문턱, 숨, 머묾, 돌아옴, 출발 준비)를 가로축에 두고 좌석, 공조, 빛, 창문과 잠금, 소리 다섯 레인에서 앱이 차량 값을 바꾸는 지점을 표시한 띠 그림" width="860">
 </p>
 
-<h1 align="center">룸19</h1>
-<p align="center"><b>주차한 차가 몇 분 동안 나만의 기도실이 된다.</b><br>
-<sub>Room 19: a parked car becomes a short prayer room, then quietly turns back into a car.</sub></p>
+<h1 align="center">Room19</h1>
+<p align="center"><b>룸19 · 주차한 차가 몇 분 동안 나만의 기도실이 된다.</b><br>
+<sub>A parked car becomes a short prayer room, then quietly turns back into a car.</sub></p>
 
 <p align="center">
   <a href="https://mangsanggwedo-team.github.io/codeyourapp-submission/site/"><strong>소개 페이지</strong></a> ·

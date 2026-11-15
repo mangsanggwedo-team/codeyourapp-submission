@@ -1039,7 +1039,7 @@ function exportPNG(card){const svgEl=card.querySelector('svg');if(!svgEl)return;
  const clone=svgEl.cloneNode(true);clone.setAttribute('xmlns','http://www.w3.org/2000/svg');clone.setAttribute('width',r.width);clone.setAttribute('height',r.height);
  const bg=document.createElementNS('http://www.w3.org/2000/svg','rect');bg.setAttribute('width','100%');bg.setAttribute('height','100%');bg.setAttribute('fill',C.s1);clone.insertBefore(bg,clone.firstChild);
  const img=new Image();img.onload=()=>{const cv=document.createElement('canvas');cv.width=r.width*sc;cv.height=r.height*sc;const cx=cv.getContext('2d');cx.scale(sc,sc);cx.drawImage(img,0,0);
-  const a=document.createElement('a');a.download='golbang_'+(card.dataset.chart||'chart')+'.png';a.href=cv.toDataURL('image/png');a.click()};
+  const a=document.createElement('a');a.download='room19_'+(card.dataset.chart||'chart')+'.png';a.href=cv.toDataURL('image/png');a.click()};
  img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(new XMLSerializer().serializeToString(clone))}
 
 /* PNG export */
@@ -1047,7 +1047,7 @@ document.querySelectorAll('.png').forEach(btn=>btn.onclick=()=>{const card=btn.c
  const clone=svgEl.cloneNode(true);clone.setAttribute('xmlns','http://www.w3.org/2000/svg');clone.setAttribute('width',r.width);clone.setAttribute('height',r.height);
  const bg=document.createElementNS('http://www.w3.org/2000/svg','rect');bg.setAttribute('width','100%');bg.setAttribute('height','100%');bg.setAttribute('fill',C.s1);clone.insertBefore(bg,clone.firstChild);
  const img=new Image();img.onload=()=>{const cv=document.createElement('canvas');cv.width=r.width*sc;cv.height=r.height*sc;const cx=cv.getContext('2d');cx.scale(sc,sc);cx.drawImage(img,0,0);
-  const a=document.createElement('a');a.download='golbang_'+card.dataset.chart+'.png';a.href=cv.toDataURL('image/png');a.click()};
+  const a=document.createElement('a');a.download='room19_'+card.dataset.chart+'.png';a.href=cv.toDataURL('image/png');a.click()};
  img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(new XMLSerializer().serializeToString(clone))});
 
 drawSankey();drawTime();drawRank();
