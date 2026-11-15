@@ -21,4 +21,19 @@
 - 원문에서 확인한 숫자만 쓴다. 2차 보도에만 있는 숫자는 쓰지 않는다.
 - 공개 저장소에는 실명, 연락처, 서명, 개인정보 원본을 올리지 않는다(`scripts/check_published.py`로 매 커밋 점검).
 
+## 에이전트
+역할별 에이전트 정의와 각자의 작업 기억이다.
+
+| 에이전트 | 맡은 일 | 정의 | 기억 |
+|---|---|---|---|
+| conductor | 지휘자. 지시를 쪼개 맡기고 결과를 검증 | [정의](../../.claude/agents/conductor.md) |  |
+| contest-ops | 공모전 운영, 일정과 제출 점검 | [정의](../../.claude/agents/contest-ops.md) | [기억](../../.claude/agent-memory/contest-ops/MEMORY.md) |
+| creative-director | 아트 디렉션, 표현 사이의 일관성 | [정의](../../.claude/agents/creative-director.md) | [기억](../../.claude/agent-memory/creative-director/MEMORY.md) |
+| design-reviewer | 화면과 그림을 차량 UX 원칙으로 검토 | [정의](../../.claude/agents/design-reviewer.md) | [기억](../../.claude/agent-memory/design-reviewer/MEMORY.md) |
+| developer | 앱, 코어, 시뮬레이션 개발 | [정의](../../.claude/agents/developer.md) | [기억](../../.claude/agent-memory/developer/MEMORY.md) |
+| fact-verifier | 주장을 원문과 대조해 판정 | [정의](../../.claude/agents/fact-verifier.md) | [기억](../../.claude/agent-memory/fact-verifier/MEMORY.md) |
+| judge | 심사위원 셋을 시뮬레이션해 채점 | [정의](../../.claude/agents/judge.md) | [기억](../../.claude/agent-memory/judge/MEMORY.md) |
+| proposal-writer | 기획서와 README 문장 | [정의](../../.claude/agents/proposal-writer.md) | [기억](../../.claude/agent-memory/proposal-writer/MEMORY.md) |
+| researcher | 사실과 출처 수집 | [정의](../../.claude/agents/researcher.md) | [기억](../../.claude/agent-memory/researcher/MEMORY.md) |
+
 더 자세한 협업 방식: [ai/](../../ai/README.md)

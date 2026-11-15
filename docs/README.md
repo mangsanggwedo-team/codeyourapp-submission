@@ -25,3 +25,8 @@ flowchart LR
 | R | [research/](research/README.md) · [AI 사용 요약](research/AI_사용_요약.md) | 숫자와 인용은 어디서 왔나? AI는 무엇을 했나? | 전체 |
 
 문서 종류 구분은 [Diátaxis](https://diataxis.fr/)를 따른다: 01·02·06 = 설명(Explanation) · 03·04 = 참조(Reference) · 05 = 따라하기(How-to). 구조도는 [C4 모델](https://c4model.com/)의 Context·Container 두 단계만 쓴다. 도식은 모두 Mermaid 텍스트가 원본이라 GitHub에서 바로 그려지고, 고친 내역이 diff로 남는다.
+
+## 그 밖의 기록
+- 결정 기록: [ADR 0001 결정을 기록한다](adr/0001-결정을-기록한다.md)
+- 시뮬레이션 상태와 차량 데이터 지도: [sim STATUS](../sim/docs/STATUS.md) · [vehicle-data-map](../sim/docs/vehicle-data-map.md)
+- 변경 요청 양식: [PR 템플릿](../.github/pull_request_template.md)
